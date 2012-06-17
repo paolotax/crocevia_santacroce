@@ -3,6 +3,6 @@ production:
   encoding: unicode
   database: <%= postgresql_database %>
   pool: 5
-  username: crocevia
+  username: <%= postgresql_user %>
   password: <%= postgresql_password %>
   host: <%= postgresql_host %>
