@@ -20,17 +20,20 @@ gem "capybara", ">= 1.1.2", :group => :test
 gem "database_cleaner", ">= 0.8.0", :group => :test
 gem "launchy", ">= 2.1.0", :group => :test
 gem "guard", ">= 0.6.2", :group => :development  
-case HOST_OS
-  when /darwin/i
-    gem 'rb-fsevent', :group => :development
-    gem 'growl', :group => :development
-  when /linux/i
-    gem 'libnotify', :group => :development
-    gem 'rb-inotify', :group => :development
-  when /mswin|windows/i
-    gem 'rb-fchange', :group => :development
-    gem 'win32console', :group => :development
-    gem 'rb-notifu', :group => :development
+
+group :development do
+  case HOST_OS
+    when /darwin/i
+      gem 'rb-fsevent', :group => :development
+      gem 'growl', :group => :development
+    when /linux/i
+      gem 'libnotify', :group => :development
+      gem 'rb-inotify', :group => :development
+    when /mswin|windows/i
+      gem 'rb-fchange', :group => :development
+      gem 'win32console', :group => :development
+      gem 'rb-notifu', :group => :development
+  end
 end
 gem "guard-bundler", ">= 0.1.3", :group => :development
 gem "guard-rails", ">= 0.0.3", :group => :development
