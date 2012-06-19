@@ -1,0 +1,38 @@
+.front-container
+  .front-card
+    .front-signin
+      = simple_form_for(User.new, :url => session_path(:user), class: "signin") do |f| 
+        .placeholding-input.username
+          = f.text_field :email, placeholder: "email", class: 'text-input'
+    
+        %table.flex-table.password-signin
+          %tbody
+            %tr
+              %td.flex-table-primary
+                .placeholding-input.password.flex-table-form
+                  = f.password_field :password, placeholder: 'password', class: "text-input flex-table-input"
+              %td.flex-table-secondary
+                = f.submit "Accedi", class: "btn btn-info"
+    
+        .remember-forgot
+          %label.remember
+            = f.check_box :remember_me
+            %span Ricordami
+          %span.separator .
+          = link_to "Hai dimenticato la password?", new_password_path(:user), class: 'forgot'
+
+    .front-signup
+      %h2
+        %strong Nuovo su Crocevia?
+        Iscriviti
+      = form_for(User.new, :url => registration_path(:user), class: "signup") do |f|
+        / = devise_error_messages!
+        .placeholding-input
+          = f.text_field :name, class: "text-input", placeholder: "Nome e Cognome"
+        .placeholding-input
+          = f.email_field :email, class: "text-input", placeholder: "Email"
+
+        .placeholding-input
+          = f.password_field :password, class: "text-input", placeholder: "Password"
+        .placeholding-input
+          = f.submit "Iscriviti a Crocevia", class: "btn btn-warning"

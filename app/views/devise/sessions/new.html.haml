@@ -1,13 +1,23 @@
-.devise-form.well
-  = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| 
+.front-container
+  .front-card
+    .front-signin
+      = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), class: "signin") do |f| 
+        .placeholding-input.username
+          = f.text_field :email, placeholder: "email", class: 'text-input'
     
-    = f.input :email, placeholder: "email", :label => false
-    .form-inline
-      = f.password_field :password, placeholder: 'password'
-      = f.submit "Accedi", class: "btn btn-primary"
-    %br  
-      
-    - if devise_mapping.rememberable?
-      .form-inline
-        = f.input :remember_me, as: :boolean, inline_label: "Ricordami", :label => false
-        = render :partial => "devise/shared/links"
+        %table.flex-table.password-signin
+          %tbody
+            %tr
+              %td.flex-table-primary
+                .placeholding-input.password.flex-table-form
+                  = f.password_field :password, placeholder: 'password', class: "text-input flex-table-input"
+              %td.flex-table-secondary
+                = f.submit "Accedi", class: "btn btn-info"
+    
+        .remember-forgot
+          %label.remember
+            = f.check_box :remember_me
+            %span Ricordami
+          %span.separator .
+          = link_to "Hai dimenticato la password?", new_password_path(resource_name), class: 'forgot'
+        
