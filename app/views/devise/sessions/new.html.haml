@@ -1,18 +1,13 @@
 .devise-form.well
-  %h2 Accesso
-
-  %br
-    
   = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| 
     
-    = f.input :email
-    = f.input :password
-    
+    = f.input :email, placeholder: "email", :label => false
+    .form-inline
+      = f.password_field :password, placeholder: 'password'
+      = f.submit "Accedi", class: "btn btn-primary"
+    %br  
+      
     - if devise_mapping.rememberable?
-      = f.input :remember_me, as: :boolean, label: "Ricordami"
-    
-    .control-group
-      .controls
-        = f.button :submit, "Accedi"
-
-  = render :partial => "devise/shared/links"
+      .form-inline
+        = f.input :remember_me, as: :boolean, inline_label: "Ricordami", :label => false
+        = render :partial => "devise/shared/links"
