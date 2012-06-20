@@ -1,5 +1,10 @@
 .front-container
   .front-card
+    .front-welcome
+      .front-welcome-text
+        %h1 Benvenuto su Crocevia.
+        %p Scopri cosa dicono, proprio in questo momento, le persone e le organizzazioni che ti interessano.
+        
     .front-signin
       = simple_form_for(User.new, :url => session_path(:user), class: "signin") do |f| 
         .placeholding-input.username

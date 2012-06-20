@@ -234,3 +234,52 @@ label {
 .signup-btn {
 
 }
+
+.front-welcome {
+  background-image: url(../img/front_page/cricket.jpg);
+  -webkit-box-shadow: 0 1px 0 
+  rgba(0, 0, 0, .2),0 0 125px 
+  rgba(255, 190, 43, .35);
+  -moz-box-shadow: 0 1px 0 rgba(0,0,0,.2),0 0 125px rgba(255,190,43,.35);
+  box-shadow: 0 1px 0 
+  rgba(0, 0, 0, .2),0 0 125px 
+  rgba(255, 190, 43, .35);
+}
+
+
+.front-welcome {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 520px;
+  height: 328px;
+  background: black url(../img/front_page/cricket.jpg) no-repeat left top;
+  border: 0;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .2),0 0 125px rgba(255, 255, 255, .35);
+  -moz-box-shadow: 0 1px 0 rgba(0,0,0,.2),0 0 125px rgba(255,255,255,.35);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .2),0 0 125px rgba(255, 255, 255, .35);
+}
+.front-welcome-text {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 470px;
+  padding: 20px;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 22px;
+  color:  #EEE;
+  text-align: left;
+  text-shadow: black 0 1px 2px;
+  p {
+    font-size: 20px;
+    line-height: 22px;
+  }
+}
+.front-welcome-text h1 {
+  margin-bottom: 3px;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+}
