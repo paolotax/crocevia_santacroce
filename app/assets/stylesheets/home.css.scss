@@ -1,3 +1,62 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.regolamento {
+  
+  background: white;
+  background: -webkit-gradient(linear,left top,left bottom,color-stop(0%, white),color-stop(100%, #DDD));
+  background: -webkit-linear-gradient(top, white 0, #DDD 100%);
+  background: -moz-linear-gradient(top, white 0, #DDD 100%);
+  background: -ms-linear-gradient(top, white 0, #DDD 100%);
+  background: -o-linear-gradient(top, white 0, #DDD 100%);
+  background: linear-gradient(top, white 0, #DDD 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#dddddd',GradientType=0);
+  border-left: solid 1px #EEE;
+  border-right: solid 1px #EEE;
+  border-bottom: solid 1px #CCC;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  -moz-box-shadow: 0 1px 0 rgba(0,0,0,.1);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+    
+  padding: 20px;
+  font-size: 1.2em;
+  text-shadow: rgba(255, 255, 255, 0.597656) 0px 1px 0px;
+  h2 {
+    text-align: center;  
+    padding-bottom: 10px;
+    
+    font-size: 1.3em;
+    font-weight: 500;
+    color: #333;
+    line-height: 20px;
+    border-bottom: 1px solid #E2E2E2;
+    -webkit-box-shadow: 0 1px 0 white;
+    -moz-box-shadow: 0 1px 0 #fff;
+    box-shadow: 0 1px 0 white;
+    -webkit-text-shadow: 0 1px 0 rgba(255,255,255,.6);
+    -moz-text-shadow: 0 1px 0 rgba(255,255,255,.6);
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+    
+    
+  }
+  
+  ol {
+    margin-top: 10px;
+  }
+  li {
+    
+    font-size: 14px;
+    color: #666666;
+    
+    text-align: justify;  
+    padding-bottom: 10px;
+    
+  }
+}
+  
