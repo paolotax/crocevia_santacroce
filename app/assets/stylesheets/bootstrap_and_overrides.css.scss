@@ -17,15 +17,22 @@ body { padding-top: 110px; }
 
 
 @media (max-width: 480px) {
-  .brand img {
-    text-align: center;
-    
-  }
+
   
 }
 
 // Landscape phone to portrait tablet
 @media (max-width: 768px) {
+  
+  .navbar {
+    text-align: center;
+  }
+  .navbar .brand {
+    float: none;
+    margin: auto;
+    
+  }
+  
   div.front-container {
     position: static;
     margin: auto;
