@@ -14,3 +14,54 @@ $bodyBackground: #E9DEBA;
 body { padding-top: 110px; }
 
 @import "bootstrap-responsive";
+
+
+@media (max-width: 480px) {
+  .brand img {
+    text-align: center;
+    
+  }
+  
+}
+
+// Landscape phone to portrait tablet
+@media (max-width: 768px) {
+  div.front-container {
+    position: static;
+    margin: auto;
+    .front-card {
+      position: static;
+      margin: auto;
+      width: 300px;
+      .front-signin {
+        position: relative;
+        margin: auto;
+        margin-bottom: 10px;
+        left: 0;
+      }
+      .front-signup {
+        position: static;
+        margin: auto;
+      }
+    }
+  }  
+
+}
+ 
+// Portrait tablet to landscape and desktop
+@media (min-width: 768px) and (max-width: 980px) {
+
+}
+ 
+// Large desktop
+@media (min-width: 980px) { 
+  
+  // .modal {
+  //   width: 70%; 
+  //   max-height: 700px; 
+  //   top: 40%; 
+  //   left: 30%;
+  // }
+
+
+}

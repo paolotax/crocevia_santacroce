@@ -1,15 +1,15 @@
 .front-container
   .front-card
-    .front-welcome
+    .front-welcome.hidden-phone
       .front-welcome-text
         %h1 Benvenuto su Crocevia.
         %p Scopri il mercatino dell' usato in via Santa Croce a Bologna.
-        
+      
     .front-signin
       = simple_form_for(User.new, :url => session_path(:user), class: "signin") do |f| 
         .placeholding-input.username
           = f.text_field :email, placeholder: "email", class: 'text-input'
-    
+  
         %table.flex-table.password-signin
           %tbody
             %tr
@@ -18,7 +18,7 @@
                   = f.password_field :password, placeholder: 'password', class: "text-input flex-table-input"
               %td.flex-table-secondary
                 = f.submit "Accedi", class: "btn btn-info"
-    
+  
         .remember-forgot
           %label.remember
             = f.check_box :remember_me
