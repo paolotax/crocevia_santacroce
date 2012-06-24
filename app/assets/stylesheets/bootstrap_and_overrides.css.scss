@@ -32,7 +32,9 @@ body { padding-top: 110px; }
     margin: auto;
     
   }
-  
+  div.front-welcome {
+    display: none;
+  }
   div.front-container {
     position: static;
     margin: auto;
