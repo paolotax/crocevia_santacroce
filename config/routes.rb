@@ -8,5 +8,5 @@ CroceviaSantacroce::Application.routes.draw do
   resources :users, :only => [:show, :index]
 
   match '/regolamento', :to => 'home#regolamento'
-
+  match '/staff',       :to => 'home#staff'
 end

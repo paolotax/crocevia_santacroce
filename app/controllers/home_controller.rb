@@ -7,4 +7,7 @@ class HomeController < ApplicationController
   def regolamento
   end
   
+  def staff
+  end
+  
 end

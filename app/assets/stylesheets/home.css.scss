@@ -5,24 +5,7 @@
 
 .regolamento {
   
-  background: white;
-  background: -webkit-gradient(linear,left top,left bottom,color-stop(0%, white),color-stop(100%, #DDD));
-  background: -webkit-linear-gradient(top, white 0, #DDD 100%);
-  background: -moz-linear-gradient(top, white 0, #DDD 100%);
-  background: -ms-linear-gradient(top, white 0, #DDD 100%);
-  background: -o-linear-gradient(top, white 0, #DDD 100%);
-  background: linear-gradient(top, white 0, #DDD 100%); 
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#dddddd',GradientType=0);
-  border-left: solid 1px #EEE;
-  border-right: solid 1px #EEE;
-  border-bottom: solid 1px #CCC;
-  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
-  -moz-box-shadow: 0 1px 0 rgba(0,0,0,.1);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
-  
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
+
     
   padding: 20px;
   font-size: 1.2em;

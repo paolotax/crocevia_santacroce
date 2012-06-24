@@ -4,6 +4,8 @@
   %ul.nav
     %li 
       = link_to "Regolamento", regolamento_path
+    %li  
+      = link_to "Staff", staff_path
     - if user_signed_in?
       %li
         = link_to('Esci', destroy_user_session_path, :method=>'delete')
