@@ -48,5 +48,7 @@ gem "bootstrap-sass", ">= 2.0.3"
 gem "simple_form"
 gem "rails-footnotes", ">= 3.7", :group => :development
 
+gem "omniauth-facebook"
+
 gem 'capistrano'
 gem 'unicorn'

@@ -6,9 +6,16 @@
       = link_to "Regolamento", regolamento_path
     %li  
       = link_to "Staff", staff_path
+    
     - if user_signed_in?
+      %li.signed-in
+        Benvenuto
+        %strong= current_user.name
+        !
+        = link_to "Esci", destroy_user_session_path, id: "sign_out", :method=>'delete'
+    - else
       %li
-        = link_to('Esci', destroy_user_session_path, :method=>'delete')
+        = link_to "Accedi con Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in"
     / - else
     /       %li
     /         = link_to('Accedi', new_user_session_path)
