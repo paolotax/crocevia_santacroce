@@ -10,6 +10,7 @@ jQuery ->
     console.log 'urra'
     map = new GMaps
       div: '#map-home'
+      scrollwheel: false
       lat: 44.49857200306232
       lng: 11.332459900305139
     
@@ -40,6 +41,7 @@ jQuery ->
     map.addMarker
       lat: 44.496153
       lng: 11.329235
+      color: 'blue'
       title: "Crocevia - mercato dell'usato"
       infoWindow:
         content: "<p><strong>Crocevia - mercato dell'usato</strong></br>Via Santa Croce 11/abcdef</br>40121 Bologna</p>" 

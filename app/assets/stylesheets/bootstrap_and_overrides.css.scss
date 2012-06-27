@@ -20,7 +20,26 @@ body { padding-top: 100px; }
 
 
 @media (max-width: 480px) {
+  
+  body {
+    padding: 0;
+  }
+  .member {
+    margin: 0 0 30px 0;
+    img {
 
+      box-shadow: 0 0 15px #999;
+      border-radius: 2px;
+      width: 100px;
+      height: 100px;
+      // border: 1px solid #6CC1DF;
+      padding: 5px;
+      background: white; 
+      float: left;
+      display: inline;
+      margin: 0 15px 0 0;
+    }
+  }
   
 }
 
