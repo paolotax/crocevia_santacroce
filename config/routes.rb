@@ -15,6 +15,7 @@ CroceviaSantacroce::Application.routes.draw do
   
   resources :users, :only => [:show, :index]
 
-  match '/regolamento', :to => 'home#regolamento'
-  match '/staff',       :to => 'home#staff'
+  match '/regolamento', to: 'home#regolamento'
+  match '/staff',       to: 'home#staff'
+  match '/dove_siamo',   to: 'home#dove_siamo'
 end

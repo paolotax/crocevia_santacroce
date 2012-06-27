@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#map-home img {
+  max-width: none;
+  vertical-align: baseline;
+}
+
 .staff,
 .regolamento {
   font-family: "Trebuchet MS", Helvetica, Arial, Verdana, sans-serif;

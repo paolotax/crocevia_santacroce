@@ -10,4 +10,6 @@ class HomeController < ApplicationController
   def staff
   end
   
+  def dove_siamo
+  end
 end
