@@ -16,15 +16,12 @@
     - else
       %li
         = link_to "Accedi con Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in"
-    / - else
-    /       %li
-    /         = link_to('Accedi', new_user_session_path)
-    /     - if user_signed_in?
-    /       %li
-    /         = link_to('Modifica profilo', edit_user_registration_path)
-    /       - if current_user.has_role? :admin
-    /         %li
-    /           = link_to('Admin', users_path)
-    /     - else
-    /       %li
-    /         = link_to('Iscriviti!', new_user_registration_path)
+    - if user_signed_in?
+      %li
+        = link_to('Modifica profilo', edit_user_registration_path)
+      - if current_user.has_role? :admin
+        %li
+          = link_to('Admin', users_path)
+    - else
+      %li
+        = link_to('Iscriviti!', new_user_registration_path)

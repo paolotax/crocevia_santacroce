@@ -2,45 +2,56 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
-
+.staff,
 .regolamento {
-  
-
-    
-  padding: 20px;
-  font-size: 1.2em;
-  text-shadow: rgba(255, 255, 255, 0.597656) 0px 1px 0px;
+  font-family: "Trebuchet MS", Helvetica, Arial, Verdana, sans-serif;
+  font-size: 14px;
+  color: #333333;  
   h2 {
-    text-align: center;  
-    padding-bottom: 10px;
-    
-    font-size: 1.3em;
+    font-size: 24px;
+    text-align: center;
+    padding: 0 0 20px;
     font-weight: 500;
-    color: #333;
-    line-height: 20px;
-    border-bottom: 1px solid #E2E2E2;
-    -webkit-box-shadow: 0 1px 0 white;
-    -moz-box-shadow: 0 1px 0 #fff;
-    box-shadow: 0 1px 0 white;
     -webkit-text-shadow: 0 1px 0 rgba(255,255,255,.6);
     -moz-text-shadow: 0 1px 0 rgba(255,255,255,.6);
     text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
-    
-    
   }
-  
+  h3 {
+    color: #008DBF;
+    font-size: 20px;
+    margin: 0 0 10px 0;
+  }
+  p {
+    font-family: inherit;
+    font-size: inherit;
+    font-color: inherit;
+    line-height: 24px;
+    margin: 0 0 10px 0;
+  }
   ol {
     margin-top: 10px;
   }
   li {
-    
-    font-size: 14px;
-    color: #666666;
-    
+    line-height: 24px;
+    // font-size: 14px;
+    // color: #666666;
+    font-size: inherit;
+    font-color: inherit;
     text-align: justify;  
     padding-bottom: 10px;
     
   }
 }
-  
+
+.member {
+  margin: 0 0 30px 0;
+  img {
+    border: 1px solid #6CC1DF;
+    padding: 5px;
+    background: white; 
+    float: left;
+    display: inline;
+    margin: 0 15px 0 0;
+  }
+}
+
