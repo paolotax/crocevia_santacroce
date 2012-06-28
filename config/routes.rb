@@ -13,7 +13,7 @@ CroceviaSantacroce::Application.routes.draw do
   # end
   
   
-  resources :users, :only => [:show, :index]
+  resources :users, :only => [:show, :index, :update]
 
   match '/regolamento', to: 'home#regolamento'
   match '/staff',       to: 'home#staff'
