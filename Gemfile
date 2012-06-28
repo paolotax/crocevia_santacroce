@@ -49,6 +49,7 @@ gem "simple_form"
 gem "rails-footnotes", ">= 3.7", :group => :development
 
 gem "omniauth-facebook"
+gem 'font-awesome-sass-rails'
 
 gem 'capistrano'
 gem 'unicorn'
