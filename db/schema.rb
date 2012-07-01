@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120625225750) do
+ActiveRecord::Schema.define(:version => 20120701153444) do
+
+  create_table "clienti", :force => true do |t|
+    t.string   "nome"
+    t.string   "cognome"
+    t.string   "ragione_sociale"
+    t.string   "indirizzo"
+    t.string   "cap"
+    t.string   "citta"
+    t.string   "provincia"
+    t.string   "partita_iva"
+    t.string   "codice_fiscale"
+    t.string   "tipo_documento"
+    t.string   "numero_documento"
+    t.date     "scadenza_documento"
+    t.integer  "numero_tessera"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string   "name"

@@ -1,0 +1,41 @@
+.row
+  .wrapper
+    = simple_form_for @cliente, :html => { :class => 'form-horizontal' } do |f|
+      .row
+        .span5
+          %fieldset.dati-anagrafici
+            %legend Dati anagrafici
+            .control-group.form-inline
+              %label{ for: :nome, :class => 'string required control-label'} Nome e Cognome
+              .controls
+                = f.text_field :nome
+                = f.text_field :cognome
+      
+            = f.input   :ragione_sociale
+  
+          %fieldset
+            = f.input   :codice_fiscale
+            = f.input   :partita_iva
+    
+        .span5
+          %fieldset
+            %legend Documento d'identità
+            = f.input :tipo_documento
+            = f.input :numero_documento
+            = f.input :scadenza_documento
+  
+      .row
+        .span5
+          %fieldset
+            %legend Indirizzo
+            = f.input :indirizzo
+            = f.input :cap
+            = f.input :citta
+            = f.input :provincia
+        .span5
+          %fieldset
+            %legend Recapiti
+  
+
+        
+      = f.button :submit

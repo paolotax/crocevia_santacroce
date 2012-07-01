@@ -20,8 +20,6 @@
     #main{:role => "main"}
       .container
         .content
-          .row
-            .offset3.span6
-              = render 'layouts/messages'
-              = yield
+          = render 'layouts/messages'
+          = yield
     %footer

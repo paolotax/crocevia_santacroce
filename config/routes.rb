@@ -1,5 +1,7 @@
 CroceviaSantacroce::Application.routes.draw do
   
+  resources :clienti
+
   authenticated :user do
     root :to => 'home#index'
   end

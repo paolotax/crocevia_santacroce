@@ -27,3 +27,6 @@
     - else
       %li
         = link_to('Iscriviti!', new_user_registration_path)
+    - if can? :manage, Cliente
+      %li
+        = link_to "Clienti", clienti_path

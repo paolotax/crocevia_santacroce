@@ -1,0 +1,24 @@
+.row
+  .span6.offset2.wrapper
+    %h3= @cliente.full_name
+
+    %address
+      = @cliente.indirizzo
+      %br
+      = "#{@cliente.cap} #{@cliente.citta} #{@cliente.provincia}"
+
+    .dati-fiscali
+      = @cliente.codice_fiscale
+      = @cliente.partita_iva
+  
+    .info_documento
+      = @cliente.tipo_documento
+      = @cliente.numero_documento
+      = @cliente.scadenza_documento
+    
+  .span3.side-bar
+    .well
+      %ul
+        %li= link_to "Modifica", edit_cliente_url(@cliente)
+        %li= link_to "Stampa mandato", ""
+        %li= link_to "Clienti", clienti_url
