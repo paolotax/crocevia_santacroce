@@ -1,6 +1,6 @@
 .row
-  .wrapper
-    = simple_form_for @cliente, :html => { :class => 'form-horizontal' } do |f|
+  .span10.offset1.wrapper
+    = simple_form_for @cliente, :html => { :class => 'form-horizontal', style: "background-color: white" } do |f|
       .row
         .span5
           %fieldset.dati-anagrafici
@@ -10,20 +10,18 @@
               .controls
                 = f.text_field :nome
                 = f.text_field :cognome
-      
+
             = f.input   :ragione_sociale
-  
-          %fieldset
             = f.input   :codice_fiscale
             = f.input   :partita_iva
-    
+
         .span5
           %fieldset
             %legend Documento d'identità
-            = f.input :tipo_documento
+            = f.input :tipo_documento, collection: ["carta d'identità", "patente", "passaporto"]
             = f.input :numero_documento
             = f.input :scadenza_documento
-  
+
       .row
         .span5
           %fieldset
@@ -35,7 +33,7 @@
         .span5
           %fieldset
             %legend Recapiti
-  
 
-        
-      = f.button :submit
+      .form-actions
+        = f.button :submit, :class => 'btn btn-primary'
+        = link_to "Annulla", @cliente, :class => 'btn btn-danger'

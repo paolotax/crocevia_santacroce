@@ -1,6 +1,10 @@
-%h1 Clienti
-
-
-%ul
-  - for cliente in @clienti do
-    = render cliente
+.row
+  .offset2.span5.wrapper
+    %h1 Clienti
+    %ul
+      - for cliente in @clienti do
+        = render cliente
+  .span4.side-bar
+    .well
+      %ul
+        %li= link_to "Nuovo", new_cliente_url, class: "btn btn-primary"

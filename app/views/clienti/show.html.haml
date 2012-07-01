@@ -19,6 +19,7 @@
   .span3.side-bar
     .well
       %ul
+        %li= link_to "Nuovo", new_cliente_url
         %li= link_to "Modifica", edit_cliente_url(@cliente)
         %li= link_to "Stampa mandato", ""
         %li= link_to "Clienti", clienti_url
