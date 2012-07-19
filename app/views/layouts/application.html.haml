@@ -19,7 +19,6 @@
           = render 'layouts/navigation'
     #main{:role => "main"}
       .container
-        .content
-          = render 'layouts/messages'
-          = yield
+        = render 'layouts/messages'
+        = yield
     %footer

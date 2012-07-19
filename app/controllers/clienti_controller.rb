@@ -3,7 +3,7 @@ class ClientiController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @clienti = Cliente.order('created_at desc')
+    @clienti = Cliente.order('created_at desc').page(params[:page]).per_page(20)
   end
   
   def show

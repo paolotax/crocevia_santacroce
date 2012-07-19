@@ -1,6 +1,23 @@
 = link_to image_tag('crocevia232x81.png'), root_path, :class => 'brand'
 
 .pull-right
+  %ul.nav    
+    - if user_signed_in?
+      %li.signed-in
+        Benvenuto
+        %strong= current_user.name
+        !
+      %li
+        = link_to('Modifica profilo', edit_user_registration_path)  
+      %li
+        = link_to "Esci", destroy_user_session_path, id: "sign_out", :method=>'delete' 
+    - else
+      %li
+        = link_to "Accedi con Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in"
+      %li
+        = link_to('Iscriviti!', new_user_registration_path)
+
+.pull-right
   %ul.nav
     %li 
       = link_to "Regolamento", regolamento_path
@@ -8,25 +25,11 @@
       = link_to "Staff", staff_path
     %li  
       = link_to "Dove siamo?", dove_siamo_path
-      
-    - if user_signed_in?
-      %li.signed-in
-        Benvenuto
-        %strong= current_user.name
-        !
-        = link_to "Esci", destroy_user_session_path, id: "sign_out", :method=>'delete'
-    - else
-      %li
-        = link_to "Accedi con Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in"
-    - if user_signed_in?
-      %li
-        = link_to('Modifica profilo', edit_user_registration_path)
+    - if user_signed_in? 
       - if current_user.has_role? :admin
         %li
           = link_to('Admin', users_path)
-    - else
-      %li
-        = link_to('Iscriviti!', new_user_registration_path)
     - if can? :manage, Cliente
       %li
-        = link_to "Clienti", clienti_path
+        = link_to "Clienti", clienti_path  
+
