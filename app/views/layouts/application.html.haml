@@ -13,12 +13,21 @@
     = csrf_meta_tags
     = yield(:head)
   %body
-    %header.navbar.navbar-fixed-top
-      %nav.navbar-inner
-        .container
-          = render 'layouts/navigation'
-    #main{:role => "main"}
+    %header
+      = render 'layouts/navigation'
+      
       .container
         = render 'layouts/messages'
-        = yield
-    %footer
+      = yield
+
+      %footer
+        .navbar
+          .container
+            .navbar-inner
+              %ul.nav
+                %li 
+                  = link_to "Regolamento", regolamento_path
+                %li  
+                  = link_to "Staff", staff_path
+                %li  
+                  = link_to "Dove siamo?", dove_siamo_path
