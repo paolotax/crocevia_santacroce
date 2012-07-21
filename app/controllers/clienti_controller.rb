@@ -3,7 +3,7 @@ class ClientiController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @clienti = Cliente.paginate(page: params[:page]).per_page(20)
+    @clienti = Cliente.all
   end
   
   def show
