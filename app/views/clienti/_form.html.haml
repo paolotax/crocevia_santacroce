@@ -1,36 +1,38 @@
-= simple_form_for @cliente, :html => { :class => 'form-horizontal span10 offset1', style: "background-color: white" } do |f|
+= simple_form_for @cliente, :html => { :class => 'form-horizontal', style: "background-color: white" } do |f|
   .row
-    .span5
-      %fieldset.dati-anagrafici
-        %legend Dati anagrafici
-        .control-group.form-inline
-          %label{ for: :nome, :class => 'string required control-label'} Nome e Cognome
-          .controls
-            = f.text_field :nome
-            = f.text_field :cognome
+    .span12.well
+      .row
+        .span6
+          %fieldset.dati-anagrafici
+            %legend Dati anagrafici
+            .control-group.form-inline
+              %label{ for: :nome, :class => 'string required control-label'} Nome e Cognome
+              .controls
+                = f.text_field :nome
+                = f.text_field :cognome
 
-        = f.input   :ragione_sociale
-        = f.input   :codice_fiscale
-        = f.input   :partita_iva
-    .span5
-      %fieldset
-        %legend Documento d'identità
-        = f.input :tipo_documento, collection: ["carta d'identità", "patente", "passaporto"]
-        = f.input :numero_documento
-        = f.input :scadenza_documento
+            = f.input   :ragione_sociale
+            = f.input   :codice_fiscale
+            = f.input   :partita_iva
+        .span6
+          %fieldset
+            %legend Documento d'identità
+            = f.input :tipo_documento, collection: ["carta d'identità", "patente", "passaporto"]
+            = f.input :numero_documento
+            = f.input :scadenza_documento
 
-  .row
-    .span5
-      %fieldset
-        %legend Indirizzo
-        = f.input :indirizzo
-        = f.input :cap
-        = f.input :citta
-        = f.input :provincia
-    .span5
-      %fieldset
-        %legend Recapiti
+      .row
+        .span6
+          %fieldset
+            %legend Indirizzo
+            = f.input :indirizzo
+            = f.input :cap
+            = f.input :citta
+            = f.input :provincia
+        .span6
+          %fieldset
+            %legend Recapiti
 
-  .form-actions
-    = f.button :submit, :class => 'btn btn-primary'
-    = link_to "Annulla", @cliente, :class => 'btn btn-danger'
+      .form-actions
+        = f.button :submit, :class => 'btn btn-primary'
+        = link_to "Annulla", @cliente, :class => 'btn btn-danger'

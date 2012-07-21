@@ -16,24 +16,24 @@
     %header
       = render 'layouts/navigation'
       
-      .container
-        = render 'layouts/messages'
-        = yield
+    .container
+      = render 'layouts/messages'
+      = yield
 
-      %footer
-        .navbar
-          .container
-            .navbar-inner
-              %ul.nav
-                %li 
-                  = link_to_unless_current "Home", root_path do
-                    &nbsp
-                %li 
-                  = link_to_unless_current "Regolamento", regolamento_path do
-                    &nbsp
-                %li  
-                  = link_to_unless_current "Staff", staff_path do
-                    &nbsp
-                %li  
-                  = link_to_unless_current "Dove siamo?", dove_siamo_path do
-                    &nbsp
+    %footer
+      .navbar
+        .container
+          .navbar-inner
+            %ul.nav
+              %li 
+                = link_to_unless_current "Home", root_path do
+                  &nbsp
+              %li 
+                = link_to_unless_current "Regolamento", regolamento_path do
+                  &nbsp
+              %li  
+                = link_to_unless_current "Staff", staff_path do
+                  &nbsp
+              %li  
+                = link_to_unless_current "Dove siamo?", dove_siamo_path do
+                  &nbsp

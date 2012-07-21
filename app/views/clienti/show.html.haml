@@ -1,5 +1,36 @@
 .row
-  .span6.offset2.wrapper
+  .span3.side-bar
+    .well
+      %ul.nav.nav-list
+        %li.nav-header
+          %i.icon-user
+          Clienti
+        %li
+          = link_to new_cliente_url do
+            %i.icon-plus
+            Nuovo
+        
+        %li
+          = link_to edit_cliente_url(@cliente) do
+            %i.icon-pencil
+            Modifica
+          
+        %li
+          = link_to "" do
+            %i.icon-print
+            Stampa mandato
+            
+        %li
+          = link_to clienti_url do
+            %i.icon-user
+            Clienti
+        %li.divider
+          %li.nav-header
+            %i.icon-gift
+            Articoli
+            
+
+  .span6
     %h3= @cliente.full_name
 
     %address
@@ -16,10 +47,3 @@
       = @cliente.numero_documento
       = @cliente.scadenza_documento
     
-  .span3.side-bar
-    .well
-      %ul
-        %li= link_to "Nuovo", new_cliente_url
-        %li= link_to "Modifica", edit_cliente_url(@cliente)
-        %li= link_to "Stampa mandato", ""
-        %li= link_to "Clienti", clienti_url

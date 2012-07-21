@@ -148,19 +148,25 @@ footer ul {
 // Large desktop
 @media (min-width: 980px) { 
   
+  [class*="span"] {
+    float: left;
+    margin-left: 20px;
+  }
+  .span12,
   .container {
     width: 940px;
+  }
+  .span9 {
+    width: 700px;
+  }
+  .span6 {
+    width: 460px;
+  }
+  .span3 {
+    width: 220px;
   }
   .navbar .container {
     width: 940px;
   }
   
-  // .modal {
-  //   width: 70%; 
-  //   max-height: 700px; 
-  //   top: 40%; 
-  //   left: 30%;
-  // }
-
-
 }
