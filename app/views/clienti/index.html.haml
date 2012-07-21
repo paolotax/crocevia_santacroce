@@ -1,5 +1,5 @@
 .row
-  .offset2.span5.wrapper
+  .span9
     %h1 Clienti
     %ul
       - for cliente in @clienti do
@@ -9,7 +9,7 @@
       .class.page_info
         = page_entries_info @clienti
         = will_paginate @clienti, previous_label: h("<"), next_label: h(">"), container: false, page_links: false
-  .span4.side-bar
+  .span3.side-bar
     .well
       %ul
         %li= link_to "Nuovo", new_cliente_url, class: "btn btn-primary"
