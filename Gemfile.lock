@@ -297,4 +297,4 @@ DEPENDENCIES
   sqlite3
   uglifier (>= 1.0.3)
   unicorn
-  will_paginate
+  will_paginate (~> 3.0)

@@ -22,7 +22,7 @@ gem "database_cleaner", ">= 0.8.0", :group => :test
 gem "launchy", ">= 2.1.0", :group => :test
 gem "guard", ">= 0.6.2", :group => :development  
 
-gem 'will_paginate'
+gem 'will_paginate', '~> 3.0'
 gem 'bootstrap-will_paginate'
 
 gem "faker"

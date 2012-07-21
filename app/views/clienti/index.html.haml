@@ -4,11 +4,8 @@
     %ul
       - for cliente in @clienti do
         = render cliente
-    = will_paginate @clienti, page_links: false, previous_label: h("<"), next_label: h(">")    
-    .pagination
-      .class.page_info
-        = page_entries_info @clienti
-        = will_paginate @clienti, previous_label: h("<"), next_label: h(">"), container: false, page_links: false
+    = will_paginate @clienti
+
   .span3.side-bar
     .well
       %ul
