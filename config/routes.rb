@@ -1,5 +1,9 @@
 CroceviaSantacroce::Application.routes.draw do
   
+  resources :categorie
+
+  resources :articoli
+
   resources :clienti
 
   authenticated :user do

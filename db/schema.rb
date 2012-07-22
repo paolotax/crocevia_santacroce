@@ -11,7 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120701153444) do
+ActiveRecord::Schema.define(:version => 20120721174644) do
+
+  create_table "articoli", :force => true do |t|
+    t.string   "nome"
+    t.integer  "quantita"
+    t.decimal  "prezzo",         :precision => 7, :scale => 2
+    t.decimal  "prezzo_vendita", :precision => 7, :scale => 2
+    t.integer  "provvigione"
+    t.integer  "cliente_id"
+    t.integer  "categoria_id"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
+  add_index "articoli", ["categoria_id"], :name => "index_articoli_on_categoria_id"
+  add_index "articoli", ["cliente_id"], :name => "index_articoli_on_cliente_id"
+
+  create_table "categorie", :force => true do |t|
+    t.string   "nome"
+    t.integer  "provvigione"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "clienti", :force => true do |t|
     t.string   "nome"

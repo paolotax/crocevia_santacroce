@@ -47,3 +47,10 @@
       = @cliente.numero_documento
       = @cliente.scadenza_documento
     
+    = simple_form_for @cliente.articoli.build, html: { class: 'form-inline' }  do |f|
+      = f.hidden_field :cliente_id
+      = f.input :nome
+      = f.input :prezzo
+      = f.input :provvigione
+      = f.button :submit
+      
