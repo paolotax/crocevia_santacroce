@@ -1,8 +1,8 @@
 class ArticoliController < ApplicationController
  
   def create
-    @cliente = Cliente.find(params[:cliente_id])
-    @cliente.articolo.build(params[:articolo])
+    @articolo = Articolo.create(params[:articolo])
+    redirect_to @articolo.cliente
   end
   
 end

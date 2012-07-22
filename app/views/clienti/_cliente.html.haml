@@ -1,3 +1,4 @@
-%li[cliente]
-  = link_to cliente.full_name, cliente
-  = cliente.created_at
+%tr[cliente]
+  %td= link_to cliente.full_name, cliente
+  %td
+    %small= "creato il #{cliente.created_at.strftime("%d-%m-%y") }"
