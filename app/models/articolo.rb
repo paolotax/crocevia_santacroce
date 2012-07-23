@@ -2,15 +2,19 @@ class Articolo < ActiveRecord::Base
   
   belongs_to :cliente
   
-  attr_accessible :categoria_id, :cliente_id, :nome, :prezzo_in_euro, :provvigione, :quantita
+  attr_accessible :categoria_id, :cliente_id, :nome, :prezzo, :provvigione, :quantita
 
   def importo
-    self.quantita.to_f * self.prezzo.to_f
+    if prezzo
+      self.prezzo.to_d * self.quantita
+    else
+      0
+    end
   end
   
   def importo_cliente
     if prezzo
-      self.quantita.to_d * self.prezzo.to_d * self.provvigione / 100
+      self.quantita.to_d * self.prezzo.to_d * self.provvigione.to_d / 100
     else
       0
     end  

@@ -61,7 +61,7 @@
 
       .input-prepend.prezzo.pull-left
         %span.add-on €
-        = f.text_field :prezzo_in_euro, class: 'input-mini'
+        = f.text_field :prezzo, class: 'input-mini', step: :any, min: 0
       
       .input-prepend.provvigione.pull-left
         %span.add-on %
