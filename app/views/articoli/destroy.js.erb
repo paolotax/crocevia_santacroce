@@ -7,3 +7,7 @@ $(".table-footer .quantita strong").html(quantita)
 var importo  = $(".table-footer .importo").data("value") - <%= @articolo.importo %>;
 $(".table-footer .importo").data("value", importo);
 $(".table-footer .importo strong").html(importo)
+
+var importo_cliente  = $(".table-footer .importo_cliente").data("value") - <%= @articolo.importo_cliente %>;
+$(".table-footer .importo_cliente").data("value", importo_cliente);
+$(".table-footer .importo_cliente strong").html(importo_cliente)

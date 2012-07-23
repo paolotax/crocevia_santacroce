@@ -3,6 +3,7 @@
   %td= articolo.nome
   %td= articolo.quantita
   %td= number_to_currency articolo.prezzo
+  %td= number_to_percentage articolo.provvigione, precision: 0
   %td= articolo.created_at.try(:strftime, "%d-%m-%y")
   %td
     = link_to articolo, method: :delete, remote: true, class: "close" do

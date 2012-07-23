@@ -7,6 +7,14 @@ class Articolo < ActiveRecord::Base
   def importo
     self.quantita.to_f * self.prezzo.to_f
   end
+  
+  def importo_cliente
+    if prezzo
+      self.quantita.to_d * self.prezzo.to_d * self.provvigione / 100
+    else
+      0
+    end  
+  end
     
   def prezzo_in_euro
     prezzo.to_d/100 if prezzo

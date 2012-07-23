@@ -82,6 +82,8 @@
           %strong= @cliente.articoli.sum(:quantita) 
         %td.importo{ data: {value: @cliente.articoli.sum(&:importo) }}
           %strong= number_to_currency @cliente.articoli.sum(&:importo)
+        %td.importo_cliente{ data: {value: @cliente.articoli.sum(&:importo_cliente) }}
+          %strong= number_to_currency @cliente.articoli.sum(&:importo_cliente)
         %td
           .pull-right= link_to "carica"
         %td
