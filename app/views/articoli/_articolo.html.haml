@@ -1,0 +1,9 @@
+%tr[articolo]
+  %td= "art.#{articolo.id}"
+  %td= articolo.nome
+  %td= articolo.quantita
+  %td= number_to_currency articolo.prezzo
+  %td= articolo.created_at.try(:strftime, "%d-%m-%y")
+  %td
+    = link_to articolo, method: :delete, remote: true, class: "close" do
+      &times;

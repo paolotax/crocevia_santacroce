@@ -45,11 +45,11 @@
     .info_documento
       = @cliente.tipo_documento
       = @cliente.numero_documento
-      = @cliente.scadenza_documento
+      = @cliente.scadenza_documento.strftime("%d-%m-%y")
     
     %br
     
-    = form_for @cliente.articoli.build, class: "form-inline" do |f|
+    = form_for @cliente.articoli.build, class: "form-inline", remote: true do |f|
       = f.hidden_field :cliente_id
       
       .pull-left
@@ -57,32 +57,35 @@
       
       .input-prepend.quantita.pull-left
         %span.add-on Pz.
-        = f.text_field :quantita, class: 'input-mini', value: 1
+        = f.number_field :quantita, class: 'input-mini', value: 1
 
       .input-prepend.prezzo.pull-left
         %span.add-on €
-        = f.text_field :prezzo, class: 'input-mini'
+        = f.text_field :prezzo_in_euro, class: 'input-mini'
       
       .input-prepend.provvigione.pull-left
         %span.add-on %
-        = f.text_field :provvigione, class: 'input-mini', value: 50      
+        = f.number_field :provvigione, class: 'input-mini', value: 50      
       .pull-left
         = f.submit "Aggiungi"
     %br  
-    %table.table
+    
+    %table#articoli-da-caricare.table
+      
       - for articolo in @cliente.articoli do
-        %tr
-          %td= articolo.nome
-          %td= articolo.quantita
-          %td= number_to_currency articolo.prezzo
-          %td= articolo.created_at.try(:strftime, "%d-%m-%y")
-      %tr
-        %td Totale
-        %td
+        - unless articolo.new_record?
+          = render articolo
+      
+      %tr.table-footer
+        %td{ colspan: 2} Totale
+        %td.quantita{ data: {value: @cliente.articoli.sum(&:quantita) }}
           %strong= @cliente.articoli.sum(:quantita) 
+        %td.importo{ data: {value: @cliente.articoli.sum(&:importo) }}
+          %strong= number_to_currency @cliente.articoli.sum(&:importo)
         %td
-          %strong= number_to_currency @cliente.articoli.sum("articoli.prezzo * articoli.quantita")
+          .pull-right= link_to "carica"
         %td
+          .pull-right= link_to "etichette"
         
         
       

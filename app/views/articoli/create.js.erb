@@ -1,0 +1,13 @@
+$("#articoli-da-caricare .table-footer").before("<%= escape_javascript(render @articolo) %>");
+$("form.new_articolo").get(0).reset();
+
+$("input#articolo_nome").focus();
+
+var quantita = $(".table-footer .quantita").data("value") + <%= @articolo.quantita %>;
+$(".table-footer .quantita").data("value", quantita);
+$(".table-footer .quantita strong").html(quantita)
+
+var importo  = $(".table-footer .importo").data("value") + <%= @articolo.importo %>;
+$(".table-footer .importo").data("value", importo);
+$(".table-footer .importo strong").html(importo)
+
