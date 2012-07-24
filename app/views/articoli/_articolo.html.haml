@@ -1,4 +1,5 @@
 %tr[articolo]
+  %td= articolo.barcode.to_svg(:margin => 0, :xdim => 2, :height => 40).html_safe
   %td= "art.#{articolo.id}"
   %td= articolo.nome
   %td= articolo.quantita

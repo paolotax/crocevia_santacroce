@@ -26,6 +26,9 @@ gem "guard", ">= 0.6.2", :group => :development
 gem "kaminari"
 gem "faker"
 
+gem "chunky_png"
+gem "has_barcode"
+
   # case HOST_OS
   #   when /darwin/i
   #     gem 'rb-fsevent', :group => :development

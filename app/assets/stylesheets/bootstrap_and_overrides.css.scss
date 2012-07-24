@@ -187,24 +187,24 @@ footer ul {
   }
   
   .mandato {
-    
-    
-    .firme {
-      margin-top: 30px;
-    }
-    
     margin-top: -40px;
     li {
       margin-bottom: 10px;
     }
-    
-    p.dati-ditta {
+    p.dati-ditta.hidden {
+      display: block;
+      visibility: visible;
       font-size: 11px;
       border-bottom: 1px solid #666666;
     }
-    p.testo-mandato {
-      line-height: 16px;
+    p.testo-mandato,
+    ol li {
+      line-height: 14px;
     }
+  }
+
+  .firme {
+    margin-top: 30px;
   }
   
   
