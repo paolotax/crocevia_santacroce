@@ -1,23 +1,22 @@
 .mandato
-  %p
+  %p.dati-ditta
     di Marzia Bertoncelli s Stefano Scifoni snc Via Santa Croce 11/abcde - 40121 BOLOGNA Tel e Fax 051.64.90.677
     %br
     Email: mercatino@crocevia-santacroce.com Web: crocevia-santacroce.com - P.IVA 03218281206
-  %hr
-  
-  
+
   .intestazione
     %h3 
-      MANDATO DI VENDITA N.  ??? del 20/07/2012
+      MANDATO DI VENDITA N.  ??? del ?????
       %small da Mandante n.
       %strong ???
     %p
       Io sottoscritto/a
-      %strong= @cliente.cognome_nome
+      %strong= @cliente.cognome_nome.upcase
       mandante in qualità di cliente privato
       %br
-      nato il ...........
-      Cod.Fisc
+      nato il ???????
+      a ????????
+      Cod.Fisc.
       = @cliente.codice_fiscale
       %br
       residente in:
@@ -29,33 +28,31 @@
       = "Documento: #{@cliente.tipo_documento.upcase} N. #{@cliente.numero_documento} ril/rin. il #{@cliente.scadenza_documento.strftime("%d-%m-%y")} Da: ???????"
       
   
-  %p
+  %p.testo-mandato
     Dò mandato di vendita a nome e per mio conto degli oggetti di mia proprietà come da allegata "lista oggetti ricevuti" alla ditta sopra citata, di seguito denominata Mandatario, alle seguenti condizioni e per n∞ 90 giorni di esposizione:
 
-  %ol
-    %li Gli oggetti restano di mia proprietà fino alla loro vendita e permangono presso il Mandatario in  esposizione gratuita salvo quanto esposto di seguito.
-    %li Prendo atto che mi verrà corrisposto dopo la vendita l'importo ricavato meno la percentuale di provvigione IVA compresa concordata come specificato nella "lista oggetti ricevuti".
+    %ol
+      %li Gli oggetti restano di mia proprietà fino alla loro vendita e permangono presso il Mandatario in  esposizione gratuita salvo quanto esposto di seguito.
+      %li Prendo atto che mi verrà corrisposto dopo la vendita l'importo ricavato meno la percentuale di provvigione IVA compresa concordata come specificato nella "lista oggetti ricevuti".
 
-    %li Prendo atto che l'importo degli oggetti venduti detratta la provvigione di cui al punto 2 mi sarà messo a disposizione a partire dal primo giorno del mese successivo alla vendita dei singoli oggetti consegnati in vendita. Fino alla data della riscossione il Mandatario sarà custode per mio conto dell'importo stesso e le spese sostenute dallo stesso per la custodia delle somme incassate in nome e per mio conto si intendono compensate con i frutti eventualmente percepiti in dipendenza del deposito, in deroga agli art. 1775/1781 Cod.Civ.
+      %li Prendo atto che l'importo degli oggetti venduti detratta la provvigione di cui al punto 2 mi sarà messo a disposizione a partire dal primo giorno del mese successivo alla vendita dei singoli oggetti consegnati in vendita. Fino alla data della riscossione il Mandatario sarà custode per mio conto dell'importo stesso e le spese sostenute dallo stesso per la custodia delle somme incassate in nome e per mio conto si intendono compensate con i frutti eventualmente percepiti in dipendenza del deposito, in deroga agli art. 1775/1781 Cod.Civ.
 
-    %li Prendo atto che ogni diritto di riscossione dei crediti relativi agli oggetti venduti in nome e per mio conto decade trascorso un anno dalla vendita degli stessi (art. 2964 Cod. Civ).
+      %li Prendo atto che ogni diritto di riscossione dei crediti relativi agli oggetti venduti in nome e per mio conto decade trascorso un anno dalla vendita degli stessi (art. 2964 Cod. Civ).
 
-    %li Prendo atto che la durata massima dell' esposizione è di 60 gg. e che dopo tale termine gli oggetti invenduti e non ritirati potranno essere scontati dal Mandatario fino ad un massimo del 50% del prezzo concordato per ulteriori 30 giorni.
+      %li Prendo atto che la durata massima dell' esposizione è di 60 gg. e che dopo tale termine gli oggetti invenduti e non ritirati potranno essere scontati dal Mandatario fino ad un massimo del 50% del prezzo concordato per ulteriori 30 giorni.
 
-    %li Prendo atto che, scaduti i termini del contratto (90 gg.) senza nessun preavviso da ambo le parti, autorizzo il Mandatario a determinare il prezzo di vendita al maggior realizzo.
+      %li Prendo atto che, scaduti i termini del contratto (90 gg.) senza nessun preavviso da ambo le parti, autorizzo il Mandatario a determinare il prezzo di vendita al maggior realizzo.
 
-    %li Prendo atto che, al fine di evitare lo sconto come da punto 5 e la determinazione dei prezzi da parte del Mandatario come da punto 6 sarà esclusivamente mia cura aggiornarmi sui tempi di esposizione ed eventualmente provvedere al ritiro della merce; in deroga all'art.1712 del Codice Civile sollevo il Mandatario dall'obbligo di comunicare l'esecuzione del Mandato di vendita.
+      %li Prendo atto che, al fine di evitare lo sconto come da punto 5 e la determinazione dei prezzi da parte del Mandatario come da punto 6 sarà esclusivamente mia cura aggiornarmi sui tempi di esposizione ed eventualmente provvedere al ritiro della merce; in deroga all'art.1712 del Codice Civile sollevo il Mandatario dall'obbligo di comunicare l'esecuzione del Mandato di vendita.
 
-    %li Sono consapevole che, ai fini dell'esecuzione del mandato, i dati personali da me conferiti saranno trattati con l'ausilio di strumenti elettronici dal Mandatario, nel rispetto degli artt. 13 e 7 del D.Lgs. 196/2003 ("Codice in materia di protezione dei dati personali") di cui ho preso visione.
+      %li Sono consapevole che, ai fini dell'esecuzione del mandato, i dati personali da me conferiti saranno trattati con l'ausilio di strumenti elettronici dal Mandatario, nel rispetto degli artt. 13 e 7 del D.Lgs. 196/2003 ("Codice in materia di protezione dei dati personali") di cui ho preso visione.
 
-
-  %p Firma Mandante  ___________
-
-
-  %p per esplicita approvazione dei punti 3.4.5.6.7.8.
-
-
-  %p Firma Mandante  ____________
+  .firme    
+    %p Firma Mandante  ___________
+    %br
+    %p per esplicita approvazione dei punti 3.4.5.6.7.8.
+    %br
+    %p Firma Mandante  ____________
   
   
   

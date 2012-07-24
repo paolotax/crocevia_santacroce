@@ -178,4 +178,26 @@ footer ul {
   .nav {
     display: none !important;
   }
+  
+  .mandato {
+    
+    .firme {
+      margin-top: 30px;
+    }
+    
+    margin-top: -40px;
+    li {
+      margin-bottom: 10px;
+    }
+    
+    p.dati-ditta {
+      font-size: 11px;
+      border-bottom: 1px solid #666666;
+    }
+    p.testo-mandato {
+      line-height: 16px;
+    }
+  }
+  
+  
 } 
