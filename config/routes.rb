@@ -4,7 +4,11 @@ CroceviaSantacroce::Application.routes.draw do
 
   resources :articoli
 
-  resources :clienti
+  resources :clienti do
+    member do
+      get :mandato
+    end
+  end
 
   authenticated :user do
     root :to => 'home#index'

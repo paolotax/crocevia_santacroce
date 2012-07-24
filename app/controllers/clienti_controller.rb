@@ -35,4 +35,8 @@ class ClientiController < ApplicationController
     @cliente.destroy
     redirect_to clienti_path, notice: "Cliente eliminato!."
   end
+  
+  def mandato
+  end
+  
 end

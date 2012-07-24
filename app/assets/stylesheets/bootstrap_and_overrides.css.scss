@@ -170,3 +170,12 @@ footer ul {
   }
   
 }
+
+@media print {
+  body {
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+  }
+  .nav {
+    display: none !important;
+  }
+} 

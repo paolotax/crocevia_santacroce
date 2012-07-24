@@ -14,4 +14,8 @@ class Cliente < ActiveRecord::Base
     [nome, cognome, ragione_sociale].join(" ")
   end
   
+  def cognome_nome
+    [cognome, nome].join(" ")
+  end
+  
 end
