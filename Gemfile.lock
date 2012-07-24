@@ -30,6 +30,7 @@ GEM
       multi_json (~> 1.0)
     addressable (2.2.8)
     arel (3.0.2)
+    barby (0.5.0)
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.0.3.1)
     builder (3.0.0)
@@ -49,6 +50,7 @@ GEM
       xpath (~> 0.1.4)
     childprocess (0.3.2)
       ffi (~> 1.0.6)
+    chunky_png (1.2.5)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -120,6 +122,11 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
+    has_barcode (0.2.0)
+      activesupport (>= 3)
+      barby
+      i18n
+      rake
     hashie (1.2.0)
     highline (1.6.13)
     hike (1.2.1)
@@ -263,10 +270,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  barby
   bootstrap-sass (>= 2.0.3)
   cancan (>= 1.6.7)
   capistrano
   capybara (>= 1.1.2)
+  chunky_png
   coffee-rails (~> 3.2.1)
   cucumber-rails (>= 1.3.0)
   database_cleaner (>= 0.8.0)
@@ -283,6 +292,7 @@ DEPENDENCIES
   guard-rspec (>= 0.4.3)
   haml (>= 3.1.6)
   haml-rails (>= 0.3.4)
+  has_barcode
   jquery-rails
   kaminari
   launchy (>= 2.1.0)
