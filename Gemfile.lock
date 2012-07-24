@@ -270,6 +270,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  barby
   bootstrap-sass (>= 2.0.3)
   cancan (>= 1.6.7)
   capistrano
