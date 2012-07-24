@@ -30,18 +30,18 @@ gem "barby"
 gem "chunky_png"
 gem "has_barcode"
 
-  # case HOST_OS
-  #   when /darwin/i
-  #     gem 'rb-fsevent', :group => :development
-  #     gem 'growl', :group => :development
-  #   when /linux/i
-  #     gem 'libnotify', :group => :development
-  #     gem 'rb-inotify', :group => :development
-  #   when /mswin|windows/i
-  #     gem 'rb-fchange', :group => :development
-  #     gem 'win32console', :group => :development
-  #     gem 'rb-notifu', :group => :development
-  # end
+# case HOST_OS
+#   when /darwin/i
+#     gem 'rb-fsevent', :group => :development
+#     gem 'growl', :group => :development
+#   when /linux/i
+#     gem 'libnotify', :group => :development
+#     gem 'rb-inotify', :group => :development
+#   when /mswin|windows/i
+#     gem 'rb-fchange', :group => :development
+#     gem 'win32console', :group => :development
+#     gem 'rb-notifu', :group => :development
+# end
 
 gem "guard-bundler", ">= 0.1.3", :group => :development
 gem "guard-rails", ">= 0.0.3", :group => :development
