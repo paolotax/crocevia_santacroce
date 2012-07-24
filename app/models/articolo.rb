@@ -1,15 +1,22 @@
 class Articolo < ActiveRecord::Base
   
-  include HasBarcode
-
-  has_barcode :barcode,
-    :outputter => :svg, 
-    :type => :code_39,
-    :value => Proc.new { |p| p.number }
-
-  def number
-    self.id.to_s
-  end
+  # include HasBarcode
+  # 
+  # has_barcode :barcode,
+  #   :outputter => :svg, 
+  #   :type => :code_39,
+  #   :value => Proc.new { |p| p.number }
+  # 
+  # def number
+  #   self.id.to_s
+  # end
+  # 
+  # def to_barby
+  #   barcode_value = self.number.to_s
+  #   barcode = Barby::Code39.new(barcode_value)
+  #   full_path = "tmp/barcode_#{barcode_value}.png"
+  #   File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 3, :xdim => 2, :height => 55) }
+  # end
   
   belongs_to :cliente
   
@@ -23,12 +30,7 @@ class Articolo < ActiveRecord::Base
     end
   end
   
-  def to_barby
-    barcode_value = self.number.to_s
-    barcode = Barby::Code39.new(barcode_value)
-    full_path = "tmp/barcode_#{barcode_value}.png"
-    File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 3, :xdim => 2, :height => 55) }
-  end
+
   
   def importo_cliente
     if prezzo
