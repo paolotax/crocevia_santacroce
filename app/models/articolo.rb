@@ -1,6 +1,6 @@
-require 'barby'
-require 'barby/barcode/code_39'
-require 'barby/outputter/png_outputter'
+# require 'barby'
+# require 'barby/barcode/code_39'
+# require 'barby/outputter/png_outputter'
 
 class Articolo < ActiveRecord::Base
   
