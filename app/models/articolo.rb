@@ -1,16 +1,20 @@
+require 'barby'
+require 'barby/barcode/code_39'
+require 'barby/outputter/png_outputter'
+
 class Articolo < ActiveRecord::Base
   
-  # include HasBarcode
-  # 
-  # has_barcode :barcode,
-  #   :outputter => :svg, 
-  #   :type => :code_39,
-  #   :value => Proc.new { |p| p.number }
-  # 
-  # def number
-  #   self.id.to_s
-  # end
-  #
+  include HasBarcode
+  
+  has_barcode :barcode,
+    :outputter => :svg, 
+    :type => :code_39,
+    :value => Proc.new { |p| p.number }
+  
+  def number
+    self.id.to_s
+  end
+  
   
   after_save :to_barby
    

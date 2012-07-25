@@ -4,6 +4,11 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.5'
 gem 'sqlite3'
 gem 'pg'
+
+gem "barby"
+gem "chunky_png"
+gem "has_barcode"
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -26,9 +31,7 @@ gem "guard", ">= 0.6.2", :group => :development
 gem "kaminari"
 gem "faker"
 
-gem "barby"
-gem "chunky_png"
-gem "has_barcode"
+
 
 # case HOST_OS
 #   when /darwin/i
