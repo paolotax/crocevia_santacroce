@@ -1,6 +1,6 @@
-# require 'barby'
-# require 'barby/barcode/code_39'
-# require 'barby/outputter/png_outputter'
+require 'barby'
+require 'barby/barcode/code_39'
+require 'barby/outputter/png_outputter'
 
 class Articolo < ActiveRecord::Base
   
@@ -14,9 +14,8 @@ class Articolo < ActiveRecord::Base
   # def number
   #   self.id.to_s
   # end
-  # 
-  # 
-  # after_save :to_barby
+  
+  after_save :to_barby
    
   def to_barby
     barcode_value = self.id.to_s

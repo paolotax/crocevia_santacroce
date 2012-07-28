@@ -49,7 +49,7 @@
     
     %br
     
-    = form_for @cliente.articoli.build, class: "form-inline", remote: false do |f|
+    = form_for @cliente.articoli.build, class: "form-inline", remote: true do |f|
       = f.hidden_field :cliente_id
       
       .pull-left
