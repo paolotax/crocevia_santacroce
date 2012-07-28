@@ -19,7 +19,8 @@
             %legend Documento d'identità
             = f.input :tipo_documento, collection: ["carta d'identità", "patente", "passaporto"]
             = f.input :numero_documento
-            = f.input :scadenza_documento
+            = f.input :documento_rilasciato_da, label: "Rilasciato da"
+            = f.input :data_rilascio_documento, label: "Data rilascio", :as => :string
 
       .row
         .span6
@@ -31,7 +32,11 @@
             = f.input :provincia
         .span6
           %fieldset
-            %legend Recapiti
+            %legend Recapiti & note
+            = f.input :telefono
+            = f.input :cellulare
+            = f.input :email
+            = f.input :note,  :input_html => { :rows => 2 }
 
       .form-actions
         = f.button :submit, :class => 'btn btn-primary'

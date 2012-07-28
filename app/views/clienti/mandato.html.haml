@@ -30,7 +30,7 @@
       = @cliente.citta
       = @cliente.provincia  
       %br
-      = "Documento: #{@cliente.tipo_documento.upcase} N. #{@cliente.numero_documento} ril/rin. il #{@cliente.scadenza_documento.strftime("%d-%m-%y")} Da: ???????"
+      = "Documento: #{@cliente.tipo_documento.upcase} N. #{@cliente.numero_documento} ril/rin. il #{@cliente.data_rilascio_documento.try(:strftime, "%d-%m-%y")} Da: #{@cliente.documento_rilasciato_da}"
       
   
   %p.testo-mandato

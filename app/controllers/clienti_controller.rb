@@ -7,6 +7,9 @@ class ClientiController < ApplicationController
   end
   
   def show
+    if request.path != cliente_path(@cliente)
+      redirect_to @cliente, status: :moved_permanently
+    end
   end
   
   def new

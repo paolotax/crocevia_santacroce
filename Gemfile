@@ -30,7 +30,7 @@ gem "guard", ">= 0.6.2", :group => :development
 
 gem "kaminari"
 gem "faker"
-
+gem "friendly_id"
 
 
 # case HOST_OS

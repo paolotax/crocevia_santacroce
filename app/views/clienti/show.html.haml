@@ -44,8 +44,9 @@
   
     .info_documento
       = @cliente.tipo_documento
-      = @cliente.numero_documento
-      = @cliente.scadenza_documento.strftime("%d-%m-%y")
+      = "num. #{@cliente.numero_documento}"
+      = "rilasciato da: #{@cliente.documento_rilasciato_da}"
+      = "il #{@cliente.data_rilascio_documento.try(:strftime, "%d-%m-%y")}"
     
     %br
     
