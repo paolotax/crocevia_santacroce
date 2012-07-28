@@ -3,7 +3,7 @@ class ClientiController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @clienti = Cliente.all
+    @clienti = Cliente.page(params[:page]).per(10)
   end
   
   def show
