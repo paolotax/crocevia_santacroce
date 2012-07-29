@@ -1,3 +1,5 @@
+$blue: #049cdb;
+
 // Set the correct sprite paths
 $iconSpritePath: asset-url('glyphicons-halflings.png', image);
 $iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
@@ -7,7 +9,7 @@ $navbarBackgroundHighlight: white;
 
 $navbarText: grey;
 $navbarLinkColor: black;
-$navbarLinkBackgroundHover: #049cdb;
+$navbarLinkBackgroundHover: $blue;
 $sansFontFamily: "Trebuchet MS", Helvetica, Arial, Verdana, sans-serif;
 
 
