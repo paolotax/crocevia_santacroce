@@ -7,6 +7,8 @@ class ClientiController < ApplicationController
   end
   
   def show
+    @cliente = Cliente.includes(:articoli).find(params[:id])
+    
     if request.path != cliente_path(@cliente)
       redirect_to @cliente, status: :moved_permanently
     end

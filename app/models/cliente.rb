@@ -24,7 +24,10 @@ class Cliente < ActiveRecord::Base
     [cognome, nome].join(" ")
   end
   
-
+  def has_articoli?
+    !self.articoli.all.empty?
+  end
+  
   def data_rilascio_documento_text
     @data_rilascio_documento_text || data_rilascio_documento.try(:strftime, "%d-%m-%Y")
   end
