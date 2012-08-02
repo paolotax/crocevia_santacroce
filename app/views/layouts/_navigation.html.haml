@@ -26,4 +26,7 @@
         - if can? :manage, Cliente
           %li
             = link_to "Clienti", clienti_path  
+        - if can? :manage, Articolo
+          %li
+            = link_to "Articoli", articoli_path
 

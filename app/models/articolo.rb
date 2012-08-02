@@ -30,12 +30,20 @@ class Articolo < ActiveRecord::Base
   attr_accessible :categoria_id, :cliente_id, :nome, :prezzo, :provvigione, :quantita
 
   def data_scadenza
+    self.created_at + 2.months
+  end
+  
+  def data_patate
     self.created_at + 3.months
   end
   
   def scaduto?
-    Time.now > self.data_scadenza
+    Time.now > self.data_scadenza && Time.now < self.data_patate
   end
+  
+  def patate?
+    Time.now > self.data_patate
+  end  
   
   def prezzo_vendita
     if self.scaduto?

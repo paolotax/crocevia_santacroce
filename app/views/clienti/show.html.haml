@@ -72,9 +72,14 @@
       
       .pull-left
         = f.submit "Aggiungi", class: "btn-aggiungi"
-    %br  
     
-    - unless @cliente.articoli.empty?
+    %br  
+    .clearfix    
+    
+    - unless @cliente.has_articoli?
+      .empty-da-caricare.clearfix
+        Non ci sono articoli da caricare    
+    - else
       %table#articoli-da-caricare.table
       
         - for articolo in @cliente.articoli do
@@ -93,9 +98,8 @@
             .pull-right= link_to "carica"
           %td
             .pull-right= link_to "etichette"
-    - else
-      .empty-da-caricare
-        Non ci sono articoli da caricare
+
+
         
         
       

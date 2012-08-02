@@ -1,4 +1,10 @@
 class ArticoliController < ApplicationController
+  
+  load_and_authorize_resource
+  
+  def index
+    @articoli = Articolo.order("id desc").page(params[:page]).per(30)
+  end
  
   def create
     @articolo = Articolo.create(params[:articolo])
