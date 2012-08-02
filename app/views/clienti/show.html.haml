@@ -74,24 +74,28 @@
         = f.submit "Aggiungi", class: "btn-aggiungi"
     %br  
     
-    %table#articoli-da-caricare.table
+    - unless @cliente.articoli.empty?
+      %table#articoli-da-caricare.table
       
-      - for articolo in @cliente.articoli do
-        - unless articolo.new_record?
-          = render articolo
+        - for articolo in @cliente.articoli do
+          - unless articolo.new_record?
+            = render articolo
       
-      %tr.table-footer
-        %td{ colspan: 2} Totale
-        %td.quantita{ data: {value: @cliente.articoli.sum(&:quantita) }}
-          %strong= @cliente.articoli.sum(:quantita) 
-        %td.importo{ data: {value: @cliente.articoli.sum(&:importo) }}
-          %strong= number_to_currency @cliente.articoli.sum(&:importo)
-        %td.importo_cliente{ data: {value: @cliente.articoli.sum(&:importo_cliente) }}
-          %strong= number_to_currency @cliente.articoli.sum(&:importo_cliente)
-        %td
-          .pull-right= link_to "carica"
-        %td
-          .pull-right= link_to "etichette"
+        %tr.table-footer
+          %td{ colspan: 2} Totale
+          %td.quantita{ data: {value: @cliente.articoli.sum(&:quantita) }}
+            %strong= @cliente.articoli.sum(&:quantita) 
+          %td.importo{ data: {value: @cliente.articoli.sum(&:importo) }}
+            %strong= number_to_currency @cliente.articoli.sum(&:importo)
+          %td.importo_cliente{ data: {value: @cliente.articoli.sum(&:importo_cliente) }}
+            %strong= number_to_currency @cliente.articoli.sum(&:importo_cliente)
+          %td
+            .pull-right= link_to "carica"
+          %td
+            .pull-right= link_to "etichette"
+    - else
+      .empty-da-caricare
+        Non ci sono articoli da caricare
         
         
       

@@ -8,6 +8,7 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'articolo', 'articoli'
   inflect.irregular 'cliente', 'clienti'
   inflect.irregular 'categoria', 'categorie'  
+  inflect.irregular 'movimento', 'movimenti'
   inflect.uncountable %w( fish sheep )
 end
 

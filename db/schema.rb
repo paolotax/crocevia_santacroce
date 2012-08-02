@@ -11,18 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120728160628) do
+ActiveRecord::Schema.define(:version => 20120802065143) do
 
   create_table "articoli", :force => true do |t|
     t.string   "nome"
     t.integer  "quantita"
-    t.decimal  "prezzo",         :precision => 7, :scale => 2
-    t.decimal  "prezzo_vendita", :precision => 7, :scale => 2
+    t.decimal  "prezzo",       :precision => 7, :scale => 2
     t.integer  "provvigione"
     t.integer  "cliente_id"
     t.integer  "categoria_id"
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
   end
 
   add_index "articoli", ["categoria_id"], :name => "index_articoli_on_categoria_id"
@@ -71,6 +70,18 @@ ActiveRecord::Schema.define(:version => 20120728160628) do
   add_index "friendly_id_slugs", ["slug", "sluggable_type"], :name => "index_friendly_id_slugs_on_slug_and_sluggable_type", :unique => true
   add_index "friendly_id_slugs", ["sluggable_id"], :name => "index_friendly_id_slugs_on_sluggable_id"
   add_index "friendly_id_slugs", ["sluggable_type"], :name => "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "movimenti", :force => true do |t|
+    t.string   "tipo"
+    t.integer  "quantita",                                  :default => 1
+    t.decimal  "prezzo",      :precision => 7, :scale => 2
+    t.string   "data"
+    t.integer  "articolo_id"
+    t.datetime "created_at",                                               :null => false
+    t.datetime "updated_at",                                               :null => false
+  end
+
+  add_index "movimenti", ["articolo_id"], :name => "index_movimenti_on_articolo_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

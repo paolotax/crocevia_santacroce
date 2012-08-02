@@ -4,6 +4,7 @@ require 'barby/outputter/png_outputter'
 
 class Articolo < ActiveRecord::Base
   
+  has_many :movimenti
   # include HasBarcode
   # 
   # has_barcode :barcode,
@@ -28,6 +29,22 @@ class Articolo < ActiveRecord::Base
   
   attr_accessible :categoria_id, :cliente_id, :nome, :prezzo, :provvigione, :quantita
 
+  def data_scadenza
+    self.created_at + 3.months
+  end
+  
+  def scaduto?
+    Time.now > self.data_scadenza
+  end
+  
+  def prezzo_vendita
+    if self.scaduto?
+      self.prezzo / 2
+    else
+      self.prezzo
+    end
+  end
+  
   def importo
     if prezzo
       self.prezzo.to_d * self.quantita
@@ -36,11 +53,9 @@ class Articolo < ActiveRecord::Base
     end
   end
   
-
-  
   def importo_cliente
     if prezzo
-      self.quantita.to_d * self.prezzo.to_d * self.provvigione.to_d / 100
+      self.prezzo.to_d * self.provvigione * self.quantita / 100
     else
       0
     end  
