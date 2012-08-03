@@ -12,10 +12,11 @@
         %li
           = link_to clienti_url do
             %i.icon-user
-            Clienti    
+            tutti    
   
   .span9
     %h1 Clienti
+    %br
     %table.table
       - for cliente in @clienti do
         = render cliente

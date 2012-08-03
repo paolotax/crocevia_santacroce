@@ -1,6 +1,10 @@
-$("#articoli-da-caricare .table-footer").before("<%= escape_javascript(render @articolo) %>");
-$("form.new_articolo").get(0).reset();
+$("#articoli-da-caricare .table-footer").before("<%= escape_javascript(render 'clienti/articolo', articolo: @articolo) %>");
 
+$(".table-header").removeClass("hidden")
+$(".table-footer").removeClass("hidden")
+$(".empty-rows").addClass("hidden")
+
+$("form.new_articolo").get(0).reset();
 $("input#articolo_nome").focus();
 
 var quantita = $(".table-footer .quantita").data("value") + <%= @articolo.quantita %>;

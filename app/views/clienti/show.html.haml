@@ -76,28 +76,38 @@
     %br  
     .clearfix    
     
-    - unless @cliente.has_articoli?
-      .empty-da-caricare.clearfix
-        Non ci sono articoli da caricare    
-    - else
-      %table#articoli-da-caricare.table
+    %table#articoli-da-caricare.table.articoli
       
-        - for articolo in @cliente.articoli do
-          - unless articolo.new_record?
-            = render articolo
+      %tr.table-header{ class: "#{'hidden' unless @cliente.has_articoli? }" }
+        %th.barcode Barcode
+        %th.codice Codice
+        %th.articolo Articolo
+        %th.quantita Quantità
+        %th.prezzo Prezzo
+        %th.provvigione Provvigione
+        %th.created_at Data carico
+        %th
+              
+      - for articolo in @cliente.articoli do
+        - unless articolo.new_record?
+          = render 'clienti/articolo', articolo: articolo
       
-        %tr.table-footer
-          %td{ colspan: 2} Totale
-          %td.quantita{ data: {value: @cliente.articoli.sum(&:quantita) }}
-            %strong= @cliente.articoli.sum(&:quantita) 
-          %td.importo{ data: {value: @cliente.articoli.sum(&:importo) }}
-            %strong= number_to_currency @cliente.articoli.sum(&:importo)
-          %td.importo_cliente{ data: {value: @cliente.articoli.sum(&:importo_cliente) }}
-            %strong= number_to_currency @cliente.articoli.sum(&:importo_cliente)
-          %td
-            .pull-right= link_to "carica"
-          %td
-            .pull-right= link_to "etichette"
+      - unless @cliente.has_articoli?
+        .empty-rows.clearfix
+          Non ci sono articoli da caricare    
+    
+      %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli? }"}
+        %td{ colspan: 3} Totale
+        %td.quantita{ data: {value: @cliente.articoli.sum(&:quantita) }}
+          %strong= @cliente.articoli.sum(&:quantita) 
+        %td.importo.prezzo{ data: {value: @cliente.articoli.sum(&:importo) }}
+          %strong= number_to_currency @cliente.articoli.sum(&:importo)
+        %td.importo_cliente.provvigione{ data: {value: @cliente.articoli.sum(&:importo_cliente) }}
+          %strong= number_to_currency @cliente.articoli.sum(&:importo_cliente)
+        %td
+          .pull-right= link_to "carica"
+        %td
+          .pull-right= link_to "etichette"
 
 
         

@@ -1,4 +1,19 @@
-%h2 Users
-- @users.each do |user|
-  %br/
-  #{link_to user.email, user} signed up #{user.created_at.to_date}
+.row
+  .span3.side-bar
+    .well
+      %ul.nav.nav-list
+        %li.nav-header
+          %i.icon-group
+          Utenti
+        %li
+          = link_to users_url do
+            %i.icon-group
+            tutti    
+  
+  .span9
+    %h1 Utenti
+    - for user in @users do
+      %br/
+      #{link_to user.email, user} signed up #{user.created_at.to_date}
+
+

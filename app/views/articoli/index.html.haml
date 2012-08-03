@@ -3,16 +3,17 @@
     .well
       %ul.nav.nav-list
         %li.nav-header
-          %i.icon-user
+          %i.icon-gift
           Articoli
           
         %li
           = link_to articoli_url do
-            %i.icon-user
-            Articoli    
+            %i.icon-gift
+            tutti    
   
   .span9
     %h1 Articoli
+    %br
     %table.table
       - for articolo in @articoli do
         = render articolo

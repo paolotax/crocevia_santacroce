@@ -1,3 +1,5 @@
+/ articolo clienti
+
 %tr[articolo]
   %td.barcode= image_tag "/barcodes/barcode_#{articolo.id}.png"
   / articolo.barcode.to_svg(:margin => 0, :xdim => 2, :height => 40).html_safe
@@ -8,4 +10,5 @@
   %td.provvigione= number_to_percentage articolo.provvigione, precision: 0
   %td.created_at= articolo.created_at.try(:strftime, "%d-%m-%y")
   %td
-    = link_to articolo.cliente.full_name, articolo.cliente
+    = link_to articolo, method: :delete, remote: true, class: "close" do
+      &times;
