@@ -12,4 +12,9 @@ var importo_cliente  = (parseFloat($(".table-footer .importo_cliente").data("val
 $(".table-footer .importo_cliente").data("value", importo_cliente);
 $(".table-footer .importo_cliente strong").html(importo_cliente)
 
-console.log(importo_cliente)
+
+if ($(".articoli .articolo").length == 1) {
+  $(".table-header").addClass("hidden");
+  $(".table-footer").addClass("hidden");
+  $(".empty-rows").removeClass("hidden");
+}

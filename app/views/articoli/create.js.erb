@@ -1,9 +1,5 @@
 $("#articoli-da-caricare .table-footer").before("<%= escape_javascript(render 'clienti/articolo', articolo: @articolo) %>");
 
-$(".table-header").removeClass("hidden")
-$(".table-footer").removeClass("hidden")
-$(".empty-rows").addClass("hidden")
-
 $("form.new_articolo").get(0).reset();
 $("input#articolo_nome").focus();
 
@@ -20,3 +16,6 @@ var importo_cliente  = (parseFloat($(".table-footer .importo_cliente").data("val
 $(".table-footer .importo_cliente").data("value", importo_cliente);
 $(".table-footer .importo_cliente strong").html(importo_cliente)
 
+$(".table-header").removeClass("hidden")
+$(".table-footer").removeClass("hidden")
+$(".empty-rows").addClass("hidden")
