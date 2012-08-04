@@ -1,5 +1,5 @@
 %tr[articolo]
-  %td.barcode= image_tag "/barcodes/barcode_#{articolo.id}.png"
+  / %td.barcode= image_tag "/barcodes/barcode_#{articolo.id}.png"
   / articolo.barcode.to_svg(:margin => 0, :xdim => 2, :height => 40).html_safe
   %td.id= "art.#{articolo.id}"
   %td.nome= articolo.nome

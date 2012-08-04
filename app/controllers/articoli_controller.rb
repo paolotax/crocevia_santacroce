@@ -3,7 +3,10 @@ class ArticoliController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @articoli = Articolo.order("id desc").page(params[:page]).per(30)
+    @q = Articolo.includes(:cliente).order("id desc").page(params[:page]).per(30).search(params[:q])
+    @articoli = @q.result(:distinct => true)
+    # @search.build_condition if @search.conditions.empty?
+    # @search.build_sort if @search.sorts.empty?
   end
  
   def create
@@ -24,5 +27,8 @@ class ArticoliController < ApplicationController
       format.js
     end
   end
-
+  
+  def show
+  end
+  
 end

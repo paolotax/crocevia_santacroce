@@ -9,12 +9,35 @@
         %li
           = link_to articoli_url do
             %i.icon-gift
-            tutti    
+            tutti
+    .well
+      = search_form_for @q do |f|
+        = f.text_field :nome_cont, class: "search-query", placeholder: "cerca articolo", style: "width: 152px; margin-bottom: 10px"
+        .pull-right.clearfix= f.submit "cerca", class: "btn"
+
+        / = search_form_for @search, url: search_articoli_path, method: :post do |f|
+        /   = f.condition_fields do |c|
+        /     = render "condition_fields", f: c            
+        /   %p= link_to_add_fields "Add Conditions", f, :condition
+        /   .field
+        /     Sort:
+        /     = f.sort_fields do |s|
+        /       = s.sort_select
+        /   .actions= f.submit "Cerca"
+          
   
   .span9
     %h1 Articoli
     %br
     %table.table
+      %tr
+        %th= sort_link @q, :id, "codice"
+        %th= sort_link @q, :nome, "articolo"
+        %th quantita
+        %th= sort_link @q, :prezzo, "prezzo"
+        %th provv.
+        %th= sort_link @q, :created_at, "caricato il"
+
       - for articolo in @articoli do
         = render articolo
-    = paginate @articoli
+    / = paginate @articoli

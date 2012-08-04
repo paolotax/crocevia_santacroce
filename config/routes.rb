@@ -6,7 +6,9 @@ CroceviaSantacroce::Application.routes.draw do
   
   resources :categorie
 
-  resources :articoli
+  resources :articoli do
+    # collection { post :search, to: 'articoli#index' }
+  end
 
   resources :clienti do
     member do
