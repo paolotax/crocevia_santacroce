@@ -1,6 +1,6 @@
 class ArticoliController < ApplicationController
   
-  load_and_authorize_resource
+  # load_and_authorize_resource
   
   def index
     @q = Articolo.includes(:cliente).order("id desc").page(params[:page]).per(30).search(params[:q])

@@ -10,10 +10,11 @@
           = link_to articoli_url do
             %i.icon-gift
             tutti
-    .well
+        %li.divider
+        
       = search_form_for @q do |f|
         = f.text_field :nome_cont, class: "search-query", placeholder: "cerca articolo", style: "width: 152px; margin-bottom: 10px"
-        .pull-right.clearfix= f.submit "cerca", class: "btn"
+        .pull-right.clearfix= f.submit "cerca", class: "btn", name: nil
 
         / = search_form_for @search, url: search_articoli_path, method: :post do |f|
         /   = f.condition_fields do |c|
@@ -37,7 +38,8 @@
         %th= sort_link @q, :prezzo, "prezzo"
         %th provv.
         %th= sort_link @q, :created_at, "caricato il"
-
+        %th= sort_link @q, "clienti.nome", "venditore"
+        
       - for articolo in @articoli do
         = render articolo
-    / = paginate @articoli
+    = paginate @articoli
