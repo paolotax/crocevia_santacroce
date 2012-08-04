@@ -10,6 +10,7 @@ class Ability
     if user.has_role? :staff
       can :manage, Cliente
       can :manage, Articolo
+      can :index, :cassa
     end;  
     
     # Define abilities for the passed in user here. For example:

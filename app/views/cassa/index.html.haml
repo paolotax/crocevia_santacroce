@@ -1,0 +1,4 @@
+= form_tag articoli_url, class: "well form-search cerca-articolo", method: 'get' do
+  = text_field_tag :cerca, params[:q], class: "search-query", placeholder: "cerca articolo"
+  = submit_tag "Cerca", class: "btn", name: nil
+  

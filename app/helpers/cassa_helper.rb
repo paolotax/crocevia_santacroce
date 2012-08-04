@@ -1,0 +1,2 @@
+module CassaHelper
+end

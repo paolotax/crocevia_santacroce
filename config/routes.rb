@@ -1,5 +1,9 @@
 CroceviaSantacroce::Application.routes.draw do
   
+  match '/cassa',   controller: 'cassa', action: 'index'
+  
+  resources :movimenti
+  
   resources :categorie
 
   resources :articoli
