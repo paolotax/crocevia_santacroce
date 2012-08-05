@@ -8,6 +8,7 @@ namespace :barcodes do
     Creates the upload folders unless they exist
     and sets the proper upload permissions.
   EOD
+  
   task :setup, :except => { :no_release => true } do
     dirs = barcodes_dirs.map { |d| File.join(shared_path, d) }
     run "#{try_sudo} mkdir -p #{dirs.join(' ')} && #{try_sudo} chmod g+w #{dirs.join(' ')}"
