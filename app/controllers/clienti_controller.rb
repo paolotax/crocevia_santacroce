@@ -3,7 +3,8 @@ class ClientiController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @clienti = Cliente.page(params[:page]).per(10)
+    @q = Cliente.search(params[:q])
+    @clienti = @q.result(distinct: true).page(params[:page]).per(10)
   end
   
   def show

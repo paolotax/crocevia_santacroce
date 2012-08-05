@@ -12,7 +12,11 @@
         %li
           = link_to clienti_url do
             %i.icon-user
-            tutti    
+            tutti
+        %li.divider
+      = search_form_for @q do |f|
+        = f.text_field :nome_or_cognome_or_ragione_sociale_cont, class: "search-query", placeholder: "cerca cliente", style: "width: 152px; margin-bottom: 10px"
+        .pull-right.clearfix= f.submit "cerca", class: "btn", name: nil
   
   .span9
     %h1 Clienti

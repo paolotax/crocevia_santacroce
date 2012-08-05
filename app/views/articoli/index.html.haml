@@ -38,7 +38,7 @@
         %th= sort_link @q, :prezzo, "prezzo"
         %th provv.
         %th= sort_link @q, :created_at, "caricato il"
-        %th= sort_link @q, "clienti.nome", "venditore"
+        %th= sort_link @q, :cliente_nome, "venditore"
         
       - for articolo in @articoli do
         = render articolo

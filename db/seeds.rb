@@ -13,11 +13,28 @@
 # user.add_role :admin
 
 
-500.times do
-  Cliente.create :nome => "#{Faker::Name.first_name}", cognome: "#{Faker::Name.last_name}", 
- 
-  indirizzo:  "#{Faker::Address.street_address}",
-  citta:      "#{Faker::Address.city}",
-  provincia:  "#{Faker::Address.us_state}",
-  cap:        "#{Faker::Address.zip_code}"
+50.times do
+  @cliente = Cliente.create nome: "#{Faker::Name.first_name}", 
+    cognome:    "#{Faker::Name.last_name}", 
+    indirizzo:  "#{Faker::Address.street_address}", 
+    citta:      "#{Faker::Address.city}", 
+    provincia:  "#{Faker::Address.us_state}", 
+    cap:        "#{Faker::Address.zip_code}"
+  
+  3.times do
+    Articolo.create cliente_id: "#{@cliente.id}",
+      nome: "#{"camicia pantalone gonna giacca gile' scarpe stivali cappello maglione felpa mutande calze abito".split.shuffle[0] }",
+      prezzo: "#{rand(25)}",
+      quantita: 1,
+      provvigione: 50
+  end
+
+  3.times do
+    Articolo.create cliente_id: @cliente.id,
+      nome: "#{"divano poltrona sedia tavolo cucina como' ".split.shuffle[0] }",
+      prezzo: [10,45,50,90,120,150,200,34.5].shuffle[0],
+      quantita: 1,
+      provvigione: 65
+  end
+      
 end

@@ -6,6 +6,14 @@
 # - Davide Guerri (d.guerri@caspur.it)
 
 it:
+  views:
+    pagination:
+      first: "&laquo; Prima"
+      last: "Ultima &raquo;"
+      previous: "&lsaquo; Prec"
+      next: "Succ &rsaquo;"
+      truncate: "..."
+      
   number:
     format:
       delimiter: ""

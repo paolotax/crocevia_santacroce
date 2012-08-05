@@ -22,6 +22,19 @@ $bodyBackground: white;
 
 @import "bootstrap-responsive";
 
+.page.gap,
+.page.current {
+  float: left;
+  padding: 0 14px;
+  line-height: 34px;
+  text-decoration: none;
+  border-right: 1px solid #DDD;
+}
+.pagination .first a {
+  border-left: 1px solid #DDD;
+  border-left-width: 1px;
+} 
+
 .navbar .navbar-inner {
   background: white;
   color: black;
