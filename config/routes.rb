@@ -7,6 +7,7 @@ CroceviaSantacroce::Application.routes.draw do
   resources :categorie
 
   resources :articoli do
+    get 'pagina/:page', :action => :index, :on => :collection
     # collection { post :search, to: 'articoli#index' }
   end
 
@@ -14,6 +15,7 @@ CroceviaSantacroce::Application.routes.draw do
     member do
       get :mandato
     end
+    get 'pagina/:page', :action => :index, :on => :collection
   end
 
   authenticated :user do

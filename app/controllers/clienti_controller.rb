@@ -4,7 +4,7 @@ class ClientiController < ApplicationController
   
   def index
     @q = Cliente.search(params[:q])
-    @clienti = @q.result(distinct: true).page(params[:page]).per(10)
+    @clienti = @q.result(distinct: true).pagina(params[:page]).per(10)
   end
   
   def show

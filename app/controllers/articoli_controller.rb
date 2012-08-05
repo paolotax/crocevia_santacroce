@@ -3,8 +3,8 @@ class ArticoliController < ApplicationController
   # load_and_authorize_resource
   
   def index
-    @q = Articolo.includes(:cliente).order("id desc").search(params[:q])
-    @articoli = @q.result(:distinct => true).page(params[:page]).per(30)
+    @q = Articolo.includes(:cliente).joins(:cliente).order("articoli.id desc").search(params[:q])
+    @articoli = @q.result(:distinct => true).pagina(params[:page]).per(30)
   end
  
   def create
