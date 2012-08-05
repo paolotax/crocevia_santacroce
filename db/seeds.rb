@@ -13,7 +13,7 @@
 # user.add_role :admin
 
 
-50.times do
+rand(1000).times do
   @cliente = Cliente.create nome: "#{Faker::Name.first_name}", 
     cognome:    "#{Faker::Name.last_name}", 
     indirizzo:  "#{Faker::Address.street_address}", 
@@ -21,17 +21,17 @@
     provincia:  "#{Faker::Address.us_state}", 
     cap:        "#{Faker::Address.zip_code}"
   
-  3.times do
+  rand(10).times do
     Articolo.create cliente_id: "#{@cliente.id}",
-      nome: "#{"camicia pantalone gonna giacca gile' scarpe stivali cappello maglione felpa mutande calze abito".split.shuffle[0] }",
+      nome: "#{"camicia pantalone gonna giacca gile' scarpe stivali cappello maglione felpa mutande calze abito".split.shuffle[0] } #{"blu giallo grigio vintage anni70 anni80 anni90 verde celeste nero spaziale".split.shuffle[0] }",
       prezzo: "#{rand(25)}",
       quantita: 1,
       provvigione: 50
   end
 
-  3.times do
+  rand(10).times do
     Articolo.create cliente_id: @cliente.id,
-      nome: "#{"divano poltrona sedia tavolo cucina como' ".split.shuffle[0] }",
+      nome: "#{"divano poltrona sedia tavolo cucina como' ".split.shuffle[0]} #{"rococo anni70 cippendale liberty anni50 pop' ".split.shuffle[0]}",
       prezzo: [10,45,50,90,120,150,200,34.5].shuffle[0],
       quantita: 1,
       provvigione: 65
