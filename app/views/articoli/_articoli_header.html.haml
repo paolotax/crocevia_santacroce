@@ -1,0 +1,9 @@
+%thead.articoli
+  %tr
+    %th= sort_link @q, :id, "codice"
+    %th= sort_link @q, :nome, "articolo"
+    %th quantita
+    %th= sort_link @q, :prezzo, "prezzo"
+    %th provv.
+    %th= sort_link @q, :created_at, "caricato il"
+    %th= sort_link @q, :cliente_nome, "venditore"

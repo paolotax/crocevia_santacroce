@@ -1,0 +1,4 @@
+
+$('tbody.clienti').html('<%= escape_javascript render(@clienti) %>');
+
+$('nav.pagination').html('<%= escape_javascript(paginate(@clienti, :remote => true).to_s) %>');

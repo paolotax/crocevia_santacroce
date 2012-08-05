@@ -1,0 +1,5 @@
+$('thead.articoli').replaceWith("<%= escape_javascript render('articoli_header') %>");
+
+$('tbody.articoli').html('<%= escape_javascript render(@articoli) %>');
+
+$('nav.pagination').html('<%= escape_javascript(paginate(@articoli, :remote => true).to_s) %>');

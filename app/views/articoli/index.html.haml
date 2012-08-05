@@ -12,7 +12,7 @@
             tutti
         %li.divider
         
-      = search_form_for @q do |f|
+      = search_form_for @q, remote: true do |f|
         = f.text_field :nome_cont, class: "search-query", placeholder: "cerca articolo", style: "width: 152px; margin-bottom: 10px"
         .pull-right.clearfix= f.submit "cerca", class: "btn", name: nil
 
@@ -31,15 +31,8 @@
     %h1 Articoli
     %br
     %table.table
-      %tr
-        %th= sort_link @q, :id, "codice"
-        %th= sort_link @q, :nome, "articolo"
-        %th quantita
-        %th= sort_link @q, :prezzo, "prezzo"
-        %th provv.
-        %th= sort_link @q, :created_at, "caricato il"
-        %th= sort_link @q, :cliente_nome, "venditore"
-        
-      - for articolo in @articoli do
-        = render articolo
-    = paginate @articoli
+      = render "articoli_header"
+      %tbody.articoli  
+        - for articolo in @articoli do
+          = render articolo
+    = paginate @articoli, remote: true;

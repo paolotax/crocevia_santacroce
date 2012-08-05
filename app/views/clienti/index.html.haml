@@ -14,7 +14,7 @@
             %i.icon-user
             tutti
         %li.divider
-      = search_form_for @q do |f|
+      = search_form_for @q, remote: true do |f|
         = f.text_field :nome_or_cognome_or_ragione_sociale_cont, class: "search-query", placeholder: "cerca cliente", style: "width: 152px; margin-bottom: 10px"
         .pull-right.clearfix= f.submit "cerca", class: "btn", name: nil
   
@@ -22,7 +22,9 @@
     %h1 Clienti
     %br
     %table.table
-      - for cliente in @clienti do
-        = render cliente
-    = paginate @clienti
+      %tbody.clienti
+        - for cliente in @clienti do
+          = render cliente
+    
+    = paginate @clienti, remote: true
 
