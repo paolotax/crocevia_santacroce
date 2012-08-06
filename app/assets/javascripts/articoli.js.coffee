@@ -8,3 +8,7 @@ jQuery ->
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
+
+  $(".sort_link").live "click", (e) ->
+    $.getScript(this.href)
+    return false;

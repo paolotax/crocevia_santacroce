@@ -1,3 +1,4 @@
+$('thead.clienti').replaceWith("<%= escape_javascript render('clienti_header') %>");
 
 $('tbody.clienti').html('<%= escape_javascript render(@clienti) %>');
 

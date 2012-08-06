@@ -44,7 +44,7 @@ jQuery ->
       color: 'blue'
       title: "Crocevia - mercato dell'usato"
       infoWindow:
-        content: "<p><strong>Crocevia - mercato dell'usato</strong></br>Via Santa Croce 11/abcdef</br>40121 Bologna</p>" 
+        content: "<p><strong>Crocevia - mercato dell'usato</strong></br>Via Santa Croce 11/abcdef</br>40122 Bologna</p>" 
       click: ->
         console.log 'You clicked in this marker'
       

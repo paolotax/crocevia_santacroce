@@ -1,4 +1,5 @@
 %tr[cliente]
+  %td= cliente.id
   %td= link_to cliente.full_name, cliente
   %td
-    %small= "creato il #{cliente.created_at.strftime("%d-%m-%y") }"
+    %small= cliente.created_at.strftime("%d-%m-%y")

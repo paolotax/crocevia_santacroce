@@ -1,0 +1,8 @@
+%thead.clienti
+  %tr
+    %th.codice
+      = sort_link @q, :id, "codice"
+    %th.full_name
+      = sort_link @q, :nome, "cliente"
+    %th.created_at
+      = sort_link @q, :created_at, "caricato il"

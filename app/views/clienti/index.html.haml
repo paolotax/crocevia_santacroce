@@ -22,6 +22,7 @@
     %h1 Clienti
     %br
     %table.table
+      = render "clienti_header"
       %tbody.clienti
         - for cliente in @clienti do
           = render cliente
