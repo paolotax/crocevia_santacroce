@@ -11,17 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120804182203) do
+ActiveRecord::Schema.define(:version => 20120807074548) do
 
   create_table "articoli", :force => true do |t|
     t.string   "nome"
     t.integer  "quantita"
-    t.decimal  "prezzo",       :precision => 7, :scale => 2
+    t.decimal  "prezzo",          :precision => 7, :scale => 2
     t.integer  "provvigione"
     t.integer  "cliente_id"
     t.integer  "categoria_id"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at",                                                   :null => false
+    t.datetime "updated_at",                                                   :null => false
+    t.integer  "movimenti_count",                               :default => 0
   end
 
   add_index "articoli", ["categoria_id"], :name => "index_articoli_on_categoria_id"

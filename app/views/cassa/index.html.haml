@@ -1,4 +1,44 @@
-= form_tag articoli_url, class: "well form-search cerca-articolo", method: 'get' do
-  = text_field_tag :cerca, params[:q], class: "search-query", placeholder: "cerca articolo"
-  = submit_tag "Cerca", class: "btn", name: nil
+.row
+  .span3.side-bar
+    .well
+      %ul.nav.nav-list
+        %li.nav-header
+          %i.icon-user
+          Clienti 
+        %li
+          = link_to clienti_url do
+            %i.icon-user
+            tutti
+        
+        %li.divider
+
+        %li.nav-header
+          %i.icon-gift
+          Articoli
+        
+        %li
+          = link_to articoli_url do
+            %i.icon-gift
+            tutti
   
+  .span9
+
+    .form-search-articolo.pull-left
+      = form_for @movimento, class: "well form-search" do |f|
+  
+        = f.text_field :articolo_id, class: "search-query", placeholder: "inserisci codice articolo", autofocus: true
+        = f.submit "aggiungi", class: "btn btn-primary"
+    
+    .pull-right.clearfix
+      %span Incasso totale
+      %strong= number_to_currency @movimenti.sum(&:prezzo)
+      = link_to "#", class: "btn btn-success" do
+        %i.icon-shopping-cart
+        registra
+    
+    %table.table
+      = render @movimenti
+           
+    / = @movimenti.sum(&:importo_provvigione)
+    / = @movimenti.sum(&:importo_patate)
+    / = @movimenti.sum(&:ricavo)

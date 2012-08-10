@@ -206,7 +206,9 @@ footer ul {
   footer {
     display: none !important;
   }
-  
+  .well {
+    border-width: 0;
+  }
   .btn-stampami {
     display: none;
   }

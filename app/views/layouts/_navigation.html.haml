@@ -29,4 +29,11 @@
         - if can? :manage, Articolo
           %li
             = link_to "Articoli", articoli_path
+        
+        - if can? :manage, Movimento
+          %li
+            = link_to cassa_path do
+              %i.icon-shopping-cart.icon-large
+              Cassa
+        
 

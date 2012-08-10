@@ -1,0 +1,16 @@
+%tr[movimento]
+  / %tr[movimento]{class: "#{movimento.patate? == true ? 'patate' : ''} #{movimento.scaduto? == true ? 'scaduto' : ''}"}
+  %td= "art.#{movimento.articolo_id}"
+  %td= movimento.articolo.nome if movimento.articolo.present?
+  %td= number_to_currency movimento.prezzo
+  %td
+    - if movimento.patate?
+      .label.label-info.pull-left
+        patate
+    - if movimento.scaduto? && !movimento.patate?
+      .label.label-warning.pull-left
+        scaduto    
+  / %td= movimento.giorni_di_giacenza
+  %td
+    = link_to movimento, method: :delete, class: "close" do
+      &times;

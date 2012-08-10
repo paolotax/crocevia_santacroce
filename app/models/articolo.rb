@@ -28,7 +28,15 @@ class Articolo < ActiveRecord::Base
   belongs_to :cliente
   
   attr_accessible :categoria_id, :cliente_id, :nome, :prezzo, :provvigione, :quantita
-
+  
+  scope :disponibili, where("articoli.quantita > articoli.movimenti_count")
+  scope :esauriti,    where("articoli.quantita = articoli.movimenti_count")
+  scope :esagerati,   where("articoli.quantita < articoli.movimenti_count")
+  
+  def disponibile?
+    self.quantita > self.movimenti_count
+  end
+  
   def data_scadenza
     self.created_at + 2.months
   end
@@ -38,7 +46,7 @@ class Articolo < ActiveRecord::Base
   end
   
   def scaduto?
-    Time.now > self.data_scadenza && Time.now < self.data_patate
+    Time.now > self.data_scadenza
   end
   
   def patate?
@@ -76,4 +84,11 @@ class Articolo < ActiveRecord::Base
   def prezzo_in_euro=(euros)
     self.prezzo = euros.to_d if euros.present?
   end
+  
+  def self.ricalcola_counter
+    Articolo.find_each do |p|
+      Articolo.update_counters p.id, :movimenti_count => p.movimenti.length
+    end
+  end  
+  
 end
