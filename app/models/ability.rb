@@ -10,6 +10,7 @@ class Ability
     if user.has_role? :staff
       can :manage, Cliente
       can :manage, Articolo
+      can :manage, Movimento
       can :index, :cassa
     end;  
     

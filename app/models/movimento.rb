@@ -2,10 +2,19 @@ class Movimento < ActiveRecord::Base
   attr_accessible :data, :prezzo, :quantita, :tipo, :articolo_id
   
   belongs_to :articolo, counter_cache: true
+  belongs_to :user
+  belongs_to :documento
   
   before_save :set_prezzo
   
+  scope :attivo, where(documento_id: nil)
+  
   # include ActionView::Helpers::DateHelper
+  
+  def da_registrare?
+    self.documento.nil?
+  end
+  
   
   def set_prezzo
     if self.prezzo.blank?

@@ -8,7 +8,7 @@ class MovimentiController < ApplicationController
     
     if @articolo
       if @articolo.disponibile?
-        @movimento = Movimento.create(params[:movimento].merge(tipo: "vendita"))
+        @movimento = current_user.movimenti.create(params[:movimento].merge(tipo: "vendita"))
         respond_to do |format|
           format.html { redirect_to cassa_path }
           format.js

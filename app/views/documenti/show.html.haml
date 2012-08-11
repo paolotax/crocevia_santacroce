@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Tipo:
+  = @documento.tipo
+%p
+  %b Data:
+  = @documento.data
+%p
+  %b Importo:
+  = @documento.importo
+
+= link_to 'Edit', edit_documento_path(@documento)
+\|
+= link_to 'Back', documenti_path

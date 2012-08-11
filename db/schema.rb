@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120807074548) do
+ActiveRecord::Schema.define(:version => 20120810232134) do
 
   create_table "articoli", :force => true do |t|
     t.string   "nome"
@@ -62,6 +62,14 @@ ActiveRecord::Schema.define(:version => 20120807074548) do
 
   add_index "clienti", ["slug"], :name => "index_clienti_on_slug"
 
+  create_table "documenti", :force => true do |t|
+    t.string   "tipo"
+    t.date     "data"
+    t.decimal  "importo",    :precision => 7, :scale => 2, :default => 0.0
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+  end
+
   create_table "friendly_id_slugs", :force => true do |t|
     t.string   "slug",                         :null => false
     t.integer  "sluggable_id",                 :null => false
@@ -75,15 +83,18 @@ ActiveRecord::Schema.define(:version => 20120807074548) do
 
   create_table "movimenti", :force => true do |t|
     t.string   "tipo"
-    t.integer  "quantita",                                  :default => 1
-    t.decimal  "prezzo",      :precision => 7, :scale => 2
-    t.string   "data"
+    t.integer  "quantita",                                   :default => 1
+    t.decimal  "prezzo",       :precision => 7, :scale => 2
     t.integer  "articolo_id"
-    t.datetime "created_at",                                               :null => false
-    t.datetime "updated_at",                                               :null => false
+    t.datetime "created_at",                                                :null => false
+    t.datetime "updated_at",                                                :null => false
+    t.integer  "documento_id"
+    t.integer  "user_id"
   end
 
   add_index "movimenti", ["articolo_id"], :name => "index_movimenti_on_articolo_id"
+  add_index "movimenti", ["documento_id"], :name => "index_movimenti_on_documento_id"
+  add_index "movimenti", ["user_id"], :name => "index_movimenti_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"

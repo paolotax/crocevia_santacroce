@@ -5,7 +5,7 @@ class CassaController < ApplicationController
   def index
     @movimento = Movimento.new(tipo: "vendita")
     
-    @movimenti = Movimento.includes(:articolo).all
+    @movimenti = current_user.movimenti.attivo.includes(:articolo).all
   end
 
 end
