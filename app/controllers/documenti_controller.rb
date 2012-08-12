@@ -44,15 +44,16 @@ class DocumentiController < ApplicationController
     @documento = Documento.new(params[:documento])
     
     if params[:documento][:tipo] == 'cassa'
+      # raise "GINO"
       @documento.add_movimenti_attivi(current_user)
     end
 
     respond_to do |format|
       if @documento.save
-        format.html { redirect_to @documento, notice: 'Documento was successfully created.' }
+        format.html { redirect_to cassa_path, notice: "Documento di #{@documento.tipo} registrato!" }
         format.json { render json: @documento, status: :created, location: @documento }
       else
-        format.html { render action: "new" }
+        format.html { redirect_to cassa_path, error: "Errore nella registrazione!" }
         format.json { render json: @documento.errors, status: :unprocessable_entity }
       end
     end

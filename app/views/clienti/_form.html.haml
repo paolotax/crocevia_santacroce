@@ -1,6 +1,10 @@
 = simple_form_for @cliente, :html => { :class => 'form-horizontal', style: "background-color: white" } do |f|
+  
+  
+  
   .row
     .span12.well
+      = f.error_notification
       .row
         .span6
           %fieldset.dati-anagrafici
@@ -37,7 +41,9 @@
             = f.input :cellulare
             = f.input :email
             = f.input :note,  :input_html => { :rows => 2 }
-
+      
+      = f.error :base
+      
       .form-actions
         = f.button :submit, :class => 'btn btn-primary'
         = link_to "Annulla", @cliente, :class => 'btn btn-danger'

@@ -5,11 +5,29 @@ class Movimento < ActiveRecord::Base
   belongs_to :user
   belongs_to :documento
   
+  validate :validate_articolo, on: :create
+  
+  def validate_articolo
+    if Articolo.find_by_id(articolo_id)
+      errors.add(:articolo, "Articolo esaurito!") if self.articolo.disponibile? == false
+    else
+      errors.add(:articolo, "Codice non trovato!")
+    end
+  end
+  
   before_save :set_prezzo
   
   scope :attivo, where(documento_id: nil)
   
   # include ActionView::Helpers::DateHelper
+  # after_save :update_documento_importo
+  # 
+  # def update_documento_importo
+  #   return true unless quantita_changed?
+  #   Documento.update_counters documento.id, 
+  #     :importo => (quantita - (quantita_was || 0))
+  #   return true
+  # end
   
   def da_registrare?
     self.documento.nil?

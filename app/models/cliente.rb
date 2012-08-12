@@ -13,6 +13,13 @@ class Cliente < ActiveRecord::Base
                   :documento_rilasciato_da, :telefono, :email, :cellulare, :note
 
   attr_writer :data_rilascio_documento_text
+  
+  validates :nome,           presence: true
+  validates :tipo_documento, presence: true
+  validates :numero_documento, presence: true 
+  validates :documento_rilasciato_da, presence: true 
+  validates :data_rilascio_documento_text, presence: true
+  
   validate :check_data_rilascio_documento_text
   before_save :save_data_rilascio_documento_text  
 

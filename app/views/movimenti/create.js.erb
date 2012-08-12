@@ -1,0 +1,13 @@
+$("span.help-inline.error-inline").remove();
+
+<%- if @movimento.errors.empty? %>
+  $(".movimenti.da-registrare").prepend("<%= escape_javascript(render @movimento) %>");
+  $("form#new_movimento").get(0).reset();
+  $(".cassa-result strong").html("<%= number_to_currency @movimento.user.movimenti.attivo.sum(&:prezzo) %>")
+  $("input#movimento_articolo_id").focus();
+<%- else %>
+  
+  $("input#movimento_articolo_id").select();
+  $("input#new_movimento_submit").after("<span class='error-inline help-inline'><%= @movimento.errors.values.join %></span>"); 
+
+<%- end %>

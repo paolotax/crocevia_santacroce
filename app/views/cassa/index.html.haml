@@ -20,25 +20,34 @@
           = link_to articoli_url do
             %i.icon-gift
             tutti
-  
+    .well
+      Incassi recenti
+      - for i in @incassi do
+        .incasso
+          = link_to i.id, documento_path(i)
+          = i.data.try(:strftime, "%d-%m-%y")
+          .pull-right= number_to_currency i.importo
+          
   .span9
+    %header
+      .form-search-articolo.pull-left
+        = form_for @movimento, class: "well form-search", remote: true do |f|
 
-    .form-search-articolo.pull-left
-      = form_for @movimento, class: "well form-search" do |f|
-  
-        = f.text_field :articolo_id, class: "search-query", placeholder: "inserisci codice articolo", autofocus: true
-        = f.submit "aggiungi", class: "btn btn-primary"
-    
-    .cassa-result.pull-right.clearfix
-      %span Incasso totale
-      %strong= number_to_currency @movimenti.sum(&:prezzo)
-      = form_for Documento.new do |f|
-        - f.hidden_field :data, value: Time.now
-        = f.hidden_field :tipo, value: "cassa"
-        = f.submit "registra", class: "btn btn-success"
-    
-    %table.table
-      = render @movimenti
+          = f.text_field :articolo_id, class: "search-query", placeholder: "inserisci codice articolo", autofocus: true
+          = f.submit "aggiungi", class: "btn btn-primary", id: "new_movimento_submit"
+      .message.pull-left
+        &nbsp;
+      
+      .cassa-result.pull-right.clearfix
+        %span Incasso totale
+        %strong= number_to_currency @movimenti.sum(&:prezzo)
+        = form_for Documento.new do |f|
+          = f.hidden_field :data, value: Time.now
+          = f.hidden_field :tipo, value: "cassa"
+          = f.submit "registra", class: "btn btn-success"
+    %section.movimenti
+      %table.table.movimenti.da-registrare
+        = render @movimenti
            
     / = @movimenti.sum(&:importo_provvigione)
     / = @movimenti.sum(&:importo_patate)
