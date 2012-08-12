@@ -14,7 +14,7 @@ class CreateDocumenti < ActiveRecord::Migration
     add_index :movimenti, :documento_id
     add_index :movimenti, :user_id
     
-    remove_column :movimenti, :data, :string
+    remove_column :movimenti, :data
     
   end
 end
