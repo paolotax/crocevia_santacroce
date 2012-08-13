@@ -103,11 +103,11 @@
       
       %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli? }"}
         %td{ colspan: 3} Totale
-        %td.quantita{ data: {value: @cliente.articoli.sum(&:quantita) }}
+        %td.quantita
           %strong= @cliente.articoli.sum(&:quantita) 
-        %td.importo.prezzo{ data: {value: @cliente.articoli.sum(&:importo) }}
+        %td.prezzo
           %strong= number_to_currency @cliente.articoli.sum(&:importo)
-        %td.importo_cliente.provvigione{ data: {value: @cliente.articoli.sum(&:importo_cliente) }}
+        %td.provvigione
           %strong= number_to_currency @cliente.articoli.sum(&:importo_cliente)
         %td
           .pull-right= link_to "carica"

@@ -1,17 +1,8 @@
 $("#<%=  dom_id(@articolo) %>").remove();
 
-var quantita = $(".table-footer .quantita").data("value") - <%= @articolo.quantita %>;
-$(".table-footer .quantita").data("value", quantita);
-$(".table-footer .quantita strong").html(quantita)
-
-var importo  = (parseFloat($(".table-footer .importo").data("value")) - <%= @articolo.importo %>).toFixed(2);
-$(".table-footer .importo").data("value", importo);
-$(".table-footer .importo strong").html(importo)
-
-var importo_cliente  = (parseFloat($(".table-footer .importo_cliente").data("value")) - <%= @articolo.importo_cliente %>).toFixed(2);
-$(".table-footer .importo_cliente").data("value", importo_cliente);
-$(".table-footer .importo_cliente strong").html(importo_cliente)
-
+$(".table-footer .quantita strong").html("<%= @articolo.cliente.articoli.sum(&:quantita)  %>")
+$(".table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.sum(&:importo) %>")
+$(".table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.sum(&:importo_cliente) %>")
 
 if ($(".articoli .articolo").length == 1) {
   $(".table-header").addClass("hidden");
