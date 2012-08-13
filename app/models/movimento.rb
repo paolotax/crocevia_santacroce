@@ -5,6 +5,8 @@ class Movimento < ActiveRecord::Base
   belongs_to :user
   belongs_to :documento
   
+  has_one :cliente, through: :articolo
+  
   validate :validate_articolo, on: :create
   
   def validate_articolo

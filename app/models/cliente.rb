@@ -5,6 +5,20 @@ class Cliente < ActiveRecord::Base
   
   has_many :articoli
   
+  has_many :articoli_in_giacenza, class_name: "Articolo",
+                                  conditions: "(articoli.quantita > articoli.movimenti_count)"
+  
+  has_many :movimenti, through: :articoli 
+  
+  has_many :vendite, through: :articoli, 
+                     source: :movimenti,
+                     conditions: { tipo: "vendita" }
+                     
+  has_many :rese, through: :articoli, 
+                  source: :movimenti,
+                  conditions: { tipo: "resa"}
+  
+                      
   accepts_nested_attributes_for :articoli
   
   attr_accessible :cap, :citta, :codice_fiscale, :cognome, :indirizzo, :nome,
