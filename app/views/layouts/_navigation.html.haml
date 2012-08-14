@@ -23,12 +23,33 @@
             %li
               = link_to_unless_current users_path do
                 = link_to "Utenti", users_path
+        
         - if can? :manage, Cliente
-          %li
-            = link_to "Clienti", clienti_path  
+          %li.dropdown
+            %a.dropdown-toggle{ href: '#', "data-toggle" => 'dropdown'}
+              Clienti
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to "tutti i clienti", clienti_path
+              %li= link_to "nuovo cliente",  new_cliente_path
+              %li.divider
+              %li
+                = form_tag clienti_path, name: "clienti_search", id: 'clienti_search', method: 'get'  do
+                  = text_field_tag "q[nome_or_cognome_or_ragione_sociale_cont]", nil, class: "search-query", placeholder: "cerca clienti", style: "margin: 0 10px -10px 10px"
+                  
+                
+
         - if can? :manage, Articolo
-          %li
-            = link_to "Articoli", articoli_path
+          %li.dropdown
+            %a.dropdown-toggle{ href: '#', "data-toggle" => 'dropdown'}
+              Articoli
+              %b.caret
+            %ul.dropdown-menu
+              %li= link_to "tutti gli articoli", articoli_path
+              %li.divider
+              %li
+                = form_tag articoli_path, name: "articoli_search", id: 'articoli_search', method: 'get'  do
+                  = text_field_tag "q[nome_cont]", nil, class: "search-query", placeholder: "cerca articoli", style: "margin: 0 10px -10px 10px"
         
         - if can? :manage, Movimento
           %li

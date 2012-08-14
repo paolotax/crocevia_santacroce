@@ -68,14 +68,13 @@ footer .navbar-inner {
 .navbar .nav.actions {
   margin-top: 20px;
 }
-.navbar .nav a {
+.navbar .nav.actions > li > a {
   border: 2px solid #DDD;
   padding: 7px 16px 7px;
   border-radius: 4px;
   font-size: 11px;
-  line-height: 1;
+  line-height: 22px;
   margin-left: 20px;
-  color: #333;
   text-transform: uppercase;
   text-shadow: 0;
 }
