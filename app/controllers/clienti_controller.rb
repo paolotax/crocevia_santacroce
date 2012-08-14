@@ -3,7 +3,7 @@ class ClientiController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @q = Cliente.includes(:articoli).search(params[:q])
+    @q = Cliente.includes(:articoli).order("id desc").search(params[:q])
     @clienti = @q.result(distinct: true).pagina(params[:page]).per(10)
   end
   
