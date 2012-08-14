@@ -1,3 +1,7 @@
+= content_for :head do
+  = javascript_include_tag "http://maps.google.com/maps/api/js?sensor=true"
+  = javascript_include_tag "/javascripts/gmaps.js"
+  
 .container
   .dove_siamo.wrapper
     .map-container
@@ -6,7 +10,7 @@
     %address
       %h2 Crocevia snc
       %p
-        via Santa Croce 11/abcdef
+        via Santa Croce 11/abcde
         %br
         40121 Bologna
         %br
@@ -17,4 +21,61 @@
         %span
           %i.icon-envelope
           = mail_to "mercatino@crocevia-santacroce.com"
+
+
+:javascript
+  $(document).ready( function() {
+    
+    if ($('#map-home').length > 0) { 
+      console.log('urra');
+      var map = new GMaps({
+        div: '#map-home',
+        scrollwheel: false,
+        lat: 44.49857200306232,
+        lng: 11.332459900305139
+      });
+      
+      map.drawRoute({
+        origin: [44.50249184009872, 11.33302944445802],
+        destination: [44.496153, 11.329235],
+        travelMode: 'drive',
+        strokeColor: 'blue',
+        strokeOpacity: 0.6,
+        strokeWeight: 6      
+      });
+
+
+      map.drawRoute({
+        origin: [44.49927790307992, 11.327107126953138],
+        destination: [44.496153, 11.329235],
+        travelMode: 'drive',
+        strokeColor: 'red',
+        strokeOpacity: 0.6,
+        strokeWeight: 6      
+      })
+
+
+      map.drawRoute({
+        origin: [44.49897180459999, 11.327965433837903],
+        destination: [44.496153, 11.329235],
+        travelMode: 'driving',
+        strokeColor: 'green',
+        strokeOpacity: 0.6,
+        strokeWeight: 6
+      });
+
+      map.addMarker({
+        lat: 44.496153,
+        lng: 11.329235,
+        color: 'blue',
+        title: "Crocevia - mercato dell'usato",
+        infoWindow: {
+          content: "<p><strong>Crocevia - mercato dell'usato</strong></br>Via Santa Croce 11/abcde</br>40122 Bologna</p>"         
+        }
+      });
+       
+    };
+  
+  
+  });
   
