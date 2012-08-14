@@ -1,0 +1,7 @@
+.cassa-result.pull-right.clearfix{ class: "#{'hidden' if movimenti.empty? }" }
+  %span Incasso totale
+  %strong= number_to_currency movimenti.sum(&:prezzo)
+  = form_for Documento.new do |f|
+    = f.hidden_field :data, value: Time.now
+    = f.hidden_field :tipo, value: "cassa"
+    = f.submit "registra", class: "btn btn-success"

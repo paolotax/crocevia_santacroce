@@ -1,6 +1,5 @@
 $("#<%= dom_id(@movimento) %>").remove();
-$(".cassa-result strong").html("<%= number_to_currency @movimento.user.movimenti.attivo.sum(&:prezzo) %>")
-
+$(".cassa-result").replaceWith("<%= escape_javascript( render partial: 'cassa/cassa_result', locals: { movimenti: @movimento.user.movimenti.attivo } ) %>");
 $("form#new_movimento").get(0).reset();
 $("input#movimento_articolo_id").focus();
 $("span.help-inline.error-inline").remove();

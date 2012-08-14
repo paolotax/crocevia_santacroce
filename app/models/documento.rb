@@ -1,7 +1,7 @@
 class Documento < ActiveRecord::Base
   attr_accessible :data, :importo, :tipo
   
-  has_many :movimenti, dependent: :nullify
+  has_many :movimenti, dependent: :destroy
   
   scope :incasso, where(tipo: "cassa")
   scope :recente, order("documenti.id desc")

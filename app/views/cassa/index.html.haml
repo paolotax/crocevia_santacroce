@@ -35,16 +35,9 @@
 
           = f.text_field :articolo_id, class: "search-query", placeholder: "inserisci codice articolo", autofocus: true
           = f.submit "aggiungi", class: "btn btn-primary", id: "new_movimento_submit"
-      .message.pull-left
-        &nbsp;
-      
-      .cassa-result.pull-right.clearfix
-        %span Incasso totale
-        %strong= number_to_currency @movimenti.sum(&:prezzo)
-        = form_for Documento.new do |f|
-          = f.hidden_field :data, value: Time.now
-          = f.hidden_field :tipo, value: "cassa"
-          = f.submit "registra", class: "btn btn-success"
+
+      = render :partial => 'cassa_result', locals: { movimenti: @movimenti }
+
     %section.movimenti
       %table.table.movimenti.da-registrare
         = render @movimenti
