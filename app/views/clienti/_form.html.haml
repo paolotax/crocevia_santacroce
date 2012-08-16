@@ -14,7 +14,7 @@
               .controls
                 = f.text_field :nome
                 = f.text_field :cognome
-            = f.input   :sesso, collection: ["m", "f"], html5: true
+            = f.input   :sesso, collection: [["maschio", "m"], ["femmina", "f"]], prompt: "scegli il sesso"
             = f.input   :data_di_nascita_text, label: "Data di nascita"
             = f.input   :comune_di_nascita, html5: true
             
