@@ -1,9 +1,7 @@
-= simple_form_for @cliente, :html => { :class => 'form-horizontal', style: "background-color: white" } do |f|
-  
-  
+= simple_form_for @cliente, :html => { :class => 'form-horizontal'} do |f|
   
   .row
-    .span12.well
+    .span12
       = f.error_notification
       .row
         .span6
@@ -23,8 +21,6 @@
               - unless @cliente.new_record?
                 = content_tag :a, class: "add-on get-cf btn", href: crea_codice_fiscale_cliente_path(@cliente)  do
                   %i.icon-hand-left 
-
-            / = f.input   :codice_fiscale, hint: "#{ link_to "Crea codice", crea_codice_fiscale_cliente_path(@cliente), class: 'get-cf' unless @cliente.new_record? }" 
 
             = f.input   :partita_iva
             = f.input   :ragione_sociale
