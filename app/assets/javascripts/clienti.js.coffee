@@ -4,7 +4,7 @@
 
 jQuery ->
   
-  $(".get-cf a").live 'click', (e) ->
+  $("a.get-cf").live 'click', (e) ->
     
     e.preventDefault();
     

@@ -14,15 +14,17 @@
               .controls
                 = f.text_field :nome
                 = f.text_field :cognome
-            = f.input   :sesso, collection: ["m", "f"]
+            = f.input   :sesso, collection: ["m", "f"], html5: true
             = f.input   :data_di_nascita_text, label: "Data di nascita"
-            = f.input   :comune_di_nascita
-            .control-group
-              %label{ for: :codice_fiscale, :class => 'string control-label'} Codice fiscale
-              .controls
-                = f.text_field :codice_fiscale
-                %span.help-block.get-cf
-                  = link_to "Crea codice", crea_codice_fiscale_cliente_path(@cliente)
+            = f.input   :comune_di_nascita, html5: true
+            
+            = f.input :codice_fiscale, wrapper: :append, hint: "#{'clicca la mano per calcolare il codice fiscale' unless @cliente.new_record?}" do
+              = f.input_field :codice_fiscale, class: :mini
+              - unless @cliente.new_record?
+                = content_tag :a, class: "add-on get-cf btn", href: crea_codice_fiscale_cliente_path(@cliente)  do
+                  %i.icon-hand-left 
+
+            / = f.input   :codice_fiscale, hint: "#{ link_to "Crea codice", crea_codice_fiscale_cliente_path(@cliente), class: 'get-cf' unless @cliente.new_record? }" 
 
             = f.input   :partita_iva
             = f.input   :ragione_sociale
