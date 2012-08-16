@@ -24,18 +24,23 @@ class Cliente < ActiveRecord::Base
   attr_accessible :cap, :citta, :codice_fiscale, :cognome, :indirizzo, :nome,
                   :numero_tessera, :partita_iva, :provincia, :ragione_sociale, 
                   :numero_documento, :data_rilascio_documento_text, :tipo_documento, 
-                  :documento_rilasciato_da, :telefono, :email, :cellulare, :note
+                  :documento_rilasciato_da, :telefono, :email, :cellulare, :note,
+                  :data_di_nascita_text, :comune_di_nascita, :sesso
 
-  attr_writer :data_rilascio_documento_text
+  attr_writer :data_rilascio_documento_text, :data_di_nascita_text
   
-  validates :nome,           presence: true
-  validates :tipo_documento, presence: true
-  validates :numero_documento, presence: true 
-  validates :documento_rilasciato_da, presence: true 
+  validates :nome,              presence: true
+  validates :tipo_documento,    presence: true
+  validates :numero_documento,  presence: true 
+  validates :comune_di_nascita, presence: true 
+  validates :sesso,             presence: true, :inclusion => { :in => %w(m f) }
+  
+  validates :documento_rilasciato_da,      presence: true
   validates :data_rilascio_documento_text, presence: true
+  validates :data_di_nascita_text,         presence: true 
   
-  validate :check_data_rilascio_documento_text
-  before_save :save_data_rilascio_documento_text  
+  validate    :check_data_rilascio_documento_text, :check_data_di_nascita_text
+  before_save :save_data_rilascio_documento_text,  :save_data_di_nascita_text  
 
   def full_name
     [nome, cognome, ragione_sociale].join(" ")
@@ -45,12 +50,20 @@ class Cliente < ActiveRecord::Base
     [cognome, nome].join(" ")
   end
   
+  def maschio?
+    self.sesso == "m"
+  end
+  
   def has_articoli?
     !self.articoli.all.empty?
   end
   
   def data_rilascio_documento_text
     @data_rilascio_documento_text || data_rilascio_documento.try(:strftime, "%d-%m-%Y")
+  end
+
+  def data_di_nascita_text
+    @data_di_nascita_text || data_di_nascita.try(:strftime, "%d-%m-%Y")
   end
 
   private
@@ -64,6 +77,18 @@ class Cliente < ActiveRecord::Base
       end
     rescue ArgumentError
       errors.add :data_rilascio_documento_text, "data non valida"
+    end
+
+    def save_data_di_nascita_text
+      self.data_di_nascita = Date.parse(@data_di_nascita_text) if @data_di_nascita_text.present?
+    end
+
+    def check_data_di_nascita_text
+      if @data_di_nascita_text.present? && Date.parse(@data_di_nascita_text).nil?
+        errors.add :data_di_nascita_text, "cannot be parsed"
+      end
+    rescue ArgumentError
+      errors.add :data_di_nascita_text, "data non valida"
     end
 
 end

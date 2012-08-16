@@ -15,14 +15,24 @@
       %small da Mandante n.
       %strong= @cliente.id
     %p
-      Io sottoscritto/a
+      - if @cliente.maschio?
+        Io sottoscritto
+      - else
+        Io sottoscritta
+        
       %strong= @cliente.cognome_nome.upcase
       mandante in qualità di cliente privato
       %br
-      nato il ???????
-      a ????????
-      Cod.Fisc.
-      = @cliente.codice_fiscale
+      
+      - if @cliente.maschio?
+        nato il
+      - else
+        nata il
+        
+      = "#{@cliente.data_di_nascita_text }"
+      = "a #{@cliente.comune_di_nascita}"
+      = "Cod.Fisc. #{@cliente.codice_fiscale}"
+      
       %br
       residente in:
       = @cliente.indirizzo
@@ -30,7 +40,7 @@
       = @cliente.citta
       = @cliente.provincia  
       %br
-      = "Documento: #{@cliente.tipo_documento.upcase} N. #{@cliente.numero_documento} ril/rin. il #{@cliente.data_rilascio_documento.try(:strftime, "%d-%m-%y")} Da: #{@cliente.documento_rilasciato_da}"
+      = "Documento: #{@cliente.tipo_documento.upcase} N. #{@cliente.numero_documento} ril/rin. il #{@cliente.data_rilascio_documento_text} Da: #{@cliente.documento_rilasciato_da}"
       
   
   %p.testo-mandato

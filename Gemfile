@@ -54,6 +54,8 @@ gem "faker"
 gem "friendly_id"
 gem "ransack"
 
+gem 'savon'
+gem 'sexmachine'
 
 # case HOST_OS
 #   when /darwin/i

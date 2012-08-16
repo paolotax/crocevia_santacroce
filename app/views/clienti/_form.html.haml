@@ -14,10 +14,19 @@
               .controls
                 = f.text_field :nome
                 = f.text_field :cognome
+            = f.input   :sesso, collection: ["m", "f"]
+            = f.input   :data_di_nascita_text, label: "Data di nascita"
+            = f.input   :comune_di_nascita
+            .control-group
+              %label{ for: :codice_fiscale, :class => 'string control-label'} Codice fiscale
+              .controls
+                = f.text_field :codice_fiscale
+                %span.help-block.get-cf
+                  = link_to "Crea codice", crea_codice_fiscale_cliente_path(@cliente)
 
-            = f.input   :ragione_sociale
-            = f.input   :codice_fiscale
             = f.input   :partita_iva
+            = f.input   :ragione_sociale
+            
         .span6
           %fieldset
             %legend Documento d'identità

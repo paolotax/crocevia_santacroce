@@ -7,7 +7,9 @@ class CassaController < ApplicationController
     
     @movimenti = current_user.movimenti.attivo.includes(:articolo).all
     
-    @incassi = Documento.incasso.recente.limit(5)
+    @incassi = Documento.cassa.recente.limit(5)
+    
+    @incassi_giornalieri = Documento.cassa.recente.group(:data).select("data, sum(importo) as importo")
   end
 
 end

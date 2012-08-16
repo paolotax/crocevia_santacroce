@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120810232134) do
+ActiveRecord::Schema.define(:version => 20120815082614) do
 
   create_table "articoli", :force => true do |t|
     t.string   "nome"
@@ -58,6 +58,9 @@ ActiveRecord::Schema.define(:version => 20120810232134) do
     t.string   "email"
     t.text     "note"
     t.string   "slug"
+    t.date     "data_di_nascita"
+    t.string   "comune_di_nascita"
+    t.string   "sesso"
   end
 
   add_index "clienti", ["slug"], :name => "index_clienti_on_slug"

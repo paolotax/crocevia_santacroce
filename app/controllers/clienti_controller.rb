@@ -45,4 +45,9 @@ class ClientiController < ApplicationController
   def mandato
   end
   
+  def crea_codice_fiscale
+    @codice_fiscale = CodiceFiscale.new(@cliente)
+    render json: @codice_fiscale.to_json
+  end
+  
 end
