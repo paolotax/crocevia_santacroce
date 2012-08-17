@@ -54,8 +54,8 @@ class Cliente < ActiveRecord::Base
     self.sesso == "m"
   end
   
-  def has_articoli?
-    !self.articoli.all.empty?
+  def has_articoli_attivi?
+    !self.articoli.attivo.all.empty?
   end
   
   def data_rilascio_documento_text

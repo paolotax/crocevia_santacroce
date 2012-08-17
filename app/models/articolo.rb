@@ -4,7 +4,10 @@ require 'barby/outputter/png_outputter'
 
 class Articolo < ActiveRecord::Base
   
+  belongs_to :cliente
+  belongs_to :documento
   has_many :movimenti
+  
   # include HasBarcode
   # 
   # has_barcode :barcode,
@@ -25,13 +28,20 @@ class Articolo < ActiveRecord::Base
     File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 0, :xdim => 2, :height => 30) }
   end
   
-  belongs_to :cliente
+  def giacenza
+    self.quantita - self.movimenti_count
+  end
   
-  attr_accessible :categoria_id, :cliente_id, :nome, :prezzo, :provvigione, :quantita
+  def valore_giacenza
+    self.prezzo_vendita * self.giacenza
+  end
+  
+  attr_accessible :nome, :prezzo, :provvigione, :quantita, :cliente_id, :documento_id
   
   scope :disponibili, where("articoli.quantita > articoli.movimenti_count")
   scope :esauriti,    where("articoli.quantita = articoli.movimenti_count")
   scope :esagerati,   where("articoli.quantita < articoli.movimenti_count")
+  scope :attivo,      where("articoli.documento_id is null")
   
   def disponibile?
     self.quantita > self.movimenti_count

@@ -1,7 +1,7 @@
 $("#<%=  dom_id(@articolo) %>").remove();
 
-$(".table-footer .quantita strong").html("<%= @articolo.cliente.articoli.sum(&:quantita)  %>")
-$(".table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.sum(&:importo) %>")
+$(".table-footer .quantita strong").html("<%= @articolo.cliente.articoli.attivo.sum(&:quantita)  %>")
+$(".table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo) %>")
 $(".table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.sum(&:importo_cliente) %>")
 
 if ($(".articoli .articolo").length == 1) {

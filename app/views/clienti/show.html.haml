@@ -83,12 +83,12 @@
   %br  
   .clearfix    
 
-  .empty-rows{class: "#{'hidden' if @cliente.has_articoli? }"}
+  .empty-rows{class: "#{'hidden' if @cliente.has_articoli_attivi? }"}
     Non ci sono articoli da caricare    
   
   %table#articoli-da-caricare.table.articoli      
-    %tr.table-header{ class: "#{'hidden' unless @cliente.has_articoli? }" }
-      %th.barcode Barcode
+    %tr.table-header{ class: "#{'hidden' unless @cliente.has_articoli_attivi? }" }
+      / %th.barcode Barcode
       %th.codice Codice
       %th.articolo Articolo
       %th.quantita Quantità
@@ -97,22 +97,28 @@
       %th.created_at Data carico
       %th
        
-    - for articolo in @cliente.articoli do
+    - for articolo in @cliente.articoli.attivo do
       - unless articolo.new_record?
         = render 'clienti/articolo', articolo: articolo
     
-    %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli? }"}
-      %td{ colspan: 3} Totale
+    %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli_attivi? }"}
+      %td{ colspan: 2} Totale
       %td.quantita
         %strong= @cliente.articoli.sum(&:quantita) 
       %td.prezzo
-        %strong= number_to_currency @cliente.articoli.sum(&:importo)
+        %strong= number_to_currency @cliente.articoli.attivo.sum(&:importo)
       %td.provvigione
-        %strong= number_to_currency @cliente.articoli.sum(&:importo_cliente)
-      %td
-        .pull-right= link_to "carica"
-      %td
-        .pull-right= link_to "etichette"
+        %strong= number_to_currency @cliente.articoli.attivo.sum(&:importo_cliente)
+      %td.actions{ colspan: 2}
+        
+        .pull-right
+          = form_for Documento.new do |f|
+            = hidden_field_tag "cliente_id", @cliente.id
+            = f.hidden_field :data,       value: Time.now
+            = f.hidden_field :tipo,       value: "carico"
+            = f.submit "registra", class: "btn btn-success"
+          
+          = link_to "etichette", "", class: "btn"
 
 
         

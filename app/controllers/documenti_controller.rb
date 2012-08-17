@@ -31,12 +31,16 @@ class DocumentiController < ApplicationController
       @documento.add_movimenti_attivi(current_user)
     end
 
+    if params[:documento][:tipo] == 'carico'
+      @documento.add_articoli_cliente(params[:cliente_id])
+    end
+
     respond_to do |format|
       if @documento.save
-        format.html { redirect_to cassa_path, notice: "Documento di #{@documento.tipo} registrato!" }
+        format.html { redirect_to :back, notice: "Documento di #{@documento.tipo} registrato!" }
         format.json { render json: @documento, status: :created, location: @documento }
       else
-        format.html { redirect_to cassa_path, error: "Errore nella registrazione!" }
+        format.html { redirect_to :back, error: "Errore nella registrazione!" }
         format.json { render json: @documento.errors, status: :unprocessable_entity }
       end
     end

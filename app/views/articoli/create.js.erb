@@ -3,9 +3,9 @@ $("#articoli-da-caricare .table-footer").before("<%= escape_javascript(render 'c
 $("form.new_articolo").get(0).reset();
 $("input#articolo_nome").focus();
 
-$(".table-footer .quantita strong").html("<%= @articolo.cliente.articoli.sum(&:quantita)  %>")
-$(".table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.sum(&:importo) %>")
-$(".table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.sum(&:importo_cliente) %>")
+$(".table-footer .quantita strong").html("<%= @articolo.cliente.articoli.attivo.attivo.sum(&:quantita)  %>")
+$(".table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo) %>")
+$(".table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo_cliente) %>")
 
 
 $(".table-header").removeClass("hidden")
