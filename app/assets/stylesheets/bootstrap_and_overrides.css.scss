@@ -172,6 +172,9 @@ footer ul {
 // Large desktop
 @media (min-width: 980px) { 
   
+  .row {
+    margin-left: -20px;
+  }
   [class*="span"] {
     float: left;
     margin-left: 20px;
@@ -182,6 +185,9 @@ footer ul {
   }
   .span9 {
     width: 700px;
+  }
+  .offset3 {
+    margin-left: 260px;
   }
   .span6 {
     width: 460px;

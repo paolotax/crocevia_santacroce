@@ -1,4 +1,4 @@
-.row
+= content_for :left_col do
   .span3.side-bar
     .well
       %ul.nav.nav-list
@@ -27,12 +27,12 @@
         /   .actions= f.submit "Cerca"
           
   
-  .span9
-    %h1 Articoli
-    %br
-    %table.table
-      = render "articoli_header"
-      %tbody.articoli  
-        - for articolo in @articoli do
-          = render articolo
-    = paginate @articoli, remote: true;
+.span9
+  %h1 Articoli
+  %br
+  %table.table
+    = render "articoli_header"
+    %tbody.articoli  
+      - for articolo in @articoli do
+        = render articolo
+  = paginate @articoli, remote: true;

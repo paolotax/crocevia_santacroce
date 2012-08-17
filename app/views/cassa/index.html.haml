@@ -1,5 +1,6 @@
-.row
+= content_for :left_col do
   .span3.side-bar
+  
     %ul.nav.nav-list.well
       %li.nav-header
         %i.icon-shopping-cart
@@ -17,20 +18,20 @@
         %li
           %small= l i.data, format: :short
           .pull-right= number_to_currency i.importo
-          
-  .span9
-    %header
-      .form-search-articolo.pull-left
-        = form_for @movimento, class: "well form-search", remote: true do |f|
-          = f.text_field :articolo_id, class: "search-query", placeholder: "inserisci codice articolo", autofocus: true
-          = f.submit "aggiungi", class: "btn btn-primary", id: "new_movimento_submit"
+        
+.span9
+  %header
+    .form-search-articolo.pull-left
+      = form_for @movimento, class: "well form-search", remote: true do |f|
+        = f.text_field :articolo_id, class: "search-query", placeholder: "inserisci codice articolo", autofocus: true
+        = f.submit "aggiungi", class: "btn btn-primary", id: "new_movimento_submit"
 
-      = render :partial => 'cassa_result', locals: { movimenti: @movimenti }
+    = render :partial => 'cassa_result', locals: { movimenti: @movimenti }
 
-    %section.movimenti
-      %table.table.movimenti.da-registrare
-        = render @movimenti
-           
-    / = @movimenti.sum(&:importo_provvigione)
-    / = @movimenti.sum(&:importo_patate)
-    / = @movimenti.sum(&:ricavo)
+  %section.movimenti
+    %table.table.movimenti.da-registrare
+      = render @movimenti
+         
+  / = @movimenti.sum(&:importo_provvigione)
+  / = @movimenti.sum(&:importo_patate)
+  / = @movimenti.sum(&:ricavo)

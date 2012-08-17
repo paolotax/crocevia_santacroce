@@ -1,4 +1,4 @@
-.row
+= content_for :left_col do
   .span3.side-bar
     .well
       %ul.nav.nav-list
@@ -37,82 +37,82 @@
             tutti
             
 
-  .span9
-    %h3= @cliente.full_name
+.span9
+  %h3= @cliente.full_name
 
-    %address
-      = @cliente.indirizzo
-      %br
-      = "#{@cliente.cap} #{@cliente.citta} #{@cliente.provincia}"
-
-    .dati-fiscali
-      = @cliente.codice_fiscale
-      = @cliente.partita_iva
-  
-    .info_documento
-      = @cliente.tipo_documento
-      = "num. #{@cliente.numero_documento}"
-      = "rilasciato da: #{@cliente.documento_rilasciato_da}"
-      = "il #{@cliente.data_rilascio_documento.try(:strftime, "%d-%m-%y")}"
-    
+  %address
+    = @cliente.indirizzo
     %br
+    = "#{@cliente.cap} #{@cliente.citta} #{@cliente.provincia}"
+
+  .dati-fiscali
+    = @cliente.codice_fiscale
+    = @cliente.partita_iva
+
+  .info_documento
+    = @cliente.tipo_documento
+    = "num. #{@cliente.numero_documento}"
+    = "rilasciato da: #{@cliente.documento_rilasciato_da}"
+    = "il #{@cliente.data_rilascio_documento.try(:strftime, "%d-%m-%y")}"
+  
+  %br
+  
+  = form_for @cliente.articoli.build, class: "form-inline", remote: true do |f|
+    = f.hidden_field :cliente_id
     
-    = form_for @cliente.articoli.build, class: "form-inline", remote: true do |f|
-      = f.hidden_field :cliente_id
-      
-      .pull-left
-        = f.text_field :nome, placeholder: "articolo", required: true
+    .pull-left
+      = f.text_field :nome, placeholder: "articolo", required: true
 
-      .input-prepend.prezzo.pull-left
-        %span.add-on €
-        = f.text_field :prezzo, class: 'input-mini', step: :any, min: 0, placeholder: "prezzo", required: true
-      
-
-      .input-prepend.quantita.pull-left
-        %span.add-on Pz.
-        = f.number_field :quantita, class: 'input-mini', value: 1, min: 1, placeholder: "pezzi", required: true
-
-      
-      .input-prepend.provvigione.pull-left
-        %span.add-on %
-        = f.select  :provvigione, ["50", "65"], class: 'input-mini', value: 50     , placeholder: "provvigione", required: true 
-      
-      .pull-left
-        = f.submit "Aggiungi", class: "btn-aggiungi"
+    .input-prepend.prezzo.pull-left
+      %span.add-on €
+      = f.text_field :prezzo, class: 'input-mini', step: :any, min: 0, placeholder: "prezzo", required: true
     
-    %br  
-    .clearfix    
 
-    .empty-rows{class: "#{'hidden' if @cliente.has_articoli? }"}
-      Non ci sono articoli da caricare    
+    .input-prepend.quantita.pull-left
+      %span.add-on Pz.
+      = f.number_field :quantita, class: 'input-mini', value: 1, min: 1, placeholder: "pezzi", required: true
+
     
-    %table#articoli-da-caricare.table.articoli      
-      %tr.table-header{ class: "#{'hidden' unless @cliente.has_articoli? }" }
-        %th.barcode Barcode
-        %th.codice Codice
-        %th.articolo Articolo
-        %th.quantita Quantità
-        %th.prezzo Prezzo
-        %th.provvigione Provvigione
-        %th.created_at Data carico
-        %th
-         
-      - for articolo in @cliente.articoli do
-        - unless articolo.new_record?
-          = render 'clienti/articolo', articolo: articolo
-      
-      %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli? }"}
-        %td{ colspan: 3} Totale
-        %td.quantita
-          %strong= @cliente.articoli.sum(&:quantita) 
-        %td.prezzo
-          %strong= number_to_currency @cliente.articoli.sum(&:importo)
-        %td.provvigione
-          %strong= number_to_currency @cliente.articoli.sum(&:importo_cliente)
-        %td
-          .pull-right= link_to "carica"
-        %td
-          .pull-right= link_to "etichette"
+    .input-prepend.provvigione.pull-left
+      %span.add-on %
+      = f.select  :provvigione, ["50", "65"], class: 'input-mini', value: 50     , placeholder: "provvigione", required: true 
+    
+    .pull-left
+      = f.submit "Aggiungi", class: "btn-aggiungi"
+  
+  %br  
+  .clearfix    
+
+  .empty-rows{class: "#{'hidden' if @cliente.has_articoli? }"}
+    Non ci sono articoli da caricare    
+  
+  %table#articoli-da-caricare.table.articoli      
+    %tr.table-header{ class: "#{'hidden' unless @cliente.has_articoli? }" }
+      %th.barcode Barcode
+      %th.codice Codice
+      %th.articolo Articolo
+      %th.quantita Quantità
+      %th.prezzo Prezzo
+      %th.provvigione Provvigione
+      %th.created_at Data carico
+      %th
+       
+    - for articolo in @cliente.articoli do
+      - unless articolo.new_record?
+        = render 'clienti/articolo', articolo: articolo
+    
+    %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli? }"}
+      %td{ colspan: 3} Totale
+      %td.quantita
+        %strong= @cliente.articoli.sum(&:quantita) 
+      %td.prezzo
+        %strong= number_to_currency @cliente.articoli.sum(&:importo)
+      %td.provvigione
+        %strong= number_to_currency @cliente.articoli.sum(&:importo_cliente)
+      %td
+        .pull-right= link_to "carica"
+      %td
+        .pull-right= link_to "etichette"
 
 
         

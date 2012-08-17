@@ -1,4 +1,4 @@
-.row
+= content_for :left_col do
   .span3.side-bar
     .well
       %ul.nav.nav-list
@@ -18,14 +18,14 @@
         = f.text_field :nome_or_cognome_or_ragione_sociale_cont, class: "search-query", placeholder: "cerca cliente", style: "width: 152px; margin-bottom: 10px"
         .pull-right.clearfix= f.submit "cerca", class: "btn", name: nil
   
-  .span9
-    %h1 Clienti
-    %br
-    %table.table
-      = render "clienti_header"
-      %tbody.clienti
-        - for cliente in @clienti do
-          = render cliente
-    
-    = paginate @clienti, remote: true
+.span9
+  %h1 Clienti
+  %br
+  %table.table
+    = render "clienti_header"
+    %tbody.clienti
+      - for cliente in @clienti do
+        = render cliente
+  
+  = paginate @clienti, remote: true
 

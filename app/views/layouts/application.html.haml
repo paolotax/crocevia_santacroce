@@ -22,7 +22,11 @@
       
     .container
       = render 'layouts/messages'
-      = yield
+      .row
+        %div{ class: content_for?(:left_col) ? "span12" : "span6 offset3"}
+          .row
+            = yield :left_col
+            = yield
 
     %footer
       .navbar
