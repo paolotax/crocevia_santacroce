@@ -12,6 +12,14 @@
 # puts 'New user created: ' << user2.name
 # user.add_role :admin
 
+if User.all.empty?
+  user = User.create! :name => 'Paolo Tassinari', :email => 'ptax@crocevia-santacroce.com', :password => 'ptax', :password_confirmation => 'ptax'
+  user.add_role :admin
+
+  user_2 = User.create! :name => 'Marzia Bertoncelli', :email => 'mbert@crocevia-santacroce.com', :password => 'mbert', :password_confirmation => 'mbert'
+
+  user_2.add_role :staff
+end
 
 rand(1000).times do
   @cliente = Cliente.create nome: "#{Faker::Name.first_name}", 
@@ -19,7 +27,17 @@ rand(1000).times do
     indirizzo:  "#{Faker::Address.street_address}", 
     citta:      "#{Faker::Address.city}", 
     provincia:  "#{Faker::Address.us_state}", 
-    cap:        "#{Faker::Address.zip_code}"
+    cap:        "#{Faker::Address.zip_code}",
+
+    tipo_documento: ["patente",  "passaporto", "carta d'identità"].shuffle[0]  presence: true
+    numero_documento:  "#{Faker::Address.zip_code}",
+    comune_di_nascita: "#{Faker::Address.city}",
+    sesso:              %w(m f).split.shuffle[0],
+
+    documento_rilasciato_da: "#{w(comune questura prefetto).split.shuffle[0]} di #{Faker::Address.city}",
+    data_rilascio_documento_text: "21-12-2005",
+    data_di_nascita_text: "31-07-1965"
+  
   
   rand(10).times do
     Articolo.create cliente_id: "#{@cliente.id}",
