@@ -28,13 +28,12 @@ rand(1000).times do
     citta:      "#{Faker::Address.city}", 
     provincia:  "#{Faker::Address.us_state}", 
     cap:        "#{Faker::Address.zip_code}",
-
-    tipo_documento: ["patente",  "passaporto", "carta d'identità"].shuffle[0]  presence: true
+    tipo_documento: "#{['patente',  'passaporto', 'carta'].shuffle[0]}",
     numero_documento:  "#{Faker::Address.zip_code}",
     comune_di_nascita: "#{Faker::Address.city}",
-    sesso:              %w(m f).split.shuffle[0],
+    sesso:              "#{'m f'.split.shuffle[0]}",
 
-    documento_rilasciato_da: "#{w(comune questura prefetto).split.shuffle[0]} di #{Faker::Address.city}",
+    documento_rilasciato_da: "#{'comune questura prefetto'.split.shuffle[0]} di #{Faker::Address.city}",
     data_rilascio_documento_text: "21-12-2005",
     data_di_nascita_text: "31-07-1965"
   
