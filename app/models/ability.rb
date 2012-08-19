@@ -11,6 +11,7 @@ class Ability
       can :manage, Cliente
       can :manage, Articolo
       can :manage, Movimento
+      can :manage, Documento
       can :index, :cassa
     end;  
     
