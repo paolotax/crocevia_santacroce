@@ -55,7 +55,9 @@ gem "friendly_id"
 gem "ransack"
 
 gem 'savon'
-gem 'sexmachine'
+#gem 'sexmachine'
+gem 'mailboxer'
+
 
 # case HOST_OS
 #   when /darwin/i

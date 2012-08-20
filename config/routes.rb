@@ -1,5 +1,17 @@
 CroceviaSantacroce::Application.routes.draw do
   
+
+  resources :messages do
+  end
+  
+  resources :conversations, only: [:index, :show, :new, :create] do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+    end
+  end
+  
   resources :documenti
 
   match '/cassa',   controller: 'cassa', action: 'index'

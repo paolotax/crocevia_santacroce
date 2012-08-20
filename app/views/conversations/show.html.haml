@@ -1,0 +1,9 @@
+%h1= conversation.subject
+%ul.unstyled
+  = content_tag_for(:li, conversation.receipts_for(current_user), class: "clearfix") do |receipt|
+    - message = receipt.message
+    = div_for(receipt, class: "#{receipt.mailbox_type}") do
+      %h3= message.subject
+      %p= message.body
+      %p= message.sender.name
+= render 'messages/form', conversation: conversation

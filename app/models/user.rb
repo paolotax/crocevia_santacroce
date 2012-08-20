@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   
   has_many :movimenti
   
+  acts_as_messageable
+  
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
