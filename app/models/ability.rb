@@ -13,6 +13,7 @@ class Ability
       can :manage, Movimento
       can :manage, Documento
       can :index, :cassa
+      can :read, User
     end;  
     
     # Define abilities for the passed in user here. For example:

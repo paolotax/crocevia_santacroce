@@ -1,7 +1,13 @@
 = content_tag_for(:li, conversation) do |conversation|
   %p
     = link_to conversation.subject, conversation
+    = time_ago_in_words(conversation.updated_at)
     |
+    - if conversation.is_read?(current_user)
+      = link_to 'letta', [:mark_as_unread, conversation], method: :post
+    - else
+      = link_to 'non letta', [:mark_as_read, conversation], method: :post
+
     - if conversation.is_completely_trashed?(current_user)
       = link_to 'Untrash', [:untrash, conversation], method: :post
     - else

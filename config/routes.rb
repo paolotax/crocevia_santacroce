@@ -9,6 +9,8 @@ CroceviaSantacroce::Application.routes.draw do
       post :reply
       post :trash
       post :untrash
+      post :mark_as_read
+      post :mark_as_unread
     end
   end
   

@@ -1,6 +1,6 @@
 = simple_form_for :message, url: [:reply, conversation] do |f|
-  = f.input :subject
-  = f.input :body
+  / = f.input :subject
+  = f.input :body, label: "Intervioni", required: false, as: :text, :input_html => { :rows => 2, class: "span6" }
   .form-actions
     = f.button :submit, class: 'btn-primary'
-    = submit_tag 'Cancel', type: :reset, class: 'btn btn-danger'
+    = submit_tag 'Annulla', type: :reset, class: 'btn btn-danger'

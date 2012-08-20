@@ -1,11 +1,12 @@
 class ConversationsController < ApplicationController
+  
   before_filter :authenticate_user!
   helper_method :mailbox, :conversation
 
   def create
-    recipient_emails = conversation_params(:recipients).split(',')
-    recipients = User.where(email: recipient_emails).all
-
+    recipient_names = conversation_params(:recipients).split(', ')
+    recipients = User.where(name: recipient_names).all
+    # raise recipient_names.inspect
     conversation = current_user.
       send_message(recipients, *conversation_params(:body, :subject)).conversation
 
@@ -14,7 +15,20 @@ class ConversationsController < ApplicationController
 
   def reply
     current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
+    
+    conversation.mark_as_read(current_user)
+    
     redirect_to conversation
+  end
+
+  def mark_as_read
+    conversation.mark_as_read(current_user)
+    redirect_to :conversations
+  end
+
+  def mark_as_unread
+    conversation.mark_as_unread(current_user)
+    redirect_to :conversations
   end
 
   def trash

@@ -1,9 +1,23 @@
-%h1= conversation.subject
-%ul.unstyled
-  = content_tag_for(:li, conversation.receipts_for(current_user), class: "clearfix") do |receipt|
-    - message = receipt.message
-    = div_for(receipt, class: "#{receipt.mailbox_type}") do
-      %h3= message.subject
-      %p= message.body
-      %p= message.sender.name
-= render 'messages/form', conversation: conversation
+.span6
+  %h1
+    = conversation.subject
+    %small= time_ago_in_words(conversation.updated_at) + ' fa.'
+  %div  
+    - if conversation.is_read?(current_user)
+      = link_to 'letta', [:mark_as_unread, conversation], method: :post, class: "btn"
+    - else
+      = link_to 'non letta', [:mark_as_read, conversation], method: :post, class: "btn"
+  .partecipants
+    Partecipanti:
+    = conversation.participants.map(&:name).split.join(", ")
+    
+  %ul.unstyled
+    = content_tag_for(:li, conversation.receipts_for(current_user), class: "clearfix") do |receipt|
+      - message = receipt.message
+      = div_for(receipt, class: "#{receipt.mailbox_type}") do
+        %h3= message.body
+        %p
+          = message.sender.name
+          
+          = time_ago_in_words(message.created_at) + ' fa.'
+  = render 'messages/form', conversation: conversation
