@@ -18,6 +18,7 @@
         %h3= message.body
         %p
           = message.sender.name
-          
-          = time_ago_in_words(message.created_at) + ' fa.'
+        %p  
+          %small= time_ago_in_words(message.created_at) + ' fa.'
+          = link_to "allegato", message.attachment_url unless message.attachment.blank?
   = render 'messages/form', conversation: conversation

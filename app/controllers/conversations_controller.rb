@@ -6,15 +6,16 @@ class ConversationsController < ApplicationController
   def create
     recipient_names = conversation_params(:recipients).split(', ')
     recipients = User.where(name: recipient_names).all
-    # raise recipient_names.inspect
+    # raise conversation_params(:body, :subject, :attachment).inspect
     conversation = current_user.
-      send_message(recipients, *conversation_params(:body, :subject)).conversation
+      send_message(recipients, *conversation_params(:body, :subject), true, *conversation_params(:attachment)).conversation
 
     redirect_to conversation
   end
 
   def reply
-    current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
+    
+    current_user.reply_to_conversation(conversation, *message_params(:body, :subject), true, true, *message_params(:attachment))
     
     conversation.mark_as_read(current_user)
     
@@ -40,6 +41,10 @@ class ConversationsController < ApplicationController
     conversation.untrash(current_user)
     redirect_to :conversations
   end
+  
+  def show
+    conversation.mark_as_read(current_user)
+  end
 
   private
 
@@ -48,7 +53,7 @@ class ConversationsController < ApplicationController
   end
 
   def conversation
-    @conversation ||= mailbox.conversations.find(params[:id])
+    @conversation ||= mailbox.conversations.includes(:receipts => [:message, :receiver]).find(params[:id])
   end
 
   def conversation_params(*keys)

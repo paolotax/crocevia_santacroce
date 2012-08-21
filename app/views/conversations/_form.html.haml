@@ -1,10 +1,9 @@
-= User.all.map(&:name)
-
-
 = simple_form_for :conversation, url: :conversations do |f|
-  = f.input_field :recipients, data: { autocomplete_source: User.all.map(&:name) }
-  = f.input :subject
-  = f.input :body
+  = f.label :recipients, "Destinatari"
+  = f.input_field :recipients, data: { autocomplete_source: User.all.map(&:name) }, class: "span6", required: true
+  = f.input :subject, label: "Oggetto",              input_html: { class: "span6", required: true }
+  = f.input :body,    label: "Messaggio", as: :text, input_html: { rows: 2, class: "span6", required: true }
+  = f.input :attachment, as: :file
   .form-actions
-    = f.button :submit, class: 'btn-primary'
-    = submit_tag 'Cancel', type: :reset, class: 'btn btn-danger'
+    = f.button :submit, "Invia", class: 'btn btn-primary'
+    = submit_tag 'Annulla', type: :reset, class: 'btn btn-danger'
