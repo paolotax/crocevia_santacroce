@@ -9,7 +9,7 @@
       = link_to 'non letta', [:mark_as_read, conversation], method: :post, class: "btn"
   .partecipants
     Partecipanti:
-    = conversation.participants.map(&:name).split.join(", ")
+    = (conversation.participants.map(&:name) - [current_user.name]).split.join(", ")
     
   %ul.unstyled
     = content_tag_for(:li, conversation.receipts_for(current_user), class: "clearfix") do |receipt|

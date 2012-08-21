@@ -1,7 +1,7 @@
 = simple_form_for :message, url: [:reply, conversation], :html => {:multipart => true} do |f|
   / = f.input :subject
-  = f.input :body, label: "Intervioni", required: false, as: :text, :input_html => { :rows => 2, class: "span6" }
-  = f.input :attachment, as: :file
+  = f.input :body, label: "Rispondi", required: false, as: :text, :input_html => { :rows => 2, class: "span6" }
+  = f.input :attachment, as: :file, label: "Allegato", required: false
   .form-actions
     = f.button :submit, "Invia", class: 'btn btn-primary'
     = submit_tag 'Annulla', type: :reset, class: 'btn btn-danger'

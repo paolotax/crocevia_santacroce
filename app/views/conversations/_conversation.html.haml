@@ -2,6 +2,7 @@
   %p
     = link_to conversation.subject, conversation
     = time_ago_in_words(conversation.updated_at)
+    = (conversation.participants.map(&:name) - [current_user.name]).split.join(", ")
     |
     - if conversation.is_read?(current_user)
       = link_to 'letta', [:mark_as_unread, conversation], method: :post

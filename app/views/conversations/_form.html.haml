@@ -3,7 +3,7 @@
   = f.input_field :recipients, data: { autocomplete_source: User.all.map(&:name) }, class: "span6", required: true
   = f.input :subject, label: "Oggetto",              input_html: { class: "span6", required: true }
   = f.input :body,    label: "Messaggio", as: :text, input_html: { rows: 2, class: "span6", required: true }
-  = f.input :attachment, as: :file
+  = f.input :attachment, as: :file, label: "Allegato", required: false
   .form-actions
     = f.button :submit, "Invia", class: 'btn btn-primary'
     = submit_tag 'Annulla', type: :reset, class: 'btn btn-danger'
