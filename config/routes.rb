@@ -1,6 +1,8 @@
 CroceviaSantacroce::Application.routes.draw do
   
 
+  resources :photos
+
   resources :messages do
   end
   
