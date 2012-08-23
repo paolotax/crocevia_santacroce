@@ -55,5 +55,5 @@ CroceviaSantacroce::Application.routes.draw do
   match '/regolamento', to: 'home#regolamento'
   match '/staff',       to: 'home#staff'
   match '/dove_siamo',   to: 'home#dove_siamo'
-  match '/carica_photo',   to: 'home#upload_photo'
+  match '/carica_foto',   to: 'home#upload_photo'
 end
