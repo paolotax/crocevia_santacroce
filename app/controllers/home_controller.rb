@@ -11,4 +11,7 @@ class HomeController < ApplicationController
   
   def dove_siamo
   end
+
+  def upload_photo
+  end
 end
