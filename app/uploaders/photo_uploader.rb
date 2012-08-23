@@ -20,13 +20,14 @@ class PhotoUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
   
+  process :resize_to_fit => [nil, 800]
+
   version :thumb do
     process :resize_to_fill => [120, 120]
   end
   
   version :medium do
     process :resize_to_fit => [nil, 540]
-    
   end
 
   def extension_white_list
@@ -43,7 +44,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  # process :scale => [200, 300]
+
   #
   # def scale(width, height)
   #   # do something
