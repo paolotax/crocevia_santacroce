@@ -58,7 +58,7 @@ gem "ransack"
 gem 'savon'
 #gem 'sexmachine'
 gem 'mailboxer'
-gem "mini_magick"
+gem "rmagick"
 gem "jquery-fileupload-rails"
 
 # case HOST_OS
