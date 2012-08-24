@@ -19,11 +19,11 @@
               %li= link_to('il mio profilo', edit_user_registration_path)
               %li.divider
               %li
-                = link_to( "messaggi in arrivo", conversations_path)
+                = link_to( "messaggi", :conversations)
               %li= link_to( "nuovo messaggio", :new_conversation)
-                
-          %li
-            = link_to "Esci", destroy_user_session_path, id: "sign_out", :method=>'delete' 
+              %li.divider  
+              %li
+                = link_to "Esci", destroy_user_session_path, id: "sign_out", :method=>'delete' 
         - else
           %li
             = link_to "Accedi con Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in"

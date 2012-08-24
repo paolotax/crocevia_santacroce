@@ -8,6 +8,21 @@ module ApplicationHelper
     end
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
-
+  
+  def badge_if(value, *args)
+    
+    if value && value > 0
+    
+      if args[0].has_key?(:class)
+        args[0][:class] = args[0][:class] + " badge"
+      else
+        args.merge(:class => 'badge')
+      end
+      
+      content_tag( :span, *args) do
+        value.to_s
+      end
+    end
+  end
 
 end

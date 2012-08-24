@@ -2,6 +2,13 @@ class ConversationsController < ApplicationController
   
   before_filter :authenticate_user!
   helper_method :mailbox, :conversation
+  
+  def index
+    @box = params[:box] || 'in_arrivo'
+    @conversations = mailbox.inbox   if @box == 'in_arrivo'
+    @conversations = mailbox.sentbox if @box == 'inviati'
+    @conversations = mailbox.trash   if @box == 'cestino'
+  end
 
   def create
     recipient_names = conversation_params(:recipients).split(', ')
