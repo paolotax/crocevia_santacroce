@@ -1,8 +1,8 @@
 require 'rbconfig'
 HOST_OS = RbConfig::CONFIG['host_os']
 source 'https://rubygems.org'
+
 gem 'rails', '3.2.5'
-gem 'sqlite3'
 gem 'pg'
 
 gem "barby"

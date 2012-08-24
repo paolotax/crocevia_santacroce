@@ -14,10 +14,10 @@
       %li.nav-header
         %i.icon-shopping-cart
         Per giorno
-      - for i in @incassi_giornalieri do
+      - for d, i in @incassi_giornalieri do
         %li
-          %small= l i.data, format: :short
-          .pull-right= number_to_currency i.importo
+          %small= l d, format: :short
+          .pull-right= number_to_currency i
         
 .span9
   %header

@@ -13,10 +13,10 @@
 # user.add_role :admin
 
 if User.all.empty?
-  user = User.create! :name => 'Paolo Tassinari', :email => 'ptax@crocevia-santacroce.com', :password => 'ptax', :password_confirmation => 'ptax'
+  user = User.create! :name => 'Paolo Tassinari', :email => 'paolo.tassinari@gmail.com', :password => 'sisboccia', :password_confirmation => 'sisboccia'
   user.add_role :admin
 
-  user_2 = User.create! :name => 'Marzia Bertoncelli', :email => 'mbert@crocevia-santacroce.com', :password => 'mbert', :password_confirmation => 'mbert'
+  user_2 = User.create! :name => 'Marzia Bertoncelli', :email => 'marziabert@gmail.com', :password => 'taxciapopi', :password_confirmation => 'taxciapopi'
 
   user_2.add_role :staff
 end
@@ -48,7 +48,7 @@ rand(1000).times do
 
   rand(10).times do
     Articolo.create cliente_id: @cliente.id,
-      nome: "#{"divano poltrona sedia tavolo cucina como' ".split.shuffle[0]} #{"rococo anni70 cippendale liberty anni50 pop' ".split.shuffle[0]}",
+      nome: "#{"divano poltrona sedia tavolo cucina como".split.shuffle[0]} #{"rococo anni70 cippendale liberty anni50 pop".split.shuffle[0]}",
       prezzo: [10,45,50,90,120,150,200,34.5].shuffle[0],
       quantita: 1,
       provvigione: 65

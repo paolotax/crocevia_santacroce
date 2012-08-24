@@ -9,7 +9,7 @@ class CassaController < ApplicationController
     
     @incassi = Documento.cassa.recente.limit(5)
     
-    @incassi_giornalieri = Documento.cassa.recente.group(:data).select("data, sum(importo) as importo")
+    @incassi_giornalieri = Documento.cassa.select(:data).order("data desc").group(:data).sum(:importo)
   end
 
 end
