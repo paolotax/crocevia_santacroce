@@ -12,7 +12,7 @@
     = (conversation.participants.map(&:name) - [current_user.name]).split.join(", ")
     
   %ul.unstyled
-    = content_tag_for(:li, conversation.receipts_for(current_user), class: "clearfix") do |receipt|
+    = content_tag_for(:li, conversation.receipts_for(current_user).order(:created_at), class: "clearfix") do |receipt|
       - message = receipt.message
       = div_for(receipt, class: "#{receipt.mailbox_type}") do
         %h3= message.body
