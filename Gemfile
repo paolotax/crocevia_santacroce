@@ -58,8 +58,11 @@ gem "ransack"
 gem 'savon'
 #gem 'sexmachine'
 gem 'mailboxer'
-gem "rmagick"
+# gem "rmagick"
 gem "jquery-fileupload-rails"
+
+gem 'ruby-vips'
+gem 'carrierwave-vips'
 
 # case HOST_OS
 #   when /darwin/i
