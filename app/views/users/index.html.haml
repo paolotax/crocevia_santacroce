@@ -1,4 +1,4 @@
-.row
+= content_for :left_col do
   .span3.side-bar
     .well
       %ul.nav.nav-list
@@ -10,10 +10,36 @@
             %i.icon-group
             tutti    
   
-  .span9
-    %h1 Utenti
+.span9
+  %h1 Utenti
+  %br
+  %table.table
+    %tr
+      %th nome
+      %th email
+      %th
+        .pull-right
+          iscritto dal
+      %th
+        .pull-right
+          accessi
+      %th 
+        .pull-right
+          ultimo accesso
+      %th provider
+    
     - for user in @users do
-      %br/
-      #{link_to user.email, user} signed up #{user.created_at.to_date}
-
+      %tr
+        %td= link_to user.name, user
+        %td= mail_to user.email
+        
+        %td
+          .pull-right
+            = l user.created_at.to_date, format: :default
+        %td
+          .pull-right= user.sign_in_count
+        %td
+          .pull-right
+            = l user.last_sign_in_at, format: :short
+        %td= user.provider
 

@@ -10,19 +10,31 @@ module ApplicationHelper
   end
   
   def badge_if(value, *args)
-    
+
     if value && value > 0
-    
       if args[0].has_key?(:class)
         args[0][:class] = args[0][:class] + " badge"
       else
         args.merge(:class => 'badge')
       end
-      
+
       content_tag( :span, *args) do
         value.to_s
       end
     end
   end
+
+  def icon_mailbox(mailbox, large=false)
+    icon_class = case mailbox
+      when "in_arrivo" then "icon-envelope"
+      when "inviati"   then "icon-share"
+      when "cestino"   then "icon-trash"
+    end
+    
+    if large == true
+      icon_class += " icon-large"
+    end
+    content_tag(:i, '', class: icon_class )
+  end  
 
 end

@@ -40,8 +40,9 @@
   %h1 
     Messaggi
     %small
-      = @box.humanize
-      %i.icon-envelope
+      = icon_mailbox(@box)
+      = @box.humanize.downcase
+      
   %br
 
   %ul.unstyled= render @conversations.includes(:receipts => :receiver)

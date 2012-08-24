@@ -57,29 +57,8 @@
   
   %br
   
-  = form_for @cliente.articoli.build, class: "form-inline", remote: true do |f|
-    = f.hidden_field :cliente_id
-    
-    .pull-left
-      = f.text_field :nome, placeholder: "articolo", required: true
+  = render "articoli/form"
 
-    .input-prepend.prezzo.pull-left
-      %span.add-on €
-      = f.text_field :prezzo, class: 'input-mini', step: :any, min: 0, placeholder: "prezzo", required: true
-    
-
-    .input-prepend.quantita.pull-left
-      %span.add-on Pz.
-      = f.number_field :quantita, class: 'input-mini', value: 1, min: 1, placeholder: "pezzi", required: true
-
-    
-    .input-prepend.provvigione.pull-left
-      %span.add-on %
-      = f.select  :provvigione, ["50", "65"], class: 'input-mini', value: 50     , placeholder: "provvigione", required: true 
-    
-    .pull-left
-      = f.submit "Aggiungi", class: "btn-aggiungi"
-  
   %br  
   .clearfix    
 

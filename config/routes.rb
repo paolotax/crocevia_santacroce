@@ -6,7 +6,7 @@ CroceviaSantacroce::Application.routes.draw do
   resources :messages do
   end
   
-  resources :conversations, only: [:index, :show, :new, :create] do
+  resources :conversations, :path => "/messaggi", only: [:index, :show, :new, :create] do
     member do
       post :reply
       post :trash
@@ -38,7 +38,7 @@ CroceviaSantacroce::Application.routes.draw do
   end
 
   authenticated :user do
-    root :to => 'home#index'
+    root :to => 'home#welcome'
   end
   root :to => "home#index"
   
@@ -50,7 +50,7 @@ CroceviaSantacroce::Application.routes.draw do
   # end
   
   
-  resources :users, :only => [:show, :index, :update]
+  resources :users, path: "/utenti", :only => [:show, :index, :update]
 
   match '/regolamento', to: 'home#regolamento'
   match '/staff',       to: 'home#staff'
