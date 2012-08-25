@@ -4,14 +4,21 @@
 
 jQuery ->
   
-  $("a.get-cf").live 'click', (e) ->
+  $("span.get-cf").live 'click', (e) ->
     
     e.preventDefault();
     
-    url = $(@).attr('href');
-    console.log url
-    $.getJSON url, (data) ->
+    data =
+      cliente:
+        cognome: $('#cliente_cognome').val()
+        nome:    $('#cliente_nome').val()
+        sesso:   $('#cliente_sesso').val()
+        data_nascita:   $("#cliente_data_di_nascita_text").val()
+        comune_nascita: $("#cliente_comune_di_nascita").val()
       
+    console.log data
+    
+    $.post "/codice_fiscale", data, (data) ->
       $("input#cliente_codice_fiscale").val data.codice_fiscale
         
         

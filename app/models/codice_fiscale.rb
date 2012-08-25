@@ -5,11 +5,11 @@ class CodiceFiscale
   def initialize(cliente)
     
     request_body = {
-      "Cognome" => cliente.cognome,
-      "Nome" => cliente.nome,
-      "Sesso" => cliente.sesso,
-      "DataNascita" => cliente.data_di_nascita_text,
-      "ComuneNascita" => cliente.comune_di_nascita
+      "Cognome" => cliente[:cognome],
+      "Nome" => cliente[:nome],
+      "Sesso" => cliente[:sesso],
+      "DataNascita" => cliente[:data_nascita],
+      "ComuneNascita" => cliente[:comune_nascita]
     }
     
     client = Savon::Client.new("http://webservices.dotnethell.it//codicefiscale.asmx?wsdl")

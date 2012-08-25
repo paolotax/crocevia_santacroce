@@ -18,11 +18,11 @@
             = f.input   :data_di_nascita_text, label: "Data di nascita"
             = f.input   :comune_di_nascita, html5: true
             
-            = f.input :codice_fiscale, wrapper: :append, hint: "#{'clicca la mano per calcolare il codice fiscale' unless @cliente.new_record?}" do
+            = f.input :codice_fiscale, wrapper: :append, hint: "#{'clicca la mano per calcolare il codice fiscale'}" do
               = f.input_field :codice_fiscale, class: :mini
-              - unless @cliente.new_record?
-                = content_tag :a, class: "add-on get-cf btn", href: crea_codice_fiscale_cliente_path(@cliente)  do
-                  %i.icon-hand-left 
+              / - unless @cliente.new_record?
+              = content_tag :span, class: "add-on get-cf btn"  do
+                %i.icon-hand-left 
 
             = f.input   :partita_iva
             = f.input   :ragione_sociale
