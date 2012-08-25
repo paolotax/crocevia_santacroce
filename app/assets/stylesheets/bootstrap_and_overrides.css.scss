@@ -5,11 +5,14 @@ $iconSpritePath: asset-url('glyphicons-halflings.png', image);
 $iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
 
 $navbarBackground: white;
-$navbarBackgroundHighlight: white;
+
+$navbarBackgroundHighlight: $blue;
 
 $navbarText: grey;
 $navbarLinkColor: black;
+
 $navbarLinkBackgroundHover: $blue;
+
 $sansFontFamily: "Trebuchet MS", Helvetica, Arial, Verdana, sans-serif;
 
 

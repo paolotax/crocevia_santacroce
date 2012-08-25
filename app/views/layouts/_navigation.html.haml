@@ -9,12 +9,9 @@
           %li.dropdown
             %a.dropdown-toggle{ href: '#', "data-toggle" => 'dropdown'}
               = current_user.name
-              - unless current_user.mailbox.inbox.unread(current_user).length.zero?
-                .pull-right
-                  %span.badge.badge-info
-                    = current_user.mailbox.inbox.unread(current_user).length
-                
+              = badge_if current_user.mailbox.inbox.unread(current_user).length, class: "badge-important pull-right", style: "margin: -15px 0 -25px 0"
               %b.caret
+
             %ul.dropdown-menu
               %li= link_to('il mio profilo', edit_user_registration_path)
               %li.divider

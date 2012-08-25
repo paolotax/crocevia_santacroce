@@ -6,7 +6,7 @@
         %li.nav-header
           = link_to 'Nuovo messaggio', :new_conversation, class: "btn"
         
-        %li.nav-header
+        %li.nav-header{ class: "#{'active' if @box == 'in_arrivo'}"}
           = link_to  :conversations do
             %i.icon-envelope.icon-large
             in arrivo
@@ -18,7 +18,7 @@
               già letti
               = badge_if (mailbox.inbox - mailbox.inbox.unread(current_user)).length, class: "pull-right", style: "margin-right: -15px"
 
-        %li.nav-header
+        %li.nav-header{ class: "#{'active' if @box == 'inviati'}"}
           = link_to conversations_path(box: "inviati") do
             %i.icon-share.icon-large
             inviati
@@ -26,7 +26,7 @@
 
         %li.separator
 
-        %li.nav-header
+        %li.nav-header{ class: "#{'active' if @box == 'cestino'}"}
           = link_to conversations_path(box: "cestino") do
             %i.icon-trash.icon-large
             cestino
