@@ -14,6 +14,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-ui-rails'
+  gem "compass-rails"
 end
 
 gem 'jquery-rails'
@@ -56,7 +57,7 @@ gem "friendly_id"
 gem "ransack"
 
 gem 'savon'
-#gem 'sexmachine'
+gem 'sexmachine'
 gem 'mailboxer'
 # gem "rmagick"
 gem "jquery-fileupload-rails"
@@ -82,6 +83,7 @@ gem "devise", ">= 2.1.0"
 gem "cancan", ">= 1.6.7"
 gem "rolify", ">= 3.1.0"
 gem "bootstrap-sass", ">= 2.0.3"
+
 gem "simple_form"
 
 

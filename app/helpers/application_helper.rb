@@ -37,4 +37,13 @@ module ApplicationHelper
     content_tag(:i, '', class: icon_class )
   end  
 
+  def sexize_string(male, female, name)
+    d = SexMachine::Detector.new
+    if d.get_gender(name) == :female
+      female
+    else
+      male  
+    end
+  end
+
 end

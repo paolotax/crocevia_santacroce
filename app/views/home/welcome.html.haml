@@ -3,7 +3,7 @@
 
 .span12
   .hero-unit
-    %h1= "Benvenuto " + current_user.name
+    %h1= sexize_string("Benvenuto ", "Benvenuta ", current_user.name.split(" ")[0]) + current_user.name
     %p
       ti ringraziamo per esserti iscritto.
       %br
