@@ -4,13 +4,10 @@ $blue: #049cdb;
 $iconSpritePath: asset-url('glyphicons-halflings.png', image);
 $iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
 
-$navbarBackground: white;
-
+// $navbarBackground: white;
 $navbarBackgroundHighlight: $blue;
-
-$navbarText: grey;
+// $navbarText: grey;
 $navbarLinkColor: black;
-
 $navbarLinkBackgroundHover: $blue;
 
 $sansFontFamily: "Trebuchet MS", Helvetica, Arial, Verdana, sans-serif;
@@ -24,6 +21,7 @@ $bodyBackground: white;
 // body { padding-top: 100px; }
 
 @import "bootstrap-responsive";
+
 
 .loading {
   position: fixed;
@@ -48,47 +46,6 @@ $bodyBackground: white;
   border-left-width: 1px;
 } 
 
-.navbar .navbar-inner {
-  background: white;
-  color: black;
-  box-shadow: none;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -ms-border-radius: 0;
-  -o-border-radius: 0;
-  border-radius: 0;
-  text-shadow: none;
-  padding: 10px 0 10px;
-}
-
-footer .navbar-inner { 
-  text-align: center;
-  .nav {
-    float: none;
-    margin: auto;
-  }
-}
-.navbar .nav.actions {
-  margin-top: 20px;
-}
-.navbar .nav.actions > li > a {
-  border: 2px solid #DDD;
-  padding: 7px 16px 7px;
-  border-radius: 4px;
-  font-size: 11px;
-  line-height: 22px;
-  margin-left: 20px;
-  text-transform: uppercase;
-  text-shadow: 0;
-}
-
-footer ul {
-  overflow: hidden;
-  float: right;
-  list-style-type: none;
-  margin-bottom: 2px;
-}
-
 
 @media (max-width: 480px) {
   
@@ -99,7 +56,6 @@ footer ul {
       display: block;
     }
   }
-  
   
   body {
     padding: 0;
