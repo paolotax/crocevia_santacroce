@@ -58,6 +58,10 @@ class Cliente < ActiveRecord::Base
     !self.articoli.attivo.all.empty?
   end
   
+  def has_articoli_registrati?
+    !self.articoli.registrato.all.empty?
+  end
+  
   def data_rilascio_documento_text
     @data_rilascio_documento_text || data_rilascio_documento.try(:strftime, "%d-%m-%Y")
   end

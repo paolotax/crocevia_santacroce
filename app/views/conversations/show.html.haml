@@ -1,12 +1,16 @@
 .span6
-  %h1
-    = conversation.subject
-    %small= time_ago_in_words(conversation.updated_at) + ' fa.'
-  %div  
-    - if conversation.is_read?(current_user)
-      = link_to 'letta', [:mark_as_unread, conversation], method: :post, class: "btn"
-    - else
-      = link_to 'non letta', [:mark_as_read, conversation], method: :post, class: "btn"
+  .page-header
+    .pull-right
+      - if conversation.is_read?(current_user)
+        = link_to 'letta', [:mark_as_unread, conversation], method: :post, class: "btn"
+      - else
+        = link_to 'non letta', [:mark_as_read, conversation], method: :post, class: "btn"
+    
+    %h1
+      = conversation.subject
+      %small= time_ago_in_words(conversation.updated_at) + ' fa.'
+ 
+
   .partecipants
     Partecipanti:
     = (conversation.participants.map(&:name) - [current_user.name]).split.join(", ")

@@ -2,13 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "compass/css3/border-radius";
+@import "compass/css3/images";
 
-// .simple_form input[type=text] {
-//   width: 100%;
-// }
-// .simple_form select {
-//   width: 100%;
-// }
 
 .simple_form fieldset {
   padding: 20px 20px;
@@ -18,7 +14,6 @@
   .btn-aggiungi {
     margin-left: 10px;
   }
-
   .input-prepend {
     margin-left: 10px;
     input {
@@ -26,13 +21,30 @@
       text-align: right;
     }
   }
-  
   .input-prepend.provvigione {
     select {
       margin-left: -4px;
       width: 70px;
       text-align: right;
     }
+  }
+}
+
+.articoli-attivi {
+  @include border-radius(10px);
+  @include background-image(linear-gradient(white, #cccccc, #aaaaaa));
+  padding: 10px 10px 0 10px;
+  
+  border-left: solid 1px #EEE;
+  border-right: solid 1px #EEE;
+  border-bottom: solid 1px #CCC;
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  -moz-box-shadow: 0 1px 0 rgba(0,0,0,.1);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  
+  .empty-rows {
+    text-align: center;
+    padding-bottom: 10px;
   }
 }
 

@@ -5,10 +5,10 @@ class CodiceFiscale
   def initialize(cliente)
     
     request_body = {
-      "Cognome" => cliente[:cognome],
-      "Nome" => cliente[:nome],
-      "Sesso" => cliente[:sesso],
-      "DataNascita" => cliente[:data_nascita],
+      "Cognome"       => cliente[:cognome],
+      "Nome"          => cliente[:nome],
+      "Sesso"         => cliente[:sesso],
+      "DataNascita"   => cliente[:data_nascita],
       "ComuneNascita" => cliente[:comune_nascita]
     }
     

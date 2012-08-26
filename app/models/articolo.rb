@@ -42,6 +42,7 @@ class Articolo < ActiveRecord::Base
   scope :esauriti,    where("articoli.quantita = articoli.movimenti_count")
   scope :esagerati,   where("articoli.quantita < articoli.movimenti_count")
   scope :attivo,      where("articoli.documento_id is null")
+  scope :registrato,  where("articoli.documento_id is not null")
   
   def disponibile?
     self.quantita > self.movimenti_count

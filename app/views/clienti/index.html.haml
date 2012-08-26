@@ -14,13 +14,15 @@
             %i.icon-user
             tutti
         %li.divider
-      = search_form_for @q, remote: true do |f|
-        = f.text_field :nome_or_cognome_or_ragione_sociale_cont, class: "search-query", placeholder: "cerca cliente", style: "width: 152px; margin-bottom: 10px"
-        .pull-right.clearfix= f.submit "cerca", class: "btn", name: nil
+      
+      = search_form_for @q, html: {class: "form-search", remote: true} do |f|
+        .input-append
+          = f.text_field :nome_or_cognome_or_ragione_sociale_cont, class: "search-query span2", placeholder: "cerca cliente", style: "width: 152px; margin-bottom: 10px"
+          = button_tag "cerca", class: "btn", name: nil
   
 .span9
-  %h1 Clienti
-  %br
+  .page-header
+    %h1 Clienti
   %table.table
     = render "clienti_header"
     %tbody.clienti
