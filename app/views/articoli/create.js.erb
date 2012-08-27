@@ -3,11 +3,11 @@ $("#articoli-da-caricare .table-footer").before("<%= escape_javascript(render 'c
 $("form.new_articolo").get(0).reset();
 $("input#articolo_nome").focus();
 
-$(".table-footer .quantita strong").html("<%= @articolo.cliente.articoli.attivo.attivo.sum(&:quantita)  %>")
-$(".table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo) %>")
-$(".table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo_cliente) %>")
+$("#articoli-da-caricare .table-footer .quantita strong").html("<%= @articolo.cliente.articoli.attivo.attivo.sum(&:quantita)  %>")
+$("#articoli-da-caricare .table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo) %>")
+$("#articoli-da-caricare .table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo_cliente) %>")
 
 
-$(".table-header").removeClass("hidden")
-$(".table-footer").removeClass("hidden")
+$("#articoli-da-caricare .table-header").removeClass("hidden")
+$("#articoli-da-caricare .table-footer").removeClass("hidden")
 $(".empty-rows").addClass("hidden")

@@ -101,7 +101,11 @@
             = link_to "etichette", "", class: "btn"
 
 
-  %table#articoli-registrati.table.articoli      
+
+
+  %table#articoli-registrati.table.articoli   
+    %caption Articoli in giacenza
+    
     %tr.table-header{ class: "#{'hidden' unless @cliente.has_articoli_registrati? }" }
       / %th.barcode Barcode
       %th.codice Codice
@@ -112,18 +116,47 @@
       %th.created_at Data carico
       %th
 
-    - for articolo in @cliente.articoli.registrato do
+    - for articolo in @cliente.articoli.registrato.disponibili do
       = render 'clienti/articolo', articolo: articolo
 
     %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli_registrati? }"}
       %td{ colspan: 2} Totale
       %td.quantita
-        %strong= @cliente.articoli.registrato.sum(&:quantita) 
+        %strong= @cliente.articoli.registrato.disponibili.sum(&:quantita) 
       %td.prezzo
-        %strong= number_to_currency @cliente.articoli.registrato.sum(&:importo)
+        %strong= number_to_currency @cliente.articoli.registrato.disponibili.sum(&:importo)
       %td.provvigione
-        %strong= number_to_currency @cliente.articoli.registrato.sum(&:importo_cliente)
+        %strong= number_to_currency @cliente.articoli.registrato.disponibili.sum(&:importo_cliente)
+      %td.actions{ colspan: 2 }
+      
+
+  %br
+
+  %table#articoli-registrati.table.articoli      
+    %caption Articoli venduti
+    %tr.table-header{ class: "#{'hidden' unless @cliente.has_articoli_registrati? }" }
+      / %th.barcode Barcode
+      %th.codice Codice
+      %th.articolo Articolo
+      %th.quantita Quantità
+      %th.prezzo Prezzo
+      %th.provvigione Provvigione
+      %th.created_at Data carico
+      %th
+
+    - for articolo in @cliente.vendite do
+      = render 'movimenti/movimento', movimento: articolo
+
+    %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli_registrati? }"}
+      %td{ colspan: 2} Totale
+      %td.quantita
+        %strong= @cliente.vendite.sum(&:quantita) 
+      %td.prezzo
+        %strong= number_to_currency @cliente.vendite.sum(&:importo)
+      %td.provvigione
+        %strong= number_to_currency @cliente.vendite.sum(&:importo_cliente)
       %td.actions{ colspan: 2}
+  
         
         
       

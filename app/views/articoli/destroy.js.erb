@@ -1,11 +1,11 @@
 $("#<%=  dom_id(@articolo) %>").remove();
 
-$(".table-footer .quantita strong").html("<%= @articolo.cliente.articoli.attivo.sum(&:quantita)  %>")
-$(".table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo) %>")
-$(".table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.sum(&:importo_cliente) %>")
+$("#articoli-da-caricare .table-footer .quantita strong").html("<%= @articolo.cliente.articoli.attivo.sum(&:quantita)  %>")
+$("#articoli-da-caricare .table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo) %>")
+$("#articoli-da-caricare .table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.sum(&:importo_cliente) %>")
 
-if ($(".articoli .articolo").length == 1) {
-  $(".table-header").addClass("hidden");
-  $(".table-footer").addClass("hidden");
+if ($("#articoli-da-caricare .articolo").length == 1) {
+  $("#articoli-da-caricare .table-header").addClass("hidden");
+  $("#articoli-da-caricare .table-footer").addClass("hidden");
   $(".empty-rows").removeClass("hidden");
 }

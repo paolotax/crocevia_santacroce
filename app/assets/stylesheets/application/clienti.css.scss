@@ -29,11 +29,11 @@
 
 .articoli-attivi {
   @include border-radius(10px);
-  @include background-image(linear-gradient(white, #cccccc, #aaaaaa));
+  @include background-image(linear-gradient(#FFFBC0, #F4FF99, #FFFBC0));
   padding: 10px 10px 0 10px;
-  
-  border-left: solid 1px #EEE;
-  border-right: solid 1px #EEE;
+  border-top: solid 1px #CCC;
+  border-left: solid 1px #CCC;
+  border-right: solid 1px #CCC;
   border-bottom: solid 1px #CCC;
   -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
   -moz-box-shadow: 0 1px 0 rgba(0,0,0,.1);

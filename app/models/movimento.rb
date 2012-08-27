@@ -43,6 +43,18 @@ class Movimento < ActiveRecord::Base
     end 
   end
   
+  def importo
+  
+    self.quantita * self.prezzo
+  
+  end
+  
+  def importo_cliente
+  
+    self.quantita * self.prezzo
+  
+  end
+  
   def importo_provvigione
     if self.articolo.patate?
       0.0
