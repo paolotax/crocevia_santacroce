@@ -62,7 +62,7 @@ gem 'savon'
 gem 'sexmachine'
 gem 'mailboxer'
 # gem "rmagick"
-gem "jquery-fileupload-rails"
+gem "jquery-fileupload-rails", :git => "https://github.com/paolotax/jquery-fileupload-rails.git"
 
 gem 'ruby-vips'
 gem 'carrierwave-vips'
