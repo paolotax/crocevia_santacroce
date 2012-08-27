@@ -12,24 +12,15 @@
             tutti
         %li.divider
         
-      = search_form_for @q, remote: true do |f|
-        = f.text_field :nome_cont, class: "search-query", placeholder: "cerca articolo", style: "width: 152px; margin-bottom: 10px"
-        .pull-right.clearfix= f.submit "cerca", class: "btn", name: nil
-
-        / = search_form_for @search, url: search_articoli_path, method: :post do |f|
-        /   = f.condition_fields do |c|
-        /     = render "condition_fields", f: c            
-        /   %p= link_to_add_fields "Add Conditions", f, :condition
-        /   .field
-        /     Sort:
-        /     = f.sort_fields do |s|
-        /       = s.sort_select
-        /   .actions= f.submit "Cerca"
-          
-  
+      = search_form_for @q,  html: {class: "form-search", remote: true} do |f|
+        .input-append
+          = f.text_field :nome_cont, class: "search-query", placeholder: "cerca articolo", style: "width: 110px"
+          = button_tag class: "btn", name: nil do
+            %i.icon-search
+              
 .span9
-  %h1 Articoli
-  %br
+  .page-header
+    %h1 Articoli 
   %table.table
     = render "articoli_header"
     %tbody.articoli  
