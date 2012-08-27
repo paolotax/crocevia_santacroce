@@ -15,11 +15,12 @@
             tutti
         %li.divider
       
-      = search_form_for @q, html: {class: "form-search", remote: true} do |f|
+      = search_form_for @q, html: {class: "form form-search", remote: true} do |f|
         .input-append
-          = f.text_field :nome_or_cognome_or_ragione_sociale_cont, class: "search-query span2", placeholder: "cerca cliente", style: "width: 152px; margin-bottom: 10px"
-          = button_tag "cerca", class: "btn", name: nil
-  
+          = f.text_field :nome_or_cognome_or_ragione_sociale_cont, class: "search-query", placeholder: "cerca cliente", style: "width: 110px"
+          = button_tag class: "btn", name: nil do
+            %i.icon-search
+
 .span9
   .page-header
     %h1 Clienti

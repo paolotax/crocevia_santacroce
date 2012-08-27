@@ -15,6 +15,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-ui-rails'
   gem "compass-rails"
+  # gem "bootstrap-sass", ">= 2.0.3"
+  gem 'anjlab-bootstrap-rails', '>= 2.1', :require => 'bootstrap-rails'
 end
 
 gem 'jquery-rails'
@@ -82,7 +84,7 @@ gem 'carrierwave-vips'
 gem "devise", ">= 2.1.0"
 gem "cancan", ">= 1.6.7"
 gem "rolify", ">= 3.1.0"
-gem "bootstrap-sass", ">= 2.0.3"
+
 
 gem "simple_form"
 

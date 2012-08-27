@@ -1,15 +1,19 @@
-.dropdown.open > a {  
-  color: black !important;
-}
 
-.navbar .nav li.dropdown .dropdown-toggle .caret, .navbar .nav li.dropdown.open .caret {
-  border-top-color: #555;
-  border-bottom-color: #555;
-}
+
+// .dropdown.open > a {  
+//   color: black !important;
+// }
+// 
+// .navbar .nav li.dropdown .dropdown-toggle .caret, .navbar .nav li.dropdown.open .caret {
+//   border-top-color: #555;
+//   border-bottom-color: #555;
+// }
 .navbar .nav li.dropdown:hover .caret {
   border-top-color: white;
   border-bottom-color: white;  
 } 
+
+
 .navbar .navbar-inner {
   background: transparent;
   color: black;
@@ -21,6 +25,7 @@
   border-radius: 0;
   text-shadow: none;
   padding: 10px 0 10px;
+  border-width: 0;
 }
 
 footer .navbar-inner { 

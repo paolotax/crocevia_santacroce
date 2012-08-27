@@ -4,23 +4,26 @@ $blue: #049cdb;
 $iconSpritePath: asset-url('glyphicons-halflings.png', image);
 $iconWhiteSpritePath: asset-url('glyphicons-halflings-white.png', image);
 
-// $navbarBackground: white;
-$navbarBackgroundHighlight: $blue;
-// $navbarText: grey;
+$navbarBackground: white;
+// $navbarBackgroundHighlight: $blue;
+
 $navbarLinkColor: black;
 $navbarLinkBackgroundHover: $blue;
+
+$navbarLinkColorHover: white;
+$navbarLinkColorActive: black;
 
 $sansFontFamily: "Trebuchet MS", Helvetica, Arial, Verdana, sans-serif;
 
 
 $bodyBackground: white;
 
-@import "bootstrap";
+@import "twitter/bootstrap";
 @import "font-awesome";
 
 // body { padding-top: 100px; }
 
-@import "bootstrap-responsive";
+@import "twitter/bootstrap-responsive";
 
 
 .loading {
@@ -30,21 +33,23 @@ $bodyBackground: white;
   top: 0;
   right: 10px;
 }
-.page.gap,
-.page.current {
-  float: left;
-  padding: 0 14px;
-  line-height: 34px;
-  text-decoration: none;
-  border-right: 1px solid #DDD;
-}
-.page.current:last-child {
-  border-right-width: 0;
-}
-.pagination .first a {
-  border-left: 1px solid #DDD;
-  border-left-width: 1px;
-} 
+
+
+// .page.gap,
+// .page.current {
+//   float: left;
+//   padding: 0 14px;
+//   line-height: 34px;
+//   text-decoration: none;
+//   border-right: 1px solid #DDD;
+// }
+// .page.current:last-child {
+//   border-right-width: 0;
+// }
+// .pagination .first a {
+//   border-left: 1px solid #DDD;
+//   border-left-width: 1px;
+// } 
 
 
 @media (max-width: 480px) {

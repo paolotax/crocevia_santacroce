@@ -5,7 +5,6 @@
 @import "compass/css3/border-radius";
 @import "compass/css3/images";
 
-
 .simple_form fieldset {
   padding: 20px 20px;
 }
@@ -17,13 +16,11 @@
   .input-prepend {
     margin-left: 10px;
     input {
-      margin-left: -4px;
       text-align: right;
     }
   }
   .input-prepend.provvigione {
     select {
-      margin-left: -4px;
       width: 70px;
       text-align: right;
     }
