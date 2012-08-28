@@ -1,0 +1,5 @@
+@import "compass/utilities/general/clearfix";
+
+li.receipt {
+  @include clearfix()
+}
