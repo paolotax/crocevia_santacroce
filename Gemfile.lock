@@ -9,6 +9,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    Ascii85 (1.0.2)
     actionmailer (3.2.5)
       actionpack (= 3.2.5)
       mail (~> 2.4.4)
@@ -161,6 +162,7 @@ GEM
       barby
       i18n
       rake
+    hashery (2.0.1)
     hashie (1.2.0)
     highline (1.6.14)
     hike (1.2.1)
@@ -227,10 +229,17 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     orm_adapter (0.4.0)
+    pdf-reader (1.2.0)
+      Ascii85 (~> 1.0.0)
+      hashery (~> 2.0)
+      ruby-rc4
     pg (0.14.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
+    prawn (0.12.0)
+      pdf-reader (>= 0.9.0)
+      ttfunk (~> 1.0.2)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -283,6 +292,7 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.11.0)
+    ruby-rc4 (0.1.5)
     ruby-vips (0.3.0)
     rubyzip (0.9.9)
     sass (3.2.1)
@@ -317,6 +327,7 @@ GEM
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
+    ttfunk (1.0.3)
     tzinfo (0.3.33)
     uglifier (1.2.7)
       execjs (>= 0.3.0)
@@ -375,6 +386,7 @@ DEPENDENCIES
   mailboxer
   omniauth-facebook
   pg
+  prawn
   rails (= 3.2.5)
   rails-footnotes (>= 3.7)
   ransack

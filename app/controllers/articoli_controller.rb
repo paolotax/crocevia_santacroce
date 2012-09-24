@@ -29,4 +29,27 @@ class ArticoliController < ApplicationController
   def show
   end
   
+  def etichette
+    @articoli = Articolo.find(params[:articolo_ids])
+    
+    respond_to do |format|
+      format.pdf do
+        
+        case params[:tipo_etichetta]
+          when "Dymo 11352"
+            options = {
+              page_size:  [25.mm, 54.mm],
+              labels_per_page: 1,
+              columns: 1
+            }
+        end  
+        
+                
+        pdf = EtichettaPdf.new(@articoli, view_context, options)
+        send_data pdf.render, filename: "etichette_#{Time.now}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
+  end    
 end

@@ -28,6 +28,9 @@ CroceviaSantacroce::Application.routes.draw do
   resources :articoli do
     get 'pagina/:page', :action => :index, :on => :collection
     # collection { post :search, to: 'articoli#index' }
+    collection do
+      put :etichette, format: :pdf
+    end
   end
 
   resources :clienti do

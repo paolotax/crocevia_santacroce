@@ -88,6 +88,7 @@ gem "rolify", ">= 3.1.0"
 
 gem "simple_form"
 
+gem 'prawn'
 
 gem "omniauth-facebook"
 gem 'font-awesome-sass-rails'

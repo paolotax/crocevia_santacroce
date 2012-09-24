@@ -69,12 +69,12 @@
     %table#articoli-da-caricare.table.articoli      
       %tr.table-header{ class: "#{'hidden' unless @cliente.has_articoli_attivi? }" }
         / %th.barcode Barcode
-        %th.codice Codice
-        %th.articolo Articolo
-        %th.quantita Quantità
-        %th.prezzo Prezzo
+        %th.codice      Codice
+        %th.articolo    Articolo
+        %th.quantita    Quantità
+        %th.prezzo      Prezzo
         %th.provvigione Provvigione
-        %th.created_at Data carico
+        %th.created_at  Data carico
         %th
        
       - for articolo in @cliente.articoli.attivo do
@@ -90,18 +90,18 @@
         %td.provvigione
           %strong= number_to_currency @cliente.articoli.attivo.sum(&:importo_cliente)
         %td.actions{ colspan: 2}
+          = form_for Documento.new, html: {class: "pull-right"} do |f|
+            = hidden_field_tag "cliente_id", @cliente.id
+            = f.hidden_field :data,       value: Time.now
+            = f.hidden_field :tipo,       value: "carico"
+            = f.submit "registra", class: "btn btn-success"
         
-          .pull-right
-            = form_for Documento.new do |f|
-              = hidden_field_tag "cliente_id", @cliente.id
-              = f.hidden_field :data,       value: Time.now
-              = f.hidden_field :tipo,       value: "carico"
-              = f.submit "registra", class: "btn btn-success"
-          
-            = link_to "etichette", "", class: "btn"
-
-
-
+          = form_tag etichette_articoli_path, :method => :put, :id => "fom_appunti", class: "pull-right" do
+            - for a in @cliente.articoli.attivo do
+              = hidden_field_tag "articolo_ids[]", a.id unless a.new_record?
+              = hidden_field_tag "tipo_etichetta", "Dymo 11352"
+            = submit_tag "Etichette",  id: "bt-pdf", class: "btn"
+            
 
   %table#articoli-registrati.table.articoli   
     %caption Articoli in giacenza
