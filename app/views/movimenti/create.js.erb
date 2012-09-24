@@ -5,7 +5,7 @@ $("span.help-inline.error-inline").remove();
   $(".cassa-result").replaceWith("<%= escape_javascript( render partial: 'cassa/cassa_result', locals: { movimenti: @movimento.user.movimenti.attivo } ) %>");
   $("form#new_movimento").get(0).reset();
   $("input#movimento_articolo_id").focus();
-<%- else %>
+<% else %>
   $("input#movimento_articolo_id").select();
-  $("input#new_movimento_submit").after("<span class='error-inline help-inline'><%= @movimento.errors.values.join %></span>"); 
-<%- end %>
+  $("form#new_movimento .input-append").after("<span class='error-inline help-inline'><%= @movimento.errors.values.join %></span>"); 
+<% end %>
