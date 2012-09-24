@@ -11,3 +11,5 @@ $("#articoli-da-caricare .table-footer .provvigione strong").html("<%= number_to
 $("#articoli-da-caricare .table-header").removeClass("hidden")
 $("#articoli-da-caricare .table-footer").removeClass("hidden")
 $(".empty-rows").addClass("hidden")
+
+$("#form_articoli").append("<input type='hidden' name='articolo_ids[]' value='<%= @articolo.id %>'/>")

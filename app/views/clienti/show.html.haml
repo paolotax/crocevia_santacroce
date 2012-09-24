@@ -96,10 +96,10 @@
             = f.hidden_field :tipo,       value: "carico"
             = f.submit "registra", class: "btn btn-success"
         
-          = form_tag etichette_articoli_path, :method => :put, :id => "fom_appunti", class: "pull-right" do
+          = form_tag etichette_articoli_path, :method => :put, :id => "form_articoli", class: "pull-right", target: "_blank" do
             - for a in @cliente.articoli.attivo do
               = hidden_field_tag "articolo_ids[]", a.id unless a.new_record?
-              = hidden_field_tag "tipo_etichetta", "Dymo 11352"
+            = hidden_field_tag "tipo_etichetta", "Dymo 11352"
             = submit_tag "Etichette",  id: "bt-pdf", class: "btn"
             
 

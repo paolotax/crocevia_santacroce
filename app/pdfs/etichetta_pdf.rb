@@ -77,7 +77,7 @@ class EtichettaPdf < Prawn::Document
       draw_text articolo.id.to_s, at: [bounds.left + 37.mm, bounds.top - 10.mm]
       draw_text articolo.nome,    at: [bounds.left,         bounds.top - 15.mm]
       draw_text price(articolo.prezzo),  at: [bounds.left,         bounds.top - 20.mm]
-      draw_text articolo.created_at.strftime("%d/%m/%Y"), at: [bounds.left + 25.mm,         bounds.top - 20.mm],  :size => 9
+      draw_text articolo.created_at.strftime("%d/%m/%Y"), at: [bounds.left + 34.mm,         bounds.top - 19.mm],  :size => 9
       
       label_articolo(articolo)
     end

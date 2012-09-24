@@ -9,3 +9,5 @@ if ($("#articoli-da-caricare .articolo").length == 1) {
   $("#articoli-da-caricare .table-footer").addClass("hidden");
   $(".empty-rows").removeClass("hidden");
 }
+
+$("input[value='<%= @articolo.id %>']").remove();

@@ -1,3 +1,5 @@
+require "prawn/measurement_extensions"
+
 class ArticoliController < ApplicationController
   
   load_and_authorize_resource
