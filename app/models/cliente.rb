@@ -25,7 +25,7 @@ class Cliente < ActiveRecord::Base
                   :numero_tessera, :partita_iva, :provincia, :ragione_sociale, 
                   :numero_documento, :data_rilascio_documento_text, :tipo_documento, 
                   :documento_rilasciato_da, :telefono, :email, :cellulare, :note,
-                  :data_di_nascita_text, :comune_di_nascita, :sesso
+                  :data_di_nascita_text, :comune_di_nascita, :sesso, :index
 
   attr_writer :data_rilascio_documento_text, :data_di_nascita_text
   
@@ -94,5 +94,13 @@ class Cliente < ActiveRecord::Base
     rescue ArgumentError
       errors.add :data_di_nascita_text, "data non valida"
     end
+    
+    before_save :update_index
+
+    private
+
+      def update_index
+        self.index = "#{id} #{nome} #{cognome} #{ragione_sociale}"
+      end
 
 end

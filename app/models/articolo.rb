@@ -36,7 +36,7 @@ class Articolo < ActiveRecord::Base
     self.prezzo_vendita * self.giacenza
   end
   
-  attr_accessible :nome, :prezzo, :provvigione, :quantita, :cliente_id, :documento_id
+  attr_accessible :nome, :prezzo, :provvigione, :quantita, :cliente_id, :documento_id, :index
   
   scope :disponibili, where("articoli.quantita > articoli.movimenti_count")
   scope :esauriti,    where("articoli.quantita = articoli.movimenti_count")
@@ -107,4 +107,13 @@ class Articolo < ActiveRecord::Base
     end
   end  
   
+  before_save :update_index
+  
+  private
+    
+    def update_index
+      self.index = "#{id} #{nome}"
+    end
+    
+    
 end

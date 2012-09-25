@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120821142711) do
+ActiveRecord::Schema.define(:version => 20120925123858) do
 
   create_table "articoli", :force => true do |t|
     t.string   "nome"
@@ -24,11 +24,13 @@ ActiveRecord::Schema.define(:version => 20120821142711) do
     t.datetime "updated_at",                                                   :null => false
     t.integer  "movimenti_count",                               :default => 0
     t.integer  "documento_id"
+    t.string   "index"
   end
 
   add_index "articoli", ["categoria_id"], :name => "index_articoli_on_categoria_id"
   add_index "articoli", ["cliente_id"], :name => "index_articoli_on_cliente_id"
   add_index "articoli", ["documento_id"], :name => "index_articoli_on_documento_id"
+  add_index "articoli", ["index"], :name => "index_articoli_on_index"
   add_index "articoli", ["nome"], :name => "index_articoli_on_nome"
 
   create_table "categorie", :force => true do |t|
@@ -63,8 +65,10 @@ ActiveRecord::Schema.define(:version => 20120821142711) do
     t.date     "data_di_nascita"
     t.string   "comune_di_nascita"
     t.string   "sesso"
+    t.string   "index"
   end
 
+  add_index "clienti", ["index"], :name => "index_clienti_on_index"
   add_index "clienti", ["slug"], :name => "index_clienti_on_slug"
 
   create_table "conversations", :force => true do |t|

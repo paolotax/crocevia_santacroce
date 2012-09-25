@@ -46,7 +46,7 @@
               %li.divider
               %li
                 = form_tag clienti_path, name: "clienti_search", id: 'clienti_search', method: 'get'  do
-                  = text_field_tag "q[nome_or_cognome_or_ragione_sociale_cont]", nil, class: "search-query", placeholder: "cerca clienti", style: "margin: 0 10px -10px 10px"
+                  = text_field_tag "q[index_cont]", nil, class: "search-query", placeholder: "cerca clienti", style: "margin: 0 10px -10px 10px"
                   
                 
 
@@ -60,7 +60,7 @@
               %li.divider
               %li
                 = form_tag articoli_path, name: "articoli_search", id: 'articoli_search', method: 'get'  do
-                  = text_field_tag "q[nome_cont]", nil, class: "search-query", placeholder: "cerca articoli", style: "margin: 0 10px -10px 10px"
+                  = text_field_tag "q[index_cont]", nil, class: "search-query", placeholder: "cerca articoli", style: "margin: 0 10px -10px 10px"
         
         - if can? :manage, Movimento
           %li

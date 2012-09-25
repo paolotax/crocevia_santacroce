@@ -14,7 +14,7 @@
         
       = search_form_for @q,  html: {class: "form-search", remote: true} do |f|
         .input-append
-          = f.text_field :nome_cont, class: "search-query", placeholder: "cerca articolo", style: "width: 110px"
+          = f.text_field :index_cont, class: "search-query", placeholder: "cerca articolo", style: "width: 110px"
           = button_tag class: "btn", name: nil do
             %i.icon-search
               
