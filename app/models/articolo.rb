@@ -20,7 +20,7 @@ class Articolo < ActiveRecord::Base
   # end
   
   after_save :to_barby
-   
+  
   def to_barby
     barcode_value = self.id.to_s
     barcode = Barby::Code39.new(barcode_value)
@@ -44,6 +44,11 @@ class Articolo < ActiveRecord::Base
   scope :attivo,      where("articoli.documento_id is null")
   scope :registrato,  where("articoli.documento_id is not null")
   
+  
+  scope :trova, lambda { |term| 
+    where("(articoli.nome ilike :term) or (articoli.id = :id) ", term: term, id: term.to_i)        
+  }
+
   def disponibile?
     self.quantita > self.movimenti_count
   end

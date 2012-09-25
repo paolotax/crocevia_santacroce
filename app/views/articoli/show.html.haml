@@ -1,1 +1,85 @@
-Eccomi
+= content_for :left_col do
+  .span3.side-bar
+    .well
+      %ul.nav.nav-list
+        %li.nav-header
+          %i.icon-user
+          Articoli
+        %li
+          = link_to edit_articolo_url(@articolo) do
+            %i.icon-pencil
+            Modifica
+        %li
+          = link_to articoli_url do
+            %i.icon-user
+            tutti
+        
+        %li.divider
+
+        %li.nav-header
+          %i.icon-gift
+          Articoli
+        
+        %li
+          = link_to articoli_url do
+            %i.icon-gift
+            tutti
+            
+
+.span9
+  .pull-right
+    - if @articolo.disponibile?
+      = form_for Movimento.new do |f|
+        = f.hidden_field :articolo_id, value: @articolo.id
+        = f.submit  "Vendi", class: "btn btn-success" 
+
+  %h3
+    = @articolo.nome
+    %small
+      di
+      = link_to @articolo.cliente.full_name, @articolo.cliente
+  
+  %p
+    = "codice articolo: #{@articolo.id.to_s}"
+    %br
+    = "quantità: #{@articolo.quantita}"
+    %br
+    = "prezzo: #{number_to_currency @articolo.prezzo}"
+  
+  - if @articolo.documento
+    = link_to @articolo.documento do
+      .alert.alert-info
+        %strong
+          Caricato il
+          = l @articolo.documento.data, format: :default
+        con documento nr  
+        = @articolo.documento.id
+  - else
+    = link_to @articolo.cliente do
+      .alert.alert-error
+        %h4
+          Attenzione!
+        carico da registrare. Clicca per registrare il carico del cliente
+  
+  - unless @articolo.movimenti.empty?
+    - for m in @articolo.movimenti do
+      - if m.documento
+        = link_to m do
+          .alert.alert-success
+            %span
+              %strong
+                Venduto il
+              = l m.created_at.to_date, format: :default
+              cassa nr.
+              = m.id 
+            %span.pull-right
+              %strong
+                = number_to_currency m.prezzo
+      - else
+        = link_to cassa_path do
+          .alert.alert-error
+            %h4
+              Attenzione!
+            vendita da incassare. Clicca per registrare il movimento di cassa
+        
+  

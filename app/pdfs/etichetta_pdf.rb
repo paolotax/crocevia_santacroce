@@ -2,8 +2,6 @@ require "prawn/measurement_extensions"
 
 class EtichettaPdf < Prawn::Document
   
-  #include LayoutPdf
-  
   def initialize(articoli, view, options = {})
     
     defaults = {
@@ -79,22 +77,9 @@ class EtichettaPdf < Prawn::Document
       draw_text price(articolo.prezzo),  at: [bounds.left,         bounds.top - 20.mm]
       draw_text articolo.created_at.strftime("%d/%m/%Y"), at: [bounds.left + 34.mm,         bounds.top - 19.mm],  :size => 9
       
-      label_articolo(articolo)
     end
   end
   
-  def label_articolo(articolo)
-
-    # bounding_box [ bounds.left + @destinatario_left, bounds.top - @destinatario_top ], :width => 6.5.cm do
-    #   
-    #   text appunto.destinatario, :size => 14, :style => :bold, :spacing => 4
-    #   move_down 2.mm
-    #   #text "#{appunto.cliente.cognome} #{appunto.cliente.nome}",  :size => 14, :style => :bold, :spacing => 4      
-    #   text appunto.cliente.ragione_sociale,  :size => 14, :style => :bold, :spacing => 4
-    #   text appunto.cliente.indirizzo,  :size => 12
-    #   text appunto.cliente.cap + ' ' + appunto.cliente.frazione  + ' ' + appunto.cliente.comune  + ' ' + appunto.cliente.provincia,  :size => 12
-    # end
-  end
 
   def price(num)
     @view.number_to_currency(num, :locale => :it, :format => "%n %u", :precision => 2)

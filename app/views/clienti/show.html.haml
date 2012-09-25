@@ -103,17 +103,16 @@
             = submit_tag "Etichette",  id: "bt-pdf", class: "btn"
             
 
+  %h3 Articoli in giacenza
+
   %table#articoli-registrati.table.articoli   
-    %caption Articoli in giacenza
-    
     %tr.table-header{ class: "#{'hidden' unless @cliente.has_articoli_registrati? }" }
-      / %th.barcode Barcode
-      %th.codice Codice
-      %th.articolo Articolo
-      %th.quantita Quantità
-      %th.prezzo Prezzo
+      %th.codice      Codice
+      %th.articolo    Articolo
+      %th.quantita    Quantità
+      %th.prezzo      Prezzo
       %th.provvigione Provvigione
-      %th.created_at Data carico
+      %th.created_at  Data carico
       %th
 
     - for articolo in @cliente.articoli.registrato.disponibili do
@@ -131,11 +130,10 @@
       
 
   %br
-
+  
+  %h3 Articoli venduti
   %table#articoli-registrati.table.articoli      
-    %caption Articoli venduti
     %tr.table-header{ class: "#{'hidden' unless @cliente.has_articoli_registrati? }" }
-      / %th.barcode Barcode
       %th.codice Codice
       %th.articolo Articolo
       %th.quantita Quantità
@@ -156,7 +154,4 @@
       %td.provvigione
         %strong= number_to_currency @cliente.vendite.sum(&:importo_cliente)
       %td.actions{ colspan: 2}
-  
-        
-        
-      
+
