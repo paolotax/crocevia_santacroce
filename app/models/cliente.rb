@@ -18,6 +18,7 @@ class Cliente < ActiveRecord::Base
                   source: :movimenti,
                   conditions: { tipo: "resa"}
   
+  before_save :update_index
                       
   accepts_nested_attributes_for :articoli
   
@@ -95,12 +96,10 @@ class Cliente < ActiveRecord::Base
       errors.add :data_di_nascita_text, "data non valida"
     end
     
-    before_save :update_index
+    
 
-    private
-
-      def update_index
-        self.index = "#{id} #{nome} #{cognome} #{ragione_sociale}"
-      end
+    def update_index
+      self.index = "#{id} #{nome} #{cognome} #{ragione_sociale}"
+    end
 
 end
