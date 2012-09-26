@@ -3,7 +3,7 @@ class Cliente < ActiveRecord::Base
   extend FriendlyId
   friendly_id :full_name, use: [:slugged, :history]
   
-  has_many :articoli
+  has_many :articoli, dependent: :destroy
   
   has_many :articoli_in_giacenza, class_name: "Articolo",
                                   conditions: "(articoli.quantita > articoli.movimenti_count)"

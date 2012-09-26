@@ -6,7 +6,7 @@ class Articolo < ActiveRecord::Base
   
   belongs_to :cliente
   belongs_to :documento
-  has_many :movimenti
+  has_many :movimenti, dependent: :destroy
   
   # include HasBarcode
   # 
