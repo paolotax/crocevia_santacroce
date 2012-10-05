@@ -24,7 +24,7 @@
           = message.sender.name
         %p  
           %small= time_ago_in_words(message.created_at) + ' fa.'
-          = link_to "visualizza allegato", message.attachment_url, class: "btn" unless message.attachment.blank?
-          = link_to "scarica allegato", message.attachment_url, class: "btn", download: message.attachment  unless message.attachment.blank?
+          = link_to "visualizza allegato", message.attachment_url, class: "btn", "data-no-turbolink" => true unless message.attachment.blank?
+          = link_to "scarica allegato", message.attachment_url, class: "btn", download: message.attachment, "data-no-turbolink" => true  unless message.attachment.blank?
       .clearfix
   = render 'messages/form', conversation: conversation

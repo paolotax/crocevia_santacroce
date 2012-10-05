@@ -2,8 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-jQuery ->
-  
+# jQuery ->
+
+document.addEventListener 'page:change', ->  
+
   $("span.get-cf").live 'click', (e) ->
     
     e.preventDefault();

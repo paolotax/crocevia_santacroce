@@ -328,6 +328,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     ttfunk (1.0.3)
+    turbolinks (0.1.5)
     tzinfo (0.3.33)
     uglifier (1.2.7)
       execjs (>= 0.3.0)
@@ -397,5 +398,6 @@ DEPENDENCIES
   savon
   sexmachine
   simple_form
+  turbolinks
   uglifier (>= 1.0.3)
   unicorn

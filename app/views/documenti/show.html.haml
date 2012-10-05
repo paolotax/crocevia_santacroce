@@ -1,15 +1,57 @@
-%p#notice= notice
+= content_for :left_col do
+  .span3.side-bar
+    .well
+      %ul.nav.nav-list
+        %li.nav-header
+          %i.icon-user
+          Documento
+        %li
+          = link_to edit_documento_path(@documento) do
+            %i.icon-pencil
+            Modifica
+        %li
+          = link_to params.merge(format: :pdf) do
+            %i.icon-print
+            Stampa
+        %li
+          = link_to documenti_path do
+            %i.icon-user
+            tutti
 
-%p
-  %b Tipo:
-  = @documento.tipo
-%p
-  %b Data:
-  = @documento.data
-%p
-  %b Importo:
-  = @documento.importo
+.span9
+  %h3
+    = @documento.tipo
+    %small= "nr. #{@documento.id} del #{@documento.data.strftime('%d-%m-%Y')}"
+    - if @documento.mandante
+      %small= "di " 
+      %small= link_to @documento.mandante.full_name, @documento.mandante 
+      
+  - if @documento.carico?
+    %table#articoli.table.articoli   
+      %tr.table-header
+        %th.codice      Codice
+        %th.articolo    Articolo
+        %th.quantita    Quantità
+        %th.prezzo      Prezzo
+        %th.provvigione Provvigione
+        %th.created_at  Data carico
+        %th
 
-= link_to 'Edit', edit_documento_path(@documento)
-\|
-= link_to 'Back', documenti_path
+      = render @documento.articoli, gino: :created_at
+
+      %tr.table-footer
+        %td{ colspan: 2} Totale
+        %td.quantita
+          %strong= @documento.articoli.sum(&:quantita) 
+        %td.prezzo
+          %strong= number_to_currency @documento.importo_carico
+        %td.provvigione
+          %strong= number_to_currency @documento.rimborso
+        %td.actions{ colspan: 2 }
+  - else
+    %table.table
+      
+      = render @documento.movimenti
+
+    
+

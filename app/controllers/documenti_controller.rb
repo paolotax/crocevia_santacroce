@@ -8,8 +8,13 @@ class DocumentiController < ApplicationController
 
   def show
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @documento }
+      format.html
+      format.pdf do
+        pdf = DocumentoPdf.new(Array(@documento), view_context)
+        send_data pdf.render, filename: "#{@documento.tipo}_#{@documento.id}_#{@documento.data.strftime("%Y%m%d")}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
     end
   end
 
