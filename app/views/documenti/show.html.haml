@@ -46,7 +46,7 @@
         %td.prezzo
           %strong= number_to_currency @documento.importo_carico
         %td.provvigione
-          %strong= number_to_currency @documento.rimborso
+          %strong= number_to_currency @documento.realizzo
         %td.actions{ colspan: 2 }
   - else
     %table.table
