@@ -11,6 +11,9 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'movimento', 'movimenti'
   inflect.irregular 'documento', 'documenti'
   inflect.irregular 'vendita', 'vendite'
+  inflect.irregular 'articolo venduto', 'articoli venduti'
+  inflect.irregular 'articolo reso', 'articoli resi'
+  inflect.irregular 'articolo in giacenza', 'articoli in giacenza'
   inflect.irregular 'resa', 'rese'
   inflect.uncountable %w( fish sheep )
 end

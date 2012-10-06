@@ -20,10 +20,10 @@
               %li= link_to( "nuovo messaggio", :new_conversation)
               %li.divider  
               %li
-                = link_to "Esci", destroy_user_session_path, id: "sign_out", :method=>'delete' 
+                = link_to "Esci", destroy_user_session_path, id: "sign_out", :method=>'delete', "data-no-turbolink" => true 
         - else
           %li
-            = link_to "Accedi con Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in"
+            = link_to "Accedi con Facebook", user_omniauth_authorize_path(:facebook), id: "sign_in", "data-no-turbolink" => true
           %li
             = link_to "Accedi", new_user_session_path
           %li

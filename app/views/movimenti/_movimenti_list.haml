@@ -1,8 +1,9 @@
 %section{ class: "#{label}" }
   %header
-    %h3 
-      = pluralize( collection.size, label )
-      %small= link_to "...", "##{label}", class: "show-hide collapsed", data: { toggle: "collapse", "no-turbolink" => true }
+    %h4 
+      = pluralize( collection.size, label.humanize.downcase )
+      - if collection.size > 0
+        %small= link_to "...", "##{label}", class: "show-hide collapsed", data: { toggle: "collapse", "no-turbolink" => true }
 
   %div.collapse{ id: "#{label}" }
     %table.table.articoli      

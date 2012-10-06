@@ -1,0 +1,35 @@
+%section{ class: "#{label}" }
+  %header
+    %h4 
+      = pluralize( collection.size, label.humanize.downcase )
+      - if collection.size > 0
+        %small= link_to "...", "##{label}", class: "show-hide collapsed", data: { toggle: "collapse", "no-turbolink" => true }
+
+  %div.collapse{ id: "#{label}" } 
+    %table.table.articoli  
+      %tr.table-header{ class: "#{'hidden' if collection.empty? }" }
+        %th.codice      Codice
+        %th.articolo    Articolo
+        %th.quantita    Quantità
+        %th.prezzo      Prezzo
+        %th.provvigione Provvigione
+        %th
+        %th
+        %th
+    
+      - collection.group_by(&:documento).each do |key, values|
+        %tr
+          %td{ colspan: 8}
+            = link_to "Carico N." + key.id.to_s + " del " + key.data.strftime("%d/%m/%Y"), key
+        - for articolo in values do
+          = render 'clienti/articolo', articolo: articolo
+
+      %tr.table-footer{ class: "#{'hidden'  if collection.empty? }"}
+        %td{ colspan: 2} Totale
+        %td.quantita
+          %strong= collection.sum(&:giacenza) 
+        %td.prezzo
+          %strong= number_to_currency collection.sum(&:importo)
+        %td.provvigione
+          %strong= number_to_currency collection.sum(&:importo_cliente)
+        %td.actions{ colspan: 2 }

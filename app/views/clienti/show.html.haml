@@ -56,8 +56,7 @@
     = "il #{@cliente.data_rilascio_documento.try(:strftime, "%d-%m-%y")}"
   
   %br
-  = render :partial => 'articoli_attivi'
-  = render 'articoli_in_giacenza', cliente: @cliente
-  = render 'articoli_venduti', cliente: @cliente
-  = render 'articoli/articoli_list',  collection: @cliente.rese, label: "articoli-resi"
+  = render 'articoli/articoli_list', label: "articolo_in_giacenza", collection: @cliente.articoli.registrato.disponibili.order("articoli.documento_id desc, articoli.id")
+  = render 'movimenti/movimenti_list',  collection: @cliente.vendite, label: "articolo_venduto"
+  = render 'movimenti/movimenti_list',  collection: @cliente.rese,    label: "articolo_reso"
 
