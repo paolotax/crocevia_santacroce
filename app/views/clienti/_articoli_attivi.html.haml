@@ -1,0 +1,44 @@
+%section.articoli-attivi.clearfix
+  = render "articoli/form"
+
+  .clearfix    
+  %br  
+
+  .empty-rows{class: "#{'hidden' if @cliente.has_articoli_attivi? }"}
+    Non ci sono articoli da caricare    
+
+  %table#articoli-da-caricare.table.articoli      
+    %tr.table-header{ class: "#{'hidden' unless @cliente.has_articoli_attivi? }" }
+      / %th.barcode Barcode
+      %th.codice      Codice
+      %th.articolo    Articolo
+      %th.quantita    Quantità
+      %th.prezzo      Prezzo
+      %th.provvigione Provvigione
+      %th
+      %th
+     
+    - for articolo in @cliente.articoli.attivo do
+      - unless articolo.new_record?
+        = render 'clienti/articolo', articolo: articolo
+  
+    %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli_attivi? }"}
+      %td{ colspan: 2} Totale
+      %td.quantita
+        %strong= @cliente.articoli.attivo.sum(&:quantita) 
+      %td.prezzo
+        %strong= number_to_currency @cliente.articoli.attivo.sum(&:importo)
+      %td.provvigione
+        %strong= number_to_currency @cliente.articoli.attivo.sum(&:importo_cliente)
+      %td.actions
+        = form_for Documento.new, html: {class: "pull-right"} do |f|
+          = hidden_field_tag "cliente_id", @cliente.id
+          = f.hidden_field :data,       value: Time.now
+          = f.hidden_field :tipo,       value: "carico"
+          = f.submit "registra", class: "btn btn-success"
+      %td.actions
+        = form_tag etichette_articoli_path, :method => :put, :id => "form_articoli", class: "pull-right", target: "_blank" do
+          - for a in @cliente.articoli.attivo do
+            = hidden_field_tag "articolo_ids[]", a.id unless a.new_record?
+          = hidden_field_tag "tipo_etichetta", "Dymo 11352"
+          = submit_tag "Etichette",  id: "bt-pdf", class: "btn"

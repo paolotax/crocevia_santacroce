@@ -1,0 +1,36 @@
+%section.articoli_in_giacenza
+  %header
+    / %button{ type: "button", class: "btn pull-right", "data-toggle" => "collapse", "data-target" => "#articoli-registrati"}
+    %h3 
+      Articoli in giacenza
+      %small
+        = link_to "...", "#articoli-in-giacenza", class: "show-hide collapsed", data: { toggle: "collapse", "no-turbolink" => true }
+
+  #articoli-in-giacenza.collapse 
+    %table.table.articoli  
+      %tr.table-header{ class: "#{'hidden' unless cliente.has_articoli_registrati? }" }
+        %th.codice      Codice
+        %th.articolo    Articolo
+        %th.quantita    Quantità
+        %th.prezzo      Prezzo
+        %th.provvigione Provvigione
+        %th
+        %th
+        %th
+    
+      - cliente.articoli.registrato.disponibili.order("articoli.documento_id desc, articoli.id").group_by(&:documento).each do |key, values|
+        %tr
+          %td{ colspan: 8}
+            = link_to "Carico N." + key.id.to_s + " del " + key.data.strftime("%d/%m/%Y"), key
+        - for articolo in values do
+          = render 'clienti/articolo', articolo: articolo
+
+      %tr.table-footer{ class: "#{'hidden' unless cliente.has_articoli_registrati? }"}
+        %td{ colspan: 2} Totale
+        %td.quantita
+          %strong= cliente.articoli.registrato.disponibili.sum(&:giacenza) 
+        %td.prezzo
+          %strong= number_to_currency cliente.articoli.registrato.disponibili.sum(&:importo)
+        %td.provvigione
+          %strong= number_to_currency cliente.articoli.registrato.disponibili.sum(&:importo_cliente)
+        %td.actions{ colspan: 2 }

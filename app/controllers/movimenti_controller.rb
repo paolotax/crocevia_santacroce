@@ -3,7 +3,7 @@ class MovimentiController < ApplicationController
   load_and_authorize_resource
  
   def create
-    @movimento = current_user.movimenti.build(params[:movimento].merge(tipo: "vendita")) 
+    @movimento = current_user.movimenti.build(params[:movimento]) 
     respond_to do |format|
       if @movimento.save
         format.html { redirect_to :back, notice:  'Movimento inserito!.' }

@@ -8,6 +8,16 @@
 //   border: 1px solid #BDBDBD;
 // }
 
+a.show-hide {
+  &:before {
+    content: "nascondi"
+  }
+  &.collapsed:before {
+    content: "mostra"
+  }
+}
+
+
 .articoli {
   .quantita {
     text-align: center;
@@ -21,8 +31,23 @@
   .created_at {
     text-align: right;
   }
+  td.actions {
+    width: 100px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  td.actions-mini {
+    width: 50px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
 }
 
+#new_movimento,
+.articolo form,
 td.actions form {
   margin-bottom: 0;
 }
+
+

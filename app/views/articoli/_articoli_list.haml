@@ -1,0 +1,27 @@
+%section{ class: "#{label}" }
+  %header
+    %h3 
+      = pluralize( collection.size, label )
+      %small= link_to "...", "##{label}", class: "show-hide collapsed", data: { toggle: "collapse", "no-turbolink" => true }
+
+  %div.collapse{ id: "#{label}" }
+    %table.table.articoli      
+      %tr.table-header{ class: "#{'hidden' if collection.empty? }" }
+        %th.codice Codice
+        %th.articolo Articolo
+        %th.prezzo Prezzo
+        %th.provvigione Provvigione
+        %th
+      
+      - for articolo in collection do
+        = render 'movimenti/movimento', movimento: articolo
+
+      %tr.table-footer{ class: "#{'hidden' if collection.empty? }"}
+        %td{ colspan: 2} Totale
+        %td.quantita
+          %strong= collection.sum(&:quantita) 
+        %td.prezzo
+          %strong= number_to_currency collection.sum(&:importo)
+        %td.provvigione
+          %strong= number_to_currency collection.sum(&:importo_cliente)
+        %td.actions{ colspan: 2}

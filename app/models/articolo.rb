@@ -49,37 +49,41 @@ class Articolo < ActiveRecord::Base
     where("(articoli.nome ilike :term) or (articoli.id = :id) ", term: term, id: term.to_i)        
   }
 
+  def attivo?
+    documento_id.nil?
+  end
+  
   def disponibile?
-    self.quantita > self.movimenti_count
+    quantita > movimenti_count
   end
   
   def data_scadenza
-    self.created_at + 2.months
+    created_at + 2.months
   end
   
   def data_patate
-    self.created_at + 3.months
+    created_at + 3.months
   end
   
   def scaduto?
-    Time.now > self.data_scadenza
+    Time.now > data_scadenza
   end
   
   def patate?
-    Time.now > self.data_patate
+    Time.now > data_patate
   end  
   
   def prezzo_vendita
-    if self.scaduto?
-      self.prezzo / 2
+    if scaduto?
+      prezzo / 2
     else
-      self.prezzo
+      prezzo
     end
   end
   
   def importo
     if prezzo
-      self.prezzo.to_d * self.quantita
+      prezzo.to_d * quantita
     else
       0
     end
@@ -87,7 +91,7 @@ class Articolo < ActiveRecord::Base
   
   def importo_cliente
     if prezzo
-      self.prezzo.to_d * self.provvigione * self.quantita / 100
+      prezzo.to_d * provvigione * quantita / 100
     else
       0
     end  

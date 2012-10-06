@@ -31,6 +31,7 @@
     - if @articolo.disponibile?
       = form_for Movimento.new do |f|
         = f.hidden_field :articolo_id, value: @articolo.id
+        = f.hidden_field :tipo, value: "vendita"
         = f.submit  "Vendi", class: "btn btn-success" 
 
   %h3

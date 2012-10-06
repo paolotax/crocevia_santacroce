@@ -5,6 +5,34 @@ $("span.help-inline.error-inline").remove();
   $(".cassa-result").replaceWith("<%= escape_javascript( render partial: 'cassa/cassa_result', locals: { movimenti: @movimento.user.movimenti.attivo } ) %>");
   $("form#new_movimento").get(0).reset();
   $("input#movimento_articolo_id").focus();
+
+  if ($(".articoli_in_giacenza").length > 0) {
+    var collapsed = $(".articoli_in_giacenza header a").hasClass('collapsed')
+    $(".articoli_in_giacenza").replaceWith("<%= j render 'clienti/articoli_in_giacenza', cliente: @movimento.cliente %>")
+    if (collapsed == false) {
+      $(".articoli_in_giacenza header a").removeClass("collapsed");
+      $("#articoli-in-giacenza").addClass("in");
+    }
+  }
+
+  if ($(".articoli_venduti").length > 0) {
+    var collapsed = $(".articoli_venduti header a").hasClass('collapsed')
+    $(".articoli_venduti").replaceWith("<%= j render 'clienti/articoli_venduti', cliente: @movimento.cliente %>")
+    if (collapsed == false) {
+      $(".articoli_venduti header a").removeClass("collapsed");
+      $("#articoli-venduti").addClass("in");
+    }
+  }
+
+  if ($(".articoli_resi").length > 0) {
+    var collapsed = $(".articoli_resi header a").hasClass('collapsed')
+    $(".articoli_resi").replaceWith("<%= j render 'clienti/articoli_resi', cliente: @movimento.cliente %>")
+    if (collapsed == false) {
+      $(".articoli_resi header a").removeClass("collapsed");
+      $("#articoli-resi").addClass("in");
+    }
+  }
+  
 <% else %>
   $("input#movimento_articolo_id").select();
   $("form#new_movimento .input-append").after("<span class='error-inline help-inline'><%= @movimento.errors.values.join %></span>"); 

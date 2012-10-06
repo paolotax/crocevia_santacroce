@@ -32,7 +32,7 @@ group :development do
   gem "guard-cucumber", ">= 0.6.1"
   gem "rails-footnotes", ">= 3.7"
   
-  gem 'bullet'
+  # gem 'bullet'
 
 end
 
