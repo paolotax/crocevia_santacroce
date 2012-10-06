@@ -42,7 +42,7 @@ class DocumentiController < ApplicationController
 
     respond_to do |format|
       if @documento.save
-        format.html { redirect_to :back, notice: "Documento di #{@documento.tipo} registrato!" }
+        format.html { redirect_to @documento, notice: "Documento di #{@documento.tipo} registrato!" }
         format.json { render json: @documento, status: :created, location: @documento }
       else
         format.html { redirect_to :back, error: "Errore nella registrazione!" }

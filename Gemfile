@@ -88,6 +88,7 @@ gem "rolify", ">= 3.1.0"
 gem "simple_form"
 
 gem "turbolinks"
+gem 'jquery-turbolinks'
 
 gem 'prawn'
 

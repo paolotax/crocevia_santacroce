@@ -34,10 +34,12 @@ class Documento < ActiveRecord::Base
   end
   
   def realizzo
-    articoli.sum { |a| a.prezzo * a.quantita * a.provvigione / 100 }
+    articoli.sum { |a| a.prezzo * a.quantita * a.provvigione / 100 }.round(2)
   end
   
-  
+  def provvigione
+    importo_carico - realizzo
+  end
         
   def add_movimenti_attivi(user)
     self.importo = user.movimenti.attivo.sum(&:prezzo)

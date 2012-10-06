@@ -14,5 +14,5 @@ jQuery ->
   #   return false;
     
     
-document.addEventListener 'page:change', ->
-  $('.dropdown-toggle').dropdown()
+# document.addEventListener 'page:change', ->
+#   $('.dropdown-toggle').dropdown()

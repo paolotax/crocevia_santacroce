@@ -10,8 +10,8 @@
     Email: mercatino@crocevia-santacroce.com Web: crocevia-santacroce.com - P.IVA 03218281206
 
   .intestazione
-    %h3 
-      MANDATO DI VENDITA N.  ??? del ?????
+    %h4 
+      = "MANDATO DI VENDITA N. #{@cliente.id - 2 } del #{@cliente.created_at.strftime('%d/%m/%Y')}"
       %small da Mandante n.
       %strong= @cliente.id
     %p

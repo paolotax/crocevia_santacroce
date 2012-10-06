@@ -41,13 +41,24 @@ class EtichettaPdf < Prawn::Document
     @label_height = (bounds.height) / @rows   
     
     @articoli = articoli
+    
+    @etichette = []
+    
+    @articoli.each do |a|
+      if a.quantita > 1
+        (1..a.quantita).each { @etichette << a }
+      else
+        @etichette << a
+      end
+    end  
+
     @view = view
     
     if options[:start_from]
       (1..options[:start_from].to_i).each { @appunti.insert(0, nil) }
     end
 
-    @articoli.in_groups_of( @labels_per_page, false ) do |pages|
+    @etichette.in_groups_of( @labels_per_page, false ) do |pages|
       num_row = 0
       pages.in_groups_of(@columns, false) do |rows|
         rows.each_with_index do |a, index|
@@ -58,7 +69,7 @@ class EtichettaPdf < Prawn::Document
         num_row += 1
       end
       
-      start_new_page unless page_number >= @articoli.size.to_f / @labels_per_page
+      start_new_page unless page_number >= @etichette.size.to_f / @labels_per_page
     end
     
   end  
@@ -68,7 +79,7 @@ class EtichettaPdf < Prawn::Document
     left = num_etichetta * @label_width
     top  =  bounds.top - (num_row * @label_height)
      
-    bounding_box [ left, top ], :width => @label_width, :height => @label_height do
+    bounding_box [ left + 3.mm, top ], :width => @label_width - 3.mm, :height => @label_height do
        #stroke_bounds
       barcode =  "#{Rails.root}/public/barcodes/barcode_#{articolo.id}.png" 
       image barcode, :width => 35.mm, :height => 10.mm, :at => [bounds.left, bounds.top]

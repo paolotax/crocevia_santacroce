@@ -45,8 +45,7 @@ class ArticoliController < ApplicationController
               columns: 1
             }
         end  
-        
-                
+
         pdf = EtichettaPdf.new(@articoli, view_context, options)
         send_data pdf.render, filename: "etichette_#{Time.now}.pdf",
                               type: "application/pdf",
