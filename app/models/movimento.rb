@@ -32,59 +32,66 @@ class Movimento < ActiveRecord::Base
   # end
   
   def da_registrare?
-    self.documento.nil?
+    documento.nil?
   end
   
+  %w(vendita resa).each do |tipo|
+    scope "#{tipo}", where('movimenti.tipo = ?', "#{tipo}")
+    
+    define_method "#{tipo}?" do
+      self.tipo == tipo
+    end
+  end
+    
+  def mandante
+    cliente
+  end
   
   def set_prezzo
-    if self.prezzo.blank?
-      self.prezzo = self.articolo.prezzo_vendita
+    if prezzo.blank?
+      self.prezzo = articolo.prezzo_vendita
       self.quantita = 1
     end 
   end
   
   def importo
-  
-    self.quantita * self.prezzo
-  
+    quantita * prezzo
   end
   
   def importo_cliente
-  
-    self.quantita * self.prezzo
-  
+    quantita * prezzo
   end
   
   def importo_provvigione
-    if self.articolo.patate?
+    if articolo.patate?
       0.0
     else
-      self.prezzo / 100 * self.articolo.provvigione
+      prezzo / 100 * articolo.provvigione
     end
   end
 
   def importo_patate
-    if self.articolo.patate?
-      self.prezzo
+    if articolo.patate?
+      prezzo
     else
       0.0
     end
   end
   
   def giorni_di_giacenza
-    (Date.parse(self.created_at.to_s) - Date.parse(self.articolo.created_at.to_s)).to_i
+    (Date.parse(created_at.to_s) - Date.parse(articolo.created_at.to_s)).to_i
     # distance_of_time_in_words(self.created_at, self.articolo.created_at) 
   end
   
   def ricavo
-    self.prezzo - self.importo_patate - self.importo_provvigione
+    prezzo - importo_patate - importo_provvigione
   end
     
   def patate?
-    self.created_at > self.articolo.created_at + 3.months
+    created_at > articolo.created_at + 3.months
   end
   
   def scaduto?
-    self.created_at > self.articolo.created_at + 2.months
+    created_at > articolo.created_at + 2.months
   end
 end

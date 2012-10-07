@@ -1,0 +1,6 @@
+- if can? :manage, Movimento
+  %li.cassa
+    = link_to cassa_path do
+      = badge_if current_user.movimenti.vendita.attivo.length, class: "badge-important pull-right", style: "margin: -15px -25px -25px 0"
+      %i.icon-shopping-cart.icon-large
+      Cassa

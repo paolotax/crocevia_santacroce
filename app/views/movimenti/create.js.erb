@@ -6,6 +6,11 @@ $("span.help-inline.error-inline").remove();
   $("form#new_movimento").get(0).reset();
   $("input#movimento_articolo_id").focus();
 
+  if ($("li.cassa").length > 0) {
+    $("li.cassa").replaceWith("<%= j render 'layouts/link_cassa' %>");
+  }
+
+
   if ($(".articolo_in_giacenza").length > 0) {
     var collapsed = $(".articolo_in_giacenza header a").hasClass('collapsed')
     $(".articolo_in_giacenza").replaceWith("<%= j render 'articoli/articoli_list', label: 'articolo_in_giacenza', collection: @movimento.cliente.articoli.registrato.disponibili.order('articoli.documento_id desc, articoli.id') %>")

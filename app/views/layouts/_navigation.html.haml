@@ -9,7 +9,7 @@
           %li.dropdown
             %a.dropdown-toggle{ href: '#', "data-toggle" => 'dropdown'}
               = current_user.name
-              = badge_if current_user.mailbox.inbox.unread(current_user).length, class: "badge-important pull-right", style: "margin: -15px 0 -25px 0"
+              = badge_if current_user.mailbox.inbox.unread(current_user).length, class: "badge-important pull-right", style: "margin: -15px -25px -25px 0"
               %b.caret
 
             %ul.dropdown-menu
@@ -39,7 +39,7 @@
           %li.dropdown
             %a.dropdown-toggle{ href: '#', "data-toggle" => 'dropdown'}
               Clienti
-              = badge_if Articolo.attivo.pluck(:cliente_id).uniq.size, class: "badge-important pull-right", style: "margin: -15px 0 -25px 0"
+              = badge_if Articolo.attivo.pluck(:cliente_id).uniq.size, class: "badge-important pull-right", style: "margin: -15px -25px -25px 0"
               
               %b.caret
             %ul.dropdown-menu
@@ -65,11 +65,6 @@
                 = form_tag articoli_path, name: "articoli_search", id: 'articoli_search', method: 'get'  do
                   = text_field_tag "q[index_cont]", nil, class: "search-query", placeholder: "cerca articoli", style: "margin: 0 10px -10px 10px"
         
-        - if can? :manage, Movimento
-          %li
-            = link_to cassa_path do
-              = badge_if current_user.movimenti.attivo.length, class: "badge-important pull-right", style: "margin: -15px 0 -25px 0"
-              %i.icon-shopping-cart.icon-large
-              Cassa
+        = render 'layouts/link_cassa'
              
 
