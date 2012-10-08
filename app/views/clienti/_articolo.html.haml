@@ -24,4 +24,8 @@
         = f.hidden_field :articolo_id, value: articolo.id
         = f.hidden_field :tipo, value: "vendita"
         = f.submit  "Vendi", class: "btn btn-success btn-mini pull-right" 
-    
+  - else
+    %td{ colspan: 2}
+      = link_to articolo, method: :delete, class: "close", remote: true, "data-no-turbolink" => true do
+        &times;
+      

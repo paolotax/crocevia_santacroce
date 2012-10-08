@@ -20,9 +20,13 @@ class Documento < ActiveRecord::Base
   end
   
   def mandante
-    if %w(reso carico).include? tipo
-      clienti.uniq.first
+    if %w(carico).include? tipo
+      return clienti.uniq.first
     end  
+    
+    if %w(resa).include? tipo
+      return movimenti.first.cliente
+    end
   end
   
   def numero_articoli
@@ -42,8 +46,8 @@ class Documento < ActiveRecord::Base
   end
         
   def add_movimenti_attivi(user)
-    self.importo = user.movimenti.attivo.sum(&:prezzo)
-    for m in user.movimenti.attivo do
+    self.importo = user.movimenti.vendita.attivo.sum(&:prezzo)
+    for m in user.movimenti.vendita.attivo do
       self.movimenti << m
     end  
   end
@@ -53,6 +57,14 @@ class Documento < ActiveRecord::Base
     self.importo = cliente.articoli.attivo.sum(&:prezzo)
     for a in cliente.articoli.attivo do
       self.articoli << a
+    end  
+  end
+  
+  def add_resa_cliente(cliente_id)
+    cliente = Cliente.find(cliente_id)
+    self.importo = cliente.rese.attivo.sum(&:prezzo)
+    for m in cliente.rese.attivo do
+      self.movimenti << m
     end  
   end
   

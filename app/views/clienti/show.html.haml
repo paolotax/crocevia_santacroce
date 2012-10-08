@@ -60,6 +60,12 @@
   %br
   
   = render 'articoli/articoli_list', label: "articolo_in_giacenza", collection: @cliente.articoli.registrato.disponibili.order("articoli.documento_id desc, articoli.id")
-  = render 'movimenti/movimenti_list',  collection: @cliente.vendite, label: "articolo_venduto"
-  = render 'movimenti/movimenti_list',  collection: @cliente.rese,    label: "articolo_reso"
+  
+  .articoli-venduti
+    = render 'attenzione_cassa', cliente: @cliente
+    = render 'movimenti/movimenti_list',  collection: @cliente.vendite, label: "articolo_venduto"
+
+  .articoli-resi
+    = render 'attenzione_resa', cliente: @cliente
+    = render 'movimenti/movimenti_list',  collection: @cliente.rese,    label: "articolo_reso"
 

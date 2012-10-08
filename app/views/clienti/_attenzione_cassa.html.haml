@@ -1,0 +1,7 @@
+- unless cliente.vendite.attivo.empty?
+  = link_to cassa_path, class: "attenzione_cassa" do
+    .alert.alert-error
+      %h4
+        Attenzione!
+      = pluralize( cliente.vendite.attivo.size, "articolo" )
+      da incassare. Clicca per andare alla Cassa 

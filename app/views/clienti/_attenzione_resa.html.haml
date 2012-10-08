@@ -1,0 +1,11 @@
+- unless cliente.rese.attivo.empty?
+  .attenzione_resa.alert.alert-error
+    = form_for Documento.new, html: {class: "pull-right"} do |f|
+      = hidden_field_tag "cliente_id", cliente.id
+      = f.hidden_field :data,       value: Time.now
+      = f.hidden_field :tipo,       value: "resa"
+      = f.submit "registra resa", class: "btn btn-danger"
+    %h4
+      Attenzione!
+    = pluralize( cliente.rese.attivo.size, "articolo reso" )
+    da registrare. Clicca per registrare la resa del cliente

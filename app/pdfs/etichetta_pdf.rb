@@ -8,9 +8,9 @@ class EtichettaPdf < Prawn::Document
       page_layout:   :landscape,
       page_size:     [25.mm, 54.mm],
       top_margin:    0,
-      left_margin:   2.mm,
+      left_margin:   4.mm,
       bottom_margin: 0,
-      right_margin:  2.mm,
+      right_margin:  4.mm,
       columns:       1,
       labels_per_page: 1
     }
@@ -82,11 +82,11 @@ class EtichettaPdf < Prawn::Document
     bounding_box [ left + 3.mm, top ], :width => @label_width - 3.mm, :height => @label_height do
        #stroke_bounds
       barcode =  "#{Rails.root}/public/barcodes/barcode_#{articolo.id}.png" 
-      image barcode, :width => 35.mm, :height => 10.mm, :at => [bounds.left, bounds.top]
-      draw_text articolo.id.to_s, at: [bounds.left + 37.mm, bounds.top - 10.mm]
+      image barcode, :width => 30.mm, :height => 10.mm, :at => [bounds.left, bounds.top]
+      draw_text articolo.id.to_s, at: [bounds.left + 32.mm, bounds.top - 10.mm]
       draw_text articolo.nome,    at: [bounds.left,         bounds.top - 15.mm]
-      draw_text price(articolo.prezzo),  at: [bounds.left,         bounds.top - 20.mm]
-      draw_text articolo.created_at.strftime("%d/%m/%Y"), at: [bounds.left + 34.mm,         bounds.top - 19.mm],  :size => 9
+      draw_text price(articolo.prezzo),  at: [bounds.left,         bounds.top - 20.mm], font_style: :bold
+      draw_text articolo.created_at.strftime("%d/%m/%Y"), at: [bounds.left + 28.mm,         bounds.top - 20.mm],  :size => 9
       
     end
   end

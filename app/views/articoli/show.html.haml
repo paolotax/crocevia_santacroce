@@ -62,10 +62,10 @@
           Attenzione!
         carico da registrare. Clicca per registrare il carico del cliente
   
-  - unless @articolo.movimenti.empty?
-    - for m in @articolo.movimenti do
+  - unless @articolo.movimenti.vendita.empty?
+    - for m in @articolo.movimenti.vendita do
       - if m.documento
-        = link_to m do
+        = link_to m.documento do
           .alert.alert-success
             %span
               %strong
@@ -83,4 +83,22 @@
               Attenzione!
             vendita da incassare. Clicca per registrare il movimento di cassa
         
+  - unless @articolo.movimenti.resa.empty?
+    - for m in @articolo.movimenti.resa do
+      - if m.documento
+        = link_to m.documento do
+          .alert.alert-success
+            %span
+              %strong
+                Reso il
+              = l m.created_at.to_date, format: :default
+              resa nr.
+              = m.id 
+      - else
+        = link_to @articolo.cliente do
+          .alert.alert-error
+            %h4
+              Attenzione!
+            resa da registrare. Clicca per registrare la resa del cliente
+
   

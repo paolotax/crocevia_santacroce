@@ -40,6 +40,10 @@ class DocumentiController < ApplicationController
       @documento.add_articoli_cliente(params[:cliente_id])
     end
 
+    if params[:documento][:tipo] == 'resa'
+      @documento.add_resa_cliente(params[:cliente_id])
+    end
+
     respond_to do |format|
       if @documento.save
         format.html { redirect_to @documento, notice: "Documento di #{@documento.tipo} registrato!" }
