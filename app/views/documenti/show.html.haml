@@ -14,6 +14,10 @@
             %i.icon-print
             Stampa
         %li
+          = link_to @documento, method: :delete, confirm: "Elimino il documento?\n(i movimenti non verranno eliminati)", "data-no-turbolink" => true do
+            %i.icon-trash
+            Elimina
+        %li
           = link_to documenti_path do
             %i.icon-user
             tutti

@@ -68,9 +68,10 @@ class DocumentiController < ApplicationController
   end
 
   def destroy
+    return_url = @documento.mandante || cassa_url
     @documento.destroy
     respond_to do |format|
-      format.html { redirect_to documenti_url }
+      format.html { redirect_to return_url }
       format.json { head :no_content }
     end
   end

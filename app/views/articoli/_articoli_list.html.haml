@@ -19,8 +19,11 @@
     
       - collection.group_by(&:documento).each do |key, values|
         %tr
-          %td{ colspan: 8}
+          %td{ colspan: 7}
             = link_to "Carico N." + key.id.to_s + " del " + key.data.strftime("%d/%m/%Y"), key
+          %td
+            = link_to 'x', key, class: "close", method: :delete, confirm: "Elimino il documento?\n(i movimenti non verranno eliminati)", "data-no-turbolink" => true
+            
         - for articolo in values do
           = render 'clienti/articolo', articolo: articolo
 

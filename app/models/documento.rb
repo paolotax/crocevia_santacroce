@@ -2,8 +2,8 @@ class Documento < ActiveRecord::Base
   
   attr_accessible :data, :importo, :tipo
   
-  has_many :articoli
-  has_many :movimenti, dependent: :destroy
+  has_many :articoli,  dependent:  :nullify
+  has_many :movimenti, dependent:  :nullify
   
   has_many :clienti, through: :articoli
   
