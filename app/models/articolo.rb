@@ -9,6 +9,11 @@ class Articolo < ActiveRecord::Base
   
   has_many :movimenti, dependent: :destroy
   
+  validates :nome,      presence: true
+  validates :quantita,  presence: true
+  validates :prezzo,    presence: true
+  validates :provvigione, presence: true
+
   # include HasBarcode
   # 
   # has_barcode :barcode,

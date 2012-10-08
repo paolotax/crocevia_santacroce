@@ -19,9 +19,7 @@ class ArticoliController < ApplicationController
   end
   
   def destroy
-    @articolo = Articolo.find(params[:id])
     @articolo.destroy
-
     respond_to do |format|
       format.html { redirect_to @articolo.cliente }
       format.js
@@ -29,6 +27,17 @@ class ArticoliController < ApplicationController
   end
   
   def show
+  end
+  
+  def edit
+  end
+  
+  def update
+    if @articolo.update_attributes(params[:articolo])
+      redirect_to @articolo, notice: "Articolo modificato."
+    else
+      render :edit
+    end
   end
   
   def etichette

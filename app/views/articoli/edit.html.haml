@@ -1,0 +1,30 @@
+= simple_form_for @articolo, :html => { :class => 'form-horizontal' } do |f|
+  
+  = f.error_notification
+  
+  %fieldset
+    %legend 
+      Modifica Articolo
+      %small di
+      %small
+        = link_to @articolo.cliente.full_name, @articolo.cliente
+
+  
+    = f.input :nome, placeholder: "articolo", label: "Articolo", :input_html => { class: "input-xlarge", required: true, autofocus: true }
+  
+    = f.input :prezzo, placeholder: "prezzo", :input_html => { class: "input-mini", required: true, step: :any, min: 0 }
+    / .input-prepend.prezzo.pull-left
+    /   %span.add-on €
+    /   = f.number_field :prezzo, class: 'input-mini',  placeholder: "prezzo", required: true
+  
+    = f.input :quantita, placeholder: "quantita", :input_html => { class: "input-mini", required: true, value: 1, min: 1 }
+
+    / %span.add-on %
+    = f.input :provvigione, placeholder: "provvigione", collection: ["50", "65"], :input_html => { class: 'input-mini', value: 50 , required: true }
+  
+  = f.error :base
+  
+  .form-actions
+    = f.submit "Salva Modifiche", :class => 'btn btn-primary'
+    
+
