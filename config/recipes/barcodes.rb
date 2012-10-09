@@ -1,5 +1,5 @@
 # ==============================
-# Barcodes
+# Barcodes and Uploads
 # ==============================
 
 namespace :barcodes do
@@ -19,8 +19,10 @@ namespace :barcodes do
     for the most recently deployed version.
   EOD
   task :symlink, :except => { :no_release => true } do
-    run "rm -rf #{release_path}/public/barcodes"
-    run "ln -nfs #{shared_path}/barcodes #{release_path}/public/barcodes"
+    barcodes_dirs.map  do |d|
+      run "rm -rf #{release_path}/public/#{d}"
+      run "ln -nfs #{shared_path}/#{d} #{release_path}/public/#{d}"
+    end
   end
 
   desc <<-EOD
