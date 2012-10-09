@@ -1,8 +1,47 @@
 = content_for :left_col, class: "falsa-colonna" do
   &nbsp
   
-%section.carica_foto
+= content_for :head do
+  = javascript_include_tag :uploader
+  / = stylesheet_link_tag :uploader
 
-  %h1 Foto
-  %ul#foto_caricate.thumbnails{ data: { toggle: "modal-gallery", target: "#modal-gallery", "no-turbolink" => true } }
-    = render @photos
+.span12
+  .row
+    %section.carica_foto
+      %h1 Foto
+
+      %ul#foto_caricate.thumbnails{ data: { toggle: "modal-gallery", target: "#modal-gallery", "no-turbolink" => true } }
+        = render @photos
+
+      = form_for Photo.new, html: { "data-no-turbolink" => true } do |f|
+        = f.label :photo, "Carica Foto:"
+        = f.file_field :photo, multiple: true, name: "photo[photo]"
+
+#modal-gallery.modal.modal-gallery.hide.fade
+  .modal-header
+    = link_to "", class: "close", "data-dismiss" =>"modal" do
+      &times
+    %h3.modal-title
+  .modal-body
+    .modal-image
+  .modal-footer
+    = link_to "#", class: "btn btn-info modal-prev" do
+      Precedente
+      %i.icon-arrow-left.icon-white
+    = link_to "#", class: "btn btn-primary modal-next" do
+      Successiva
+      %i.icon-arrow-right.icon-white
+    = link_to "#", class: "btn btn-success modal-play modal-slideshow", "data-slideshow" => "5000" do
+      %i.icon-play.icon-white
+        Slideshow
+    = link_to "#", class: "btn modal-download", target: "_blank", download: "" do
+      %i.icon-download
+      Download
+      
+
+
+%script{ id: "template-upload", type: "text/x-tmpl"}
+  .upload
+    {%= o.name %}
+  .progress
+    .bar{ style: "width: 0%"}
