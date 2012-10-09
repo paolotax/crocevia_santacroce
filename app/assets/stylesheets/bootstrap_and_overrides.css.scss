@@ -141,6 +141,16 @@ $bodyBackground: white;
   .row {
     margin-left: -20px;
   }
+  .thumbnails {
+    margin-left: -20px;
+    list-style: none;
+  }
+  .thumbnails > li {
+    float: left;
+    margin-bottom: 20px;
+    margin-left: 20px;
+  }
+  
   [class*="span"] {
     float: left;
     margin-left: 20px;
@@ -160,6 +170,9 @@ $bodyBackground: white;
   }
   .span3 {
     width: 220px;
+  }
+  .span2 {
+    width: 140px;
   }
   .navbar .container {
     width: 940px;

@@ -6,16 +6,18 @@
   / = stylesheet_link_tag :uploader
 
 .span12
-  .row
-    %section.carica_foto
-      %h1 Foto
+  %section.carica_foto
+    %h1 
+      Galleria
+      %small trascina il file dell'immagine sulla pagina per caricarla
+    %br  
+    %ul#foto_caricate.thumbnails{ data: { toggle: "modal-gallery", target: "#modal-gallery", "no-turbolink" => true } }
+      = render @photos
 
-      %ul#foto_caricate.thumbnails{ data: { toggle: "modal-gallery", target: "#modal-gallery", "no-turbolink" => true } }
-        = render @photos
-
-      = form_for Photo.new, html: { "data-no-turbolink" => true } do |f|
-        = f.label :photo, "Carica Foto:"
-        = f.file_field :photo, multiple: true, name: "photo[photo]"
+    
+    = form_for Photo.new, html: { "data-no-turbolink" => true } do |f|
+      = f.label :photo, "Carica Foto:"
+      = f.file_field :photo, multiple: true, name: "photo[photo]"
 
 #modal-gallery.modal.modal-gallery.hide.fade
   .modal-header
