@@ -4,14 +4,14 @@ class PhotoUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
 
-  include CarrierWave::Uploader::Processing
-  include CarrierWave::Vips
+  #include CarrierWave::Uploader::Processing
+  #include CarrierWave::Vips
   
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
-  #  include Sprockets::Helpers::RailsHelper
-  #  include Sprockets::Helpers::IsolatedHelper
+  include Sprockets::Helpers::RailsHelper
+  include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -23,7 +23,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
   
-  process :resize_to_limit => [800, 800]
+  process :resize_to_fit => [800, 800]
 
   version :thumb do
     process :resize_to_fill => [120, 120]

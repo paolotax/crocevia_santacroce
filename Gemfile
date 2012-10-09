@@ -67,7 +67,7 @@ gem "ransack"
 gem 'savon'
 gem 'sexmachine'
 gem 'mailboxer'
-#gem "mini_magick"
+gem "mini_magick"
 
 
 gem 'ruby-vips'
