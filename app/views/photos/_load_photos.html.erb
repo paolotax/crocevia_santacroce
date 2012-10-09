@@ -4,7 +4,7 @@
 <% end %>
 
 <h2><%= t('photos.title') %></h2>
-<%= form_for Photo.new, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+<%= form_for Photo.new, :html => { :multipart => true, :id => "fileupload", "data-no-turbolink" => true  } do |f| %>
   <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
   <div class="row fileupload-buttonbar">
       <div class="span7">
