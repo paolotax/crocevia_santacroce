@@ -28,7 +28,7 @@ namespace :barcodes do
     and registers them in Capistrano environment.
   EOD
   task :register_dirs do
-    set :barcodes_dirs,    %w(barcodes)
+    set :barcodes_dirs,    %w(barcodes uploads)
     set :shared_children, fetch(:shared_children) + fetch(:barcodes_dirs)
   end
 

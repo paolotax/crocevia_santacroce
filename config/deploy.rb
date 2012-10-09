@@ -8,7 +8,7 @@ load "config/recipes/nodejs"
 load "config/recipes/rbenv"
 load "config/recipes/check"
 load "config/recipes/barcodes"
-load "config/recipes/uploads"
+
 
 server "176.58.100.162", :web, :app, :db, primary: true
 
