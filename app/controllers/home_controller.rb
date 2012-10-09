@@ -13,6 +13,7 @@ class HomeController < ApplicationController
   end
 
   def upload_photo
+    @photos = Photo.all
   end
   
   def welcome

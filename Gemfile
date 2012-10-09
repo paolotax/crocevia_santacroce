@@ -16,7 +16,13 @@ group :assets do
   gem 'jquery-ui-rails'
   gem "compass-rails"
   # gem "bootstrap-sass", ">= 2.0.3"
+  
+  # gem "jquery-fileupload-rails", :git => "https://github.com/paolotax/jquery-fileupload-rails.git"
+  gem "jquery-fileupload-rails"
+  
   gem 'anjlab-bootstrap-rails', '>= 2.1', :require => 'bootstrap-rails'
+  
+  gem 'bootstrap-addons-rails'
 end
 
 gem 'jquery-rails'
@@ -61,8 +67,8 @@ gem "ransack"
 gem 'savon'
 gem 'sexmachine'
 gem 'mailboxer'
-# gem "rmagick"
-gem "jquery-fileupload-rails", :git => "https://github.com/paolotax/jquery-fileupload-rails.git"
+#gem "mini_magick"
+
 
 gem 'ruby-vips'
 gem 'carrierwave-vips'

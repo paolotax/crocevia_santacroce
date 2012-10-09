@@ -1,9 +1,9 @@
 class Photo < ActiveRecord::Base
   attr_accessible :photo
   
-  belongs_to :message
+  #  belongs_to :message
   
-  include Rails.application.routes.url_helpers
+  # include Rails.application.routes.url_helpers
   mount_uploader :photo, PhotoUploader
 
   #one convenient method to pass jq_upload the necessary information
@@ -17,4 +17,9 @@ class Photo < ActiveRecord::Base
         "delete_type" => "DELETE" 
       }
   end
+  
+  def default_name
+    File.basename(photo_url, '.*') if photo
+  end
+  
 end
