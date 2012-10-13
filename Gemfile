@@ -66,7 +66,7 @@ gem "ransack"
 gem 'savon'
 gem 'sexmachine'
 gem 'mailboxer'
-gem "rmagick"
+#gem "rmagick"
 #gem "mini_magick"
 
 
