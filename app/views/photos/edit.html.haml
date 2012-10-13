@@ -1,0 +1,21 @@
+= content_for :left_col, class: "falsa-colonna" do
+  &nbsp
+  
+.span12
+  %h1
+    Croppa immagine
+    %small= File.basename(@photo.photo_url)
+  %br
+  
+  = image_tag(@photo.photo_url(:large), id: "cropbox")
+  
+= form_for @photo do |f|
+  - %w[x y w h].each do |attribute|
+    = f.hidden_field "crop_#{attribute}"
+  .action
+    = f.submit "Crop"
+
+= form_for @photo do |f|
+  = f.hidden_field "rotate", value: true
+  .action
+    = f.submit "Ruota 90°"

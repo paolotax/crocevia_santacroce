@@ -59,7 +59,7 @@ GEM
     carrierwave (0.6.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
-    carrierwave-vips (1.0.2)
+    carrierwave-vips (1.0.3)
       carrierwave
       rmagick
       ruby-vips (>= 0.2.0)
@@ -290,7 +290,7 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.11.0)
     ruby-rc4 (0.1.5)
-    ruby-vips (0.3.0)
+    ruby-vips (0.3.4)
     rubyzip (0.9.9)
     sass (3.2.1)
     sass-rails (3.2.5)
@@ -388,6 +388,7 @@ DEPENDENCIES
   rails (= 3.2.5)
   rails-footnotes (>= 3.7)
   ransack
+  rmagick
   rolify (>= 3.1.0)
   rspec-rails (>= 2.10.1)
   ruby-vips

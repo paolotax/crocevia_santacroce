@@ -21,6 +21,7 @@ class PhotosController < ApplicationController
     end
 
     def update
+      #raise params.inspect
       @photo = Photo.find(params[:id])
       if @photo.update_attributes(params[:photo])
         redirect_to photos_url, notice: "photo was successfully updated."

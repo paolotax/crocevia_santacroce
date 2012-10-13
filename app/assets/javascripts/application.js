@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery.ui.autocomplete
 //= require jquery_ujs
-
+//= require jquery.Jcrop
 //= require twitter/bootstrap
 //= require_tree ./application
 
