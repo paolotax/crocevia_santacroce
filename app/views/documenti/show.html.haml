@@ -20,7 +20,9 @@
               - for a in @documento.articoli do
                 = hidden_field_tag "articolo_ids[]", a.id
               = hidden_field_tag "tipo_etichetta", "Dymo 11352"
-              = submit_tag "Etichette",  id: "bt-pdf", class: "btn"
+              = button_tag id: "bt-pdf" do
+                %i.icon-tag
+                Etichette
         %li
           = link_to params.merge(format: :pdf) do
             %i.icon-print

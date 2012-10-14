@@ -18,6 +18,10 @@ class PhotoUploader < CarrierWave::Uploader::Base
   version :large do
     resize_to_fit(800, 800)
   end
+  
+  version :medium do
+    resize_to_fit(650, 650)
+  end
     
   version :thumb do
     #process :croppa

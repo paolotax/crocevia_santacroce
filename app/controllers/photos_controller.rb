@@ -21,10 +21,9 @@ class PhotosController < ApplicationController
     end
 
     def update
-      #raise params.inspect
       @photo = Photo.find(params[:id])
       if @photo.update_attributes(params[:photo])
-        redirect_to photos_url, notice: "photo was successfully updated."
+        redirect_to :back
       else
         render :edit
       end
@@ -33,7 +32,7 @@ class PhotosController < ApplicationController
     def destroy
       @photo = Photo.find(params[:id])
       @photo.destroy
-      redirect_to photos_url, notice: "photo was successfully destroyed."
+      redirect_to photos_url
     end
 
 

@@ -1,21 +1,40 @@
-= content_for :left_col, class: "falsa-colonna" do
-  &nbsp
-  
-.span12
+= content_for :left_col do
+  .span3.side-bar
+    %ul.nav.nav-list
+      %li.nav-header
+        %i.icon-picture
+        Foto
+      %li
+        = form_for @photo do |f|
+          - %w[x y w h].each do |attribute|
+            = f.hidden_field "crop_#{attribute}"
+          = button_tag do
+            %i.icon-resize-small
+            Crop
+      %li      
+        = form_for @photo do |f|
+          = f.hidden_field "rotate", value: true
+          = button_tag do
+            %i.icon-repeat
+            Ruota 90°
+
+      %li        
+        = link_to @photo, method: :delete, confirm: "Sei sicuro?" do
+          %i.icon-minus
+          Elimina
+      
+      %li.divider
+        
+      %li
+        = link_to photos_url do
+          %i.icon-picture
+          Galleria
+
+.span9
   %h1
-    Croppa immagine
+    Modifica immagine
     %small= File.basename(@photo.photo_url)
   %br
   
-  = image_tag(@photo.photo_url(:large), id: "cropbox")
+  = image_tag(@photo.photo_url(:medium), id: "cropbox")
   
-= form_for @photo do |f|
-  - %w[x y w h].each do |attribute|
-    = f.hidden_field "crop_#{attribute}"
-  .action
-    = f.submit "Crop"
-
-= form_for @photo do |f|
-  = f.hidden_field "rotate", value: true
-  .action
-    = f.submit "Ruota 90°"

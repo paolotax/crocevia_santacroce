@@ -2,7 +2,9 @@
   / %tr[movimento]{class: "#{movimento.patate? == true ? 'patate' : ''} #{movimento.scaduto? == true ? 'scaduto' : ''}"}
   %td= link_to "art.#{movimento.articolo_id}", movimento.articolo
   %td= movimento.articolo.nome if movimento.articolo.present?
+  %td.quantita= movimento.quantita
   %td.prezzo= number_to_currency movimento.prezzo
+  %td.provvigione= number_to_currency movimento.importo_provvigione
   %td
     - if movimento.patate?
       .label.label-info.pull-left

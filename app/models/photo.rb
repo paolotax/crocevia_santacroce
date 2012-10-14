@@ -28,7 +28,11 @@ class Photo < ActiveRecord::Base
       vips = VIPS::Image.new(current_path)
       
       if crop_x.present?
-        ratio = vips.x_size.to_f / 800
+        if vips.y_size > vips.x_size        
+          ratio = vips.y_size.to_f / 650
+        else
+          ratio = vips.x_size.to_f / 650
+        end  
         x = crop_x.to_i * ratio
         y = crop_y.to_i * ratio
         w = crop_w.to_i * ratio

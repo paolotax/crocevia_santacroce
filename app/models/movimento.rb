@@ -35,6 +35,10 @@ class Movimento < ActiveRecord::Base
     documento.nil?
   end
   
+  def da_rimborsare?
+    vendita? && !documento.nil? && documento.data < Time.now.beginning_of_month.to_date
+  end
+  
   %w(vendita resa).each do |tipo|
     scope "#{tipo}", where('movimenti.tipo = ?', "#{tipo}")
     
