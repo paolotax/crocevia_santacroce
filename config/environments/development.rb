@@ -16,8 +16,17 @@ CroceviaSantacroce::Application.configure do
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address  => "smtp.gmail.com",
+    :port     => 587,
+    :domain   => "crocevia-santacroce.com",
+    :authentication => "plain",
+    :user_name      => "paolo.tassinari@gmail.com",
+    :password       => "_s1Sbocc1a",
+    :enable_starttls_auto => true
+  } 
   # change to true to allow email to be sent during development
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
 

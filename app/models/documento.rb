@@ -9,6 +9,8 @@ class Documento < ActiveRecord::Base
   
   scope :recente, order("documenti.id desc")
   
+  after_create :notify_vendita
+  
   TIPO_DOCUMENTO = %w(cassa reso carico)
   
   TIPO_DOCUMENTO.each do |tipo|
@@ -68,4 +70,9 @@ class Documento < ActiveRecord::Base
     end  
   end
   
+  private
+    
+    def notify_vendita
+      Notifier.vendita_added(self).deliver
+    end
 end
