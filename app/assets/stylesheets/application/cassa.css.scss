@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "compass/utilities/general/clearfix";
+
+.cassa-form {
+  @include clearfix(); 
+  margin-bottom: 10px;
+}
+
 .error-inline.help-inline {
   color: #B94A48;
 }

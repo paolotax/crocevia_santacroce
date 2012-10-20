@@ -1,18 +1,17 @@
 = content_for :left_col do
   .span3.side-bar
-    .well
-      %ul.nav.nav-list
-        %li.nav-header
-          %i.icon-gift
-          Articoli
-          
-        %li
-          = link_to articoli_url, remote: true do
-            %i.icon-gift
-            tutti
-        %li.divider
+    %ul.nav.nav-list.well
+      %li.nav-header
+        %i.icon-gift
+        Articoli
         
-      = search_form_for @q,  html: {class: "form-search", remote: true} do |f|
+      %li
+        = link_to articoli_url, remote: true do
+          %i.icon-gift
+          tutti
+      %li.divider
+      
+      = search_form_for @q,  html: {class: "form-search", remote: true, style: "margin-bottom: 0"} do |f|
         .input-append
           = f.text_field :index_cont, class: "search-query", placeholder: "cerca articolo", style: "width: 110px"
           = button_tag class: "btn", name: nil do

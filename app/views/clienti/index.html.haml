@@ -1,21 +1,21 @@
 = content_for :left_col do
   .span3.side-bar
-    .well
-      %ul.nav.nav-list
-        %li.nav-header
+    %ul.nav.nav-list.well
+      %li.nav-header
+        %i.icon-user
+        Clienti
+      %li
+        = link_to new_cliente_url do
+          %i.icon-plus
+          Nuovo
+      %li
+        = link_to clienti_url do
           %i.icon-user
-          Clienti
-        %li
-          = link_to new_cliente_url do
-            %i.icon-plus
-            Nuovo
-        %li
-          = link_to clienti_url do
-            %i.icon-user
-            tutti
-        %li.divider
-      
-      = search_form_for @q, html: {class: "form-search", remote: true} do |f|
+          tutti
+      %li.divider
+    
+
+      = search_form_for @q, html: {class: "form-search", remote: true, style: "margin-bottom: 0"} do |f|
         .input-append
           = f.text_field :index_cont, class: "search-query", placeholder: "cerca cliente", style: "width: 110px"
           = button_tag class: "btn", name: nil do

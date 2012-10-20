@@ -4,9 +4,9 @@
 
   = simple_form_for @user do |f|
     %p
-      = f.collection_check_boxes :role_ids, Role.all, :id, :name, class: "Gino"
+      = f.collection_check_boxes :role_ids, Role.all, :id, :name, input_html: {class: "Gino"}
     %p
-      Email:#{mail_to @user.email if @user.email}
+      Email: #{mail_to @user.email if @user.email}
     %p  
       = f.submit "Salva modifiche", class: "btn btn-primary" 
     

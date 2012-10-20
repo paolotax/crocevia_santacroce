@@ -20,7 +20,7 @@
           .pull-right= number_to_currency i
         
 .span9
-  %header
+  %section.cassa-form
     .form-search-articolo.pull-left
       = form_for @movimento, html: {class: "form-search", remote: true} do |f|
         .input-append
@@ -29,7 +29,8 @@
           = button_tag "aggiungi", class: "btn btn-primary", id: "new_movimento_submit", name: nil
 
     = render :partial => 'cassa_result', locals: { movimenti: @movimenti }
-
+    .clearfix
+    
   %section.movimenti
     %table.table.movimenti.da-registrare
       = render @movimenti

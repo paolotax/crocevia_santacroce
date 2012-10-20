@@ -118,12 +118,37 @@ class Articolo < ActiveRecord::Base
   end  
   
   before_save :update_index
-  
+  after_save  :update_documento
+  after_destroy :decrement_documento
   private
     
     def update_index
       self.index = "#{id} #{nome}"
     end
+    
+    private
+
+      def update_documento
+        return true unless prezzo_changed? || quantita_changed? || documento_id_changed?
+        unless documento.nil?
+          if prezzo_changed? || quantita_changed?
+            Documento.update_counters documento.id, 
+              :importo   => importo - ((prezzo_was * quantita_was) || 0.0)
+          else
+            Documento.update_counters documento.id, 
+              :importo   => importo
+          end    
+        end
+        return true
+      end
+
+      def decrement_documento      
+        unless documento.nil?
+          Documento.update_counters documento.id, 
+          :importo   => - prezzo_was * quantita_was,
+        end  
+        return true
+      end
     
     
 end

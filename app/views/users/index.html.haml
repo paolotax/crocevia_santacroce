@@ -1,14 +1,13 @@
 = content_for :left_col do
   .span3.side-bar
-    .well
-      %ul.nav.nav-list
-        %li.nav-header
+    %ul.nav.nav-list.well
+      %li.nav-header
+        %i.icon-group
+        Utenti
+      %li
+        = link_to users_url do
           %i.icon-group
-          Utenti
-        %li
-          = link_to users_url do
-            %i.icon-group
-            tutti    
+          tutti    
   
 .span9
   %h1 Utenti

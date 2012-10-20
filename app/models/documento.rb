@@ -48,7 +48,7 @@ class Documento < ActiveRecord::Base
   end
         
   def add_movimenti_attivi(user)
-    self.importo = user.movimenti.vendita.attivo.sum(&:prezzo)
+    # self.importo = user.movimenti.vendita.attivo.sum(&:prezzo)
     for m in user.movimenti.vendita.attivo do
       self.movimenti << m
     end  
@@ -56,7 +56,7 @@ class Documento < ActiveRecord::Base
   
   def add_articoli_cliente(cliente_id)
     cliente = Cliente.find(cliente_id)
-    self.importo = cliente.articoli.attivo.sum(&:prezzo)
+    # self.importo = cliente.articoli.attivo.sum(&:prezzo)
     for a in cliente.articoli.attivo do
       self.articoli << a
     end  
@@ -64,7 +64,7 @@ class Documento < ActiveRecord::Base
   
   def add_resa_cliente(cliente_id)
     cliente = Cliente.find(cliente_id)
-    self.importo = cliente.rese.attivo.sum(&:prezzo)
+    # self.importo = cliente.rese.attivo.sum(&:prezzo)
     for m in cliente.rese.attivo do
       self.movimenti << m
     end  
@@ -73,6 +73,8 @@ class Documento < ActiveRecord::Base
   private
     
     def notify_vendita
-      Notifier.vendita_added(self).deliver
+      if cassa?
+        Notifier.vendita_added(self).deliver
+      end  
     end
 end
