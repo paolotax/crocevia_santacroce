@@ -1,6 +1,6 @@
 class Documento < ActiveRecord::Base
   
-  attr_accessible :importo, :tipo, :data_text
+  attr_accessible :importo, :tipo, :data_text, :data
   attr_writer :data_text
   
   has_many :articoli,  dependent:  :nullify

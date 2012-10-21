@@ -70,8 +70,8 @@ CroceviaSantacroce::Application.configure do
     :port     => 587,
     :domain   => "crocevia-santacroce.com",
     :authentication => "plain",
-    :user_name      => "crocevia.santacroce@gmail.com",
-    :password       => "rebecca",
+    :user_name      => "croceviasantacroce@gmail.com",
+    :password       => "taxciapopi",
     :enable_starttls_auto => true
   }
   
