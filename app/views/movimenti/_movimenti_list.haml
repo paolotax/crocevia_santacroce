@@ -14,9 +14,10 @@
         %th.prezzo   Prezzo Vendita
         %th.provvigione Al Cliente
         %th
+        %th
       
-      - for articolo in collection do
-        = render 'movimenti/movimento', movimento: articolo
+      - for movimento in collection do
+        = render 'movimenti/movimento', movimento: movimento
 
       %tr.table-footer{ class: "#{'hidden' if collection.empty? }"}
         %td{ colspan: 2} Totale

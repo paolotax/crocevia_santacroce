@@ -22,7 +22,5 @@
     %h1 Articoli 
   %table.table
     = render "articoli_header"
-    %tbody.articoli  
-      - for articolo in @articoli do
-        = render articolo
-  = paginate @articoli, remote: true;
+    = render @articoli 
+  = paginate @articoli

@@ -1,23 +1,20 @@
-%h1 Listing documenti
+= content_for :left_col do
+  .span3.side-bar
+    %ul.nav.nav-list.well
+      %li.nav-header
+        %i.icon-gift
+        Documenti
+        
+      %li
+        = link_to documenti_url, remote: true do
+          %i.icon-gift
+          tutti
+      %li.divider
 
-%table
-  %tr
-    %th Tipo
-    %th Data
-    %th Importo
-    %th
-    %th
-    %th
 
-  - @documenti.each do |documento|
-    %tr
-      %td= documento.tipo
-      %td= documento.data
-      %td= documento.importo
-      %td= link_to 'Show', documento
-      %td= link_to 'Edit', edit_documento_path(documento)
-      %td= link_to 'Destroy', documento, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Documento', new_documento_path
+.span9
+  .page-header
+    %h1 Documenti 
+  %table.table
+    = render @documenti 
+  / = paginate @documenti

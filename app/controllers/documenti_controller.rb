@@ -3,7 +3,7 @@ class DocumentiController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @documenti = Documento.all
+    @documenti = Documento.order("data desc, id desc")
   end
 
   def show

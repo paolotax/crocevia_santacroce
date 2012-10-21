@@ -3,7 +3,7 @@
 
   .form-inputs
     = f.input :tipo
-    = f.input :data
+    = f.input :data_text, label: "Data", input_html: {class: "datepicker"}
 
   .form-actions
     = f.button :submit

@@ -1,14 +1,20 @@
 class Documento < ActiveRecord::Base
   
-  attr_accessible :data, :importo, :tipo
+  attr_accessible :importo, :tipo, :data_text
+  attr_writer :data_text
   
   has_many :articoli,  dependent:  :nullify
   has_many :movimenti, dependent:  :nullify
-  
   has_many :clienti, through: :articoli
   
   scope :recente, order("documenti.id desc")
   
+  validates :data_text, presence: true 
+  validates :tipo,      presence: true 
+  
+  validate    :check_data_text
+
+  before_save  :save_data_text
   after_create :notify_vendita
   
   TIPO_DOCUMENTO = %w(cassa reso carico)
@@ -19,6 +25,10 @@ class Documento < ActiveRecord::Base
     define_method "#{tipo.split.join.underscore}?" do
       self.tipo == tipo
     end
+  end
+  
+  def data_text
+    @data_text || data.try(:strftime, "%d-%m-%Y")
   end
   
   def mandante
@@ -76,5 +86,17 @@ class Documento < ActiveRecord::Base
       if cassa?
         Notifier.vendita_added(self).deliver
       end  
+    end
+    
+    def save_data_text
+      self.data = Date.parse(@data_text) if @data_text.present?
+    end
+
+    def check_data_text
+      if @data_text.present? && Date.parse(@data_text).nil?
+        errors.add :data_text, "formato data errato"
+      end
+    rescue ArgumentError
+      errors.add :data_text, "data non valida"
     end
 end

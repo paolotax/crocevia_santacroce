@@ -15,13 +15,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
   gem 'jquery-ui-rails'
   gem "compass-rails"
-  # gem "bootstrap-sass", ">= 2.0.3"
-  # gem "jquery-fileupload-rails", :git => "https://github.com/paolotax/jquery-fileupload-rails.git"
   gem "jquery-fileupload-rails"
   gem 'anjlab-bootstrap-rails', '>= 2.1', :require => 'bootstrap-rails'
-  gem 'bootstrap-addons-rails'
-
-  #gem "jcrop-rails"
 end
 
 gem 'jquery-rails'

@@ -1,7 +1,7 @@
 %section{ class: "#{label}" }
   %header
     %h4 
-      = pluralize( collection.size, label.humanize.downcase )
+      = pluralize( collection.sum(&:giacenza), label.humanize.downcase )
       - if collection.size > 0
         %small= link_to "...", "##{label}", class: "show-hide collapsed", data: { toggle: "collapse", "no-turbolink" => true }
 

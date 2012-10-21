@@ -50,6 +50,8 @@
     = "quantità: #{@articolo.quantita}"
     %br
     = "prezzo: #{number_to_currency @articolo.prezzo}"
+    %br
+    = "provvigione: #{number_to_percentage @articolo.provvigione, precision: 0}"
   
   - if @articolo.documento
     = link_to @articolo.documento do

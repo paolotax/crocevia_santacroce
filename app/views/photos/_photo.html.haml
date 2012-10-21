@@ -1,6 +1,6 @@
 %li.span2.photo
   
-  = link_to image_tag(photo.photo_url(:thumb)), photo.photo_url(:large), rel: "gallery", download: photo.default_name if photo.photo?
+  = link_to image_tag(photo.photo_url(:thumb)), photo.photo_url(:large), "data-no-turbolink" => true, rel: "gallery", download: photo.default_name if photo.photo?
   .name= photo.default_name if photo
   .actions
     = link_to "modifica", edit_photo_path(photo)

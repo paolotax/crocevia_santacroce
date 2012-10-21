@@ -25,8 +25,23 @@ class Articolo < ActiveRecord::Base
   #   self.id.to_s
   # end
   
-  after_save :to_barby
+  after_create  :to_barby
+  before_save   :update_index
+  after_save    :update_documento
+  after_destroy :decrement_documento
+    
+  attr_accessible :nome, :prezzo, :provvigione, :quantita, :cliente_id, :documento_id, :index
   
+  scope :disponibili, where("articoli.quantita > articoli.movimenti_count")
+  scope :esauriti,    where("articoli.quantita = articoli.movimenti_count")
+  scope :esagerati,   where("articoli.quantita < articoli.movimenti_count")
+  scope :attivo,      where("articoli.documento_id is null")
+  scope :registrato,  where("articoli.documento_id is not null")
+    
+  scope :trova, lambda { |term| 
+    where("(articoli.nome ilike :term) or (articoli.id = :id) ", term: term, id: term.to_i)        
+  }
+
   def to_barby
     barcode_value = self.id.to_s
     barcode = Barby::Code39.new(barcode_value)
@@ -42,19 +57,6 @@ class Articolo < ActiveRecord::Base
     self.prezzo_vendita * self.giacenza
   end
   
-  attr_accessible :nome, :prezzo, :provvigione, :quantita, :cliente_id, :documento_id, :index
-  
-  scope :disponibili, where("articoli.quantita > articoli.movimenti_count")
-  scope :esauriti,    where("articoli.quantita = articoli.movimenti_count")
-  scope :esagerati,   where("articoli.quantita < articoli.movimenti_count")
-  scope :attivo,      where("articoli.documento_id is null")
-  scope :registrato,  where("articoli.documento_id is not null")
-  
-  
-  scope :trova, lambda { |term| 
-    where("(articoli.nome ilike :term) or (articoli.id = :id) ", term: term, id: term.to_i)        
-  }
-
   def attivo?
     documento_id.nil?
   end
@@ -117,38 +119,33 @@ class Articolo < ActiveRecord::Base
     end
   end  
   
-  before_save :update_index
-  after_save  :update_documento
-  after_destroy :decrement_documento
   private
     
     def update_index
       self.index = "#{id} #{nome}"
     end
     
-    private
-
-      def update_documento
-        return true unless prezzo_changed? || quantita_changed? || documento_id_changed?
-        unless documento.nil?
-          if prezzo_changed? || quantita_changed?
-            Documento.update_counters documento.id, 
-              :importo   => importo - ((prezzo_was * quantita_was) || 0.0)
-          else
-            Documento.update_counters documento.id, 
-              :importo   => importo
-          end    
-        end
-        return true
-      end
-
-      def decrement_documento      
-        unless documento.nil?
+    def update_documento
+      return true unless prezzo_changed? || quantita_changed? || documento_id_changed?
+      unless documento.nil?
+        if prezzo_changed? || quantita_changed?
           Documento.update_counters documento.id, 
-          :importo   => - prezzo_was * quantita_was,
-        end  
-        return true
+            :importo   => importo - ((prezzo_was * quantita_was) || 0.0)
+        else
+          Documento.update_counters documento.id, 
+            :importo   => importo
+        end    
       end
+      return true
+    end
+    
+    def decrement_documento      
+      unless documento.nil?
+        Documento.update_counters documento.id, 
+        :importo   => - prezzo_was * quantita_was
+      end  
+      return true
+    end
     
     
 end

@@ -27,16 +27,16 @@
   .modal-body
     .modal-image
   .modal-footer
-    = link_to "#", class: "btn btn-info modal-prev" do
+    = link_to "#", class: "btn btn-info modal-prev", "data-no-turbolink" => true do
       Precedente
       %i.icon-arrow-left.icon-white
-    = link_to "#", class: "btn btn-primary modal-next" do
+    = link_to "#", class: "btn btn-primary modal-next", "data-no-turbolink" => true do
       Successiva
       %i.icon-arrow-right.icon-white
-    = link_to "#", class: "btn btn-success modal-play modal-slideshow", "data-slideshow" => "5000" do
+    = link_to "#", class: "btn btn-success modal-play modal-slideshow", "data-slideshow" => "5000", "data-no-turbolink" => true do
       %i.icon-play.icon-white
         Slideshow
-    = link_to "#", class: "btn modal-download", target: "_blank", download: "" do
+    = link_to "#", class: "btn modal-download", target: "_blank", "data-no-turbolink" => true, download: "" do
       %i.icon-download
       Download
       

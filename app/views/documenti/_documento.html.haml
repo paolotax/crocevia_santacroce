@@ -1,0 +1,5 @@
+%tr[documento]
+  %td.tipo= documento.tipo
+  %td.id= link_to "nr.#{documento.id}", documento
+  %td.created_at= documento.data.try(:strftime, "%d-%m-%y")
+  %td.prezzo= number_to_currency documento.importo

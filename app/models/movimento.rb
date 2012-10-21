@@ -111,7 +111,7 @@ class Movimento < ActiveRecord::Base
     def decrement_documento      
       unless documento.nil?
         Documento.update_counters documento.id, 
-        :importo   => - prezzo_was,
+          :importo   => - prezzo_was
       end  
       return true
     end

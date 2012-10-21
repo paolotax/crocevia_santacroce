@@ -13,7 +13,13 @@
 //= require jquery
 //= require jquery.ui.autocomplete
 //= require jquery_ujs
+//= require turbolinks
+//= require jquery.turbolinks
 //= require jquery.Jcrop
 //= require twitter/bootstrap
+
+//= require bootstrap-datepicker
+//= require locales/bootstrap-datepicker.it
+
 //= require_tree ./application
 
