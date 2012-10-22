@@ -58,7 +58,7 @@ class Documento < ActiveRecord::Base
   end
         
   def add_movimenti_attivi(user)
-    # self.importo = user.movimenti.vendita.attivo.sum(&:prezzo)
+    self.importo = user.movimenti.vendita.attivo.sum(&:prezzo)
     for m in user.movimenti.vendita.attivo do
       self.movimenti << m
     end  
