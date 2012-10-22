@@ -58,7 +58,7 @@ class Documento < ActiveRecord::Base
   end
         
   def add_movimenti_attivi(user)
-    self.importo = user.movimenti.vendita.attivo.sum(&:prezzo)
+    # self.importo = user.movimenti.vendita.attivo.sum(&:prezzo)
     for m in user.movimenti.vendita.attivo do
       self.movimenti << m
     end  
@@ -84,7 +84,8 @@ class Documento < ActiveRecord::Base
     
     def notify_vendita
       if cassa?
-        Notifier.vendita_added(self).deliver
+        vendita = self.reload
+        Notifier.vendita_added(vendita).deliver
       end  
     end
     
