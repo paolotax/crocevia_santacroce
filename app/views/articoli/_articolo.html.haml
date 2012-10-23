@@ -7,5 +7,3 @@
   %td.created_at= articolo.created_at.try(:strftime, "%d-%m-%y")
   %td
     = link_to articolo.cliente.full_name, articolo.cliente
-  %td
-    = articolo[:gino]

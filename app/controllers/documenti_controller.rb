@@ -3,10 +3,17 @@ class DocumentiController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @documenti = Documento.order("data desc, id desc")
+    @documenti = Documento.includes.order("data desc, id desc")
   end
 
   def show
+    
+    if @documento.carico?
+      @righe = @documento.articoli.order(:id)
+    else 
+      @righe = @documento.movimenti.order(:articolo_id)
+    end
+    
     respond_to do |format|
       format.html
       format.pdf do
