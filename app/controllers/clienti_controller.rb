@@ -45,6 +45,18 @@ class ClientiController < ApplicationController
   def mandato
   end
   
+  def tessera
+    @cliente.to_barby
+    respond_to do |format|
+      format.pdf do
+        pdf = TesseraPdf.new(@cliente, view_context)
+        send_data pdf.render, filename: "tessera_#{@cliente.id}_#{@cliente.full_name}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
+  end
+  
   def crea_codice_fiscale
     @codice_fiscale = CodiceFiscale.new(@cliente)
     render json: @codice_fiscale.to_json

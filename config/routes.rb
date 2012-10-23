@@ -36,6 +36,7 @@ CroceviaSantacroce::Application.routes.draw do
   resources :clienti do
     member do
       get :mandato
+      get :tessera
       get :crea_codice_fiscale
     end
     get 'pagina/:page', :action => :index, :on => :collection

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120925123858) do
+ActiveRecord::Schema.define(:version => 20121023064052) do
 
   create_table "articoli", :force => true do |t|
     t.string   "nome"
@@ -105,10 +105,12 @@ ActiveRecord::Schema.define(:version => 20120925123858) do
     t.datetime "updated_at",                                                :null => false
     t.integer  "documento_id"
     t.integer  "user_id"
+    t.integer  "rimborso_id"
   end
 
   add_index "movimenti", ["articolo_id"], :name => "index_movimenti_on_articolo_id"
   add_index "movimenti", ["documento_id"], :name => "index_movimenti_on_documento_id"
+  add_index "movimenti", ["rimborso_id"], :name => "index_movimenti_on_rimborso_id"
   add_index "movimenti", ["user_id"], :name => "index_movimenti_on_user_id"
 
   create_table "notifications", :force => true do |t|
@@ -192,5 +194,9 @@ ActiveRecord::Schema.define(:version => 20120925123858) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  add_foreign_key "notifications", "conversations", :name => "notifications_on_conversation_id"
+
+  add_foreign_key "receipts", "notifications", :name => "receipts_on_notification_id"
 
 end

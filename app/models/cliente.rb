@@ -1,3 +1,7 @@
+require 'barby'
+require 'barby/barcode/code_39'
+require 'barby/outputter/png_outputter'
+
 class Cliente < ActiveRecord::Base
   
   extend FriendlyId
@@ -49,6 +53,13 @@ class Cliente < ActiveRecord::Base
   
   def to_s
     full_name
+  end
+  
+  def to_barby
+    barcode_value = self.id.to_s
+    barcode = Barby::Code39.new(barcode_value)
+    full_path = "public/barcodes/tessera_#{barcode_value}.png"
+    File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 0, :xdim => 2, :height => 30) }
   end
   
   def cognome_nome

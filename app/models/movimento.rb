@@ -22,13 +22,18 @@ class Movimento < ActiveRecord::Base
   after_destroy :decrement_documento
   
   scope :attivo, where(documento_id: nil)
+  scope :da_rimborsare, lambda { |m| m.da_rimborsare? }
     
   def da_registrare?
     documento.nil?
   end
   
+  def rimborsato?
+    vendita? && !rimborso_id.nil?
+  end
+  
   def da_rimborsare?
-    vendita? && !documento.nil? && documento.data < Time.now.beginning_of_month.to_date
+    vendita? && rimborso_id.nil? && !documento.nil? && documento.data < Time.now.beginning_of_month.to_date
   end
   
   %w(vendita resa).each do |tipo|
