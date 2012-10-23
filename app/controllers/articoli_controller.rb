@@ -41,7 +41,7 @@ class ArticoliController < ApplicationController
   end
   
   def etichette
-    @articoli = Articolo.find(params[:articolo_ids])
+    @articoli = Articolo.order(:id).find(params[:articolo_ids])
     
     respond_to do |format|
       format.pdf do
