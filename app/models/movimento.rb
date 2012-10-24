@@ -20,9 +20,17 @@ class Movimento < ActiveRecord::Base
   before_save   :set_prezzo
   after_save    :update_documento
   after_destroy :decrement_documento
-  
+
+  %w(vendita resa).each do |tipo|
+    scope "#{tipo}", where('movimenti.tipo = ?', "#{tipo}")
+    
+    define_method "#{tipo}?" do
+      self.tipo == tipo
+    end
+  end
+    
   scope :attivo, where(documento_id: nil)
-  scope :da_rimborsare, lambda { |m| m.da_rimborsare? }
+  scope :da_rimborsare, vendita.joins(:documento).where("documenti.data < ?", Time.now.beginning_of_month.to_date )
     
   def da_registrare?
     documento.nil?
@@ -36,13 +44,7 @@ class Movimento < ActiveRecord::Base
     vendita? && rimborso_id.nil? && !documento.nil? && documento.data < Time.now.beginning_of_month.to_date
   end
   
-  %w(vendita resa).each do |tipo|
-    scope "#{tipo}", where('movimenti.tipo = ?', "#{tipo}")
-    
-    define_method "#{tipo}?" do
-      self.tipo == tipo
-    end
-  end
+
     
   def mandante
     cliente

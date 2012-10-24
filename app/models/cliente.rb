@@ -85,6 +85,10 @@ class Cliente < ActiveRecord::Base
   def data_di_nascita_text
     @data_di_nascita_text || data_di_nascita.try(:strftime, "%d-%m-%Y")
   end
+  
+  def importo_da_rimborsare
+    movimenti.da_rimborsare.sum(&:importo_provvigione) || 0.0
+  end
 
   private
     def save_data_rilascio_documento_text

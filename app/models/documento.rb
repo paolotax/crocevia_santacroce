@@ -7,6 +7,9 @@ class Documento < ActiveRecord::Base
   has_many :movimenti, dependent:  :nullify
   has_many :clienti, through: :articoli
   
+  has_many :rimborsi, class_name: "Movimento", foreign_key: :rimborso_id
+  
+  
   scope :recente, order("documenti.id desc")
   
   validates :data_text, presence: true 
@@ -17,7 +20,7 @@ class Documento < ActiveRecord::Base
   before_save  :save_data_text
   after_create :notify_vendita
   
-  TIPO_DOCUMENTO = %w(cassa reso carico)
+  TIPO_DOCUMENTO = %w(cassa reso carico rimessa)
   
   TIPO_DOCUMENTO.each do |tipo|
     scope "#{tipo.split.join.underscore}", where("documenti.tipo = ?", tipo)  
@@ -39,6 +42,10 @@ class Documento < ActiveRecord::Base
     if %w(resa).include? tipo
       return movimenti.first.cliente
     end
+    
+    if %w(rimborso).include? tipo
+      return rimborsi.first.cliente
+    end
   end
   
   def numero_articoli
@@ -58,7 +65,6 @@ class Documento < ActiveRecord::Base
   end
         
   def add_movimenti_attivi(user)
-    # self.importo = user.movimenti.vendita.attivo.sum(&:prezzo)
     for m in user.movimenti.vendita.attivo do
       self.movimenti << m
     end  
@@ -76,6 +82,14 @@ class Documento < ActiveRecord::Base
     cliente = Cliente.find(cliente_id)
     # self.importo = cliente.rese.attivo.sum(&:prezzo)
     for m in cliente.rese.attivo do
+      self.movimenti << m
+    end  
+  end
+
+  def add_rimborso_cliente(cliente_id)
+    cliente = Cliente.find(cliente_id)
+    # self.importo = cliente.rese.attivo.sum(&:prezzo)
+    for m in cliente.rimborsi.attivo do
       self.movimenti << m
     end  
   end
