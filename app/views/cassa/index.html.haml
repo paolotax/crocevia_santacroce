@@ -2,6 +2,19 @@
   .span3.side-bar
   
     %ul.nav.nav-list.well
+      %li
+        %small Incasso
+        .pull-right= number_to_currency @incasso_totale
+      %li
+        %small Provvigioni
+        .pull-right= number_to_currency @provvigione_clienti
+      %li
+        %small Da rimborsare
+        .pull-right= number_to_currency @da_rimborsare
+      %li
+        %small Patate
+        .pull-right= number_to_currency @patate  
+      
       %li.nav-header
         %i.icon-shopping-cart
         Ultimi incassi
@@ -13,11 +26,19 @@
             .pull-right= number_to_currency i.importo
       %li.nav-header
         %i.icon-shopping-cart
-        Per giorno
-      - for d, i in @incassi_giornalieri do
+        questa settimana
+      - for d, i in @incassi_settimana do
         %li
           %small= l d, format: :short
           .pull-right= number_to_currency i
+
+      %li.nav-header
+        %i.icon-shopping-cart
+        per mese
+      - for m, i in @incassi_mese do
+        %li
+          %small= l m, format: :long_month
+          .pull-right= number_to_currency i.sum(&:importo)
         
 .span9
   %section.cassa-form

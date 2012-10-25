@@ -11,6 +11,9 @@ class Documento < ActiveRecord::Base
   
   
   scope :recente, order("documenti.id desc")
+  scope :settimana,  where("data >= ?", Time.now.beginning_of_week )
+  
+  # scope :mese where("data >= ?", Time.now.beginning_of_month )
   
   validates :data_text, presence: true 
   validates :tipo,      presence: true 

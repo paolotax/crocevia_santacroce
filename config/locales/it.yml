@@ -74,6 +74,7 @@ it:
     formats:
       default: "%d-%m-%y"
       short: "%e %b"
+      long_month: "%B %Y"
       long: "%d %B %Y"
       only_date: "%d/%m/%Y"
 
