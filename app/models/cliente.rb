@@ -45,7 +45,7 @@ class Cliente < ActiveRecord::Base
   validates :data_di_nascita_text,         presence: true 
   
   validate    :check_data_rilascio_documento_text, :check_data_di_nascita_text
-  before_save :save_data_rilascio_documento_text,  :save_data_di_nascita_text  
+  before_save :titleize_attributes, :save_data_rilascio_documento_text,  :save_data_di_nascita_text  
 
   def full_name
     [nome, cognome, ragione_sociale].join(" ")
@@ -115,7 +115,11 @@ class Cliente < ActiveRecord::Base
       errors.add :data_di_nascita_text, "data non valida"
     end
     
-    
+    def titleize_attributes
+      %w(nome cognome indirizzo citta comune_di_nascita documento_rilasciato_da).each do |method|
+        self[method] = send(method).titleize if send("#{method}_changed?")
+      end  
+    end
 
     def update_index
       self.index = "#{id} #{nome} #{cognome} #{ragione_sociale}"
