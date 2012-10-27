@@ -52,14 +52,7 @@ class Movimento < ActiveRecord::Base
   def mandante
     cliente
   end
-  
-  def set_prezzo
-    if prezzo.blank?
-      self.prezzo = articolo.prezzo_vendita
-      self.quantita = 1
-    end 
-  end
-  
+    
   def importo
     quantita * prezzo
   end
@@ -94,15 +87,22 @@ class Movimento < ActiveRecord::Base
   end
     
   def patate?
-    created_at > articolo.created_at + 3.months
+    created_at > articolo.data_patate
   end
   
   def scaduto?
-    created_at > articolo.created_at + 2.months
+    created_at > articolo.data_scadenza
   end
   
   
   private
+    
+    def set_prezzo
+      if prezzo.blank?
+        self.prezzo = articolo.prezzo_vendita
+        self.quantita = 1
+      end 
+    end
     
     def update_documento
       return true unless prezzo_changed? || documento_id_changed? || rimborso_id_changed?
