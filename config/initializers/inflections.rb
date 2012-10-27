@@ -14,6 +14,8 @@ ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'articolo venduto', 'articoli venduti'
   inflect.irregular 'articolo reso', 'articoli resi'
   inflect.irregular 'articolo in giacenza', 'articoli in giacenza'
+  inflect.irregular 'articolo rimborsato', 'articoli rimborsati'
+  
   inflect.irregular 'resa', 'rese'
   inflect.uncountable %w( fish sheep )
 end

@@ -3,3 +3,4 @@
   %td.id= link_to "nr.#{documento.id}", documento
   %td.created_at= documento.data.try(:strftime, "%d-%m-%y")
   %td.prezzo= number_to_currency documento.importo
+  %td.cliente= link_to documento.mandante, documento.mandante if documento.mandante

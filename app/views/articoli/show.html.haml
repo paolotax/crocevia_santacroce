@@ -45,17 +45,21 @@
       = link_to @articolo.cliente.full_name, @articolo.cliente
   
   %p
-    = "codice articolo: #{@articolo.id.to_s}"
+    codice articolo: #{@articolo.id.to_s}
     %br
-    = "quantità: #{@articolo.quantita}"
+    quantità: #{@articolo.quantita}
     %br
-    = "prezzo: #{number_to_currency @articolo.prezzo}"
+    prezzo: #{number_to_currency @articolo.prezzo}
     %br
-    = "provvigione: #{number_to_percentage @articolo.provvigione, precision: 0}"
+    provvigione: #{number_to_percentage @articolo.provvigione, precision: 0}
     %br
     giacenza: #{@articolo.giacenza}
-
-  
+    %br
+    data carico: #{l @articolo.data_carico, format: :default}
+    %br
+    scadrà il #{l @articolo.data_scadenza, format: :default}
+    
+    
   - if @articolo.documento
     = link_to @articolo.documento do
       .alert.alert-info

@@ -41,7 +41,7 @@ class Articolo < ActiveRecord::Base
   scope :trova, lambda { |term| 
     where("(articoli.nome ilike :term) or (articoli.id = :id) ", term: term, id: term.to_i)        
   }
-
+  
   def to_barby
     barcode_value = self.id.to_s
     barcode = Barby::Code39.new(barcode_value)
@@ -65,12 +65,16 @@ class Articolo < ActiveRecord::Base
     quantita > movimenti_count
   end
   
+  def data_carico
+    try(:documento).try(:data) || created_at.to_date
+  end
+  
   def data_scadenza
-    created_at + 2.months
+    data_carico + 2.months
   end
   
   def data_patate
-    created_at + 3.months
+    data_carico + 3.months
   end
   
   def scaduto?

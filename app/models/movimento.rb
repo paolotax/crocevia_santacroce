@@ -1,6 +1,6 @@
 class Movimento < ActiveRecord::Base
   
-  attr_accessible :data, :prezzo, :quantita, :tipo, :articolo_id, :rimborso_id
+  attr_accessible :prezzo, :quantita, :tipo, :articolo_id, :rimborso_id
   
   belongs_to :articolo, counter_cache: true
   belongs_to :user
@@ -35,7 +35,8 @@ class Movimento < ActiveRecord::Base
   scope :da_rimborsare, vendita.where("movimenti.rimborso_id is null")
   scope :rimborsabile,  da_rimborsare.joins(:documento).where("documenti.data < ?", Time.now.beginning_of_month.to_date )
   scope :rimborsato, vendita.where("movimenti.rimborso_id is not null")  
-
+  
+  
   def da_registrare?
     documento.nil?
   end

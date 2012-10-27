@@ -6,13 +6,10 @@ class Documento < ActiveRecord::Base
   has_many :articoli,  dependent:  :nullify
   has_many :movimenti, dependent:  :nullify
   has_many :clienti, through: :articoli
-  
   has_many :rimborsi, class_name: "Movimento", foreign_key: :rimborso_id, dependent: :nullify
-  
   
   scope :recente, order("documenti.id desc")
   scope :settimana,  where("data >= ?", Time.now.beginning_of_week )
-  
   # scope :mese where("data >= ?", Time.now.beginning_of_month )
   
   validates :data_text, presence: true 
@@ -49,6 +46,17 @@ class Documento < ActiveRecord::Base
     end
   end
   
+  def righe
+    case tipo
+    when "cassa" || "resa"
+      movimenti.order(:articolo_id)
+    when "carico"
+      articoli.order(:id)
+    when "rimborso"
+      rimborsi.order(:articolo_id)
+    end    
+  end
+  
   def numero_articoli
     articoli.sum(&:quantita)
   end
@@ -73,7 +81,6 @@ class Documento < ActiveRecord::Base
   
   def add_articoli_cliente(cliente_id)
     cliente = Cliente.find(cliente_id)
-    # self.importo = cliente.articoli.attivo.sum(&:prezzo)
     for a in cliente.articoli.attivo do
       self.articoli << a
     end  
@@ -81,7 +88,6 @@ class Documento < ActiveRecord::Base
   
   def add_resa_cliente(cliente_id)
     cliente = Cliente.find(cliente_id)
-    # self.importo = cliente.rese.attivo.sum(&:prezzo)
     for m in cliente.rese.attivo do
       self.movimenti << m
     end  
@@ -89,10 +95,8 @@ class Documento < ActiveRecord::Base
 
   def add_rimborso_cliente(cliente_id)
     cliente = Cliente.find(cliente_id)
-    # self.importo = cliente.rese.attivo.sum(&:prezzo)
     for r in cliente.vendite do
       self.rimborsi << r if r.da_rimborsare?
-      # r.update_attributes(rimborso_id: id)
     end  
   end
   

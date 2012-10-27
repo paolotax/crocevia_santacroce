@@ -8,13 +8,7 @@ class DocumentiController < ApplicationController
 
   def show
     
-    if @documento.carico?
-      @righe = @documento.articoli.order(:id)
-    elsif @documento.rimborso?
-      @righe = @documento.rimborsi.order(:articolo_id)
-    else  
-      @righe = @documento.movimenti.order(:articolo_id)
-    end
+    @righe = @documento.righe
     
     respond_to do |format|
       format.html
