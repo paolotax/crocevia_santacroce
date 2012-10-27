@@ -91,6 +91,13 @@ class Cliente < ActiveRecord::Base
   end
 
   private
+  
+    # def save_data_text
+    #   %(data_rilascio_documento data_di_nascita).each do |method|
+    #     self[method] = Date.parse(data_rilascio_documento_text) if @data_rilascio_documento_text.present?
+    #   end
+    # end
+        
     def save_data_rilascio_documento_text
       self.data_rilascio_documento = Date.parse(@data_rilascio_documento_text) if @data_rilascio_documento_text.present?
     end
@@ -119,6 +126,9 @@ class Cliente < ActiveRecord::Base
       %w(nome cognome indirizzo citta comune_di_nascita documento_rilasciato_da).each do |method|
         self[method] = send(method).titleize if send("#{method}_changed?")
       end  
+      %w(codice_fiscale provincia numero_documento).each do |method|
+        self[method] = send(method).upcase if send("#{method}_changed?")
+      end
     end
 
     def update_index

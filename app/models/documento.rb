@@ -7,7 +7,7 @@ class Documento < ActiveRecord::Base
   has_many :movimenti, dependent:  :nullify
   has_many :clienti, through: :articoli
   
-  has_many :rimborsi, class_name: "Movimento", foreign_key: :rimborso_id
+  has_many :rimborsi, class_name: "Movimento", foreign_key: :rimborso_id, dependent: :nullify
   
   
   scope :recente, order("documenti.id desc")
@@ -23,7 +23,7 @@ class Documento < ActiveRecord::Base
   before_save  :save_data_text
   after_create :notify_vendita
   
-  TIPO_DOCUMENTO = %w(cassa reso carico rimessa)
+  TIPO_DOCUMENTO = %w(cassa resa carico rimborso)
   
   TIPO_DOCUMENTO.each do |tipo|
     scope "#{tipo.split.join.underscore}", where("documenti.tipo = ?", tipo)  
@@ -38,16 +38,14 @@ class Documento < ActiveRecord::Base
   end
   
   def mandante
-    if %w(carico).include? tipo
-      return clienti.uniq.first
-    end  
-    
-    if %w(resa).include? tipo
-      return movimenti.first.cliente
-    end
-    
-    if %w(rimborso).include? tipo
-      return rimborsi.first.cliente
+    if tipo == 'carico'
+      clienti.uniq.first
+    elsif tipo == "resa"
+      movimenti.first.cliente
+    elsif tipo == 'rimborso'
+      rimborsi.try(:first).try(:cliente) || nil
+    else
+      return nil
     end
   end
   
@@ -92,8 +90,9 @@ class Documento < ActiveRecord::Base
   def add_rimborso_cliente(cliente_id)
     cliente = Cliente.find(cliente_id)
     # self.importo = cliente.rese.attivo.sum(&:prezzo)
-    for m in cliente.rimborsi.attivo do
-      self.movimenti << m
+    for r in cliente.vendite do
+      self.rimborsi << r if r.da_rimborsare?
+      # r.update_attributes(rimborso_id: id)
     end  
   end
   

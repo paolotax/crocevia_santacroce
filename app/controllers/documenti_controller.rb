@@ -10,7 +10,9 @@ class DocumentiController < ApplicationController
     
     if @documento.carico?
       @righe = @documento.articoli.order(:id)
-    else 
+    elsif @documento.rimborso?
+      @righe = @documento.rimborsi.order(:articolo_id)
+    else  
       @righe = @documento.movimenti.order(:articolo_id)
     end
     
@@ -49,6 +51,10 @@ class DocumentiController < ApplicationController
 
     if params[:documento][:tipo] == 'resa'
       @documento.add_resa_cliente(params[:cliente_id])
+    end
+    
+    if params[:documento][:tipo] == 'rimborso'
+      @documento.add_rimborso_cliente(params[:cliente_id])
     end
 
     respond_to do |format|

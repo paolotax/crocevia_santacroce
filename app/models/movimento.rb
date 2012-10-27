@@ -1,9 +1,11 @@
 class Movimento < ActiveRecord::Base
-  attr_accessible :data, :prezzo, :quantita, :tipo, :articolo_id
+  
+  attr_accessible :data, :prezzo, :quantita, :tipo, :articolo_id, :rimborso_id
   
   belongs_to :articolo, counter_cache: true
   belongs_to :user
   belongs_to :documento
+  belongs_to :rimborso, class_name: 'Documento'
   
   has_one :cliente, through: :articolo
   
@@ -30,8 +32,10 @@ class Movimento < ActiveRecord::Base
   end
     
   scope :attivo, where(documento_id: nil)
-  scope :da_rimborsare, vendita.joins(:documento).where("documenti.data < ?", Time.now.beginning_of_month.to_date )
-    
+  scope :da_rimborsare, vendita.where("movimenti.rimborso_id is null")
+  scope :rimborsabile,  da_rimborsare.joins(:documento).where("documenti.data < ?", Time.now.beginning_of_month.to_date )
+  scope :rimborsato, vendita.where("movimenti.rimborso_id is not null")  
+
   def da_registrare?
     documento.nil?
   end
@@ -43,9 +47,7 @@ class Movimento < ActiveRecord::Base
   def da_rimborsare?
     vendita? && rimborso_id.nil? && !documento.nil? && documento.data < Time.now.beginning_of_month.to_date
   end
-  
-
-    
+   
   def mandante
     cliente
   end
@@ -102,14 +104,17 @@ class Movimento < ActiveRecord::Base
   private
     
     def update_documento
-      return true unless prezzo_changed? || documento_id_changed?
+      return true unless prezzo_changed? || documento_id_changed? || rimborso_id_changed?
       unless documento.nil?
         if prezzo_changed?
           Documento.update_counters documento.id, 
             :importo   => prezzo - (prezzo_was || 0.0)
-        else
+        elsif documento_id_changed?
           Documento.update_counters documento.id, 
             :importo   => prezzo
+        elsif rimborso_id_changed?
+          Documento.update_counters rimborso.id, 
+            :importo   => importo_provvigione
         end    
       end
       return true

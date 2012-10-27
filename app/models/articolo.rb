@@ -99,7 +99,7 @@ class Articolo < ActiveRecord::Base
   
   def importo_cliente
     if prezzo
-      prezzo.to_d * provvigione * quantita / 100
+      prezzo.to_d * provvigione * giacenza / 100
     else
       0
     end  

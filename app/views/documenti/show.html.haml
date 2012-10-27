@@ -35,39 +35,11 @@
   %h3
     = @documento.tipo
     %small= "nr. #{@documento.id} del #{@documento.data.strftime('%d-%m-%Y')}"
+    %span.pull-right= number_to_currency @documento.importo
+    
     - if @documento.mandante
       %small= "di " 
       %small= link_to @documento.mandante.full_name, @documento.mandante 
   
   %table.table
     = render @righe
-      
-  / - if @documento.carico?
-  /   %table#articoli.table.articoli   
-  /     %tr.table-header
-  /       %th.codice      Codice
-  /       %th.articolo    Articolo
-  /       %th.quantita    Quantità
-  /       %th.prezzo      Prezzo
-  /       %th.provvigione Provvigione
-  /       %th.created_at  Data carico
-  /       %th
-  / 
-  /     = render @documento.articoli
-  / 
-  /     %tr.table-footer
-  /       %td{ colspan: 2} Totale
-  /       %td.quantita
-  /         %strong= @documento.articoli.sum(&:quantita) 
-  /       %td.prezzo
-  /         %strong= number_to_currency @documento.importo_carico
-  /       %td.provvigione
-  /         %strong= number_to_currency @documento.realizzo
-  /       %td.actions{ colspan: 2 }
-  / - else
-  /   %table.table
-  /     
-  /     = render @documento.movimenti
-
-    
-
