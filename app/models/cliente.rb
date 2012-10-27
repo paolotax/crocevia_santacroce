@@ -91,13 +91,7 @@ class Cliente < ActiveRecord::Base
   end
 
   private
-  
-    # def save_data_text
-    #   %(data_rilascio_documento data_di_nascita).each do |method|
-    #     self[method] = Date.parse(data_rilascio_documento_text) if @data_rilascio_documento_text.present?
-    #   end
-    # end
-        
+
     def save_data_rilascio_documento_text
       self.data_rilascio_documento = Date.parse(@data_rilascio_documento_text) if @data_rilascio_documento_text.present?
     end

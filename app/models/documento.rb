@@ -48,7 +48,9 @@ class Documento < ActiveRecord::Base
   
   def righe
     case tipo
-    when "cassa" || "resa"
+    when "cassa"
+      movimenti.order(:articolo_id)
+    when "resa"
       movimenti.order(:articolo_id)
     when "carico"
       articoli.order(:id)
