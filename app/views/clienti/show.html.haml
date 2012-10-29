@@ -1,6 +1,5 @@
 = content_for :left_col do
   .span3.side-bar
-
     %ul.nav.nav-list.well
       %li.nav-header
         %i.icon-user
@@ -9,12 +8,15 @@
         = link_to new_cliente_url do
           %i.icon-plus
           Nuovo
-      
       %li
         = link_to edit_cliente_url(@cliente) do
           %i.icon-pencil
           Modifica
-        
+      %li
+        = link_to clienti_url do
+          %i.icon-user
+          tutti
+      %li.divider
       %li
         = link_to mandato_cliente_url(@cliente) do
           %i.icon-print
@@ -23,23 +25,10 @@
         = link_to tessera_cliente_url(@cliente, format: 'pdf'), target: "_blank" do
           %i.icon-tag
           Stampa tessera    
-          
       %li
-        = link_to clienti_url do
-          %i.icon-user
-          tutti
-      
-      %li.divider
-
-      %li.nav-header
-        %i.icon-gift
-        Articoli
-      
-      %li
-        = link_to articoli_url do
-          %i.icon-gift
-          tutti
-            
+        = link_to situazione_cliente_url(@cliente, format: 'pdf'), target: "_blank" do
+          %i.icon-money
+          Stampa situazione    
 
 .span9
   %h3= @cliente.full_name

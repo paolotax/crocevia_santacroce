@@ -57,6 +57,17 @@ class ClientiController < ApplicationController
     end
   end
   
+  def situazione
+    respond_to do |format|
+      format.pdf do
+        pdf = SituazioneClientePdf.new(@cliente, view_context)
+        send_data pdf.render, filename: "situazione_#{@cliente.id}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
+  end
+  
   def crea_codice_fiscale
     @codice_fiscale = CodiceFiscale.new(@cliente)
     render json: @codice_fiscale.to_json

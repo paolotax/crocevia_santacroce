@@ -25,16 +25,17 @@ class Movimento < ActiveRecord::Base
 
   %w(vendita resa).each do |tipo|
     scope "#{tipo}", where('movimenti.tipo = ?', "#{tipo}")
-    
+
     define_method "#{tipo}?" do
       self.tipo == tipo
     end
   end
     
-  scope :attivo, where(documento_id: nil)
+  scope :attivo,        where('movimenti.documento_id is null')
+  scope :registrato,    where('movimenti.documento_id is not null')
   scope :da_rimborsare, vendita.where("movimenti.rimborso_id is null")
   scope :rimborsabile,  da_rimborsare.joins(:documento).where("documenti.data < ?", Time.now.beginning_of_month.to_date )
-  scope :rimborsato, vendita.where("movimenti.rimborso_id is not null")  
+  scope :rimborsato,    vendita.where("movimenti.rimborso_id is not null")  
   
   
   def da_registrare?

@@ -1,4 +1,5 @@
 require "prawn/measurement_extensions"
+require "layout_pdf"
 
 class DocumentoPdf < Prawn::Document
   
@@ -22,7 +23,7 @@ class DocumentoPdf < Prawn::Document
     @view = view
      
     @documenti.each do |documento|
-      logo
+      default_header
       intestazione(documento)
       line_items(documento)
       firme(documento)
@@ -33,22 +34,7 @@ class DocumentoPdf < Prawn::Document
     
   end
   
-  def logo
-    logo = "#{Rails.root}/app/assets/images/crocevia232x81.png"
-    image logo, :width => 60.mm, :height => 20.mm, :at => [bounds.left, bounds.top]
-    
-    draw_text "di Marzia Bertoncelli e Stefano Scifoni. Via Santa Croce 11/abcde - 40121 Bologna - tel. e fax 051.64.90.677", 
-              at: [bounds.left, bounds.top - 25.mm],
-              size: 10
-    draw_text "email: mercatino@crocevia-santacroce.com. Web: crocevia-santacroce.com - P.IVA 03218281206",
-              at: [bounds.left, bounds.top - 29.mm],
-              size: 10
-    
-    stroke_line [bounds.left, bounds.top - 31.mm], [bounds.right, bounds.top - 31.mm]
-    
-    
-  end
-  
+
   def intestazione(documento)
     
     bounding_box [ bounds.left, bounds.top - 35.mm ], width: bounds.width do

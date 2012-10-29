@@ -10,7 +10,6 @@ $("span.help-inline.error-inline").remove();
     $("li.cassa").replaceWith("<%= j render 'layouts/link_cassa' %>");
   }
 
-
   if ($(".articolo_in_giacenza").length > 0) {
     var collapsed = $(".articolo_in_giacenza header a").hasClass('collapsed')
     $(".articolo_in_giacenza").replaceWith("<%= j render 'articoli/articoli_list', label: 'articolo_in_giacenza', collection: @movimento.cliente.articoli.registrato.disponibili.order('articoli.documento_id desc, articoli.id') %>")
@@ -19,7 +18,7 @@ $("span.help-inline.error-inline").remove();
       $("#articolo_in_giacenza").addClass("in");
     }
   }
-
+  
   if ($(".articoli-venduti").length > 0) {
     var collapsed = $(".articolo_venduto header a").hasClass('collapsed')
     $(".articoli-venduti").html("")
@@ -29,7 +28,7 @@ $("span.help-inline.error-inline").remove();
       $("#articolo_venduto").addClass("in");
     }
   }
-
+  
   if ($(".articoli-resi").length > 0) {
     var collapsed = $(".articolo_reso header a").hasClass('collapsed')
     $(".articoli-resi").html("")

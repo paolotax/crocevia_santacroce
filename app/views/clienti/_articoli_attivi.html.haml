@@ -25,11 +25,11 @@
     %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli_attivi? }"}
       %td{ colspan: 2} Totale
       %td.quantita
-        %strong= @cliente.articoli.attivo.sum(&:quantita) 
+        %strong= @cliente.articoli.attivo.sum(&:giacenza) 
       %td.prezzo
         %strong= number_to_currency @cliente.articoli.attivo.sum(&:importo)
       %td.provvigione
-        %strong= number_to_currency @cliente.articoli.attivo.sum(&:importo_cliente)
+        %strong= number_to_currency @cliente.articoli.attivo.sum(&:importo_provvigione)
       %td.actions
         = form_tag etichette_articoli_path, :method => :put, :id => "form_articoli", class: "pull-right", target: "_blank" do
           - for a in @cliente.articoli.attivo do

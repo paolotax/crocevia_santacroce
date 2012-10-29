@@ -49,14 +49,6 @@ class Articolo < ActiveRecord::Base
     File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 0, :xdim => 2, :height => 30) }
   end
   
-  def giacenza
-    self.quantita - self.movimenti_count
-  end
-  
-  def valore_giacenza
-    self.prezzo_vendita * self.giacenza
-  end
-  
   def attivo?
     documento_id.nil?
   end
@@ -85,6 +77,14 @@ class Articolo < ActiveRecord::Base
     Time.now > data_patate
   end  
   
+  def giacenza
+    quantita - movimenti_count
+  end
+  
+  def valore_giacenza
+    prezzo_vendita * giacenza
+  end
+
   def prezzo_vendita
     if scaduto?
       prezzo / 2
@@ -94,28 +94,28 @@ class Articolo < ActiveRecord::Base
   end
   
   def importo
-    if prezzo
-      prezzo.to_d * quantita
-    else
-      0
-    end
+    prezzo * giacenza
   end
   
-  def importo_cliente
-    if prezzo
-      prezzo.to_d * provvigione * giacenza / 100
-    else
-      0
-    end  
-  end
-    
-  def prezzo_in_euro
-    prezzo.to_d/100 if prezzo
+  def importo_provvigione
+    prezzo * provvigione * giacenza / 100
   end
   
-  def prezzo_in_euro=(euros)
-    self.prezzo = euros.to_d if euros.present?
+  def ricavo
+    importo - importo_provvigione
   end
+  
+  # def importo_provvigione
+  #   prezzo * giacenza / 100 * provvigione
+  # end
+  
+  # def prezzo_in_euro
+  #   prezzo.to_d/100 if prezzo
+  # end
+  # 
+  # def prezzo_in_euro=(euros)
+  #   self.prezzo = euros.to_d if euros.present?
+  # end
   
   def self.ricalcola_counter
     Articolo.find_each do |p|

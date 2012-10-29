@@ -32,7 +32,7 @@
         %td.quantita
           %strong= collection.sum(&:giacenza) 
         %td.prezzo
-          %strong= number_to_currency collection.sum {|m| m.prezzo * m.giacenza }
+          %strong= number_to_currency collection.sum(&:importo)
         %td.provvigione
-          %strong= number_to_currency collection.sum(&:importo_cliente)
+          %strong= number_to_currency collection.sum(&:importo_provvigione)
         %td.actions{ colspan: 2 }
