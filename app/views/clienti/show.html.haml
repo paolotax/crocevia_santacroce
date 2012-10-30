@@ -62,9 +62,11 @@
 
   .articoli-resi
     = render 'attenzione_resa', cliente: @cliente
-    = render 'movimenti/movimenti_list',  collection: @cliente.rese,    label: "articolo_reso"
+    = render 'movimenti/movimenti_list',  collection: @cliente.rese.attivo,    label: "articolo_reso_da_registrare"
 
-  - unless @cliente.rimborsi.empty?  
-    %table.table.articoli-rimborsati
-      = render @cliente.rimborsi + @cliente.resi 
+  - unless @cliente.rimborsi.empty?  && @cliente.resi.empty? 
+    .articoli-storici
+      %h4 Rimborsi & Rese
+      %table.table.articoli-rimborsati
+        = render (@cliente.rimborsi + @cliente.resi).sort {|a, b| b.id <=> a.id}
     

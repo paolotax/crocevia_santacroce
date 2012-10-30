@@ -29,12 +29,15 @@ class SituazioneClientePdf < Prawn::Document
     table_articoli(@carichi)
     firme_articoli(Time.zone.now)
 
-    start_new_page
-
+    
     @vendite = @cliente.movimenti.registrato.vendita.da_rimborsare.joins(:documento).order("documenti.data")
-    default_header
-    intestazione(@cliente, "VENDUTO CLIENTE #{@cliente.id}")  
-    table_vendite(@vendite)
+    
+    unless @vendite.empty?
+      start_new_page
+      default_header
+      intestazione(@cliente, "VENDUTO CLIENTE #{@cliente.id}")  
+      table_vendite(@vendite)
+    end
   end
 
 

@@ -53,11 +53,11 @@ class Cliente < ActiveRecord::Base
   before_save :titleize_attributes, :save_data_rilascio_documento_text,  :save_data_di_nascita_text  
 
   def rimborsi
-    movimenti.rimborsato.map(&:rimborso).uniq
+    movimenti.rimborsato.map(&:rimborso).uniq || []
   end
 
   def resi
-    rese.map(&:documento).uniq
+    rese.registrato.map(&:documento).uniq || []
   end
   
   def full_name

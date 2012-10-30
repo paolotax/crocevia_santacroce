@@ -1,12 +1,13 @@
 - unless cliente.vendite.rimborsabile.empty?
   .alert
-    %h4
-      Attenzione!
-    = pluralize( cliente.vendite.rimborsabile.size, "articolo" )
-    da rimborare. Clicca per creare la Rimessa (rimborso)
     = form_for Documento.new, html: {class: "pull-right"} do |f|
       = hidden_field_tag "cliente_id", cliente.id
       = f.hidden_field :data,       value: Time.now
       = f.hidden_field :tipo,       value: "rimborso"
       = f.submit "rimborsa", class: "btn btn-warning"
+
+    %h4
+      Attenzione!
+    = pluralize( cliente.vendite.rimborsabile.size, "articolo" )
+    da rimborsare. Clicca per creare la Rimessa (rimborso)
       
