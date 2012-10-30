@@ -266,7 +266,7 @@ module LayoutPdf
         "art.#{movimento.articolo.id} #{movimento.articolo.nome}",
         movimento.mandante.id - 2, 
         1, 
-        "VEN/#{movimento.id}",
+        "#{movimento.tipo.upcase[0..2]}/#{movimento.id}",
         price(movimento.prezzo)
       ]
     end

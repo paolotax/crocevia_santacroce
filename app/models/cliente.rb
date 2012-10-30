@@ -7,21 +7,26 @@ class Cliente < ActiveRecord::Base
   extend FriendlyId
   friendly_id :full_name, use: [:slugged, :history]
   
+
   has_many :articoli, dependent: :destroy
   
   has_many :articoli_in_giacenza, class_name: "Articolo",
                                   conditions: "(articoli.quantita > articoli.movimenti_count)"
   
   has_many :movimenti, through: :articoli 
-  
+
   has_many :vendite, through: :articoli, 
                      source: :movimenti,
                      conditions: { tipo: "vendita" }
-                     
   has_many :rese, through: :articoli, 
                   source: :movimenti,
                   conditions: { tipo: "resa"}
   
+  # has_many :rimborsi, through: :articoli, 
+  #                     source: :movimenti,
+  #                     finder_sql: 'select * from movimenti where articolo_id = #{id}'
+  #                     conditions: { tipo: "resa"}
+
   before_save :update_index
                       
   accepts_nested_attributes_for :articoli
@@ -47,6 +52,14 @@ class Cliente < ActiveRecord::Base
   validate    :check_data_rilascio_documento_text, :check_data_di_nascita_text
   before_save :titleize_attributes, :save_data_rilascio_documento_text,  :save_data_di_nascita_text  
 
+  def rimborsi
+    movimenti.rimborsato.map(&:rimborso).uniq
+  end
+
+  def resi
+    rese.map(&:documento).uniq
+  end
+  
   def full_name
     [nome, cognome, ragione_sociale].join(" ")
   end

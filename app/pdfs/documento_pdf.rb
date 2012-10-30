@@ -39,8 +39,7 @@ class DocumentoPdf < Prawn::Document
   
   def stampa_resa(documento)
     intestazione(documento.mandante, "RESA Nr. #{documento.id} del #{documento.data.strftime('%d/%m/%Y')} CLIENTE #{documento.mandante.id}")
-    table_articoli(documento.righe)
-    firme_articoli
+    table_cassa(documento.righe)
   end
 
   def stampa_cassa(documento)

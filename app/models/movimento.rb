@@ -37,7 +37,7 @@ class Movimento < ActiveRecord::Base
   scope :rimborsato,    vendita.where("movimenti.rimborso_id is not null")  
   scope :rimborsabile,  da_rimborsare.joins(:documento).where("documenti.data < ?", Time.now.beginning_of_month.to_date )
   
-  
+
   def da_registrare?
     documento.nil?
   end
