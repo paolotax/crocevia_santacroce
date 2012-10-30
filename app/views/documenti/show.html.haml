@@ -12,7 +12,7 @@
         = link_to @documento, method: :delete, confirm: "Elimino il documento?\n(i movimenti non verranno eliminati)", "data-no-turbolink" => true do
           %i.icon-trash
           Elimina
-
+      %li.divider
       - unless @documento.articoli.empty?
         %li
           = form_tag etichette_articoli_path, :method => :put, :id => "form_articoli", target: "_blank" do
@@ -23,13 +23,14 @@
               %i.icon-tag
               Etichette
       %li
-        = link_to params.merge(format: :pdf) do
+        = link_to params.merge(format: :pdf), target: "_blank" do
           %i.icon-print
           Stampa
+      %li.divider
       %li
         = link_to documenti_path do
           %i.icon-user
-          tutti
+          tutti i documenti
 
 .span9
   %h3

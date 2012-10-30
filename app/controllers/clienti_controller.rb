@@ -50,7 +50,7 @@ class ClientiController < ApplicationController
     respond_to do |format|
       format.pdf do
         pdf = TesseraPdf.new(@cliente, view_context)
-        send_data pdf.render, filename: "tessera_#{@cliente.id}_#{@cliente.full_name}.pdf",
+        send_data pdf.render, filename: "tessera_#{@cliente.id}_#{@cliente.full_name}_#{Time.zone.now}.pdf",
                               type: "application/pdf",
                               disposition: "inline"
       end
@@ -61,7 +61,7 @@ class ClientiController < ApplicationController
     respond_to do |format|
       format.pdf do
         pdf = SituazioneClientePdf.new(@cliente, view_context)
-        send_data pdf.render, filename: "situazione_#{@cliente.id}.pdf",
+        send_data pdf.render, filename: "situazione_#{@cliente.id}_#{Time.zone.now}.pdf",
                               type: "application/pdf",
                               disposition: "inline"
       end

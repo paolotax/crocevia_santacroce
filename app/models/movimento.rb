@@ -34,8 +34,8 @@ class Movimento < ActiveRecord::Base
   scope :attivo,        where('movimenti.documento_id is null')
   scope :registrato,    where('movimenti.documento_id is not null')
   scope :da_rimborsare, vendita.where("movimenti.rimborso_id is null")
-  scope :rimborsabile,  da_rimborsare.joins(:documento).where("documenti.data < ?", Time.now.beginning_of_month.to_date )
   scope :rimborsato,    vendita.where("movimenti.rimborso_id is not null")  
+  scope :rimborsabile,  da_rimborsare.joins(:documento).where("documenti.data < ?", Time.now.beginning_of_month.to_date )
   
   
   def da_registrare?

@@ -1,7 +1,9 @@
 require "prawn/measurement_extensions"
-require "layout_pdf"
+
 
 class DocumentoPdf < Prawn::Document
+  
+  include LayoutPdf
   
   def initialize(documenti, view)
     
@@ -24,37 +26,61 @@ class DocumentoPdf < Prawn::Document
      
     @documenti.each do |documento|
       default_header
-      intestazione(documento)
-      line_items(documento)
-      firme(documento)
+      send("stampa_#{documento.tipo}", documento)
+
     end
+    
+
       
     #cstart_new_page unless page_number >= @articoli.size.to_f / @labels_per_page
     
     
   end
   
+  def stampa_resa(documento)
+    intestazione(documento.mandante, "RESA Nr. #{documento.id} del #{documento.data.strftime('%d/%m/%Y')} CLIENTE #{documento.mandante.id}")
+    table_articoli(documento.righe)
+    firme_articoli
+  end
 
-  def intestazione(documento)
-    
-    bounding_box [ bounds.left, bounds.top - 35.mm ], width: bounds.width do
-      
-      text "LISTA OGGETTI RICEVUTI DA CLIENTE N. #{documento.mandante.id}", style: :bold
-      bounding_box [bounds.width / 2, bounds.top], width: bounds.width / 2 do
-        text "MANDATO N. #{documento.mandante.id - 2} del #{documento.mandante.created_at.strftime('%d/%m/%Y')}", align: :right
-      end
-      bounding_box [ bounds.left, bounds.top - 7.mm], width: bounds.width do
-        text "#{documento.mandante.to_s.upcase}", style: :bold
-        bounding_box [bounds.width / 2, bounds.top], width: bounds.width / 2 do
-          text "nato il #{documento.mandante.data_di_nascita_text} a #{documento.mandante.comune_di_nascita}", align: :right
-        end
-      end  
-      move_down 5
-      text "residente in: #{documento.mandante.indirizzo} - #{documento.mandante.cap} - #{documento.mandante.citta}   (#{documento.mandante.provincia})"
-      move_down 5
-      text "CF. #{documento.mandante.codice_fiscale} - P.IVA #{documento.mandante.partita_iva}"
-    end
-  end    
+  def stampa_cassa(documento)
+    text "CASSA Nr. #{documento.id} del #{documento.data.strftime('%d/%m/%Y')}"
+    table_cassa(documento.righe)
+  end
+
+  def stampa_rimborso(documento)
+    intestazione(documento.mandante, "RIMESSA INCASSI Nr. #{documento.id} del #{documento.data.strftime('%d/%m/%Y')} CLIENTE #{documento.mandante.id}")
+    table_vendite(documento.righe)
+    firme_vendite
+  end
+
+  def stampa_carico(documento)
+    intestazione(documento.mandante, "LISTA OGGETTI RICEVUTI DA CLIENTE N. #{documento.mandante.id}")
+    table_articoli(documento.righe)
+    firme_articoli(documento.data)
+  end
+
+
+  # def intestazione(documento)
+  #   
+  #   bounding_box [ bounds.left, bounds.top - 35.mm ], width: bounds.width do
+  #     
+  #     text "LISTA OGGETTI RICEVUTI DA CLIENTE N. #{documento.mandante.id}", style: :bold
+  #     bounding_box [bounds.width / 2, bounds.top], width: bounds.width / 2 do
+  #       text "MANDATO N. #{documento.mandante.id - 2} del #{documento.mandante.created_at.strftime('%d/%m/%Y')}", align: :right
+  #     end
+  #     bounding_box [ bounds.left, bounds.top - 7.mm], width: bounds.width do
+  #       text "#{documento.mandante.to_s.upcase}", style: :bold
+  #       bounding_box [bounds.width / 2, bounds.top], width: bounds.width / 2 do
+  #         text "nato il #{documento.mandante.data_di_nascita_text} a #{documento.mandante.comune_di_nascita}", align: :right
+  #       end
+  #     end  
+  #     move_down 5
+  #     text "residente in: #{documento.mandante.indirizzo} - #{documento.mandante.cap} - #{documento.mandante.citta}   (#{documento.mandante.provincia})"
+  #     move_down 5
+  #     text "CF. #{documento.mandante.codice_fiscale} - P.IVA #{documento.mandante.partita_iva}"
+  #   end
+  # end    
     
   def line_items(documento)
     move_down 10
@@ -157,23 +183,5 @@ class DocumentoPdf < Prawn::Document
   end
 
 
-
-  
-  def price(num)
-    @view.number_to_currency(num, :locale => :it, :format => "%n %u", :precision => 2)
-  end
-  
-  def l(data)
-    @view.l data, :format => :only_date
-  end
-  
-  def t(data)
-    @view.t data
-  end
-
-
-  def current_user
-    @view.current_user
-  end
     
 end
