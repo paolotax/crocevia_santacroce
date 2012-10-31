@@ -55,7 +55,7 @@ class DocumentoPdf < Prawn::Document
 
   def stampa_carico(documento)
     intestazione(documento.mandante, "LISTA OGGETTI RICEVUTI DA CLIENTE N. #{documento.mandante.id}")
-    table_articoli(documento.righe)
+    table_articoli(documento.righe, false)
     firme_articoli(documento.data)
   end
 

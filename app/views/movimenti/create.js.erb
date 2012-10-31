@@ -22,7 +22,7 @@ $("span.help-inline.error-inline").remove();
   if ($(".articoli-venduti").length > 0) {
     var collapsed = $(".articolo_venduto header a").hasClass('collapsed')
     $(".articoli-venduti").html("")
-    $(".articoli-venduti").append("<%= j render 'clienti/attenzione_cassa', cliente: @movimento.cliente %><%= j render 'movimenti/movimenti_list', collection: @movimento.cliente.vendite, label: 'articolo_venduto' %>")
+    $(".articoli-venduti").append("<%= j render 'clienti/attenzione_cassa', cliente: @movimento.cliente %><%= j render 'clienti/attenzione_rimborso', cliente: @movimento.cliente %><%= j render 'movimenti/movimenti_list', collection: @movimento.cliente.vendite, label: 'articolo_venduto' %>")
     if (collapsed == false) {
       $(".articolo_venduto header a").removeClass("collapsed");
       $("#articolo_venduto").addClass("in");

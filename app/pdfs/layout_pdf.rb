@@ -43,9 +43,9 @@ module LayoutPdf
 
   #articoli
 
-  def table_articoli(collection)
+  def table_articoli(collection, giacenza = true)
     move_down 10
-    table articoli_rows(collection), :cell_style => { :size => 9  } do
+    table articoli_rows(collection, giacenza), :cell_style => { :size => 9  } do
       row(0).font_style = :bold
       cells.padding = 3
       cells.borders = []
@@ -61,10 +61,10 @@ module LayoutPdf
       self.row_colors = ["DDDDDD", "FFFFFF"]
       self.header = true
     end
-    riepilogo_articoli(collection)
+    riepilogo_articoli(collection, giacenza)
   end
 
-  def articoli_rows(collection)
+  def articoli_rows(collection, giacenza)
     [["Data Entr.", "N.Art.", "N.Carico", "Descrizione", "Q.ta", "Prezzo un.", "Provv."]] +
       
       collection.map do |articolo|
@@ -73,14 +73,16 @@ module LayoutPdf
         articolo.id,
         articolo.documento.id, 
         articolo.nome, 
-        articolo.giacenza,
+        giacenza == true ? articolo.giacenza : articolo.quantita,
         price(articolo.prezzo),
         "#{articolo.provvigione}%"
       ]
     end
   end
   
-  def riepilogo_articoli(collection)
+  def riepilogo_articoli(collection, giacenza)
+    
+    
     
     move_down 1
     stroke_line [bounds.left, cursor], [bounds.right, cursor]
@@ -94,19 +96,19 @@ module LayoutPdf
       end
       
       bounding_box [bounds.left + 35.mm, bounds.top], width: 20.mm do
-        text collection.sum(&:giacenza).to_s, align: :right, size: 9
+        text collection.sum {|a| giacenza == true ? a.giacenza : a.quantita}.to_s, align: :right, size: 9
       end
       
       bounding_box [bounds.left + 55.mm, bounds.top], width: 25.mm do
-        text price(collection.sum(&:importo)), align: :right, size: 9
+        text price(collection.sum{|a| giacenza == true ? a.importo : a.prezzo * a.quantita }), align: :right, size: 9
       end
       
       bounding_box [bounds.left + 80.mm, bounds.top], width: 20.mm do
-        text price(collection.sum(&:importo_provvigione)), align: :right, size: 9
+        text price(collection.sum{ |a| giacenza == true ? a.importo_provvigione : a.prezzo * a.provvigione * a.quantita / 100 }), align: :right, size: 9
       end
       
       bounding_box [bounds.left + 70.mm, bounds.top - 3.mm - 3], width: 20.mm do
-        text price(collection.sum(&:ricavo)), align: :right, size: 9, style: :bold
+        text price(collection.sum{ |a| giacenza == true ? a.ricavo : (a.prezzo * a.quantita) - (a.prezzo * a.provvigione * a.quantita / 100)}), align: :right, size: 9, style: :bold
       end
     end
   end

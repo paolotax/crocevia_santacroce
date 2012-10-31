@@ -17,8 +17,7 @@
         %th
         %th
       
-      - for movimento in collection do
-        = render 'movimenti/movimento', movimento: movimento
+      = render collection
 
       %tr.table-footer{ class: "#{'hidden' if collection.empty? }"}
         %td{ colspan: 2} Totale
@@ -29,7 +28,6 @@
         %td.provvigione
           %strong= number_to_currency collection.sum(&:importo_provvigione)
         %td
-        %td.provvigione
-          %strong= number_to_currency collection.select{ |m| m.da_rimborsare?}.sum(&:importo_provvigione)
+        %td
         %td.actions
 
