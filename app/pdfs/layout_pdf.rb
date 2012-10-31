@@ -108,7 +108,9 @@ module LayoutPdf
       end
       
       bounding_box [bounds.left + 70.mm, bounds.top - 3.mm - 3], width: 20.mm do
-        text price(collection.sum{ |a| giacenza == true ? a.ricavo : (a.prezzo * a.quantita) - (a.prezzo * a.provvigione * a.quantita / 100)}), align: :right, size: 9, style: :bold
+        text price(collection.sum{ |a| giacenza == true ? a.importo_provvigione : a.prezzo * a.provvigione * a.quantita / 100 }), align: :right, size: 9
+
+        #text price(collection.sum{ |a| giacenza == true ? a.ricavo : (a.prezzo * a.quantita) - (a.prezzo * a.provvigione * a.quantita / 100)}), align: :right, size: 9, style: :bold
       end
     end
   end

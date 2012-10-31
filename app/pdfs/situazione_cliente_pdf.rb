@@ -30,7 +30,7 @@ class SituazioneClientePdf < Prawn::Document
     firme_articoli(Time.zone.now)
 
     
-    @vendite = @cliente.movimenti.registrato.vendita.da_rimborsare.joins(:documento).order("documenti.data")
+    @vendite = @cliente.movimenti.registrato.vendita.da_rimborsare.joins(:documento).order("documenti.data, movimenti.id")
     
     unless @vendite.empty?
       start_new_page
