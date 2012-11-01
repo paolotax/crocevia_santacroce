@@ -41,8 +41,19 @@
   
   .empty-rows {
     text-align: center;
-    padding-bottom: 10px;
+    padding: 10px;
   }
+  #articoli-da-caricare {
+    margin-bottom: 0;
+    tr.table-footer td {
+      line-height: 32px
+    }
+  }
+}
+
+.alert form {
+  margin-top: 5px;
+  margin-right: -22px;
 }
 
 

@@ -1,4 +1,4 @@
-%tr[movimento]{class: "#{'scaduto' if movimento.scaduto?}"}
+%tr[movimento]{class: "#{'scaduto' if movimento.scaduto?} #{movimento.tipo} #{'rimborsato' if movimento.rimborsato?} #{'da_rimborsare' if movimento.da_rimborsare?}"}
   %td= link_to "art.#{movimento.articolo_id}", movimento.articolo
   %td= movimento.articolo.nome if movimento.articolo.present?
   %td.quantita= movimento.quantita

@@ -1,0 +1,11 @@
+$resa: #EDEDB4;
+
+tr.movimento {
+  &.resa {
+    background-color: $resa;
+    .provvigione {
+      color: $resa;
+    }
+  }
+  
+}

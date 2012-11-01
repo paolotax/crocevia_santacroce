@@ -4,10 +4,11 @@
       = hidden_field_tag "cliente_id", cliente.id
       = f.hidden_field :data,       value: Time.now
       = f.hidden_field :tipo,       value: "rimborso"
-      = f.submit "rimborsa", class: "btn btn-warning"
+      = f.submit "Rimborsa", class: "btn btn-warning"
 
     %h4
       Attenzione!
     = pluralize( cliente.vendite.rimborsabile.size, "articolo" )
-    da rimborsare. Clicca per creare la Rimessa (rimborso)
+    = number_to_currency( cliente.vendite.rimborsabile.sum(&:importo_provvigione))
+    da rimborsare.
       
