@@ -16,5 +16,12 @@
   .page-header
     %h1 Documenti 
   %table.table
-    = render @documenti 
-  / = paginate @documenti
+    - @documenti_per_giorno.each do |giorno, documenti|
+      %tr
+        %td{colspan: 7}
+          %strong= l giorno, format: :long
+        / %td.provvigione
+        /   importo:
+        /   %strong= number_to_currency documenti.sum(&:importo)
+      = render documenti
+  = paginate @documenti

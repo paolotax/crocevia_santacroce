@@ -3,7 +3,9 @@ class MovimentiController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @movimenti = Movimento.registrato.includes(:articolo, :documento).filtra(params).order("documenti.data desc, documenti.id desc, movimenti.id desc").pagina(params[:page]).per(30)
+    @movimenti = Movimento.registrato.includes(:articolo, :documento)
+                .filtra(params).order("documenti.data desc, documenti.id desc, movimenti.id desc")
+                .pagina(params[:page]).per(30)
     @movimenti_per_giorno = @movimenti.group_by {|m| m.documento.data}
   end
   

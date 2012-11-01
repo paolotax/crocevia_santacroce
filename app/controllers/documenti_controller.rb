@@ -3,7 +3,8 @@ class DocumentiController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @documenti = Documento.includes.order("data desc, id desc")
+    @documenti = Documento.includes.order("data desc, id desc").pagina(params[:page]).per(30)
+    @documenti_per_giorno = @documenti.group_by(&:data)
   end
 
   def show
