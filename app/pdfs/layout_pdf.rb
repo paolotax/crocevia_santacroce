@@ -299,18 +299,18 @@ module LayoutPdf
   def firme_cassa
     move_down 3.mm
 
-    bounding_box [bounds.left, cursor], width: bounds.width do
-
-      text "Dichiaro di aver ricevuto la somma a saldo, in contanti"
-      move_down 3.mm
-      text "Firma_____________________________________", align: :right
-      move_down 3.mm
-      text "Dichiaro di aver ricevuto la somma indicata a saldo a mezzo A.B."
-      move_down 3.mm
-      text "CODICE IBAN_____________________________________________"
-      draw_text "Firma_____________________________________", at: [bounds.left + 118.mm, cursor + 2.mm - 2]
-      
-    end
+    # bounding_box [bounds.left, cursor], width: bounds.width do
+    # 
+    #   text "Dichiaro di aver ricevuto la somma a saldo, in contanti"
+    #   move_down 3.mm
+    #   text "Firma_____________________________________", align: :right
+    #   move_down 3.mm
+    #   text "Dichiaro di aver ricevuto la somma indicata a saldo a mezzo A.B."
+    #   move_down 3.mm
+    #   text "CODICE IBAN_____________________________________________"
+    #   draw_text "Firma_____________________________________", at: [bounds.left + 118.mm, cursor + 2.mm - 2]
+    #   
+    # end
   end
 
   # utils

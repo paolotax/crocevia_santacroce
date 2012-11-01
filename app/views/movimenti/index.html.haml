@@ -1,0 +1,21 @@
+= content_for :left_col do
+  .span3.side-bar
+    %ul.nav.nav-list.well
+      %li.nav-header Movimenti
+      %li
+        = link_to movimenti_path do
+          tutti i movimenti
+      
+.span9
+  .page-header
+    %h1 Movimenti 
+  
+  %table.table
+    - @movimenti_per_giorno.each do |giorno, movimenti|
+      %tr
+        %td{colspan: 7}= l giorno, format: :long
+        %td.provvigione
+          incasso:
+          %strong= number_to_currency movimenti.select{ |m| m.vendita?}.sum(&:importo)
+      = render movimenti
+  = paginate @movimenti

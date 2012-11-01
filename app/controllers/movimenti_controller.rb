@@ -1,7 +1,12 @@
 class MovimentiController < ApplicationController
   
   load_and_authorize_resource
- 
+  
+  def index
+    @movimenti = Movimento.registrato.includes(:articolo, :documento).filtra(params).order("documenti.data desc").pagina(params[:page]).per(30)
+    @movimenti_per_giorno = @movimenti.group_by {|m| m.documento.data}
+  end
+  
   def create
     @movimento = current_user.movimenti.build(params[:movimento]) 
     respond_to do |format|

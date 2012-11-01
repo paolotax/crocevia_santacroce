@@ -95,9 +95,16 @@ class Movimento < ActiveRecord::Base
     created_at > articolo.data_scadenza
   end
   
-  
+  def self.filtra(params)
+    movimenti = scoped
+    movimenti = movimenti.where("documenti.data = ?", params[:del]) if params[:del].present?
+    movimenti = movimenti.vendita if params[:tipo].present?  && params[:tipo] == 'vendita'
+    movimenti = movimenti.where("documenti.data = ?", Date.new( params[:year].to_i, params[:month].to_i, params[:day].to_i)) if params[:day].present?
+    movimenti
+  end
+
   private
-    
+
     def set_prezzo
       if prezzo.blank?
         self.prezzo = articolo.prezzo_vendita

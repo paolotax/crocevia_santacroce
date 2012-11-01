@@ -21,6 +21,10 @@ CroceviaSantacroce::Application.routes.draw do
 
   match '/cassa',   controller: 'cassa', action: 'index'
   
+  match 'movimenti/:year/:month/:day' => 'movimenti#index',
+      :constraints => { :year => /\d{4}/, :month => /\d{1,2}/, :day => /\d{1,2}/ },
+      :as => 'lista_movimenti'
+
   resources :movimenti
   
   resources :categorie

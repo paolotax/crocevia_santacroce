@@ -33,42 +33,18 @@ class TesseraPdf < Prawn::Document
 
     @view = view
     tessera cliente
-    
   end  
     
   def tessera(cliente)
-    
     font_size 9
-    
     bounding_box [ bounds.left, bounds.top - 3.mm ], :width => bounds.width do
-      #stroke_bounds
       text cliente.id.to_s
       text cliente.full_name.upcase, style: :bold
       text cliente.indirizzo
       text "#{cliente.cap} #{cliente.citta} #{cliente.provincia}"
       barcode =  "#{Rails.root}/public/barcodes/tessera_#{cliente.id}.png" 
-      
       image barcode, :width => 30.mm, :height => 7.mm, :at => [bounds.left, bounds.top - 17.mm]
-      
     end
   end
-  
 
-  def price(num)
-    @view.number_to_currency(num, :locale => :it, :format => "%n %u", :precision => 2)
-  end
-  
-  def l(data)
-    @view.l data, :format => :only_date
-  end
-  
-  def t(data)
-    @view.t data
-  end
-
-
-  def current_user
-    @view.current_user
-  end
-    
 end

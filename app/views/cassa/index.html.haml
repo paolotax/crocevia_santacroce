@@ -29,8 +29,9 @@
         questa settimana
       - for d, i in @incassi_settimana do
         %li
-          %small= l d, format: :short
-          .pull-right= number_to_currency i
+          = link_to lista_movimenti_path(year: d.year, month: d.month, day: d.day) do
+            %small= l d, format: :short
+            .pull-right= number_to_currency i
 
       %li.nav-header
         %i.icon-shopping-cart
