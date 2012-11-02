@@ -37,23 +37,6 @@ $bodyBackground: white;
 }
 
 
-.page.gap,
-.page.current {
-  float: left;
-  padding: 0 14px;
-  line-height: 34px;
-  text-decoration: none;
-  border-right: 1px solid #DDD;
-}
-.page.current:last-child {
-  border-right-width: 0;
-}
-.pagination .first a {
-  border-left: 1px solid #DDD;
-  border-left-width: 1px;
-} 
-
-
 @media (max-width: 480px) {
   
   .hero-unit h1 {
