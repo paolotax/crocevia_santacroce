@@ -310,6 +310,12 @@ GEM
       rubyzip
     sexmachine (0.0.5)
       unicode_utils (>= 1.3.0)
+    shoulda (3.3.2)
+      shoulda-context (~> 1.0.1)
+      shoulda-matchers (~> 1.4.1)
+    shoulda-context (1.0.1)
+    shoulda-matchers (1.4.1)
+      activesupport (>= 3.0.0)
     simple_form (2.0.2)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -392,6 +398,7 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   savon
   sexmachine
+  shoulda
   simple_form
   sqlite3
   turbolinks

@@ -24,7 +24,7 @@ describe DocumentiController do
   # Documento. As you add validations to Documento, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    { data: '2010-10-11', tipo: "cassa" }
   end
   
   # This should return the minimal set of values that should be in the session
@@ -32,6 +32,15 @@ describe DocumentiController do
   # DocumentiController. Be sure to keep this updated too.
   def valid_session
     {}
+  end
+  
+  before(:each) do
+    @ability = Object.new
+    @ability.extend(CanCan::Ability)
+    controller.stub(:current_ability) { @ability }
+    @ability.can :manage, Documento
+    @user = FactoryGirl.create(:user)
+    controller.stub(:current_user).and_return(@user)
   end
 
   describe "GET index" do
@@ -86,18 +95,25 @@ describe DocumentiController do
     end
 
     describe "with invalid params" do
+      
+      before(:each) do
+        request.env["HTTP_REFERER"] = "where_i_came_from"
+      end
+      
       it "assigns a newly created but unsaved documento as @documento" do
         # Trigger the behavior that occurs when invalid params are submitted
         Documento.any_instance.stub(:save).and_return(false)
         post :create, {:documento => {}}, valid_session
-        assigns(:documento).should be_a_new(Documento)
+        response.should redirect_to "where_i_came_from"
+        # assigns(:documento).should be_a_new(Documento)
       end
 
-      it "re-renders the 'new' template" do
+      it "redirects to back" do
         # Trigger the behavior that occurs when invalid params are submitted
         Documento.any_instance.stub(:save).and_return(false)
         post :create, {:documento => {}}, valid_session
-        response.should render_template("new")
+        response.should redirect_to "where_i_came_from"
+        #response.should render_template("new")
       end
     end
   end
@@ -154,10 +170,10 @@ describe DocumentiController do
       }.to change(Documento, :count).by(-1)
     end
 
-    it "redirects to the documenti list" do
+    it "redirects to the cassa list" do
       documento = Documento.create! valid_attributes
       delete :destroy, {:id => documento.to_param}, valid_session
-      response.should redirect_to(documenti_url)
+      response.should redirect_to(cassa_url)
     end
   end
 

@@ -39,8 +39,6 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem "rspec-rails", ">= 2.10.1"
-  gem "factory_girl_rails", ">= 3.3.0"
-  
 end
 
 group :test do
@@ -49,8 +47,9 @@ group :test do
   gem "cucumber-rails", ">= 1.3.0", :require => false
   gem "capybara", ">= 1.1.2"
   gem "database_cleaner", ">= 0.8.0"
+  gem "factory_girl_rails", ">= 3.3.0"
   gem "launchy", ">= 2.1.0"
-
+  gem 'shoulda'
 end
 
 
