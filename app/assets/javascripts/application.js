@@ -19,7 +19,7 @@
 //= require twitter/bootstrap
 
 //= require bootstrap-datepicker
-//= require locales/bootstrap-datepicker.it
+//= require locales/bootstrap-datepicker.it.js
 
 //= require_tree ./application
 

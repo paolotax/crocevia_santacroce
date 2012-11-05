@@ -20,7 +20,7 @@
      
     - for articolo in @cliente.articoli.attivo do
       - unless articolo.new_record?
-        = render 'clienti/articolo', articolo: articolo
+        = render articolo
   
     %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli_attivi? }"}
       %td{ colspan: 2} Totale

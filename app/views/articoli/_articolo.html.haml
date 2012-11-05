@@ -1,9 +1,28 @@
 %tr[articolo]
   %td.id= link_to "art.#{articolo.id}", articolo
   %td.nome= articolo.nome
-  %td.quantita= articolo.quantita
+  %td.quantita= articolo.giacenza
   %td.prezzo= number_to_currency articolo.prezzo
   %td.provvigione= number_to_percentage articolo.provvigione, precision: 0
-  %td.created_at= articolo.created_at.try(:strftime, "%d-%m-%y")
-  %td
-    = link_to articolo.cliente.full_name, articolo.cliente
+  - unless articolo.attivo?
+    %td.etichetta.actions-mini
+      = form_tag etichette_articoli_path, :method => :put, :id => "form_articoli", class: "pull-right", target: "_blank" do
+        = hidden_field_tag "articolo_ids[]", articolo.id
+        = hidden_field_tag "tipo_etichetta", "Dymo 11352"
+        = button_tag id: "bt-pdf", class: "btn btn-mini" do
+          %i.icon-tag
+          eti
+    %td.rendi.actions-mini
+      = form_for Movimento.new, remote: true do |f|
+        = f.hidden_field :articolo_id, value: articolo.id
+        = f.hidden_field :tipo, value: "resa"
+        = f.submit  "Rendi", class: "btn btn-danger btn-mini pull-right" 
+    %td.vendi.actions-mini
+      = form_for Movimento.new, remote: true do |f|
+        = f.hidden_field :articolo_id, value: articolo.id
+        = f.hidden_field :tipo, value: "vendita"
+        = f.submit  "Vendi", class: "btn btn-success btn-mini pull-right" 
+  - else
+    %td{ colspan: 2}
+      = link_to articolo, method: :delete, class: "close", remote: true, "data-no-turbolink" => true do
+        &times;

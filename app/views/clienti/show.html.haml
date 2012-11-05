@@ -31,6 +31,8 @@
           Stampa situazione    
 
 .span9
+  = table_articoli @cliente.articoli
+  
   %h3= @cliente.full_name
 
   %address

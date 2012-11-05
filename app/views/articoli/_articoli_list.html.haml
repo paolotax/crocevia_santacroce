@@ -25,7 +25,7 @@
             = link_to 'x', key, class: "close", method: :delete, confirm: "Elimino il documento?\n(i movimenti non verranno eliminati)", "data-no-turbolink" => true
             
         - for articolo in values do
-          = render 'clienti/articolo', articolo: articolo
+          = render articolo
 
       %tr.table-footer{ class: "#{'hidden'  if collection.empty? }"}
         %td{ colspan: 2} Totale
