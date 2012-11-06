@@ -21,6 +21,13 @@ describe ArticoliController do
         @ability.can :read, Articolo
         @cliente = FactoryGirl.create(:cliente)
       end
+      
+      xit "assigns all articoli to @articoli with mock" do
+        articolo = stub_model(Articolo)  # devo assegnare il cliente
+        Articolo.stub(:all) { [articolo] }
+        get :index
+        assigns(:articoli).should eq([articolo])
+      end
 
       it "render index" do
         get :index
