@@ -3,7 +3,7 @@
     .front-signin
       = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), class: "signin") do |f| 
         .placeholding-input.username
-          = f.text_field :email, placeholder: "email", class: 'text-input'
+          = f.text_field :login, placeholder: "nome utente o email", class: 'text-input'
         %table.flex-table.password-signin
           %tbody
             %tr

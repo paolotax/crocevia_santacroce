@@ -8,12 +8,25 @@ class User < ActiveRecord::Base
          
          :omniauthable
 
+  attr_accessor :login
+
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :provider, :uid, :role_ids
+  attr_accessible :name, :email, :password, :login, :password_confirmation, :remember_me, :provider, :uid, :role_ids
+
   
   has_many :movimenti
   
   acts_as_messageable
+  
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions).where(["lower(name) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+    else
+      where(conditions).first
+    end
+  end
+      
   
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first

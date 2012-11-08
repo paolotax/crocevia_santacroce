@@ -20,7 +20,7 @@ it:
       unauthenticated: "Devi accedere o registrarti per continuare."
       unconfirmed: "Devi confermare il tuo account per continuare."
       locked: "Il tuo account è bloccato."
-      invalid: "Indirizzo email o password non validi."
+      invalid: "Nome utente, email o password non validi."
       invalid_token: "Codice di autenticazione non valido."
       timeout: "Sessione scaduta, accedere nuovamente per continuare."
       inactive: "Il tuo account non è stato ancora attivato."

@@ -49,7 +49,7 @@ end
 
 def sign_in
   visit '/users/sign_in'
-  fill_in "user_email", :with => @visitor[:email]
+  fill_in "user_login", :with => @visitor[:email]
   fill_in "user_password", :with => @visitor[:password]
   click_button "Accedi"
 end
@@ -172,7 +172,7 @@ Then /^I should see a successful sign up message$/ do
 end
 
 Then /^I should see an invalid email message$/ do
-  page.should have_content "Indirizzo email o password non validi"
+  page.should have_content "Nome utente, email o password non validi."
 end
 
 Then /^I should see a missing password message$/ do
@@ -192,7 +192,7 @@ Then /^I should see a signed out message$/ do
 end
 
 Then /^I see an invalid login message$/ do
-  page.should have_content "Indirizzo email o password non validi."
+  page.should have_content "Nome utente, email o password non validi."
 end
 
 Then /^I should see an account edited message$/ do
