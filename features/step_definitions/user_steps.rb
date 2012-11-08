@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 ### UTILITY METHODS ###
 
 def create_visitor
@@ -22,6 +24,13 @@ def create_user
   @user = FactoryGirl.create(:user, email: @visitor[:email])
 end
 
+def create_admin_user
+  create_visitor
+  delete_user
+  @user = FactoryGirl.create(:user, email: @visitor[:email])
+  @user.has_role :admin
+end
+
 def delete_user
   @user ||= User.first conditions: {:email => @visitor[:email]}
   @user.destroy unless @user.nil?
@@ -30,19 +39,19 @@ end
 def sign_up
   delete_user
   visit '/users/sign_up'
-  fill_in "Name", :with => @visitor[:name]
-  fill_in "Email", :with => @visitor[:email]
-  fill_in "Password", :with => @visitor[:password]
-  fill_in "Password confirmation", :with => @visitor[:password_confirmation]
-  click_button "Sign up"
+  fill_in "user_name", :with => @visitor[:name]
+  fill_in "user_email", :with => @visitor[:email]
+  fill_in "user_password", :with => @visitor[:password]
+  #fill_in "Password confirmation", :with => @visitor[:password_confirmation]
+  click_button "Iscriviti a Crocevia"
   find_user
 end
 
 def sign_in
   visit '/users/sign_in'
-  fill_in "Email", :with => @visitor[:email]
-  fill_in "Password", :with => @visitor[:password]
-  click_button "Sign in"
+  fill_in "user_email", :with => @visitor[:email]
+  fill_in "user_password", :with => @visitor[:password]
+  click_button "Accedi"
 end
 
 ### GIVEN ###
@@ -66,6 +75,10 @@ end
 
 Given /^I exist as an unconfirmed user$/ do
   create_unconfirmed_user
+end
+
+Given /^I am an admin user$/ do
+  @user.add_role :admin
 end
 
 ### WHEN ###
@@ -122,27 +135,28 @@ When /^I sign in with a wrong password$/ do
 end
 
 When /^I edit my account details$/ do
-  click_link "Edit account"
+  click_link "il mio profilo"
   fill_in "Name", :with => "newname"
   fill_in "Current password", :with => @visitor[:password]
   click_button "Update"
 end
 
 When /^I look at the list of users$/ do
-  visit '/'
+  sign_in
+  visit "/users"
 end
 
 ### THEN ###
 Then /^I should be signed in$/ do
-  page.should have_content "Logout"
-  page.should_not have_content "Sign up"
-  page.should_not have_content "Login"
+  page.should have_content "Esci"
+  page.should_not have_content "Iscriviti!"
+  page.should_not have_content "Accedi"
 end
 
 Then /^I should be signed out$/ do
-  page.should have_content "Sign up"
-  page.should have_content "Login"
-  page.should_not have_content "Logout"
+  page.should have_content "Accedi"
+  page.should have_content "Iscriviti!"
+  page.should_not have_content "Esci"
 end
 
 Then /^I see an unconfirmed account message$/ do
@@ -150,15 +164,15 @@ Then /^I see an unconfirmed account message$/ do
 end
 
 Then /^I see a successful sign in message$/ do
-  page.should have_content "Signed in successfully."
+  page.should have_content "Accesso effettuato con successo."
 end
 
 Then /^I should see a successful sign up message$/ do
-  page.should have_content "Welcome! You have signed up successfully."
+  page.should have_content "Benvenut"
 end
 
 Then /^I should see an invalid email message$/ do
-  page.should have_content "Email is invalid"
+  page.should have_content "Indirizzo email o password non validi"
 end
 
 Then /^I should see a missing password message$/ do
@@ -174,15 +188,15 @@ Then /^I should see a mismatched password message$/ do
 end
 
 Then /^I should see a signed out message$/ do
-  page.should have_content "Signed out successfully."
+  page.should have_content "Sei uscito correttamente."
 end
 
 Then /^I see an invalid login message$/ do
-  page.should have_content "Invalid email or password."
+  page.should have_content "Indirizzo email o password non validi."
 end
 
 Then /^I should see an account edited message$/ do
-  page.should have_content "You updated your account successfully."
+  page.should have_content "Il tuo account è stato correttamente modificato."
 end
 
 Then /^I should see my name$/ do

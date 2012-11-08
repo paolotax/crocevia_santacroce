@@ -40,7 +40,8 @@ it:
       signed_up_but_unconfirmed: 'Iscrizione correttamente eseguita. Se abilitata, una conferma è stata inviata al tuo indirizzo email.'
       signed_up_but_inactive: "Ti sei registrato correttamente. Tuttavia non puoi effettuare l'accesso perchè il tuo account non è ancora stato attivato."
       signed_up_but_locked: "Ti sei registrato correttamente. Tuttavia non puoi effettuare l'accesso perchè il tuo account è bloccato"
-
+      updated: 'Il tuo account è stato correttamente modificato.'
+      
     unlocks:
       send_instructions: "Riceverai un messaggio email con le istruzioni per sbloccare il tuo account entro qualche minuto."
       unlocked: "Il tuo account è stato correttamente sbloccato. Ora sei collegato."
