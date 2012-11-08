@@ -24,14 +24,10 @@ gem "haml", ">= 3.1.6"
 
 group :development do
   gem "haml-rails", ">= 0.3.4"
-  gem "guard", ">= 0.6.2" 
-  gem "guard-bundler", ">= 0.1.3"
-  gem "guard-rails", ">= 0.0.3"
-  gem "guard-livereload", ">= 0.3.0"
-  gem "guard-rspec", ">= 0.4.3"
-  gem "guard-cucumber", ">= 0.6.1"
+
   gem "rails-footnotes", ">= 3.7"
   
+
   # gem 'bullet'
 
 end
@@ -39,6 +35,15 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem "rspec-rails", ">= 2.10.1"
+
+  gem "guard", ">= 0.6.2" 
+  gem "guard-bundler", ">= 0.1.3"
+  gem "guard-rails", ">= 0.0.3"
+  gem "guard-livereload", ">= 0.3.0"
+  gem "guard-rspec", ">= 0.4.3"
+  gem "guard-cucumber", ">= 0.6.1"
+  gem "guard-spork"  
+  
 end
 
 group :test do
@@ -50,6 +55,9 @@ group :test do
   gem "factory_girl_rails", ">= 3.3.0"
   gem "launchy", ">= 2.1.0"
   gem 'shoulda'
+
+  gem 'fuubar'
+
 end
 
 
@@ -68,18 +76,18 @@ gem 'mailboxer'
 gem 'ruby-vips'
 gem 'carrierwave-vips'
 
-# case HOST_OS
-#   when /darwin/i
-#     gem 'rb-fsevent', :group => :development
-#     gem 'growl', :group => :development
-#   when /linux/i
-#     gem 'libnotify', :group => :development
-#     gem 'rb-inotify', :group => :development
-#   when /mswin|windows/i
-#     gem 'rb-fchange', :group => :development
-#     gem 'win32console', :group => :development
-#     gem 'rb-notifu', :group => :development
-# end
+case HOST_OS
+  when /darwin/i
+    gem 'rb-fsevent', :group => :development
+    gem 'growl', :group => :development
+  when /linux/i
+    gem 'libnotify', :group => :development
+    gem 'rb-inotify', :group => :development
+  when /mswin|windows/i
+    gem 'rb-fchange', :group => :development
+    gem 'win32console', :group => :development
+    gem 'rb-notifu', :group => :development
+end
 
 
 gem "devise", ">= 2.1.0"

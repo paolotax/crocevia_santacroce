@@ -31,12 +31,22 @@
             
 
 .span9
-  .pull-right
-    - if @articolo.disponibile?
-      = form_for Movimento.new do |f|
+  - if @articolo.disponibile?
+    .pull-right
+      = form_for Movimento.new, html: { class: "btn-articolo"} do |f|
         = f.hidden_field :articolo_id, value: @articolo.id
         = f.hidden_field :tipo, value: "vendita"
         = f.submit  "Vendi", class: "btn btn-success" 
+      = form_for Movimento.new, html: { class: "btn-articolo"} do |f|
+        = f.hidden_field :articolo_id, value: @articolo.id
+        = f.hidden_field :tipo, value: "resa"
+        = f.submit  "Rendi", class: "btn btn-danger"
+      = form_tag etichette_articoli_path, :method => :put, :id => "form_articoli", class: "btn-articolo", target: "_blank" do
+        = hidden_field_tag "articolo_ids[]", @articolo.id
+        = hidden_field_tag "tipo_etichetta", "Dymo 11352"
+        = button_tag id: "bt-pdf", class: "btn" do
+          %i.icon-tag
+          eti
 
   %h3
     = @articolo.nome
