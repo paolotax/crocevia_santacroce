@@ -23,5 +23,9 @@
         %td.pezzi{colspan: 5}
           incasso:
           %strong= number_to_currency movimenti.select{ |m| m.vendita?}.sum(&:importo)
-      = render movimenti
+      - for m in controller.exhibit(movimenti, "movimenti") do
+        = m.render_template(self)
+
   = paginate @movimenti
+
+  

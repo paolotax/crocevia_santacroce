@@ -95,6 +95,8 @@ gem "simple_form"
 gem "turbolinks"
 gem 'jquery-turbolinks'
 
+gem 'display_case', :git => "https://github.com/objects-on-rails/display-case.git"
+
 gem 'prawn'
 
 gem "omniauth-facebook"
