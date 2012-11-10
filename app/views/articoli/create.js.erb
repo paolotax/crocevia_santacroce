@@ -1,4 +1,4 @@
-$("#articoli-da-caricare .table-footer").before("<%= escape_javascript(render 'clienti/articolo', articolo: @articolo) %>");
+$("#articoli-da-caricare .table-footer").before("<%= escape_javascript(render @articolo) %>");
 
 $("form.new_articolo").get(0).reset();
 $("input#articolo_nome").focus();

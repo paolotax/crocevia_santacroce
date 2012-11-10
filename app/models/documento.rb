@@ -101,6 +101,13 @@ class Documento < ActiveRecord::Base
       self.rimborsi << r if r.da_rimborsare?
     end  
   end
+
+  def self.filtra(params)
+    documenti = scoped
+    documenti = documenti.where("documenti.data = ?", Date.new( params[:year].to_i, params[:month].to_i, params[:day].to_i)) if params[:day].present?
+    documenti
+  end
+
   
   private
     

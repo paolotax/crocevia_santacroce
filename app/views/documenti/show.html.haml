@@ -32,7 +32,7 @@
           %i.icon-user
           tutti i documenti
 
-.span9
+%section[@documento]{class: "span9 #{@documento.tipo}"}
   %h3
     = @documento.tipo
     %small= "nr. #{@documento.id} del #{@documento.data.strftime('%d-%m-%Y')}"

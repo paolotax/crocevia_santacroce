@@ -6,11 +6,11 @@
         %small= link_to "...", "##{label}", class: "show-hide collapsed", data: { toggle: "collapse", "no-turbolink" => true }
 
   %div.collapse{ id: "#{label}" }
-    %table.table.articoli      
+    %table.table.movimenti      
       %tr.table-header{ class: "#{'hidden' if collection.empty? }" }
         %th.codice   Codice
         %th.articolo Articolo
-        %th.quantita Pezzi
+        %th.pezzi    Pezzi
         %th.prezzo   Prezzo Vendita
         %th.provvigione Al Cliente
         %th
@@ -21,7 +21,7 @@
 
       %tr.table-footer{ class: "#{'hidden' if collection.empty? }"}
         %td{ colspan: 2} Totale
-        %td.quantita
+        %td.pezzi
           %strong= collection.sum(&:quantita) 
         %td.prezzo
           %strong= number_to_currency collection.sum(&:importo)

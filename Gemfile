@@ -24,12 +24,8 @@ gem "haml", ">= 3.1.6"
 
 group :development do
   gem "haml-rails", ">= 0.3.4"
-
   gem "rails-footnotes", ">= 3.7"
-  
-
   # gem 'bullet'
-
 end
 
 group :development, :test do

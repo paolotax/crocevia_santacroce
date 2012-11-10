@@ -24,15 +24,15 @@ a.show-hide {
   }
 }
 
-.articoli {
+
+
+.articolo {
   .quantita {
     text-align: center;
   }
   .prezzo {
-    text-align: right;    
-  }
-  .provvigione {
     text-align: right;
+
   }
   .created_at {
     text-align: right;
@@ -50,7 +50,33 @@ a.show-hide {
   
 }
 
-.scaduto .prezzo{
+.table td.pezzi,
+.table td.prezzo,
+.table td.quantita,
+.table td.giacenza {
+  text-align: right;
+}
+
+.table td.giacenza {
+  font-style: bold;
+}
+
+.table td.quantita {
+  display: none;
+}
+
+section.documento.carico td.giacenza {
+  display: none;
+}
+section.documento.carico td.quantita {
+  display: block;
+}
+
+.prezzo, .provvigione {
+  min-width: 60px;
+}
+
+.scaduto .prezzo {
   color: #B94A48;
 }
 

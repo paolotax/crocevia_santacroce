@@ -5,7 +5,7 @@ class MovimentiController < ApplicationController
   def index
     @movimenti = Movimento.registrato.includes(:articolo, :documento)
                 .filtra(params).order("documenti.data desc, documenti.id desc, movimenti.id desc")
-                .pagina(params[:page]).per(30)
+                .pagina(params[:page]).per(30)       
     @movimenti_per_giorno = @movimenti.group_by {|m| m.documento.data}
   end
   

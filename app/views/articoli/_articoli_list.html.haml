@@ -10,7 +10,7 @@
       %tr.table-header{ class: "#{'hidden' if collection.empty? }" }
         %th.codice      Codice
         %th.articolo    Articolo
-        %th.quantita    Quantità
+        %th.pezzi    Quantità
         %th.prezzo      Prezzo
         %th.provvigione Provvigione
         %th
@@ -29,7 +29,7 @@
 
       %tr.table-footer{ class: "#{'hidden'  if collection.empty? }"}
         %td{ colspan: 2} Totale
-        %td.quantita
+        %td.pezzi
           %strong= collection.sum(&:giacenza) 
         %td.prezzo
           %strong= number_to_currency collection.sum(&:importo)

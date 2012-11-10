@@ -12,7 +12,7 @@
       / %th.barcode Barcode
       %th.codice      Codice
       %th.articolo    Articolo
-      %th.quantita    Quantità
+      %th.pezzi       Quantità
       %th.prezzo      Prezzo
       %th.provvigione Provvigione
       %th
@@ -24,7 +24,7 @@
   
     %tr.table-footer{ class: "#{'hidden' unless @cliente.has_articoli_attivi? }"}
       %td{ colspan: 2} Totale
-      %td.quantita
+      %td.pezzi
         %strong= @cliente.articoli.attivo.sum(&:giacenza) 
       %td.prezzo
         %strong= number_to_currency @cliente.articoli.attivo.sum(&:importo)

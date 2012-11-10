@@ -5,6 +5,10 @@
       %li
         = link_to movimenti_path do
           tutti i movimenti
+      %li.divider
+      %li
+        = link_to documenti_path do
+          tutti i documenti
       
 .span9
   .page-header
@@ -13,8 +17,10 @@
   %table.table
     - @movimenti_per_giorno.each do |giorno, movimenti|
       %tr
-        %td{colspan: 7}= l giorno, format: :long
-        %td.provvigione
+        %td{colspan: 4}
+          = link_to lista_movimenti_path(year: giorno.year, month: giorno.month, day: giorno.day) do
+            %strong= l giorno, format: :long
+        %td.pezzi{colspan: 5}
           incasso:
           %strong= number_to_currency movimenti.select{ |m| m.vendita?}.sum(&:importo)
       = render movimenti

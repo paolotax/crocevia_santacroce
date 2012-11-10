@@ -1,9 +1,11 @@
 %tr[articolo]
   %td.id= link_to "art.#{articolo.id}", articolo
   %td.nome= articolo.nome
-  %td.quantita= articolo.giacenza
+  %td.quantita= articolo.quantita
+  %td.giacenza= articolo.giacenza
   %td.prezzo= number_to_currency articolo.prezzo
   %td.provvigione= number_to_percentage articolo.provvigione, precision: 0
+  
   - unless articolo.attivo?
     %td.etichetta.actions-mini
       = form_tag etichette_articoli_path, :method => :put, :id => "form_articoli", class: "pull-right", target: "_blank" do
