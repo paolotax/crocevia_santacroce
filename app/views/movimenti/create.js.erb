@@ -1,6 +1,9 @@
 $("span.help-inline.error-inline").remove();
 
 <%- if @movimento.errors.empty? %>
+  
+  $("#<%= dom_id @movimento.articolo %>").replaceWith("<%= j (render @movimento.articolo.reload) %>")
+  
   $(".movimenti.da-registrare").prepend("<%= escape_javascript(render @movimento) %>");
   $(".cassa-result").replaceWith("<%= escape_javascript( render partial: 'cassa/cassa_result', locals: { movimenti: @movimento.user.movimenti.attivo } ) %>");
   $("form#new_movimento").get(0).reset();

@@ -11,7 +11,7 @@
           tutti
       %li.divider
       
-      = search_form_for @q,  html: {class: "form-search", remote: true, style: "margin-bottom: 0"} do |f|
+      = search_form_for @q,  html: {class: "form-search", style: "margin-bottom: 0"} do |f|
         .input-append
           = f.text_field :index_cont, class: "search-query", placeholder: "cerca articolo", style: "width: 110px"
           = button_tag class: "btn", name: nil do
