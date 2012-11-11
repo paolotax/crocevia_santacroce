@@ -1,7 +1,6 @@
 class RimborsoExhibit < DisplayCase::Exhibit
 
   def self.applicable_to?(object, context) 
-  	#raise context.name.inspect
   	object.class.name == 'Movimento' && object.vendita? && !object.rimborso_id.nil?
   end
 

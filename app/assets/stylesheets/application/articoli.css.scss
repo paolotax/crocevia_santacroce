@@ -8,12 +8,14 @@
 //   border: 1px solid #BDBDBD;
 // }
 
+@import "colors";
+
 a.show-hide {
   &:before {
-    content: "nascondi"
+    content: "nascondi";
   }
   &.collapsed:before {
-    content: "mostra"
+    content: "mostra";
   }
 }
 
@@ -24,19 +26,14 @@ a.show-hide {
   }
 }
 
-
-
 .articolo {
-  .quantita {
-    text-align: center;
-  }
-  .prezzo {
-    text-align: right;
-
-  }
   .created_at {
     text-align: right;
   }
+}
+
+.table {
+  
   td.actions {
     width: 100px;
     padding-left: 0;
@@ -47,23 +44,24 @@ a.show-hide {
     padding-left: 0;
     padding-right: 0;
   }
-  
-}
-
-.table td.pezzi,
-.table td.prezzo,
-.table td.quantita,
-.table td.giacenza {
-  text-align: right;
-}
-
-.table td.giacenza {
+  td.pezzi,
+  td.prezzo,
+  td.quantita,
+  td.giacenza,
+  td.rimborsi {
+    text-align: right;
+  }
+  td.giacenza {
   font-style: bold;
+  }
+  td.quantita {
+    display: none;
+  }
+  td.rimborsi {
+    color: $redText;
+  }
 }
 
-.table td.quantita {
-  display: none;
-}
 
 section.documento.carico td.giacenza {
   display: none;

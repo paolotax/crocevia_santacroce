@@ -12,6 +12,10 @@
       
 .span9
   .page-header
+    = link_to "#", class: "btn btn-stampami pull-right", onclick: "window.print();return false;", "data-no-turbolink" => true do
+      %i.icon-print
+      Stampami
+    
     %h1 Movimenti 
   
   %table.table
@@ -19,10 +23,10 @@
       %tr
         %td{colspan: 4}
           = link_to lista_movimenti_path(year: giorno.year, month: giorno.month, day: giorno.day) do
-            %strong= l giorno, format: :long
+            %h4= l giorno, format: :long
         %td.pezzi{colspan: 5}
-          incasso:
-          %strong= number_to_currency movimenti.select{ |m| m.vendita?}.sum(&:importo)
+          incasso
+          %h4= number_to_currency movimenti.select{ |m| m.vendita?}.sum(&:importo)
       - for m in controller.exhibit(movimenti, "movimenti") do
         = m.render_template(self)
 

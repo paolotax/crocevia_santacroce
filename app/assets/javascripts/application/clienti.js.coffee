@@ -1,13 +1,7 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
-
 jQuery ->
 
-  #document.addEventListener 'page:change', ->  
-
   $("span.get-cf").live 'click', (e) ->
-    
+
     e.preventDefault();
     
     data =
@@ -17,12 +11,6 @@ jQuery ->
         sesso:   $('#cliente_sesso').val()
         data_nascita:   $("#cliente_data_di_nascita_text").val()
         comune_nascita: $("#cliente_comune_di_nascita").val()
-      
-    console.log data
-    
+        
     $.post "/codice_fiscale", data, (data) ->
       $("input#cliente_codice_fiscale").val data.codice_fiscale
-        
-        
-    
-    
