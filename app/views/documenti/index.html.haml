@@ -11,7 +11,7 @@
         = link_to movimenti_path do
           tutti i movimenti    
 
-.span9
+%section.documenti.span9
   .page-header
     = link_to "#", class: "btn btn-stampami pull-right", onclick: "window.print();return false;", "data-no-turbolink" => true do
       %i.icon-print
@@ -23,11 +23,13 @@
         %td.giorno{colspan: 2, style: "padding-top: 18px" }
           = link_to lista_documenti_path(year: giorno.year, month: giorno.month, day: giorno.day) do
             %h4= l giorno, format: :long
-        %td.pezzi{colspan: 2, style: "padding-top: 20px"}
-          incasso
-          %h4= number_to_currency documenti.select{ |m| m.cassa?}.sum(&:importo)
+        %td.incasso{colspan: 2, style: "padding-top: 20px"}
+          - if documenti.select{ |m| m.cassa?}.sum(&:importo) > 0
+            incasso
+            %h4= number_to_currency documenti.select{ |m| m.cassa?}.sum(&:importo)
         %td.rimborsi{colspan: 2, style: "padding-top: 20px"}
-          rimborsi
-          %h4= number_to_currency documenti.select{ |m| m.rimborso?}.sum(&:importo)
+          - if documenti.select{ |m| m.rimborso?}.sum(&:importo) > 0
+            rimborsi
+            %h4= number_to_currency documenti.select{ |m| m.rimborso?}.sum(&:importo)
       = render documenti
   = paginate @documenti

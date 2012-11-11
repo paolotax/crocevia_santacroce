@@ -5,7 +5,7 @@ class CassaController < ApplicationController
   def index
     @movimento           = Movimento.new(tipo: "vendita")
     @movimenti           = current_user.movimenti.vendita.attivo.includes(:articolo).all
-    @incassi             = Documento.cassa.recente.limit(5)
+    @incassi             = Documento.recente.limit(5)
     @incassi_settimana   = Documento.settimana.cassa.select(:data).order("data desc").group(:data).sum(:importo)
     @incassi_mese        = Documento.cassa.order("data desc").group_by {|d| d.data.beginning_of_month }
     

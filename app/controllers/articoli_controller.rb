@@ -3,7 +3,7 @@ require "prawn/measurement_extensions"
 class ArticoliController < ApplicationController
   
   load_and_authorize_resource
-  
+
   def index
     @q = Articolo.includes(:cliente).joins(:cliente).order("articoli.id desc").search(params[:q])
     @articoli = @q.result(:distinct => true).pagina(params[:page]).per(30)

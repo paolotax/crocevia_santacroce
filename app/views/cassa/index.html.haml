@@ -17,16 +17,20 @@
       
       %li.nav-header
         %i.icon-shopping-cart
-        Ultimi incassi
+        Ultimi documenti
       - for i in @incassi do
         %li[i]
           = link_to documento_path(i) do
             = "#{i.tipo} #{i.id} -"
             %small= l i.data, format: :short
             .pull-right= number_to_currency i.importo
+      %li
+        = link_to documenti_path do
+          = "...tutti"
+
       %li.nav-header
         %i.icon-shopping-cart
-        questa settimana
+        incassi settimana
       - for d, i in @incassi_settimana do
         %li
           = link_to lista_documenti_path(year: d.year, month: d.month, day: d.day) do
@@ -35,7 +39,7 @@
 
       %li.nav-header
         %i.icon-shopping-cart
-        per mese
+        incassi mese
       - for m, i in @incassi_mese do
         %li
           %small= l m, format: :long_month
