@@ -18,18 +18,27 @@
       Stampami
     %h1 Documenti 
   %table.table
-    - @documenti_per_giorno.each do |giorno, documenti|
+    - @documenti_per_giorno.each do |month, days|
       %tr
-        %td.giorno{colspan: 2, style: "padding-top: 18px" }
-          = link_to lista_documenti_path(year: giorno.year, month: giorno.month, day: giorno.day) do
-            %h4= l giorno, format: :long
-        %td.incasso{colspan: 2, style: "padding-top: 20px"}
-          - if documenti.select{ |m| m.cassa?}.sum(&:importo) > 0
-            incasso
-            %h4= number_to_currency documenti.select{ |m| m.cassa?}.sum(&:importo)
-        %td.rimborsi{colspan: 2, style: "padding-top: 20px"}
-          - if documenti.select{ |m| m.rimborso?}.sum(&:importo) > 0
-            rimborsi
-            %h4= number_to_currency documenti.select{ |m| m.rimborso?}.sum(&:importo)
-      = render documenti
-  = paginate @documenti
+        %td= l month, format: :long_month
+        = importo_per_mese(@documenti)
+        = importo_per_mese(days.values, 'rimborso')
+
+      - days.each do |giorno, documenti|
+        %tr
+          %td.giorno{colspan: 2, style: "padding-top: 18px" }
+            = link_to lista_documenti_path(year: giorno.year, month: giorno.month, day: giorno.day) do
+              %h4= l giorno, format: :long
+          %td.incasso{colspan: 2, style: "padding-top: 20px"}
+            - if documenti.select{ |m| m.cassa?}.sum(&:importo) > 0
+              incasso
+              %h4= number_to_currency documenti.select{ |m| m.cassa?}.sum(&:importo)
+          %td.rimborsi{colspan: 2, style: "padding-top: 20px"}
+            - if documenti.select{ |m| m.rimborso?}.sum(&:importo) > 0
+              rimborsi
+              %h4= number_to_currency documenti.select{ |m| m.rimborso?}.sum(&:importo)
+  
+        = render documenti   
+
+  
+  = paginate @paged

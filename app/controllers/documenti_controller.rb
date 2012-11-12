@@ -3,14 +3,15 @@ class DocumentiController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @documenti = Documento.includes.order("data desc, id desc").filtra(params).pagina(params[:page]).per(30)
-    @documenti_per_giorno = @documenti.group_by(&:data)
+    @documenti = Documento.includes.order("data desc, id desc").filtra(params)
+    @paged = @paged.pagina(params[:page]).per(30)
+    @documenti_per_giorno = @paged.group_by_data
   end
 
   def show
-    
+
     @righe = @documento.righe
-    
+
     respond_to do |format|
       format.html
       format.pdf do
@@ -19,14 +20,6 @@ class DocumentiController < ApplicationController
                               type: "application/pdf",
                               disposition: "inline"
       end
-    end
-  end
-
-  def new
-    @documento = Documento.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @documento }
     end
   end
 

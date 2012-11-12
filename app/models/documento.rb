@@ -30,6 +30,40 @@ class Documento < ActiveRecord::Base
     end
   end
   
+  def self.group_by_data
+    documenti = scoped
+    grouped_documenti = {}
+
+    documenti.each do |documento|
+      #ensure containers exist
+      grouped_documenti[documento.data.beginning_of_month] ||= {}
+      grouped_documenti[documento.data.beginning_of_month][documento.data] ||= []
+      #grouped_documenti[documento.data.beginning_of_month][documento.data.day][documento.year] ||= []
+
+      #put the documento in its place
+      grouped_documenti[documento.data.beginning_of_month][documento.data] << documento
+    end
+
+    grouped_documenti
+  end
+
+  # def self.totali_per_mese
+  #   documenti = scoped
+  #   totali_per_mese = {}
+
+  #   documenti.each do |documento|
+  #     #ensure containers exist
+  #     totali_per_mese[documento.data.beginning_of_month] ||= {}
+  #     grouped_documenti[documento.data.beginning_of_month][documento.data] ||= []
+  #     #grouped_documenti[documento.data.beginning_of_month][documento.data.day][documento.year] ||= []
+
+  #     #put the documento in its place
+  #     grouped_documenti[documento.data.beginning_of_month][documento.data] << documento
+  #   end
+
+  #   grouped_documenti
+  # end
+
   def data_text
     @data_text || data.try(:strftime, "%d-%m-%Y")
   end

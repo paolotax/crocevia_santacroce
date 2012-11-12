@@ -59,12 +59,12 @@ describe DocumentiController do
     end
   end
 
-  describe "GET new" do
-    it "assigns a new documento as @documento" do
-      get :new, {}, valid_session
-      assigns(:documento).should be_a_new(Documento)
-    end
-  end
+  # describe "GET new" do
+  #   it "assigns a new documento as @documento" do
+  #     get :new, {}, valid_session
+  #     assigns(:documento).should be_a_new(Documento)
+  #   end
+  # end
 
   describe "GET edit" do
     it "assigns the requested documento as @documento" do

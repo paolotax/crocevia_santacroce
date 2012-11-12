@@ -1,13 +1,13 @@
 %tr[documento]
-	%td.tipo= documento.tipo
-	%td.id= link_to "nr.#{documento.id} del #{documento.data.try(:strftime, "%d-%m-%y")}", documento
-	%td.cliente= link_to documento.mandante, documento.mandante if documento.mandante
-	%td.prezzo
-		= documento.cassa? ? number_to_currency(documento.importo) :	''
-	%td
-		&nbsp	
-	%td.rimborsi
-		= documento.rimborso? ? number_to_currency(documento.importo) :	''
+  %td.tipo= documento.tipo
+  %td.id= link_to "nr.#{documento.id} del #{documento.data.try(:strftime, "%d-%m-%y")}", documento
+  %td.cliente= link_to documento.mandante, documento.mandante if documento.mandante
+  %td.prezzo
+    = documento.cassa? ? number_to_currency(documento.importo) : ''
+  %td
+    &nbsp 
+  %td.rimborsi
+    = documento.rimborso? ? number_to_currency(documento.importo) : ''
 
 
 
