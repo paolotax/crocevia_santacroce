@@ -49,7 +49,8 @@ a.show-hide {
   td.quantita,
   td.giacenza,
   td.rimborsi,
-  td.incasso {
+  td.totale_cassa,
+  td.totale_rimborso {
     text-align: right;
   }
   td.giacenza {
@@ -58,7 +59,8 @@ a.show-hide {
   td.quantita {
     display: none;
   }
-  td.rimborsi {
+  td.rimborsi,
+  td.totale_rimborso {
     color: $redText;
   }
 }

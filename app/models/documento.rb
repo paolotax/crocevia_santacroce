@@ -8,9 +8,10 @@ class Documento < ActiveRecord::Base
   has_many :clienti, through: :articoli
   has_many :rimborsi, class_name: "Movimento", foreign_key: :rimborso_id, dependent: :nullify
   
-  scope :recente, order("documenti.id desc")
-  scope :settimana,  where("data >= ?", Time.now.beginning_of_week )
-  # scope :mese where("data >= ?", Time.now.beginning_of_month )
+  scope :recente, order("documenti.data desc, documenti.id desc")
+  scope :settimana,   where("data >= ?", Time.now.beginning_of_week )
+  scope :filtra_mese, lambda { |mese| where("documenti.data >= ? and documenti.data <= ?", 
+                                             mese.beginning_of_month, mese.end_of_month) }
   
   validates :data_text, presence: true 
   validates :tipo,      presence: true 
@@ -30,39 +31,19 @@ class Documento < ActiveRecord::Base
     end
   end
   
-  def self.group_by_data
+  def self.group_by_month
     documenti = scoped
     grouped_documenti = {}
-
     documenti.each do |documento|
       #ensure containers exist
       grouped_documenti[documento.data.beginning_of_month] ||= {}
       grouped_documenti[documento.data.beginning_of_month][documento.data] ||= []
       #grouped_documenti[documento.data.beginning_of_month][documento.data.day][documento.year] ||= []
-
       #put the documento in its place
       grouped_documenti[documento.data.beginning_of_month][documento.data] << documento
     end
-
     grouped_documenti
   end
-
-  # def self.totali_per_mese
-  #   documenti = scoped
-  #   totali_per_mese = {}
-
-  #   documenti.each do |documento|
-  #     #ensure containers exist
-  #     totali_per_mese[documento.data.beginning_of_month] ||= {}
-  #     grouped_documenti[documento.data.beginning_of_month][documento.data] ||= []
-  #     #grouped_documenti[documento.data.beginning_of_month][documento.data.day][documento.year] ||= []
-
-  #     #put the documento in its place
-  #     grouped_documenti[documento.data.beginning_of_month][documento.data] << documento
-  #   end
-
-  #   grouped_documenti
-  # end
 
   def data_text
     @data_text || data.try(:strftime, "%d-%m-%Y")

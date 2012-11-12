@@ -3,9 +3,9 @@ class DocumentiController < ApplicationController
   load_and_authorize_resource
   
   def index
-    @documenti = Documento.includes.order("data desc, id desc").filtra(params)
-    @paged = @paged.pagina(params[:page]).per(30)
-    @documenti_per_giorno = @paged.group_by_data
+    @documenti = Documento.recente.filtra(params)
+    @paged = @documenti.pagina(params[:page]).per(30)
+    @documenti_per_giorno = @paged.group_by_month
   end
 
   def show

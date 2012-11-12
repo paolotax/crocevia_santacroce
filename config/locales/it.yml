@@ -77,6 +77,7 @@ it:
       long_month: "%B %Y"
       long: "%d %B %Y"
       only_date: "%d/%m/%Y"
+      only_long_day: "%A %d"
 
     day_names:
       - Domenica
