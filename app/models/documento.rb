@@ -3,6 +3,9 @@ class Documento < ActiveRecord::Base
   attr_accessible :importo, :tipo, :data_text, :data
   attr_writer :data_text
   
+  # prima dell'associazione se no non funziona
+  # before_destroy :change_vendite_user
+
   has_many :articoli,  dependent:  :nullify
   has_many :movimenti, dependent:  :nullify
   has_many :clienti, through: :articoli
@@ -18,8 +21,9 @@ class Documento < ActiveRecord::Base
   
   validate    :check_data_text
 
-  before_save  :save_data_text
-  after_create :notify_vendita
+  
+  before_save    :save_data_text
+  after_create   :notify_vendita
   
   TIPO_DOCUMENTO = %w(cassa resa carico rimborso)
   
@@ -126,6 +130,15 @@ class Documento < ActiveRecord::Base
   
   private
     
+    # def change_vendite_user
+    #   if cassa?
+    #     #raise righe.size.inspect
+    #     righe.each do |r|
+    #       r.update_attributes(user: User.current)
+    #     end
+    #   end 
+    # end
+
     def notify_vendita
       if cassa?
         vendita = self.reload

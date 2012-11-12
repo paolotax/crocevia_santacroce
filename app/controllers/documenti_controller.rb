@@ -2,6 +2,10 @@ class DocumentiController < ApplicationController
 
   load_and_authorize_resource
   
+  # http://rails-bestpractices.com/posts/47-fetch-current-user-in-models solution
+  # violates MVC pattern
+  # before_filter :set_current_user
+
   def index
     @documenti = Documento.recente.filtra(params)
     @paged = @documenti.pagina(params[:page]).per(30)
@@ -70,6 +74,10 @@ class DocumentiController < ApplicationController
 
   def destroy
     return_url = @documento.mandante || cassa_url
+    # non posso passare current_user nel model
+    if @documento.cassa?
+       @documento.righe.each {|r| r.update_attributes(user: current_user)}
+    end
     @documento.destroy
     respond_to do |format|
       format.html { redirect_to return_url }

@@ -1,6 +1,6 @@
 class Movimento < ActiveRecord::Base
   
-  attr_accessible :prezzo, :quantita, :tipo, :articolo_id, :rimborso_id
+  attr_accessible :prezzo, :quantita, :tipo, :articolo_id, :rimborso_id, :user
   
   belongs_to :articolo, counter_cache: true
   belongs_to :user
