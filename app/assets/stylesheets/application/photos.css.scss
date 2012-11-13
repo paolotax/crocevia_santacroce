@@ -1,3 +1,6 @@
+@import "colors";
+@import "compass/css3/border-radius";
+
 .upload {
   border-top: solid 1px #CCC;
   width: 400px;
@@ -13,5 +16,26 @@
       height: 10px;
       background: #3EC144;
     }
+  }
+}
+
+ul#foto_caricate {
+  width: 320px;
+  float: right;
+}
+.dropzone {
+  width: 80px;
+  font-weight: bold;
+  border-style: dotted; 
+  border-color: $lightGray;
+  border-width: 5px;
+  @include border-radius(10px);
+  color: $lightGray - 20;
+  text-align: center;
+  vertical-align: middle;
+  padding: 1em 1em 1em 1em;
+  margin-top: 1em;
+  form {
+    margin: 0;
   }
 }

@@ -1,3 +1,7 @@
+= content_for :head do
+  = javascript_include_tag :uploader
+
+
 = content_for :left_col do
   .span3.side-bar
     %ul.nav.nav-list.well
@@ -28,9 +32,9 @@
         = link_to articoli_url do
           %i.icon-gift
           tutti
-            
 
-.span9
+
+%section.span9
   - if @articolo.disponibile?
     .pull-right
       = form_for Movimento.new, html: { class: "btn-articolo"} do |f|
@@ -54,6 +58,16 @@
       di
       = link_to @articolo.cliente.full_name, @articolo.cliente
   
+  %ul#foto_caricate.thumbnails
+    = render @articolo.photos  
+    %li.dropzone
+      trascina qui una
+      o più fotografie
+      %br
+      = form_for Photo.new, html: { "data-no-turbolink" => true } do |f|
+        = f.hidden_field :articolo_id, value: @articolo.id
+        = f.file_field :photo, multiple: true, name: "photo[photo]", class: "hidden"
+
   %p
     codice articolo: #{@articolo.id.to_s}
     %br
@@ -69,7 +83,9 @@
     %br
     data scadenza: #{l @articolo.data_scadenza, format: :default}
     
-    
+   
+  .clearfix
+
   - if @articolo.documento
     = link_to @articolo.documento do
       .alert.alert-info

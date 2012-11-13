@@ -9,6 +9,7 @@
 // }
 
 @import "colors";
+@import "compass/css3/border-radius";
 
 a.show-hide {
   &:before {
@@ -86,5 +87,6 @@ section.documento.carico td.quantita {
 td.actions form {
   margin-bottom: 0;
 }
+
 
 

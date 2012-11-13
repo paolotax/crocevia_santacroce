@@ -2,11 +2,12 @@ class Photo < ActiveRecord::Base
   
   mount_uploader :photo, PhotoUploader
   
-  attr_accessible :photo, :crop_x, :crop_y, :crop_w, :crop_h, :rotate
+  attr_accessible :photo, :crop_x, :crop_y, :crop_w, :crop_h, :rotate, :articolo_id
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :rotate
   after_update :elaborate_photo #:crop_photo
 
-  
+  belongs_to :articolo
+
   def default_name
     File.basename(photo_url, '.*') if photo
   end

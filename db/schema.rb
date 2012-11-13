@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121023064052) do
+ActiveRecord::Schema.define(:version => 20121113193931) do
 
   create_table "articoli", :force => true do |t|
     t.string   "nome"
@@ -134,10 +134,12 @@ ActiveRecord::Schema.define(:version => 20121023064052) do
   create_table "photos", :force => true do |t|
     t.string   "photo"
     t.integer  "message_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "articolo_id"
   end
 
+  add_index "photos", ["articolo_id"], :name => "index_photos_on_articolo_id"
   add_index "photos", ["message_id"], :name => "index_photos_on_message_id"
 
   create_table "receipts", :force => true do |t|
@@ -194,5 +196,9 @@ ActiveRecord::Schema.define(:version => 20121023064052) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], :name => "index_users_roles_on_user_id_and_role_id"
+
+  add_foreign_key "notifications", "conversations", :name => "notifications_on_conversation_id"
+
+  add_foreign_key "receipts", "notifications", :name => "receipts_on_notification_id"
 
 end

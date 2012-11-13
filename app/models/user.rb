@@ -16,16 +16,6 @@ class User < ActiveRecord::Base
   has_many :movimenti
   
   acts_as_messageable
-  
-  # http://rails-bestpractices.com/posts/47-fetch-current-user-in-models solution
-  # violates MVC pattern
-  # def self.current
-  #   Thread.current[:user]
-  # end
-  
-  # def self.current=(user)
-  #   Thread.current[:user] = user
-  # end
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

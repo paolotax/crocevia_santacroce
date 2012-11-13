@@ -8,6 +8,7 @@ class Articolo < ActiveRecord::Base
   belongs_to :documento
   
   has_many :movimenti, dependent: :destroy
+  has_many :photos
   
   validates :nome,      presence: true
   validates :quantita,  presence: true
