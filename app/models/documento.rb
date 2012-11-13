@@ -3,9 +3,6 @@ class Documento < ActiveRecord::Base
   attr_accessible :importo, :tipo, :data_text, :data
   attr_writer :data_text
   
-  # prima dell'associazione se no non funziona
-  # before_destroy :change_vendite_user
-
   has_many :articoli,  dependent:  :nullify
   has_many :movimenti, dependent:  :nullify
   has_many :clienti, through: :articoli
@@ -47,6 +44,14 @@ class Documento < ActiveRecord::Base
       grouped_documenti[documento.data.beginning_of_month][documento.data] << documento
     end
     grouped_documenti
+  end
+
+  def self.mesi
+    mesi = []
+    scoped.recente.each do |d|
+      mesi << d.data.beginning_of_month
+    end
+    mesi.uniq  
   end
 
   def data_text
@@ -124,21 +129,15 @@ class Documento < ActiveRecord::Base
   def self.filtra(params)
     documenti = scoped
     documenti = documenti.where("documenti.data = ?", Date.new( params[:year].to_i, params[:month].to_i, params[:day].to_i)) if params[:day].present?
+    documenti = documenti.send(params[:tipo]) if params[:tipo].present?
+    documenti = documenti.filtra_mese(Date.new( params[:anno].to_i, params[:mese].to_i, 1)) if params[:mese].present?  
+    
     documenti
   end
 
   
   private
     
-    # def change_vendite_user
-    #   if cassa?
-    #     #raise righe.size.inspect
-    #     righe.each do |r|
-    #       r.update_attributes(user: User.current)
-    #     end
-    #   end 
-    # end
-
     def notify_vendita
       if cassa?
         vendita = self.reload
@@ -158,3 +157,4 @@ class Documento < ActiveRecord::Base
       errors.add :data_text, "data non valida"
     end
 end
+  

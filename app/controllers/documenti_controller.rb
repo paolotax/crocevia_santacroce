@@ -2,10 +2,6 @@ class DocumentiController < ApplicationController
 
   load_and_authorize_resource
   
-  # http://rails-bestpractices.com/posts/47-fetch-current-user-in-models solution
-  # violates MVC pattern
-  # before_filter :set_current_user
-
   def index
     @documenti = Documento.recente.filtra(params)
     @paged = @documenti.pagina(params[:page]).per(30)
@@ -15,7 +11,6 @@ class DocumentiController < ApplicationController
   def show
 
     @righe = @documento.righe
-
     respond_to do |format|
       format.html
       format.pdf do
@@ -81,7 +76,6 @@ class DocumentiController < ApplicationController
     @documento.destroy
     respond_to do |format|
       format.html { redirect_to return_url }
-      format.json { head :no_content }
     end
   end
 end

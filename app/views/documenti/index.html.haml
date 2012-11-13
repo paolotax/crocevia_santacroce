@@ -6,7 +6,19 @@
       %li
         = link_to documenti_url do
           tutti i documenti
+      - for m in Documento.mesi
+        %li{ class: "#{'active' if params[:mese] == m.month.to_s}"}
+          = link_to params.merge(anno: m.year, mese: m.month)  do
+            = l Date.new(m.year.to_i, m.month.to_i, 1), format: :long_month
+
       %li.divider
+
+      - for tipo in Documento::TIPO_DOCUMENTO
+        %li{ class: "#{'active' if params[:tipo] == tipo}"}
+          = link_to tipo, params.merge(tipo: tipo)
+      %li
+        = link_to "tutti...", params.except(:tipo)     
+      %li.divider  
       %li
         = link_to movimenti_path do
           tutti i movimenti    
@@ -21,7 +33,9 @@
     - @documenti_per_giorno.each do |month, days|
       %tr
         %td{ colspan: 2 }
-          %h4= l month, format: :long_month
+          %h4
+            = link_to documenti_path(anno: month.year, mese: month.month) do
+              = l month, format: :long_month
         = totale_importo(Documento.cassa.filtra_mese(month))
         = totale_importo(Documento.rimborso.filtra_mese(month), 'rimborso')
 
