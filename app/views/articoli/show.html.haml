@@ -81,14 +81,14 @@
     %section.galleria_articolo.span4  
       %ul#foto_caricate.thumbnails
         = render @articolo.photos  
-      .dropzone
-        .inner
-          trascina qui una
-          o più fotografie
-          %br
-          = form_for Photo.new, html: { "data-no-turbolink" => true } do |f|
-            = f.hidden_field :articolo_id, value: @articolo.id
-            = f.file_field :photo, multiple: true, name: "photo[photo]", class: "hidden"
+        %li.dropzone.span2
+          .inner
+            trascina qui una
+            o più fotografie
+            %br
+            = form_for Photo.new, html: { "data-no-turbolink" => true } do |f|
+              = f.hidden_field :articolo_id, value: @articolo.id
+              = f.file_field :photo, multiple: true, name: "photo[photo]", class: "hidden"
 
 
 
