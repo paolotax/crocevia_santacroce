@@ -35,122 +35,62 @@
 
 
 %section.span9
-  - if @articolo.disponibile?
-    .pull-right
-      = form_for Movimento.new, html: { class: "btn-articolo"} do |f|
-        = f.hidden_field :articolo_id, value: @articolo.id
-        = f.hidden_field :tipo, value: "vendita"
-        = f.submit  "Vendi", class: "btn btn-success" 
-      = form_for Movimento.new, html: { class: "btn-articolo"} do |f|
-        = f.hidden_field :articolo_id, value: @articolo.id
-        = f.hidden_field :tipo, value: "resa"
-        = f.submit  "Rendi", class: "btn btn-danger"
-      = form_tag etichette_articoli_path, :method => :put, :id => "form_articoli", class: "btn-articolo", target: "_blank" do
-        = hidden_field_tag "articolo_ids[]", @articolo.id
-        = hidden_field_tag "tipo_etichetta", "Dymo 11352"
-        = button_tag id: "bt-pdf", class: "btn" do
-          %i.icon-tag
-          eti
-
-  %h3
-    = @articolo.nome
-    %small
-      di
-      = link_to @articolo.cliente.full_name, @articolo.cliente
   
-  %ul#foto_caricate.thumbnails
-    = render @articolo.photos  
-    %li.dropzone
-      trascina qui una
-      o più fotografie
-      %br
-      = form_for Photo.new, html: { "data-no-turbolink" => true } do |f|
-        = f.hidden_field :articolo_id, value: @articolo.id
-        = f.file_field :photo, multiple: true, name: "photo[photo]", class: "hidden"
+  .page-header
+    - if @articolo.disponibile?
+      .pull-right
+        = form_for Movimento.new, html: { class: "btn-articolo"} do |f|
+          = f.hidden_field :articolo_id, value: @articolo.id
+          = f.hidden_field :tipo, value: "vendita"
+          = f.submit  "Vendi", class: "btn btn-success" 
+        = form_for Movimento.new, html: { class: "btn-articolo"} do |f|
+          = f.hidden_field :articolo_id, value: @articolo.id
+          = f.hidden_field :tipo, value: "resa"
+          = f.submit  "Rendi", class: "btn btn-danger"
+        = form_tag etichette_articoli_path, :method => :put, :id => "form_articoli", class: "btn-articolo", target: "_blank" do
+          = hidden_field_tag "articolo_ids[]", @articolo.id
+          = hidden_field_tag "tipo_etichetta", "Dymo 11352"
+          = button_tag id: "bt-pdf", class: "btn" do
+            %i.icon-tag
+            eti
+      %h3
+        = @articolo.nome
+        %small
+          di
+          = link_to @articolo.cliente.full_name, @articolo.cliente
+  .row
+    .span5
+      %p
+        codice articolo: #{@articolo.id.to_s}
+        %br
+        quantità: #{@articolo.quantita}
+        %br
+        prezzo: #{number_to_currency @articolo.prezzo}
+        %br
+        provvigione: #{number_to_percentage @articolo.provvigione, precision: 0}
+        %br
+        giacenza: #{@articolo.giacenza}
+        %br
+        data carico: #{l @articolo.data_carico, format: :default}
+        %br
+        data scadenza: #{l @articolo.data_scadenza, format: :default}
 
-  %p
-    codice articolo: #{@articolo.id.to_s}
-    %br
-    quantità: #{@articolo.quantita}
-    %br
-    prezzo: #{number_to_currency @articolo.prezzo}
-    %br
-    provvigione: #{number_to_percentage @articolo.provvigione, precision: 0}
-    %br
-    giacenza: #{@articolo.giacenza}
-    %br
-    data carico: #{l @articolo.data_carico, format: :default}
-    %br
-    data scadenza: #{l @articolo.data_scadenza, format: :default}
-    
-   
-  .clearfix
+      = render "history"
+      
 
-  - if @articolo.documento
-    = link_to @articolo.documento do
-      .alert.alert-info
-        %strong
-          Caricato il
-          = l @articolo.documento.data, format: :default
-        con documento nr  
-        = @articolo.documento.id
-  - else
-    = link_to @articolo.cliente do
-      .alert.alert-error
-        %h4
-          Attenzione!
-        carico da registrare. Clicca per registrare il carico del cliente
-  
-  - unless @articolo.movimenti.vendita.empty?
-    - for m in @articolo.movimenti.vendita do
-      - if m.documento
-        - if m.rimborsato?
-          = link_to m.rimborso do
-            .alert
-              %span
-                %strong
-                  Rimborso del
-                = l m.rimborso.data, format: :default
-                cassa nr.
-                = m.rimborso.id 
-              %span.pull-right
-                %strong
-                  = number_to_currency m.prezzo
-        - else
-          = link_to m.documento do
-            .alert.alert-success
-              %span
-                %strong
-                  Venduto il
-                = l m.documento.data, format: :default
-                cassa nr.
-                = m.documento.id 
-              %span.pull-right
-                %strong
-                  = number_to_currency m.prezzo
-      - else
-        = link_to cassa_path do
-          .alert.alert-error
-            %h4
-              Attenzione!
-            vendita da incassare. Clicca per registrare il movimento di cassa
-        
-  - unless @articolo.movimenti.resa.empty?
-    - for m in @articolo.movimenti.resa do
-      - if m.documento
-        = link_to m.documento do
-          .alert
-            %span
-              %strong
-                Reso il
-              = l m.documento.data, format: :default
-              resa nr.
-              = m.documento.id 
-      - else
-        = link_to @articolo.cliente do
-          .alert.alert-error
-            %h4
-              Attenzione!
-            resa da registrare. Clicca per registrare la resa del cliente
+    %section.galleria_articolo.span4  
+      %ul#foto_caricate.thumbnails
+        = render @articolo.photos  
+      .dropzone
+        .inner
+          trascina qui una
+          o più fotografie
+          %br
+          = form_for Photo.new, html: { "data-no-turbolink" => true } do |f|
+            = f.hidden_field :articolo_id, value: @articolo.id
+            = f.file_field :photo, multiple: true, name: "photo[photo]", class: "hidden"
+
+
+
 
   

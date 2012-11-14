@@ -1,5 +1,6 @@
 @import "colors";
 @import "compass/css3/border-radius";
+@import "compass/utilities/general/clearfix";
 
 .upload {
   border-top: solid 1px #CCC;
@@ -20,8 +21,9 @@
 }
 
 ul#foto_caricate {
-  width: 320px;
-  float: right;
+  // width: 320px;
+  // float: right;
+  // @include clearfix(); 
 }
 .dropzone {
   width: 80px;
