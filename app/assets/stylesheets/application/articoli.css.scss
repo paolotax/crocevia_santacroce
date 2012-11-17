@@ -66,6 +66,11 @@ a.show-hide {
   }
 }
 
+.rimborsi,
+.totale_rimborso {
+  color: $redText;
+}
+
 
 section.documento.carico td.giacenza {
   display: none;

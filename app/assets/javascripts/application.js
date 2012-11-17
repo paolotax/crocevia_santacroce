@@ -18,8 +18,15 @@
 //= require jquery.Jcrop
 //= require twitter/bootstrap
 
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
+//= require load-image
+//= require bootstrap-image-gallery
+
 //= require bootstrap-datepicker
 //= require locales/bootstrap-datepicker.it.js
+
+
 
 //= require_tree ./application
 

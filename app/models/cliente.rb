@@ -18,14 +18,14 @@ class Cliente < ActiveRecord::Base
   has_many :vendite, through: :articoli, 
                      source: :movimenti,
                      conditions: { tipo: "vendita" }
+
   has_many :rese, through: :articoli, 
                   source: :movimenti,
                   conditions: { tipo: "resa"}
   
-  # has_many :rimborsi, through: :articoli, 
-  #                     source: :movimenti,
-  #                     finder_sql: 'select * from movimenti where articolo_id = #{id}'
-  #                     conditions: { tipo: "resa"}
+  has_many :rimb, through: :articoli, 
+                  source: :movimenti,
+                  conditions: ["rimborso_id is not null"]
 
   before_save :update_index
                       
@@ -89,6 +89,10 @@ class Cliente < ActiveRecord::Base
   
   def has_articoli_registrati?
     !self.articoli.registrato.all.empty?
+  end
+
+  def has_vendite_da_rimborsare?
+    !self.vendite.rimborsabile.empty?
   end
   
   def data_rilascio_documento_text

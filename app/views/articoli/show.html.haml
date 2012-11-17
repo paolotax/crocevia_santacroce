@@ -1,7 +1,3 @@
-= content_for :head do
-  = javascript_include_tag :uploader
-
-
 = content_for :left_col do
   .span3.side-bar
     %ul.nav.nav-list.well
@@ -33,31 +29,31 @@
           %i.icon-gift
           tutti
 
-
 %section.span9
   
   .page-header
     - if @articolo.disponibile?
       .pull-right
-        = form_for Movimento.new, html: { class: "btn-articolo"} do |f|
-          = f.hidden_field :articolo_id, value: @articolo.id
-          = f.hidden_field :tipo, value: "vendita"
-          = f.submit  "Vendi", class: "btn btn-success" 
-        = form_for Movimento.new, html: { class: "btn-articolo"} do |f|
-          = f.hidden_field :articolo_id, value: @articolo.id
-          = f.hidden_field :tipo, value: "resa"
-          = f.submit  "Rendi", class: "btn btn-danger"
         = form_tag etichette_articoli_path, :method => :put, :id => "form_articoli", class: "btn-articolo", target: "_blank" do
           = hidden_field_tag "articolo_ids[]", @articolo.id
           = hidden_field_tag "tipo_etichetta", "Dymo 11352"
           = button_tag id: "bt-pdf", class: "btn" do
             %i.icon-tag
             eti
-      %h3
-        = @articolo.nome
-        %small
-          di
-          = link_to @articolo.cliente.full_name, @articolo.cliente
+        = form_for Movimento.new, html: { class: "btn-articolo"} do |f|
+          = f.hidden_field :articolo_id, value: @articolo.id
+          = f.hidden_field :tipo, value: "resa"
+          = f.submit  "Rendi", class: "btn btn-danger"
+        = form_for Movimento.new, html: { class: "btn-articolo"} do |f|
+          = f.hidden_field :articolo_id, value: @articolo.id
+          = f.hidden_field :tipo, value: "vendita"
+          = f.submit  "Vendi", class: "btn btn-success" 
+
+    %h3
+      = @articolo.nome
+      %small
+        di
+        = link_to @articolo.cliente.full_name, @articolo.cliente
   .row
     .span5
       %p

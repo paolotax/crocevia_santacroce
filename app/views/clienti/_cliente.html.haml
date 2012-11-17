@@ -3,3 +3,5 @@
   %td= link_to cliente.full_name, cliente
   %td
     %small= cliente.created_at.strftime("%d-%m-%y")
+  %td.rimborsi
+    = "#{number_to_currency(cliente.vendite.rimborsabile.sum(&:importo_provvigione)) if cliente.has_vendite_da_rimborsare?}"
