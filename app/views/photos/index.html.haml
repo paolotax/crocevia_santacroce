@@ -4,17 +4,11 @@
 
 .span12
   %section.carica_foto
-    %h1 
-      Galleria
-      %small trascina il file dell'immagine sulla pagina per caricarla
-    %br  
-    %ul#foto_caricate.thumbnails{ data: { toggle: "modal-gallery", target: "#modal-gallery", "no-turbolink" => true } }
-      = render @photos
+    %ul.mosaic.unstyled{ data: { toggle: "modal-gallery", target: "#modal-gallery", "no-turbolink" => true } }
+      - for p in @photos do
+        %li{style: "display: inline"}
+          = link_to image_tag(p.photo_url(:thumb)), p.photo_url(:large), "data-no-turbolink" => true, title: "#{p.name}", rel: "gallery", download: p.default_name if p.photo?
 
-    
-    = form_for Photo.new, html: { "data-no-turbolink" => true } do |f|
-      = f.label :photo, "Carica Foto:"
-      = f.file_field :photo, multiple: true, name: "photo[photo]"
 
 #modal-gallery.modal.modal-gallery.hide.fade
   .modal-header
@@ -30,7 +24,7 @@
     = link_to "#", class: "btn btn-primary modal-next", "data-no-turbolink" => true do
       Successiva
       %i.icon-arrow-right.icon-white
-    = link_to "#", class: "btn btn-success modal-play modal-slideshow", "data-slideshow" => "5000", "data-no-turbolink" => true do
+    = link_to "#", class: "btn btn-success modal-play modal-slideshow", "data-slideshow" => "3000", "data-no-turbolink" => true do
       %i.icon-play.icon-white
         Slideshow
     = link_to "#", class: "btn modal-download", target: "_blank", "data-no-turbolink" => true, download: "" do

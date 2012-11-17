@@ -12,6 +12,10 @@ class Photo < ActiveRecord::Base
     File.basename(photo_url, '.*') if photo
   end
 
+  def name
+    try(:articolo).try(:nome) || default_name
+  end
+
   private
   
     def crop_photo
