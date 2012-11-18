@@ -1,6 +1,6 @@
 CroceviaSantacroce::Application.routes.draw do
   
-  resources :photos, :path => "/galleria", as: "galleria"
+  resources :photos, :path => "/galleria"
   
   resources :codice_fiscale, only: [:create]
 
