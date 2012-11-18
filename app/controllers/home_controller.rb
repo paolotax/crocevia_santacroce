@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   
   def index
+    @photos = Photo.all
   end
   
   def regolamento
@@ -10,10 +11,6 @@ class HomeController < ApplicationController
   end
   
   def dove_siamo
-  end
-
-  def upload_photo
-    @photos = Photo.all
   end
   
   def welcome

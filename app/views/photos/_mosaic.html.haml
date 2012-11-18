@@ -1,0 +1,27 @@
+%section.carica_foto
+  %ul.mosaic.unstyled{ data: { toggle: "modal-gallery", target: "#modal-gallery", "no-turbolink" => true } }
+    - for p in @photos do
+      %li{style: "display: inline"}
+        = link_to image_tag(p.photo_url(:thumb)), p.photo_url(:large), "data-no-turbolink" => true, title: "#{p.name}", rel: "gallery", download: p.default_name if p.photo?
+
+
+#modal-gallery.modal.modal-gallery.hide.fade.modal-fullscreen.modal-fullscreen-stretch
+  .modal-header
+    = link_to "", class: "close", "data-dismiss" =>"modal" do
+      &times
+    %h3.modal-title
+  .modal-body
+    .modal-image
+  .modal-footer
+    = link_to "#", class: "btn btn-info modal-prev", "data-no-turbolink" => true do
+      Precedente
+      %i.icon-arrow-left.icon-white
+    = link_to "#", class: "btn btn-primary modal-next", "data-no-turbolink" => true do
+      Successiva
+      %i.icon-arrow-right.icon-white
+    = link_to "#", class: "btn btn-success modal-play modal-slideshow", "data-slideshow" => "3000", "data-no-turbolink" => true do
+      %i.icon-play.icon-white
+        Slideshow
+    = link_to "#", class: "btn modal-download", target: "_blank", "data-no-turbolink" => true, download: "" do
+      %i.icon-download
+      Download

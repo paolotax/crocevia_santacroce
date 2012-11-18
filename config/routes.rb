@@ -1,6 +1,6 @@
 CroceviaSantacroce::Application.routes.draw do
   
-  resources :photos, :path => "/galleria"
+  resources :photos, :path => "/galleria", as: "galleria"
   
   resources :codice_fiscale, only: [:create]
 
@@ -68,5 +68,4 @@ CroceviaSantacroce::Application.routes.draw do
   match '/regolamento', to: 'home#regolamento'
   match '/staff',       to: 'home#staff'
   match '/dove_siamo',  to: 'home#dove_siamo'
-  match '/carica_foto', to: 'home#upload_photo'
 end

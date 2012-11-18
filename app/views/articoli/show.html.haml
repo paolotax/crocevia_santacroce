@@ -87,6 +87,8 @@
               = f.file_field :photo, multiple: true, name: "photo[photo]", class: "hidden"
 
 
-
-
-  
+%script{ id: "template-upload", type: "text/x-tmpl"}
+  .upload
+    / {%= o.name %}
+    .progress
+      .bar{ style: "width: 0%"}

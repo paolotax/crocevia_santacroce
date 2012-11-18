@@ -16,6 +16,10 @@ class Photo < ActiveRecord::Base
     try(:articolo).try(:nome) || default_name
   end
 
+  def prezzo
+    try(:articolo).try(:prezzo_vendita) || ''
+  end
+
   private
   
     def crop_photo
