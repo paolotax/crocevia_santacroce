@@ -8,7 +8,7 @@ class Articolo < ActiveRecord::Base
   belongs_to :documento
   
   has_many :movimenti, dependent: :destroy
-  has_many :photos
+  has_many :photos,    dependent: :destroy
   
   validates :nome,      presence: true
   validates :quantita,  presence: true
@@ -151,6 +151,5 @@ class Articolo < ActiveRecord::Base
       end  
       return true
     end
-    
     
 end

@@ -8,6 +8,8 @@ class Photo < ActiveRecord::Base
 
   belongs_to :articolo
 
+  after_destroy :remove_id_dir
+
   def default_name
     File.basename(photo_url, '.*') if photo
   end
@@ -22,6 +24,13 @@ class Photo < ActiveRecord::Base
 
   private
   
+    def remove_id_dir
+      store_dir = photo.store_dir
+      # raise store_dir.inspect
+      #remove_generic_image!
+      FileUtils.remove_dir("#{Rails.root}/public/#{store_dir}", :force => true)
+    end
+
     def crop_photo
       photo.recreate_versions! if crop_x.present?
     end
