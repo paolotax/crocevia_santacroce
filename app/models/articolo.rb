@@ -29,7 +29,8 @@ class Articolo < ActiveRecord::Base
   after_create  :to_barby
   before_save   :update_index
   after_save    :update_documento
-  after_destroy :decrement_documento
+  after_destroy :decrement_documento,
+                :remove_barcode
     
   attr_accessible :nome, :prezzo, :provvigione, :quantita, :cliente_id, :documento_id, :index
   
@@ -46,7 +47,7 @@ class Articolo < ActiveRecord::Base
   def to_barby
     barcode_value = self.id.to_s
     barcode = Barby::Code39.new(barcode_value)
-    full_path = "public/barcodes/barcode_#{barcode_value}.png"
+    full_path = "#{Rails.root}/public/barcodes/barcode_#{barcode_value}.png"
     File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 0, :xdim => 2, :height => 30) }
   end
   
@@ -123,7 +124,7 @@ class Articolo < ActiveRecord::Base
       Articolo.update_counters p.id, :movimenti_count => p.movimenti.length
     end
   end  
-  
+
   private
     
     def update_index
@@ -152,4 +153,8 @@ class Articolo < ActiveRecord::Base
       return true
     end
     
+    def remove_barcode
+      FileUtils.remove_file("#{Rails.root}/public/barcodes/barcode_#{id}.png", :force => true)
+    end
+
 end

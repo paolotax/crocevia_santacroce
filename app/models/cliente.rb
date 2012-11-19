@@ -71,7 +71,7 @@ class Cliente < ActiveRecord::Base
   def to_barby
     barcode_value = self.id.to_s
     barcode = Barby::Code39.new(barcode_value)
-    full_path = "public/barcodes/tessera_#{barcode_value}.png"
+    full_path = "#{Rails.root}/public/barcodes/tessera_#{barcode_value}.png"
     File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 0, :xdim => 2, :height => 30) }
   end
   

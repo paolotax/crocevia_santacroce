@@ -26,7 +26,6 @@ class Photo < ActiveRecord::Base
   
     def remove_id_dir
       store_dir = photo.store_dir
-      # raise store_dir.inspect
       #remove_generic_image!
       FileUtils.remove_dir("#{Rails.root}/public/#{store_dir}", :force => true)
     end

@@ -43,3 +43,12 @@ ul.mosaic {
     padding: 0;
   }
 }
+
+.modal-fullscreen .modal-header,
+.modal-fullscreen .modal-footer {
+  background-color: #000000;
+  opacity: 0.6;
+  a.btn {
+    opacity: 1;
+  }
+}
