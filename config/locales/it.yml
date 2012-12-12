@@ -135,6 +135,7 @@ it:
       short: "%d %b %H:%M"
       long: "%d %B %Y %H:%M"
       only_date: "%d-%m-%y"
+      long_month: "%B %Y"
     am: 'am'
     pm: 'pm'
 

@@ -35,8 +35,20 @@ class Movimento < ActiveRecord::Base
   scope :registrato,    where('movimenti.documento_id is not null')
   scope :da_rimborsare, vendita.where("movimenti.rimborso_id is null")
   scope :rimborsato,    vendita.where("movimenti.rimborso_id is not null")  
-  scope :rimborsabile,  da_rimborsare.joins(:documento).where("documenti.data < ?", Time.now.beginning_of_month.to_date )
+  scope :rimborsabile,  da_rimborsare.joins(:documento).where("documenti.data < ?", Time.zone.now.beginning_of_month.to_date )
   
+  scope :mese_in_corso, joins(:documento).where("documenti.data >= ?", Time.zone.now.beginning_of_month.to_date)
+
+  scope :mese_scorso, joins(:documento).where("documenti.data >= ? AND documenti.data <= ? ", 
+                                              (Time.zone.now - 1.month).beginning_of_month,
+                                              (Time.zone.now - 1.month).end_of_month
+                                             )
+  scope :mesi_passati, joins(:documento).where("documenti.data >= ? AND documenti.data <= ? ", 
+                                                Time.now.beginning_of_year,
+                                                (Time.zone.now - 2.month).end_of_month
+                                              )
+
+  scope :patate_in_corso
 
   def da_registrare?
     documento.nil?
@@ -84,7 +96,7 @@ class Movimento < ActiveRecord::Base
   end
   
   def ricavo
-    prezzo - importo_patate - importo_provvigione
+    prezzo - importo_provvigione
   end
     
   def patate?

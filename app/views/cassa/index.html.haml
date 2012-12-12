@@ -9,12 +9,29 @@
         %small Provvigioni
         .pull-right= number_to_currency @provvigione_clienti
       %li
+        %small Patate
+        .pull-right= number_to_currency @patate  
+      %li.divider
+      %li
+        %small= "Patate #{l Time.zone.now, format: :long_month}"
+        .pull-right= number_to_currency @patate_in_corso  
+      %li
+        %small= "Patate #{l Time.zone.now - 1.month, format: :long_month}"
+        .pull-right= number_to_currency @patate_scorse  
+      %li
+        %small Patate mangiate  
+        .pull-right= number_to_currency @patate_mangiate  
+      %li.divider
+      %li
         %small Da rimborsare
         .pull-right= number_to_currency @da_rimborsare
       %li
-        %small Patate
-        .pull-right= number_to_currency @patate  
-      
+        %small= "Rimborsi #{l Time.zone.now + 1.month, format: :long_month}"
+        .pull-right= number_to_currency @rimborsi_futuri
+      %li
+        %small= "Rimborsi"
+        .pull-right= number_to_currency @rimborsi
+
       %li.nav-header
         %i.icon-shopping-cart
         Ultimi documenti
