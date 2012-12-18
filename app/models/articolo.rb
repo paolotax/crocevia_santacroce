@@ -64,11 +64,11 @@ class Articolo < ActiveRecord::Base
   end
   
   def data_scadenza
-    data_carico + 2.months
+    data_carico + 60.days
   end
   
   def data_patate
-    data_carico + 3.months
+    data_carico + 90.days
   end
   
   def scaduto?
