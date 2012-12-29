@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   
   def index
-    @photos = Photo.all
+    @photos = Photo.disponibili
   end
   
   def regolamento

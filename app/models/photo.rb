@@ -8,6 +8,8 @@ class Photo < ActiveRecord::Base
 
   belongs_to :articolo
 
+  scope :disponibili, joins(:articolo).where("articoli.quantita > articoli.movimenti_count")
+
   after_destroy :remove_id_dir
 
   def default_name
