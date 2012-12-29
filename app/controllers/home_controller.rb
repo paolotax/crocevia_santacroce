@@ -14,5 +14,6 @@ class HomeController < ApplicationController
   end
   
   def welcome
+    @photos = Photo.disponibili
   end
 end

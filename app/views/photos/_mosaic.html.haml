@@ -1,6 +1,6 @@
 %section.carica_foto
   %ul.mosaic.unstyled{ data: { toggle: "modal-gallery", target: "#modal-gallery", "no-turbolink" => true } }
-    - for p in @photos do
+    - for p in @photos.shuffle do
       %li{style: "display: inline"}
         = link_to image_tag(p.photo_url(:thumb)), p.photo_url(:large), "data-no-turbolink" => true, title: "#{p.name}", rel: "gallery", download: p.default_name if p.photo?
 

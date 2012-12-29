@@ -14,3 +14,16 @@
         %i.icon-picture
         Galleria
       per vedere alcune delle nostre proposte. 
+
+  .hero-unit
+    %p.lead
+      i nostri artisti...
+
+    #ettore{ style: "width: 580px; margin: auto"}
+      = image_tag asset_path('events/ettore_si_mostra.png')
+
+  .hero-unit
+    %p.lead
+      e i nostri oggetti...  
+
+    = render 'photos/mosaic'
