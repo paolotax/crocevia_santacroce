@@ -75,11 +75,11 @@ class Movimento < ActiveRecord::Base
   end
   
   def importo_provvigione
-    if articolo.patate?
-      0.0
-    else
+    # if articolo.patate?
+    #   0.0
+    # else
       prezzo / 100 * articolo.provvigione
-    end
+    #end
   end
 
   def importo_patate

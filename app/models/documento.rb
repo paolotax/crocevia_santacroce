@@ -135,7 +135,31 @@ class Documento < ActiveRecord::Base
     documenti
   end
 
-  
+  def self.check_errors
+    errors = {
+      cassa: [],
+      rimborso: [],
+      carico: [],
+      resa: []
+    }
+    Documento.cassa.find_each do |d|
+      importo_documento = d.importo.to_f
+      importo_movimenti = d.righe.sum(&:importo).to_f
+      if (importo_documento != importo_movimenti)
+        errors[:cassa] <<  "#{d.id} #{d.tipo} #{importo_documento} #{importo_movimenti}"
+      end
+    end
+    Documento.rimborso.find_each do |d|
+      importo_documento = d.importo.to_f
+      importo_movimenti = d.righe.sum(&:importo_provvigione).to_f
+      if (importo_documento != importo_movimenti)
+        errors[:rimborso] <<  "#{d.id} #{d.tipo} #{importo_documento} #{importo_movimenti}"
+      end
+    end
+    errors
+  end
+
+
   private
     
     def notify_vendita
