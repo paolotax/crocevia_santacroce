@@ -32,14 +32,19 @@ class Articolo < ActiveRecord::Base
   after_destroy :decrement_documento,
                 :remove_barcode
     
-  attr_accessible :nome, :prezzo, :provvigione, :quantita, :cliente_id, :documento_id, :index
+  attr_accessible :nome, :prezzo, :provvigione, :quantita, :cliente_id, :documento_id, :index, :eli
+  
+  scope :eli,         where("articoli.eli = ?", true)
+  scope :non_eli,     where("articoli.eli is null or articoli.eli = ?", false)
   
   scope :disponibili, where("articoli.quantita > articoli.movimenti_count")
   scope :esauriti,    where("articoli.quantita = articoli.movimenti_count")
   scope :esagerati,   where("articoli.quantita < articoli.movimenti_count")
   scope :attivo,      where("articoli.documento_id is null")
   scope :registrato,  where("articoli.documento_id is not null")
-    
+  
+  scope :patate,      -> { disponibili.joins(:documento).where("documenti.data < ?", Time.now - 90.days) }
+
   scope :trova, lambda { |term| 
     where("(articoli.nome ilike :term) or (articoli.id = :id) ", term: term, id: term.to_i)        
   }
@@ -57,6 +62,10 @@ class Articolo < ActiveRecord::Base
   
   def disponibile?
     quantita > movimenti_count
+  end
+  
+  def eli?
+    eli == true
   end
   
   def data_carico
@@ -123,8 +132,24 @@ class Articolo < ActiveRecord::Base
     Articolo.find_each do |p|
       Articolo.update_counters p.id, :movimenti_count => p.movimenti.length
     end
-  end  
+  end 
 
+  def self.ricalcola_eli
+    
+    Movimento.find_each do |m|
+      if m.patate?
+        m.articolo.eli = true
+        m.articolo.save
+      end
+    end
+    Articolo.disponibili.non_eli.find_each do |a|
+      if a.patate?
+        a.eli = true
+        a.save
+      end
+    end
+  end  
+  
   private
     
     def update_index

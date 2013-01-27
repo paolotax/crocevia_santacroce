@@ -5,6 +5,8 @@ class CassaController < ApplicationController
   def index
     @movimento           = Movimento.new(tipo: "vendita")
     @movimenti           = current_user.movimenti.vendita.attivo.includes(:articolo).all
+    
+    #stats
     @incassi             = Documento.recente.limit(5)
     @incassi_settimana   = Documento.settimana.cassa.select(:data).order("data desc").group(:data).sum(:importo)
     @incassi_mese        = Documento.cassa.order("data desc").group_by {|d| d.data.beginning_of_month }
@@ -22,9 +24,6 @@ class CassaController < ApplicationController
     @patate_scorse       = Movimento.vendita.mese_scorso.sum(&:ricavo) 
     @patate_mangiate     = Movimento.vendita.mesi_passati.sum(&:ricavo) 
   
-    
-
-
   end
 
 end

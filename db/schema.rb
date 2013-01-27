@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113193931) do
+ActiveRecord::Schema.define(:version => 20130126111325) do
 
   create_table "articoli", :force => true do |t|
     t.string   "nome"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20121113193931) do
     t.integer  "movimenti_count",                               :default => 0
     t.integer  "documento_id"
     t.string   "index"
+    t.boolean  "eli"
   end
 
   add_index "articoli", ["categoria_id"], :name => "index_articoli_on_categoria_id"

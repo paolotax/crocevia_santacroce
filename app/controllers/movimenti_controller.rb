@@ -25,6 +25,9 @@ class MovimentiController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def destroy
     @movimento = Movimento.find(params[:id])
     @movimento.destroy
@@ -33,5 +36,10 @@ class MovimentiController < ApplicationController
       format.js
     end
   end
-    
+
+  def update
+    @movimento.update_attributes(params[:movimento])
+    respond_with_bip @movimento
+  end    
+
 end

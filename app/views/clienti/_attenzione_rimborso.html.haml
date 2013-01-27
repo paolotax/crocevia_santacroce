@@ -1,4 +1,4 @@
-- unless cliente.vendite.rimborsabile.empty?
+- unless cliente.vendite.non_eli.rimborsabile.empty?
   .alert
     = form_for Documento.new, html: {class: "pull-right"} do |f|
       = hidden_field_tag "cliente_id", cliente.id
@@ -8,7 +8,7 @@
 
     %h4
       Attenzione!
-    = pluralize( cliente.vendite.rimborsabile.size, "articolo" )
-    = number_to_currency( cliente.vendite.rimborsabile.sum(&:importo_provvigione))
+    = pluralize( cliente.vendite.non_eli.rimborsabile.size, "articolo" )
+    = number_to_currency( cliente.vendite.non_eli.rimborsabile.sum(&:importo_provvigione))
     da rimborsare.
       

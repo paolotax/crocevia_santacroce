@@ -38,8 +38,10 @@ group :development, :test do
   gem "guard-livereload", ">= 0.3.0"
   gem "guard-rspec", ">= 0.4.3"
   gem "guard-cucumber", ">= 0.6.1"
-  gem "guard-spork"  
-  
+  gem "guard-spork" 
+  gem "better_errors" 
+  gem "binding_of_caller"
+  gem 'meta_request'
 end
 
 group :test do
@@ -65,10 +67,10 @@ gem "ransack"
 gem 'savon'
 gem 'sexmachine'
 gem 'mailboxer'
+
+
 #gem "rmagick"
 #gem "mini_magick"
-
-
 gem 'ruby-vips'
 gem 'carrierwave-vips'
 
@@ -95,6 +97,8 @@ gem "simple_form"
 gem "turbolinks"
 gem 'jquery-turbolinks'
 
+gem 'best_in_place'
+
 gem 'display_case', :git => "https://github.com/objects-on-rails/display-case.git"
 
 gem 'prawn'
@@ -104,3 +108,5 @@ gem 'font-awesome-sass-rails'
 
 gem 'capistrano'
 gem 'unicorn'
+
+

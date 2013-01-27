@@ -1,16 +1,20 @@
+# encoding: utf-8
 class Movimento < ActiveRecord::Base
   
-  attr_accessible :prezzo, :quantita, :tipo, :articolo_id, :rimborso_id, :user
   
   belongs_to :articolo, counter_cache: true
   belongs_to :user
   belongs_to :documento
   belongs_to :rimborso, class_name: 'Documento'
-  
+
   has_one :cliente, through: :articolo
   
+  attr_accessible :prezzo, :quantita, :tipo, :articolo_id, :rimborso_id, :user
+
+  delegate :data_carico, :data_scadenza, :data_patate, :nome, :provvigione, to: :articolo, allow_nil: true, :prefix => true
+  delegate :id, :data, :tipo, to: :documento, allow_nil: true, prefix: true
+
   validate :validate_articolo, on: :create
-    
   def validate_articolo
     if Articolo.find_by_id(articolo_id)
       errors.add(:articolo, "Articolo esaurito!") if self.articolo.disponibile? == false
@@ -19,9 +23,11 @@ class Movimento < ActiveRecord::Base
     end
   end
   
+
   before_save   :set_prezzo
   after_save    :update_documento
   after_destroy :decrement_documento
+
 
   %w(vendita resa).each do |tipo|
     scope "#{tipo}", where('movimenti.tipo = ?', "#{tipo}")
@@ -30,7 +36,9 @@ class Movimento < ActiveRecord::Base
       self.tipo == tipo
     end
   end
-    
+
+  scope :non_eli,       joins(:articolo).where("articoli.eli is null or articoli.eli = ?", false)
+  
   scope :attivo,        where('movimenti.documento_id is null')
   scope :registrato,    where('movimenti.documento_id is not null')
   scope :da_rimborsare, vendita.where("movimenti.rimborso_id is null")
@@ -48,7 +56,9 @@ class Movimento < ActiveRecord::Base
                                                 (Time.zone.now - 2.month).end_of_month
                                               )
 
-  scope :patate_in_corso
+  def eli?
+    patate?
+  end
 
   def da_registrare?
     documento.nil?
@@ -65,7 +75,27 @@ class Movimento < ActiveRecord::Base
   def mandante
     cliente
   end
+
+
+
+  def data_uscita
+    try(:documento).try(:data) || created_at.to_date
+  end
+
+  def giorni_di_giacenza
+    (data_uscita - articolo_data_carico).to_i
+  end
+   
+  def patate?
+    data_uscita > articolo_data_patate
+  end
+  
+  def scaduto?
+    data_uscita > articolo_data_scadenza && data_uscita < articolo_data_patate
+  end
     
+
+
   def importo
     quantita * prezzo
   end
@@ -75,38 +105,30 @@ class Movimento < ActiveRecord::Base
   end
   
   def importo_provvigione
-    # if articolo.patate?
-    #   0.0
-    # else
-      prezzo / 100 * articolo.provvigione
-    #end
+    if patate?
+      0.0
+    else
+      prezzo / 100 * articolo_provvigione
+    end
   end
 
-  def importo_patate
-    if articolo.patate?
+  def importo_eli
+    if patate?
       prezzo
     else
       0.0
     end
   end
   
-  def giorni_di_giacenza
-    (Date.parse(created_at.to_s) - Date.parse(articolo.created_at.to_s)).to_i
-    # distance_of_time_in_words(self.created_at, self.articolo.created_at) 
-  end
-  
   def ricavo
     prezzo - importo_provvigione
   end
-    
-  def patate?
-    created_at > articolo.data_patate
-  end
-  
-  def scaduto?
-    created_at > articolo.data_scadenza
-  end
-  
+
+  def format_prezzo
+    "€ #{prezzo}"
+  end  
+
+
   def self.filtra(params)
     movimenti = scoped
     movimenti = movimenti.where("documenti.data = ?", params[:del]) if params[:del].present?
@@ -114,6 +136,7 @@ class Movimento < ActiveRecord::Base
     movimenti = movimenti.where("documenti.data = ?", Date.new( params[:year].to_i, params[:month].to_i, params[:day].to_i)) if params[:day].present?
     movimenti
   end
+
 
   private
 

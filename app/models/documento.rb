@@ -122,7 +122,7 @@ class Documento < ActiveRecord::Base
   def add_rimborso_cliente(cliente_id)
     cliente = Cliente.find(cliente_id)
     for r in cliente.vendite do
-      self.rimborsi << r if r.da_rimborsare?
+      self.rimborsi << r if r.da_rimborsare? && !r.eli?
     end  
   end
 

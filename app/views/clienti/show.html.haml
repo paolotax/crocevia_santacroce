@@ -54,12 +54,12 @@
   %br
   
   .articoli-in-giacenza
-    = render 'articoli/articoli_list', label: "articolo_in_giacenza", collection: @cliente.articoli.registrato.disponibili.order("articoli.documento_id desc, articoli.id")
+    = render 'articoli/articoli_list', label: "articolo_in_giacenza", collection: @cliente.articoli.registrato.disponibili.non_eli.order("articoli.documento_id desc, articoli.id")
   
   .articoli-venduti
     = render 'attenzione_cassa', cliente: @cliente
     = render 'attenzione_rimborso', cliente: @cliente
-    = render 'movimenti/movimenti_list',  collection: @cliente.vendite.da_rimborsare, label: "articolo_venduto"
+    = render 'movimenti/movimenti_list',  collection: @cliente.vendite.non_eli.da_rimborsare, label: "articolo_venduto"
 
   .articoli-resi
     = render 'attenzione_resa', cliente: @cliente

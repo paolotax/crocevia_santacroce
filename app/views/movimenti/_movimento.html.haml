@@ -1,16 +1,21 @@
+
+
 %tr[movimento]{class: "#{'scaduto' if movimento.scaduto?} #{movimento.tipo} #{'rimborsato' if movimento.rimborsato?} #{'da_rimborsare' if movimento.da_rimborsare?}"}
   %td= link_to "art.#{movimento.articolo_id}", movimento.articolo
   %td= movimento.articolo.nome if movimento.articolo.present?
   %td.pezzi= movimento.quantita
-  %td.prezzo= number_to_currency movimento.prezzo
+
+  %td.prezzo= best_in_place movimento, :prezzo, :type => :input, display_with: :number_to_currency, ok_button: "salva", cancel_button: "annulla", :helper_options => {:unit => "€"}, html_attrs: { style: "width: 60px"}, data: { :provvigione => movimento.importo_provvigione }, classes: :bounce_on_success
+  
   %td.provvigione= number_to_currency movimento.importo_provvigione
+
   %td
     - if movimento.patate?
       .label.label-info.pull-left
-        patate
-    - if movimento.scaduto? && !movimento.patate?
+        patate #{movimento.giorni_di_giacenza}
+    - if movimento.scaduto?
       .label.label-warning.pull-left
-        scaduto    
+        scaduto #{movimento.giorni_di_giacenza}   
   %td
     - if movimento.da_rimborsare?
       .label.label-important.pull-left

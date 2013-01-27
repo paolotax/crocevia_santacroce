@@ -23,14 +23,14 @@ class SituazioneClientePdf < Prawn::Document
     @cliente = cliente
     @view = view
 
-    @carichi = @cliente.articoli.registrato.disponibili.order("articoli.id")
+    @carichi = @cliente.articoli.registrato.non_eli.disponibili.order("articoli.id")
     default_header
     intestazione(@cliente, "LISTA OGGETTI IN CARICO DA CLIENTE #{@cliente.id}")  
     table_articoli(@carichi)
     firme_articoli(Time.zone.now)
 
     
-    @vendite = @cliente.movimenti.registrato.vendita.da_rimborsare.joins(:documento).order("documenti.data, movimenti.id")
+    @vendite = @cliente.movimenti.registrato.vendita.non_eli.da_rimborsare.joins(:documento).order("documenti.data, movimenti.id")
     
     unless @vendite.empty?
       start_new_page
