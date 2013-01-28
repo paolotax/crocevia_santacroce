@@ -13,7 +13,7 @@ it:
       previous: "&lsaquo; Prec"
       next: "Succ &rsaquo;"
       truncate: "..."
-      
+
   number:
     format:
       delimiter: ""
