@@ -19,13 +19,16 @@
     
       - collection.group_by(&:documento).each do |key, values|
         %tr
-          %td{ colspan: 7}
+          %td
+            %small 
+              = link_to key.mandante, key.mandante
+          %td{ colspan: 6 }
             = link_to "Carico N." + key.id.to_s + " del " + key.data.strftime("%d/%m/%Y"), key
+
           %td
             = link_to 'x', key, class: "close", method: :delete, confirm: "Elimino il documento?\n(i movimenti non verranno eliminati)", "data-no-turbolink" => true
             
-        - for articolo in values do
-          = render articolo
+        = render values
 
       %tr.table-footer{ class: "#{'hidden'  if collection.empty? }"}
         %td{ colspan: 2} Totale

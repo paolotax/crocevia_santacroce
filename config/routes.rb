@@ -1,5 +1,7 @@
 CroceviaSantacroce::Application.routes.draw do
   
+  match "/patate", to: "patate#index"
+
   resources :photos, :path => "/galleria"
   
   resources :codice_fiscale, only: [:create]

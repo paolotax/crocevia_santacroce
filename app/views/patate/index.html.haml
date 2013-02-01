@@ -1,0 +1,20 @@
+= content_for :left_col do
+  .span3.side-bar
+    %ul.nav.nav-list.well
+      %li.nav-header
+        %i.icon-user
+        Clienti
+      %li
+        = link_to clienti_url do
+          %i.icon-user
+          tutti
+
+.span9
+  
+  / %h3= @cliente.full_name
+
+  .movimenti-patate
+    = render 'movimenti/movimenti_list',  collection: @patate_mangiate, label: "patate_mangiate"
+
+  .articoli-in-giacenza
+    = render 'articoli/articoli_list', collection: @patate_da_mangiare, label: "patate_da_mangiare"

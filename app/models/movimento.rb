@@ -69,7 +69,8 @@ class Movimento < ActiveRecord::Base
   end
   
   def da_rimborsare?
-    vendita? && rimborso_id.nil? && !documento.nil? && documento.data < Time.now.beginning_of_month.to_date
+    vendita? && !eli? && rimborso_id.nil? && !documento.nil? && documento.data < Time.now.beginning_of_month.to_date
+    #true
   end
    
   def mandante
