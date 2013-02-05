@@ -80,8 +80,12 @@ class Articolo < ActiveRecord::Base
     data_carico + 90.days
   end
   
+  def giorni_di_giacenza
+    (Time.now.to_date - data_carico).to_i
+  end
+
   def scaduto?
-    Time.now > data_scadenza
+    Time.now > data_scadenza && Time.now < data_patate
   end
   
   def patate?
@@ -97,7 +101,7 @@ class Articolo < ActiveRecord::Base
   end
 
   def prezzo_vendita
-    if scaduto?
+    if scaduto? || patate?
       prezzo / 2
     else
       prezzo
@@ -116,18 +120,7 @@ class Articolo < ActiveRecord::Base
     importo - importo_provvigione
   end
   
-  # def importo_provvigione
-  #   prezzo * giacenza / 100 * provvigione
-  # end
-  
-  # def prezzo_in_euro
-  #   prezzo.to_d/100 if prezzo
-  # end
-  # 
-  # def prezzo_in_euro=(euros)
-  #   self.prezzo = euros.to_d if euros.present?
-  # end
-  
+
   def self.ricalcola_counter
     Articolo.find_each do |p|
       Articolo.update_counters p.id, :movimenti_count => p.movimenti.length

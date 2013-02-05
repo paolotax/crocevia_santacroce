@@ -6,7 +6,14 @@
   %td.giacenza= articolo.giacenza
   %td.prezzo= number_to_currency articolo.prezzo
   %td.provvigione= number_to_percentage articolo.provvigione, precision: 0
-  
+  %td
+    - if articolo.patate?
+      .label.label-info.pull-left
+        patate #{articolo.giorni_di_giacenza}
+    - if articolo.scaduto?
+      .label.label-warning.pull-left
+        scaduto #{articolo.giorni_di_giacenza}  
+        
   - unless articolo.attivo?
     %td.etichetta.actions-mini
       = form_tag etichette_articoli_path, :method => :put, :id => "form_articoli", class: "pull-right", target: "_blank" do
