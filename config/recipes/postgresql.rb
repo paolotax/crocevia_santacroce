@@ -8,7 +8,7 @@ namespace :postgresql do
   task :install, roles: :db, only: {primary: true} do
     run "#{sudo} add-apt-repository ppa:pitti/postgresql"
     run "#{sudo} apt-get -y update"
-    run "#{sudo} apt-get -y install postgresql libpq-dev postgresql-contrib-9.1"
+    run "#{sudo} apt-get -y install postgresql-9.1 libpq-dev postgresql-contrib-9.1"
   end
   after "deploy:install", "postgresql:install"
 
