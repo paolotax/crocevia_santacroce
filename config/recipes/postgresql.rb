@@ -6,6 +6,8 @@ set_default(:postgresql_database) { "crocevia_production" }
 namespace :postgresql do
   desc "Install the latest stable release of PostgreSQL."
   task :install, roles: :db, only: {primary: true} do
+    # ubuntu 10.04
+    #run "#{sudo} add-apt-repository ppa:pitti/postgresql"
     run "#{sudo} apt-get -y update"
     run "#{sudo} apt-get -y install postgresql-9.1 libpq-dev postgresql-contrib-9.1"
   end
