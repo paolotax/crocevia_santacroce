@@ -14,7 +14,7 @@ namespace :crocevia do
 
     run "gem install taps --no-ri --no-rdoc"
     #run "gem install rmagick --no-ri --no-rdoc"
-    run "gem install sqlite3 --no-ri --no-rdoc"
+    #run "gem install sqlite3 --no-ri --no-rdoc"
     run "gem install pg --no-ri --no-rdoc"
   end
   after "deploy:setup", "crocevia:dependencies"
