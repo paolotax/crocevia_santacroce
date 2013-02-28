@@ -1,3 +1,6 @@
+ 
+server_names_hash_bucket_size 64;
+
 upstream unicorn_<%= application %> {
   server unix:/tmp/unicorn.<%= application %>.sock fail_timeout=0;
 }
@@ -30,3 +33,4 @@ server {
   client_max_body_size 4G;
   keepalive_timeout 10;
 }
+
