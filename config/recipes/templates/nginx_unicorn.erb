@@ -5,10 +5,11 @@ upstream unicorn_<%= application %> {
   server unix:/tmp/unicorn.<%= application %>.sock fail_timeout=0;
 }
 
-server{
-  server_name www.crocevia-santacroce.com;
-  rewrite ^(.*) http://crocevia-santacroce.com$1 permanent;
-}
+# questo in caso di ip condiviso
+#server{
+#  server_name www.crocevia-santacroce.com;
+#  rewrite ^(.*) http://crocevia-santacroce.com$1 permanent;
+#}
 
 server {
   listen 80;
