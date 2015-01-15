@@ -72,8 +72,8 @@ gem 'mailboxer'
 #gem "rmagick"
 #gem "mini_magick"
 
-gem 'ruby-vips'
-gem 'carrierwave-vips'
+# gem 'ruby-vips'
+# gem 'carrierwave-vips'
 
 
 gem "devise", ">= 2.1.0"

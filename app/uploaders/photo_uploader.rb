@@ -2,7 +2,7 @@
 
 class PhotoUploader < CarrierWave::Uploader::Base
 
-  include CarrierWave::Vips
+  #include CarrierWave::Vips
   
   include Sprockets::Helpers::RailsHelper
   include Sprockets::Helpers::IsolatedHelper
