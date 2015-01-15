@@ -13,20 +13,20 @@ class PhotoUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
   
-  #  process resize_to_fit: [ 800, 800 ]
+  process resize_to_fit: [ 800, 800 ]
 
-  version :large do
-    resize_to_fit(800, 800)
-  end
+  # version :large do
+  #   resize_to_fit(800, 800)
+  # end
   
-  version :medium do
-    resize_to_fit(650, 650)
-  end
+  # version :medium do
+  #   resize_to_fit(650, 650)
+  # end
     
-  version :thumb do
-    #process :croppa
-    resize_to_fill(120, 120)
-  end
+  # version :thumb do
+  #   #process :croppa
+  #   resize_to_fill(120, 120)
+  # end
   
   def croppa
     if model.crop_x.present?

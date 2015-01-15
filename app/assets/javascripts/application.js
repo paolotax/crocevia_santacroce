@@ -11,10 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery.ui.autocomplete
 //= require jquery_ujs
 //= require turbolinks
-//= require jquery.turbolinks
 //= require jquery.Jcrop
 //= require twitter/bootstrap
 

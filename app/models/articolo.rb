@@ -73,11 +73,23 @@ class Articolo < ActiveRecord::Base
   end
   
   def data_scadenza
-    data_carico + 60.days
+    start_date = Date.new(data_carico.year, 6, 1)
+    end_date = Date.new(data_carico.year, 7, 31)
+    if (start_date..end_date).cover?(data_carico) == true
+      data_carico + 90.days
+    else
+      data_carico + 60.days
+    end
   end
   
   def data_patate
-    data_carico + 90.days
+    start_date = Date.new(data_carico.year, 6, 1)
+    end_date = Date.new(data_carico.year, 7, 31)
+    if (start_date..end_date).cover?(data_carico) == true
+      data_carico + 120.days
+    else
+      data_carico + 90.days
+    end
   end
   
   def giorni_di_giacenza

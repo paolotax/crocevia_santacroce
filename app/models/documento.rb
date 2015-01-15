@@ -62,7 +62,7 @@ class Documento < ActiveRecord::Base
     if tipo == 'carico'
       clienti.uniq.first
     elsif tipo == "resa"
-      movimenti.first.cliente
+      movimenti.try(:first).try(:cliente) || nil
     elsif tipo == 'rimborso'
       rimborsi.try(:first).try(:cliente) || nil
     else
