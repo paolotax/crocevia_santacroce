@@ -68,6 +68,11 @@ gem 'savon'
 gem 'sexmachine'
 gem 'mailboxer'
 
+group :development do
+  gem "rmagick"
+  gem "mini_magick"
+end
+
 group :production do
   gem 'ruby-vips'
   gem 'carrierwave-vips'

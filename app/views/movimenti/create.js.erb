@@ -43,6 +43,8 @@ $("span.help-inline.error-inline").remove();
   }
     
 <% else %>
+  
   $("input#movimento_articolo_id").select();
   $("form#new_movimento .input-append").after("<span class='error-inline help-inline'><%= @movimento.errors.values.join %></span>"); 
+
 <% end %>

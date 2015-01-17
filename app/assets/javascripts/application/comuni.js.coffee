@@ -1,23 +1,29 @@
 document.addEventListener "page:fetch", ->
-  $(".loading").show()
+  $("#loading").show()
 
 document.addEventListener "page:receive", ->
-  $(".loading").hide()
+  $("#loading").hide()
 
+$(document).on "ajaxSend", () ->
+  console.log "GINO"
+  $("#loading").show()
+
+$(document).on "ajaxComplete", () ->
+  $("#loading").hide()
 
 jQuery ->
-  # $(".best_in_place").best_in_place();
+
+  $(window).on 'popstate', (event) ->
+    $("#loading").hide()
+  
+  $(".best_in_place").best_in_place();
 
   $('.bounce_on_success').bind "ajax:success", (data) ->
   	console.log data
   	$("td.provvigione", $(@).closest('tr.movimento')).html "aggiorna..."
 
   
-  $(".loading").on "ajaxSend", () ->
-    $(".loading").show()
-  
-  $(".loading").on "ajaxComplete", () ->
-    $(".loading").hide()
+
 
 
 

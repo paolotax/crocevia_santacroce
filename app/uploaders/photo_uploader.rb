@@ -2,8 +2,11 @@
 
 class PhotoUploader < CarrierWave::Uploader::Base
 
-  
-  include CarrierWave::Vips if Rails.env.production?
+  if Rails.env.production?
+    include CarrierWave::Vips 
+  else
+    include CarrierWave::MiniMagick
+  end
   
   include Sprockets::Helpers::RailsHelper
   include Sprockets::Helpers::IsolatedHelper
@@ -17,16 +20,16 @@ class PhotoUploader < CarrierWave::Uploader::Base
   process resize_to_fit: [ 800, 800 ]
 
   version :large do
-    resize_to_fit(800, 800) if Rails.env.production?
+    resize_to_fit(800, 800)
   end
   
   version :medium do
-    resize_to_fit(650, 650) if Rails.env.production?
+    resize_to_fit(650, 650)
   end
     
   version :thumb do
     process :croppa if Rails.env.production?
-    resize_to_fill(120, 120) if Rails.env.production?
+    resize_to_fill(120, 120)
   end
   
   def croppa

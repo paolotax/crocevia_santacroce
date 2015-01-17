@@ -22,7 +22,7 @@ jQuery ->
             data.context.hide()
               
 
-  new PhotoCropper()
+    new PhotoCropper()
 
 class PhotoCropper
   constructor: ->

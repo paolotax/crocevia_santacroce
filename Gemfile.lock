@@ -231,6 +231,7 @@ GEM
     metaclass (0.0.1)
     method_source (0.8.1)
     mime-types (1.21)
+    mini_magick (4.0.2)
     mocha (0.10.5)
       metaclass (~> 0.0.1)
     multi_json (1.6.1)
@@ -441,12 +442,14 @@ DEPENDENCIES
   machinist
   mailboxer
   meta_request
+  mini_magick
   omniauth-facebook
   pg
   prawn
   rails (= 3.2.5)
   rails-footnotes (>= 3.7)
   ransack
+  rmagick
   rolify (>= 3.1.0)
   rspec-rails (>= 2.10.1)
   ruby-vips

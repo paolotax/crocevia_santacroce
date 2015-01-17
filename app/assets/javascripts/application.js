@@ -14,7 +14,6 @@
 //= require jquery.turbolinks
 //= require jquery.ui.autocomplete
 //= require jquery_ujs
-//= require turbolinks
 //= require jquery.Jcrop
 //= require twitter/bootstrap
 
@@ -30,4 +29,7 @@
 //= require best_in_place.purr
 
 //= require_tree ./application
+
+//= require turbolinks
+
 
