@@ -8,8 +8,9 @@ jQuery ->
         types = /(\.|\/)(gif|jpe?g|png)$/i
         file = data.files[0]
         if types.test(file.type) || types.test(file.name)
-          data.context = $(tmpl("template-upload", file))
+          data.context = $(tmpl("template-upload", file).trim()) if $('#template-upload').length > 0
           $('#new_photo').append(data.context)
+          console.log(data)
           data.submit()
         else
           alert("#{file.name} non è supportato (gif, jpg, or png)")
@@ -21,11 +22,11 @@ jQuery ->
             data.context.hide()
               
 
-  new PhotoCropper()
+    new PhotoCropper()
 
 class PhotoCropper
   constructor: ->
-    
+    console.log("CROPPAMI")
     $('#cropbox').Jcrop
       # aspectRatio: 1
       # setSelect: [0, 0, 800, 800]
