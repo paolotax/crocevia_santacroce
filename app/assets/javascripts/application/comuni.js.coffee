@@ -6,7 +6,7 @@ document.addEventListener "page:receive", ->
 
 
 jQuery ->
-  $(".best_in_place").best_in_place();
+  # $(".best_in_place").best_in_place();
 
   $('.bounce_on_success').bind "ajax:success", (data) ->
   	console.log data
