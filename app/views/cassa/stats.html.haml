@@ -1,0 +1,51 @@
+= content_for :left_col do
+  
+  .span3.side-bar
+  
+    %ul.nav.nav-list.well
+      %li
+        %small Incasso
+        .pull-right= number_to_currency @incasso_totale
+      %li
+        %small Provvigioni
+        .pull-right= number_to_currency @provvigione_clienti
+      %li
+        %small Patate
+        .pull-right= number_to_currency @patate  
+      %li.divider
+      %li
+        %small= "Patate #{l Time.zone.now, format: :long_month}"
+        .pull-right= number_to_currency @patate_in_corso  
+      %li
+        %small= "Patate #{l Time.zone.now - 1.month, format: :long_month}"
+        .pull-right= number_to_currency @patate_scorse  
+      %li
+        %small Patate mangiate  
+        .pull-right= number_to_currency @patate_mangiate  
+      %li.divider
+      %li
+        %small Da rimborsare
+        .pull-right= number_to_currency @da_rimborsare
+      %li
+        %small= "Rimborsi #{l Time.zone.now + 1.month, format: :long_month}"
+        .pull-right= number_to_currency @rimborsi_futuri
+      %li
+        %small= "Rimborsi"
+        .pull-right= number_to_currency @rimborsi
+
+      %li.nav-header
+        %i.icon-shopping-cart
+        incassi settimana
+      - for d, i in @incassi_settimana do
+        %li
+          = link_to lista_documenti_path(year: d.year, month: d.month, day: d.day) do
+            %small= l d, format: :short
+            .pull-right= number_to_currency i
+
+      %li.nav-header
+        %i.icon-shopping-cart
+        incassi mese
+      - for m, i in @incassi_mese do
+        %li
+          %small= l m, format: :long_month
+          .pull-right= number_to_currency i.sum(&:importo)

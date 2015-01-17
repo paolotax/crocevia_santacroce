@@ -12,8 +12,9 @@ class CodiceFiscale
       "ComuneNascita" => cliente[:comune_nascita]
     }
     
-    client = Savon::Client.new("http://webservices.dotnethell.it//codicefiscale.asmx?wsdl")
-    response = client.request :web, :calcola_codice_fiscale, :body => request_body
+    client = Savon.client(wsdl: "http://webservices.dotnethell.it//codicefiscale.asmx?wsdl")
+
+    response = client.call  :calcola_codice_fiscale, message: request_body
     
     if response.success?
       data = response.to_array(:calcola_codice_fiscale_response, :calcola_codice_fiscale_result).first

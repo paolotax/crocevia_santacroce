@@ -18,7 +18,6 @@ class Documento < ActiveRecord::Base
   
   validate    :check_data_text
 
-  
   before_save    :save_data_text
   after_create   :notify_vendita
   
