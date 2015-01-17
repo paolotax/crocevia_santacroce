@@ -14,8 +14,8 @@
     = csrf_meta_tags
     = yield(:head)
   %body{ class: "#{controller.controller_name} #{controller.action_name}"}
-    .loading.hidden
-      caricamento....
+    .loading
+      %strong caricamento....
       
     %header
       = render 'layouts/navigation'
@@ -39,9 +39,9 @@
               %li 
                 = link_to_unless_current "Regolamento", regolamento_path do
                   &nbsp
-              %li  
-                = link_to_unless_current "Staff", staff_path do
-                  &nbsp
+              / %li  
+              /   = link_to_unless_current "Staff", staff_path do
+              /     &nbsp
               %li  
                 = link_to_unless_current "Dove siamo?", dove_siamo_path, "data-no-turbolink" => true do
                   &nbsp

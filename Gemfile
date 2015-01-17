@@ -68,10 +68,10 @@ gem 'savon'
 gem 'sexmachine'
 gem 'mailboxer'
 
-
-#gem 'ruby-vips'
-#gem 'carrierwave-vips'
-
+group :production do
+  gem 'ruby-vips'
+  gem 'carrierwave-vips'
+end
 
 gem "devise", ">= 2.1.0"
 gem "cancan", ">= 1.6.7"

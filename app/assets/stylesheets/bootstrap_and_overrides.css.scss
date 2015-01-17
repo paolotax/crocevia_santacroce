@@ -34,7 +34,24 @@ $bodyBackground: white;
   line-height: 25px;
   top: 0;
   right: 10px;
+  z-index: 5000;
+  display: none;
 }
+
+#loading {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  z-index: 5000;
+  background-color: #FFFF9C;
+  border: 1px solid #E20000;
+  color: black;
+  padding: 5px;
+  text-align: center;  
+  display: none;
+  opacity: 0.6;
+}
+
 
 
 @media (max-width: 480px) {

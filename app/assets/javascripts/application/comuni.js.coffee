@@ -1,8 +1,8 @@
 document.addEventListener "page:fetch", ->
-  $(".loading").removeClass "hidden"
+  $(".loading").show()
 
 document.addEventListener "page:receive", ->
-  $(".loading").addClass "hidden"
+  $(".loading").hide()
 
 
 jQuery ->
@@ -12,5 +12,18 @@ jQuery ->
   	console.log data
   	$("td.provvigione", $(@).closest('tr.movimento')).html "aggiorna..."
 
-
   
+  $(".loading").on "ajaxSend", () ->
+    $(".loading").show()
+  
+  $(".loading").on "ajaxComplete", () ->
+    $(".loading").hide()
+
+
+
+  $('form').on 'focus', 'input[type=number]', (e) ->
+    $(@).on 'mousewheel.disableScroll', (e) ->
+      e.preventDefault()
+  
+  $('form').on 'blur', 'input[type=number]', (e) ->
+    $(@).off 'mousewheel.disableScroll'

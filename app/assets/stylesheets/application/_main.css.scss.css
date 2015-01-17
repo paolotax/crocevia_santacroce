@@ -1,0 +1,13 @@
+.loading {
+  position: fixed;
+  text-align: center;
+  line-height: 25px;
+  top: 0;
+  right: 10px;
+  z-index: 5000;
+  display: none;
+}
+
+body > .container {
+  min-height: 400px;
+}
