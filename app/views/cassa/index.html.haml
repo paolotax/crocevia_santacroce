@@ -45,7 +45,7 @@
       = form_for @movimento, html: {class: "form-search", remote: true} do |f|
         .input-append
           = f.text_field :articolo_id, class: "search-query", placeholder: "inserisci codice articolo", autofocus: true
-          = f.hidden_field :tipo, valu: "vendita"
+          = f.hidden_field :tipo
           = button_tag "aggiungi", class: "btn btn-primary", id: "new_movimento_submit", name: nil
 
     = render :partial => 'cassa_result', locals: { movimenti: @movimenti }
@@ -55,6 +55,3 @@
     %table.table.movimenti.da-registrare
       = render @movimenti
          
-  / = @movimenti.sum(&:importo_provvigione)
-  / = @movimenti.sum(&:importo_patate)
-  / = @movimenti.sum(&:ricavo)

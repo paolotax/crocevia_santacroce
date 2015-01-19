@@ -19,9 +19,14 @@
       text-align: right;
     }
   }
+  .input-prepend.quantita {
+    #articolo_quantita {
+      width: 25px;
+    }
+  }
   .input-prepend.provvigione {
     select {
-      width: 70px;
+      width: 130px;
       text-align: right;
     }
   }

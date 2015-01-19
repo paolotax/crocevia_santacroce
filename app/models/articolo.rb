@@ -4,16 +4,19 @@ require 'barby/outputter/png_outputter'
 
 class Articolo < ActiveRecord::Base
   
+  
   belongs_to :cliente
   belongs_to :documento
-  
+  belongs_to :categoria
+
   has_many :movimenti, dependent: :destroy
   has_many :photos,    dependent: :destroy
   
-  validates :nome,      presence: true
-  validates :quantita,  presence: true
-  validates :prezzo,    presence: true
-  validates :provvigione, presence: true
+  
+  validates :nome,        presence: true
+  validates :quantita,    presence: true
+  validates :prezzo,      presence: true
+  validates :categoria,   presence: true
 
   # include HasBarcode
   # 
@@ -26,13 +29,25 @@ class Articolo < ActiveRecord::Base
   #   self.id.to_s
   # end
   
+  
+  attr_accessible :nome, :prezzo, :provvigione, :quantita, :cliente_id, :documento_id, :categoria_id, :index, :eli
+  
+
+  delegate :patate, :scadenza, to: :categoria
+
+
   after_create  :to_barby
   before_save   :update_index
+
+  before_save :calc_provvigione
+  def calc_provvigione
+    self.provvigione = self.categoria.provvigione
+  end
+  
   after_save    :update_documento
   after_destroy :decrement_documento,
                 :remove_barcode
     
-  attr_accessible :nome, :prezzo, :provvigione, :quantita, :cliente_id, :documento_id, :index, :eli
   
   scope :eli,         where("articoli.eli = ?", true)
   scope :non_eli,     where("articoli.eli is null or articoli.eli = ?", false)
@@ -43,8 +58,6 @@ class Articolo < ActiveRecord::Base
   scope :attivo,      where("articoli.documento_id is null")
   scope :registrato,  where("articoli.documento_id is not null")
   
-  scope :patate,      -> { disponibili.joins(:documento).where("documenti.data < ?", Time.now - 90.days) }
-
   scope :trova, lambda { |term| 
     where("(articoli.nome ilike :term) or (articoli.id = :id) ", term: term, id: term.to_i)        
   }
@@ -55,7 +68,16 @@ class Articolo < ActiveRecord::Base
     full_path = "#{Rails.root}/public/barcodes/barcode_#{barcode_value}.png"
     File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 0, :xdim => 2, :height => 30) }
   end
-  
+
+
+  def self.scaduti
+    Articolo.includes(:documento, :categoria).disponibili.select{ |a| a.scaduto? == true}
+  end
+
+  def self.patate
+    Articolo.includes(:documento, :categoria).disponibili.select{ |a| a.patate? == true}
+  end
+
   def attivo?
     documento_id.nil?
   end
@@ -75,10 +97,11 @@ class Articolo < ActiveRecord::Base
   def data_scadenza
     start_date = Date.new(data_carico.year, 6, 1)
     end_date = Date.new(data_carico.year, 7, 31)
+    
     if (start_date..end_date).cover?(data_carico) == true
-      data_carico + 90.days
+      data_carico + (scadenza + 30).days
     else
-      data_carico + 60.days
+      data_carico + scadenza.days
     end
   end
   
@@ -86,9 +109,9 @@ class Articolo < ActiveRecord::Base
     start_date = Date.new(data_carico.year, 6, 1)
     end_date = Date.new(data_carico.year, 7, 31)
     if (start_date..end_date).cover?(data_carico) == true
-      data_carico + 120.days
+      data_carico + (patate + 30).days
     else
-      data_carico + 90.days
+      data_carico + patate.days
     end
   end
   
@@ -125,7 +148,7 @@ class Articolo < ActiveRecord::Base
   end
   
   def importo_provvigione
-    prezzo * provvigione * giacenza / 100
+    prezzo * categoria.provvigione * giacenza / 100
   end
   
   def ricavo

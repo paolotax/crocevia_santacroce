@@ -1,4 +1,5 @@
 = form_for @cliente.articoli.build, class: "form-inline", remote: true do |f|
+
   = f.hidden_field :cliente_id
   
   .pull-left
@@ -6,17 +7,17 @@
 
   .input-prepend.prezzo.pull-left
     %span.add-on €
-    = f.text_field :prezzo, class: 'input-mini', step: :any, min: 0, placeholder: "prezzo", required: true
+    = f.text_field :prezzo, class: 'span1', step: :any, min: 0, placeholder: "prezzo", required: true
   
 
   .input-prepend.quantita.pull-left
     %span.add-on Pz.
-    = f.number_field :quantita, class: 'input-mini', value: 1, min: 1, placeholder: "pezzi", required: true
+    = f.number_field :quantita, class: 'span1', value: 1, min: 1, placeholder: "pezzi", required: true
 
   
   .input-prepend.provvigione.pull-left
-    %span.add-on %
-    = f.select  :provvigione, ["50", "65"], class: 'input-mini', value: 50     , placeholder: "provvigione", required: true 
+    %span.add-on cat
+    = f.collection_select :categoria_id, Categoria.all, :id, :nome, { selected: Articolo.last.categoria_id.to_i}, {placeholder: "provvigione", required: true} 
   
   .pull-right
     = f.submit "Aggiungi", class: "btn btn-primary"

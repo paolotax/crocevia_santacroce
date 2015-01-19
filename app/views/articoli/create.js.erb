@@ -1,6 +1,9 @@
 $("#articoli-da-caricare .table-footer").before("<%= escape_javascript(render @articolo) %>");
 
-$("form.new_articolo").get(0).reset();
+$("input#articolo_nome").val("");
+$("input#articolo_prezzo").val("")
+$("input#articolo_quantita").val(1)
+
 $("input#articolo_nome").focus();
 
 $("#articoli-da-caricare .table-footer .quantita strong").html("<%= @articolo.cliente.articoli.attivo.attivo.sum(&:giacenza)  %>")
