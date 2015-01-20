@@ -4,7 +4,7 @@
     %ul.nav.nav-list.well
       %li
         %small Incasso
-        .pull-right= number_to_currency @incasso_totale
+        .pull-right= number_to_currency @incasso_totale, locale: :it
 
       %li.nav-header
         %i.icon-shopping-cart
@@ -15,7 +15,7 @@
             = "#{i.tipo} #{i.id} -"
             %small= l i.data, format: :short
             - if i.cassa?
-              .pull-right= number_to_currency i.importo
+              .pull-right= number_to_currency i.importo, locale: :it
             - elsif i.rimborso?
               .pull-right.rimborsi= "-#{number_to_currency i.importo}"  
       %li

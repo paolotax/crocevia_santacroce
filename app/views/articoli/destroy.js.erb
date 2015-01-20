@@ -1,8 +1,8 @@
 $("#<%=  dom_id(@articolo) %>").remove();
 
 $("#articoli-da-caricare .table-footer .quantita strong").html("<%= @articolo.cliente.articoli.attivo.sum(&:giacenza)  %>")
-$("#articoli-da-caricare .table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo) %>")
-$("#articoli-da-caricare .table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.sum(&:importo_provvigione) %>")
+$("#articoli-da-caricare .table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo), locale: :it %>")
+$("#articoli-da-caricare .table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.sum(&:importo_provvigione), locale: :it %>")
 
 if ($("#articoli-da-caricare .articolo").length == 1) {
   $("#articoli-da-caricare .table-header").addClass("hidden");

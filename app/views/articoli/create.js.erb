@@ -7,8 +7,8 @@ $("input#articolo_quantita").val(1)
 $("input#articolo_nome").focus();
 
 $("#articoli-da-caricare .table-footer .quantita strong").html("<%= @articolo.cliente.articoli.attivo.attivo.sum(&:giacenza)  %>")
-$("#articoli-da-caricare .table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo) %>")
-$("#articoli-da-caricare .table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo_provvigione) %>")
+$("#articoli-da-caricare .table-footer .prezzo strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo), locale: :it %>")
+$("#articoli-da-caricare .table-footer .provvigione strong").html("<%= number_to_currency @articolo.cliente.articoli.attivo.sum(&:importo_provvigione), locale: :it %>")
 
 
 $("#articoli-da-caricare .table-header").removeClass("hidden")

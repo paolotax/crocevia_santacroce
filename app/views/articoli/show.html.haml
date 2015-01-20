@@ -61,7 +61,7 @@
         %br
         quantità: #{@articolo.quantita}
         %br
-        prezzo: #{number_to_currency @articolo.prezzo}
+        prezzo: #{number_to_currency @articolo.prezzo, locale: :it}
         %br
         provvigione: #{number_to_percentage @articolo.provvigione, precision: 0}
         %br

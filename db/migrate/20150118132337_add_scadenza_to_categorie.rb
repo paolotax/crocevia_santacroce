@@ -18,7 +18,7 @@ class AddScadenzaToCategorie < ActiveRecord::Migration
 
     Categoria.create! nome: "50% - 60 giorni", provvigione: 50, scadenza: 60, patate: 90
     Categoria.create! nome: "65% - 60 giorni", provvigione: 65, scadenza: 60, patate: 90
-    Categoria.create! nome: "30 giorni 50%", provvigione: 50, scadenza: 30, patate: 60
+    Categoria.create! nome: "abbigliamento 30g", provvigione: 50, scadenza: 30, patate: 60
     
     Categoria.all.each do |c|
       if c.patate == 90

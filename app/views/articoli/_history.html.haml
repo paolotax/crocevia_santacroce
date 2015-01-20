@@ -29,7 +29,7 @@
                 = m.rimborso.id 
               %span.pull-right
                 %strong
-                  = number_to_currency m.prezzo
+                  = number_to_currency m.prezzo, locale: :it
         - else
           = link_to m.documento do
             .alert.alert-success
@@ -41,7 +41,7 @@
                 = m.documento.id 
               %span.pull-right
                 %strong
-                  = number_to_currency m.prezzo
+                  = number_to_currency m.prezzo, locale: :it
       - else
         = link_to cassa_path do
           .alert.alert-error

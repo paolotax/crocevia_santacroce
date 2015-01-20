@@ -6,7 +6,7 @@ module DocumentiHelper
       if importo > 0 
         raw(
             "#{tipo}" + 
-            content_tag(:h4, number_to_currency(importo))
+            content_tag(:h4, number_to_currency(importo, locale: :it))
             )
       else
         ""
