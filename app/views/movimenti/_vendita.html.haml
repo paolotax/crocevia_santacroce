@@ -2,7 +2,7 @@
   %td= link_to "art.#{movimento.articolo_id}", movimento.articolo
   %td= movimento.articolo.nome
   %td.pezzi= movimento.quantita
-  %td.prezzo= number_to_currency movimento.prezzo
+  %td.prezzo= number_to_currency movimento.prezzo, locale: :it
   %td.provvigione
     &nbsp
   %td

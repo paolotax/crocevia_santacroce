@@ -4,7 +4,7 @@
 
   %td.quantita= articolo.quantita
   %td.giacenza= articolo.giacenza
-  %td.prezzo= number_to_currency articolo.prezzo
+  %td.prezzo= number_to_currency articolo.prezzo, locale: :it
   %td.provvigione= number_to_percentage articolo.categoria.provvigione, precision: 0
   
   %td

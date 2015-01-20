@@ -36,7 +36,7 @@
   %h3
     = @documento.tipo
     %small= "nr. #{@documento.id} del #{@documento.data.strftime('%d-%m-%Y')}"
-    %span.pull-right= number_to_currency @documento.importo
+    %span.pull-right= number_to_currency @documento.importo, locale: :it
     
     - if @documento.mandante
       %small= "di " 

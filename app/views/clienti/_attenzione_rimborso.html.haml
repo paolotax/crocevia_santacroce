@@ -9,6 +9,6 @@
     %h4
       Attenzione!
     = pluralize( cliente.vendite.non_eli.rimborsabile.size, "articolo" )
-    = number_to_currency( cliente.vendite.non_eli.rimborsabile.sum(&:importo_provvigione))
+    = number_to_currency( cliente.vendite.non_eli.rimborsabile.sum(&:importo_provvigione), locale: :it)
     da rimborsare.
       

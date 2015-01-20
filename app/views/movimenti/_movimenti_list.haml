@@ -24,9 +24,9 @@
         %td.pezzi
           %strong= collection.sum(&:quantita) 
         %td.prezzo
-          %strong= number_to_currency collection.sum(&:importo)
+          %strong= number_to_currency collection.sum(&:importo), locale: :it
         %td.provvigione
-          %strong= number_to_currency collection.sum(&:importo_provvigione)
+          %strong= number_to_currency collection.sum(&:importo_provvigione), locale: :it
         %td
         %td
         %td.actions

@@ -5,7 +5,7 @@
 
   %td.prezzo= best_in_place movimento, :prezzo, :type => :input, display_with: :number_to_currency, ok_button: "salva", cancel_button: "annulla", :helper_options => {:unit => "€"}, html_attrs: { style: "width: 60px"}, data: { :provvigione => movimento.importo_provvigione }, classes: :bounce_on_success
   
-  %td.provvigione= number_to_currency movimento.importo_provvigione
+  %td.provvigione= number_to_currency movimento.importo_provvigione, locale: :it
 
   %td
     - if movimento.patate?

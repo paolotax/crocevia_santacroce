@@ -26,7 +26,7 @@
             %h4= l giorno, format: :long
         %td.pezzi{colspan: 5}
           incasso
-          %h4= number_to_currency movimenti.select{ |m| m.vendita?}.sum(&:importo)
+          %h4= number_to_currency movimenti.select{ |m| m.vendita?}.sum(&:importo), locale: :it
       - for m in controller.exhibit(movimenti, "movimenti") do
         = m.render_template(self)
 
