@@ -9,11 +9,8 @@
         .span6
           %fieldset.dati-anagrafici
             %legend Dati anagrafici
-            .control-group.form-inline
-              %label{ for: :nome, :class => 'string required control-label'} Nome e Cognome
-              .controls
-                = f.text_field :nome
-                = f.text_field :cognome
+            = f.input :nome
+            = f.input :cognome
             = f.input   :sesso, collection: [["maschio", "m"], ["femmina", "f"]], prompt: "scegli il sesso"
             = f.input   :data_di_nascita_text, label: "Data di nascita", input_html: { class: "datepicker" }
             = f.input   :comune_di_nascita, html5: true
