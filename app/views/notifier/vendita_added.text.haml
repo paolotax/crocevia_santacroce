@@ -1,6 +1,6 @@
 Si sboccia!
 
-Hai venduto #{ number_to_currency @vendita.importo, locale: :it }
-= @vendita.movimenti.map{|m| m.articolo.nome}.join(", ")
+Hai venduto
+= number_to_currency @vendita.importo, locale: :it
 
 Brava
