@@ -62,13 +62,13 @@ CroceviaSantacroce::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.default_url_options = { :host => 'crocevia-santacroce.com' }
+  config.action_mailer.default_url_options = { :host => '198.211.126.58' }
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.smtp_settings = {
     :address  => "smtp.gmail.com",
     :port     => 587,
-    :domain   => "crocevia-santacroce.com",
+    :domain   => "198.211.126.58",
     :authentication => "plain",
     :user_name      => "croceviasantacroce@gmail.com",
     :password       => "taxciapopi",
