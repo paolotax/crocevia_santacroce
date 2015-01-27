@@ -20,16 +20,21 @@ class CassaController < ApplicationController
     
     def calc_vendite
       @incassi             = Documento.recente.limit(10)
+      
+      @incassi_giorno      = Documento.cassa.where(data: Time.now).sum(:importo)
+      
       @incassi_settimana   = Documento.settimana.cassa.select(:data).order("data desc").group(:data).sum(:importo)
       @incassi_mese        = Documento.cassa.order("data desc").group_by {|d| d.data.beginning_of_month }
 
-      @incasso_totale      = Documento.cassa.sum(&:importo)
     end
 
     
     def calc_all_stats
 
       calc_vendite
+    
+      @incasso_totale      = Documento.cassa.sum(&:importo)
+      
       @provvigione_clienti = Movimento.vendita.sum(&:importo_provvigione)
       @da_rimborsare       = Movimento.rimborsabile.sum(&:importo_provvigione)
       @rimborsi            = Movimento.rimborsato.sum(&:importo_provvigione)
