@@ -40,6 +40,7 @@ class Cliente < ActiveRecord::Base
   attr_writer :data_rilascio_documento_text, :data_di_nascita_text
   
   validates :nome,              presence: true
+  validates :cognome,           presence: true
   validates :tipo_documento,    presence: true
   validates :numero_documento,  presence: true 
   validates :comune_di_nascita, presence: true 
@@ -92,7 +93,7 @@ class Cliente < ActiveRecord::Base
   end
 
   def has_vendite_da_rimborsare?
-    !self.vendite.rimborsabile.empty?
+    !self.vendite.rimborsabile.empty? && self.vendite.rimborsabile.sum(&:importo_provvigione) > 0
   end
   
   def data_rilascio_documento_text

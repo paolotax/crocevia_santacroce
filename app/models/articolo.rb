@@ -14,6 +14,7 @@ class Articolo < ActiveRecord::Base
   
   
   validates :nome,        presence: true
+  
   validates :quantita,    presence: true
   validates :prezzo,      presence: true
   validates :categoria,   presence: true
@@ -166,13 +167,13 @@ class Articolo < ActiveRecord::Base
     
     Movimento.find_each do |m|
       if m.patate?
-        m.articolo.eli = true
+        m.articolo.eli = false
         m.articolo.save
       end
     end
     Articolo.disponibili.non_eli.find_each do |a|
       if a.patate?
-        a.eli = true
+        a.eli = false
         a.save
       end
     end

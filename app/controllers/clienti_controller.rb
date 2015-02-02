@@ -5,6 +5,8 @@ class ClientiController < ApplicationController
   def index
     @q = Cliente.order("id desc").search(params[:q])
     @clienti = @q.result(distinct: true).pagina(params[:page]).per(25)
+
+    @gino = @clienti.count
   end
   
   def show

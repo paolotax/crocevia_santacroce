@@ -43,8 +43,12 @@ class Movimento < ActiveRecord::Base
   scope :registrato,    where('movimenti.documento_id is not null')
   scope :da_rimborsare, vendita.where("movimenti.rimborso_id is null")
   scope :rimborsato,    vendita.where("movimenti.rimborso_id is not null")  
-  scope :rimborsabile,  da_rimborsare.joins(:documento).where("documenti.data < ?", Time.zone.now.beginning_of_month.to_date )
   
+  #scope :rimborsabile,  da_rimborsare.joins(:documento).where("documenti.data < ?", Time.zone.now.beginning_of_month.to_date )
+  
+  scope :rimborsabile,  lambda { da_rimborsare.joins(:documento).where("documenti.data < ?", Time.zone.now.beginning_of_month.to_date ) }
+  
+
   scope :mese_in_corso, joins(:documento).where("documenti.data >= ?", Time.zone.now.beginning_of_month.to_date)
 
   scope :mese_scorso, joins(:documento).where("documenti.data >= ? AND documenti.data <= ? ", 
