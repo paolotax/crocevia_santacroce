@@ -10,11 +10,16 @@
 }
 
 .new_articolo {
+  
+  #articolo_nome {
+    margin-right: 10px;
+  }
+
   .btn-aggiungi {
     margin-left: 10px;
   }
   .input-prepend {
-    margin-left: 10px;
+    margin-right: 10px;
     input {
       text-align: right;
     }

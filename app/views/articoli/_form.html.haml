@@ -1,6 +1,11 @@
 = form_for @cliente.articoli.build, class: "form-inline", remote: true do |f|
 
   = f.hidden_field :cliente_id
+
+
+  .input-prepend.provvigione.pull-left
+    %span.add-on cat
+    = f.collection_select :categoria_id, Categoria.all, :id, :nome, { selected: Articolo.last.categoria_id.to_i}, {placeholder: "provvigione", required: true} 
   
   .pull-left
     = f.text_field :nome, placeholder: "articolo", required: true
@@ -15,9 +20,6 @@
     = f.number_field :quantita, class: 'span1', value: 1, min: 1, placeholder: "pezzi", required: true
 
   
-  .input-prepend.provvigione.pull-left
-    %span.add-on cat
-    = f.collection_select :categoria_id, Categoria.all, :id, :nome, { selected: Articolo.last.categoria_id.to_i}, {placeholder: "provvigione", required: true} 
   
   .pull-right
     = f.submit "Aggiungi", class: "btn btn-primary"

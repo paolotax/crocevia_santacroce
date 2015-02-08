@@ -167,13 +167,13 @@ class Articolo < ActiveRecord::Base
     
     Movimento.find_each do |m|
       if m.patate?
-        m.articolo.eli = false
+        m.articolo.eli = true
         m.articolo.save
       end
     end
     Articolo.disponibili.non_eli.find_each do |a|
       if a.patate?
-        a.eli = false
+        a.eli = true
         a.save
       end
     end
