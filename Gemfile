@@ -96,6 +96,8 @@ gem 'prawn'
 gem "omniauth-facebook"
 gem 'font-awesome-sass-rails'
 
+gem 'whenever', :require => false
+
 gem 'capistrano'
 gem 'unicorn'
 

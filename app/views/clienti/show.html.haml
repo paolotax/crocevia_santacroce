@@ -52,18 +52,21 @@
   %br
   = render 'articoli_attivi'
   %br
+
+
+  .articoli-venduti
+    = render 'attenzione_cassa', cliente: @cliente
+    = render 'attenzione_rimborso', cliente: @cliente
+    
+    = render 'movimenti/movimenti_list',  collection: @cliente.vendite.non_eli.select{|m| !m.da_rimborsare? && !m.rimborsato? && !m.attivo?}, label: "articolo_venduto"
+
+  = render 'attenzione_resa', cliente: @cliente
+  
   
   .articoli-in-giacenza
     = render 'articoli/articoli_list', label: "articolo_in_giacenza", collection: @cliente.articoli.registrato.disponibili.non_eli.order("articoli.documento_id desc, articoli.id")
   
-  .articoli-venduti
-    = render 'attenzione_cassa', cliente: @cliente
-    = render 'attenzione_rimborso', cliente: @cliente
-    = render 'movimenti/movimenti_list',  collection: @cliente.vendite.non_eli.da_rimborsare, label: "articolo_venduto"
 
-  .articoli-resi
-    = render 'attenzione_resa', cliente: @cliente
-    = render 'movimenti/movimenti_list',  collection: @cliente.rese.attivo,    label: "articolo_reso_da_registrare"
 
   - unless @cliente.rimborsi.empty?  && @cliente.resi.empty? 
     .articoli-storici

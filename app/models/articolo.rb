@@ -164,7 +164,6 @@ class Articolo < ActiveRecord::Base
   end 
 
   def self.ricalcola_eli
-    
     Movimento.find_each do |m|
       if m.patate?
         m.articolo.eli = true

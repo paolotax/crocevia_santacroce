@@ -40,5 +40,5 @@
           = f.submit  "Vendi", class: "btn btn-success btn-mini pull-right" 
   - else
     %td{ colspan: 2}
-      = link_to articolo, method: :delete, class: "close", remote: false, "data-no-turbolink" => true do
+      = link_to articolo, method: :delete, class: "close", remote: false, "data-no-turbolink" => false do
         &times;

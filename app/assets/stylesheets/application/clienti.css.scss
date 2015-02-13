@@ -61,6 +61,43 @@
   }
 }
 
+.attenzione-resa {
+  @include border-radius(10px);
+  background-color: #f2dede;
+  border: 1px solid #eed3d7;
+
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  -moz-box-shadow: 0 1px 0 rgba(0,0,0,.1);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+
+  color: #b94a48;
+  padding: 10px;
+  margin-bottom: 30px;
+
+  .table {
+    margin-bottom: 0;
+  }
+}
+
+.attenzione-rimborso {
+  @include border-radius(10px);
+  background-color: #fcf8e3;
+  border: 1px solid #fbeed5;
+
+  -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+  -moz-box-shadow: 0 1px 0 rgba(0,0,0,.1);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+
+  color: #c09853;
+  padding: 10px;
+  margin-bottom: 30px;
+
+  .table {
+    margin-bottom: 0;
+  }
+}
+
+
 .alert form {
   margin-top: 5px;
   margin-right: -22px;

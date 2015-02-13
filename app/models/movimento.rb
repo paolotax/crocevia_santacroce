@@ -12,8 +12,10 @@ class Movimento < ActiveRecord::Base
   attr_accessible :prezzo, :quantita, :tipo, :articolo_id, :rimborso_id, :user
 
   delegate :data_carico, :data_scadenza, :data_patate, :nome, :provvigione, to: :articolo, allow_nil: true, :prefix => true
-  delegate :id, :data, :tipo, to: :documento, allow_nil: true, prefix: true
+  
+  delegate :data, :tipo, to: :documento, allow_nil: true, prefix: true
 
+  
   validate :validate_articolo, on: :create
   def validate_articolo
     if Articolo.find_by_id(articolo_id)
@@ -25,8 +27,10 @@ class Movimento < ActiveRecord::Base
   
 
   before_save   :set_prezzo
-  after_save    :update_documento
-  after_destroy :decrement_documento
+  
+  after_save     :update_documento
+  
+  before_destroy :decrement_documento
 
 
   %w(vendita resa).each do |tipo|
@@ -55,31 +59,42 @@ class Movimento < ActiveRecord::Base
                                               (Time.zone.now - 1.month).beginning_of_month,
                                               (Time.zone.now - 1.month).end_of_month
                                              )
+  
   scope :mesi_passati, joins(:documento).where("documenti.data >= ? AND documenti.data <= ? ", 
                                                 Time.now.beginning_of_year,
                                                 (Time.zone.now - 2.month).end_of_month
                                               )
 
+  
   def eli?
     patate?
   end
 
+  
   def da_registrare?
     documento.nil?
   end
+  
   
   def rimborsato?
     vendita? && !rimborso_id.nil?
   end
   
+  
   def da_rimborsare?
     vendita? && !eli? && rimborso_id.nil? && !documento.nil? && documento.data < Time.now.beginning_of_month.to_date
-    #true
   end
-   
+
+  
+  def attivo?
+    documento.nil?
+  end
+
+
   def mandante
     cliente
   end
+
 
 
 
@@ -87,28 +102,32 @@ class Movimento < ActiveRecord::Base
     try(:documento).try(:data) || created_at.to_date
   end
 
+
   def giorni_di_giacenza
     (data_uscita - articolo_data_carico).to_i
   end
    
+
   def patate?
     data_uscita > articolo_data_patate
   end
   
+
   def scaduto?
     data_uscita > articolo_data_scadenza && data_uscita < articolo_data_patate
   end
     
 
-
   def importo
     quantita * prezzo
   end
   
+
   def importo_cliente
     quantita * prezzo
   end
   
+
   def importo_provvigione
     if patate?
       0.0
@@ -116,6 +135,7 @@ class Movimento < ActiveRecord::Base
       prezzo / 100 * articolo_provvigione
     end
   end
+
 
   def importo_eli
     if patate?
@@ -125,9 +145,11 @@ class Movimento < ActiveRecord::Base
     end
   end
   
+
   def ricavo
     prezzo - importo_provvigione
   end
+
 
   def format_prezzo
     "€ #{prezzo}"
@@ -145,12 +167,14 @@ class Movimento < ActiveRecord::Base
 
   private
 
+    
     def set_prezzo
       if prezzo.blank?
         self.prezzo = articolo.prezzo_vendita
         self.quantita = 1
       end 
     end
+    
     
     def update_documento
       return true unless prezzo_changed? || documento_id_changed? || rimborso_id_changed?
@@ -169,10 +193,15 @@ class Movimento < ActiveRecord::Base
       return true
     end
     
+    
     def decrement_documento      
       unless documento.nil?
         Documento.update_counters documento.id, 
-          :importo   => - prezzo_was
+          importo: - prezzo_was
+      end
+      unless rimborso.nil?
+        Documento.update_counters rimborso.id, 
+          importo: - prezzo_was
       end  
       return true
     end

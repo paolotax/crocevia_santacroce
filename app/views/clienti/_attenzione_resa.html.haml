@@ -1,5 +1,5 @@
 - unless cliente.rese.attivo.empty?
-  .attenzione_resa.alert.alert-error
+  .attenzione-resa
     = form_for Documento.new, html: {class: "pull-right"} do |f|
       = hidden_field_tag "cliente_id", cliente.id
       = f.hidden_field :data,       value: Time.now
@@ -7,6 +7,9 @@
       = f.submit "Registra Resa", class: "btn btn-danger"
     %h4
       Attenzione!
-    = pluralize( cliente.rese.attivo.size, "articolo reso" )
-    da registrare. Clicca per registrare la resa del cliente
     
+
+    = render 'movimenti/movimenti_list',  collection: cliente.rese.attivo,    label: "articolo_reso_da_registrare"
+
+
+

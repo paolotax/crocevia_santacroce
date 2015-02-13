@@ -3,9 +3,9 @@
     %h4 
       = pluralize( collection.size, label.humanize.downcase )
       - if collection.size > 0
-        %small= link_to "...", "##{label}", class: "show-hide collapsed", data: { toggle: "collapse", "no-turbolink" => true }
+        %small= link_to "...", "##{label}", class: "show-hide", data: { toggle: "collapse", "no-turbolink" => true }
 
-  %div.collapse{ id: "#{label}" }
+  %div.collapse.in{ id: "#{label}" }
     %table.table.movimenti      
       %tr.table-header{ class: "#{'hidden' if collection.empty? }" }
         %th.codice   Codice
@@ -27,7 +27,5 @@
           %strong= number_to_currency collection.sum(&:importo), locale: :it
         %td.provvigione
           %strong= number_to_currency collection.sum(&:importo_provvigione), locale: :it
-        %td
-        %td
-        %td.actions
+        %td.actions{ colspan: 3 }
 

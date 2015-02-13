@@ -6,7 +6,7 @@
     = link_to movimento.mandante.full_name, movimento.mandante
   %td
     - if movimento.da_registrare?
-      = link_to movimento, method: :delete, class: "close", remote: true, "data-no-turbolink" => true do
+      = link_to movimento, method: :delete, class: "close", remote: false, "data-no-turbolink" => false do
         &times;
     - else
       = link_to "#{movimento.documento.tipo}.#{movimento.documento_id}", movimento.documento

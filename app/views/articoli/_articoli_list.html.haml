@@ -3,9 +3,9 @@
     %h4 
       = pluralize( collection.sum(&:giacenza), label.humanize.downcase )
       - if collection.size > 0
-        %small= link_to "...", "##{label}", class: "show-hide collapsed", data: { toggle: "collapse", "no-turbolink" => true }
+        %small= link_to "...", "##{label}", class: "show-hide", data: { toggle: "collapse", "no-turbolink" => true }
 
-  %div.collapse{ id: "#{label}" } 
+  %div.collapse.in{ id: "#{label}" } 
     %table.table.articoli  
       %tr.table-header{ class: "#{'hidden' if collection.empty? }" }
         %th.codice      Codice
@@ -16,17 +16,18 @@
         %th
         %th
         %th
+        %th
     
       - collection.group_by(&:documento).each do |key, values|
         %tr
           %td
             %small 
               = link_to key.mandante, key.mandante
-          %td{ colspan: 6 }
+          %td{ colspan: 7 }
             = link_to "Carico N." + key.id.to_s + " del " + key.data.strftime("%d/%m/%Y"), key
 
           %td
-            = link_to 'x', key, class: "close", method: :delete, confirm: "Elimino il documento?\n(i movimenti non verranno eliminati)", "data-no-turbolink" => true
+            = link_to 'x', key, class: "close", method: :delete, confirm: "Elimino il documento?\n(i movimenti non verranno eliminati)", "data-no-turbolink" => false
             
         = render values
 
@@ -38,4 +39,4 @@
           %strong= number_to_currency collection.sum(&:importo), locale: :it
         %td.provvigione
           %strong= number_to_currency collection.sum(&:importo_provvigione), locale: :it
-        %td.actions{ colspan: 2 }
+        %td.actions{ colspan: 4 }

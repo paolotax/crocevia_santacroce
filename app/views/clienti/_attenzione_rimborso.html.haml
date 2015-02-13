@@ -1,5 +1,5 @@
 - unless cliente.vendite.non_eli.rimborsabile.empty?
-  .alert
+  .attenzione-rimborso
     = form_for Documento.new, html: {class: "pull-right"} do |f|
       = hidden_field_tag "cliente_id", cliente.id
       = f.hidden_field :data,       value: Time.now
@@ -8,7 +8,10 @@
 
     %h4
       Attenzione!
-    = pluralize( cliente.vendite.non_eli.rimborsabile.size, "articolo" )
-    = number_to_currency( cliente.vendite.non_eli.rimborsabile.sum(&:importo_provvigione), locale: :it)
-    da rimborsare.
+    / = pluralize( cliente.vendite.non_eli.rimborsabile.size, "articolo" )
+    / = number_to_currency( cliente.vendite.non_eli.rimborsabile.sum(&:importo_provvigione), locale: :it)
+    / da rimborsare.
+
+    = render 'movimenti/movimenti_list',  collection: cliente.vendite.non_eli.rimborsabile, label: "articolo_da_rimborsare"
+      
       
