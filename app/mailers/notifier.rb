@@ -13,4 +13,15 @@ class Notifier < ActionMailer::Base
       subject: "Si sboccia!"
       
   end
+
+
+  def riepilogo_giornata
+    
+    @vendite_di_oggi = Movimento.vendita.joins(:documento).includes(:articolo).where("documenti.data = ?", Time.zone.now.to_date )
+    
+
+    mail to: "marziabert@gmail.com", subject: "Riepilogo Crocevia"
+      
+  end
+
 end

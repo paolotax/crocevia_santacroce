@@ -33,13 +33,13 @@ class SituazioneClientePdf < Prawn::Document
       firme_articoli(Time.zone.now)
     end
     
-    @da_discaricare = @carichi.select { |v| (v.patate? == true)}
-    unless @da_discaricare.empty?
-      start_new_page
-      #default_header
-      intestazione(@cliente, "OGGETTI DA DISCARICARE - CLIENTE #{@cliente.id}")  
-      table_articoli(@da_discaricare)
-    end
+    # @da_discaricare = @carichi.select { |v| (v.patate? == true)}
+    # unless @da_discaricare.empty?
+    #   start_new_page
+    #   #default_header
+    #   intestazione(@cliente, "OGGETTI DA DISCARICARE - CLIENTE #{@cliente.id}")  
+    #   table_articoli(@da_discaricare)
+    # end
 
     @vendite = @cliente.movimenti
                        .registrato

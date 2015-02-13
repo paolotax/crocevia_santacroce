@@ -1,0 +1,9 @@
+
+Riepilogo venduto di oggi
+
+- for v in @vendite_di_oggi
+  = "#{v.articolo.nome}\n"
+
+
+Totale #{number_to_currency(@vendite_di_oggi.sum(&:prezzo))}  
+
