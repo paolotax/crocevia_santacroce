@@ -50,20 +50,20 @@ class Movimento < ActiveRecord::Base
   
   #scope :rimborsabile,  da_rimborsare.joins(:documento).where("documenti.data < ?", Time.zone.now.beginning_of_month.to_date )
   
-  scope :rimborsabile,  lambda { da_rimborsare.joins(:documento).where("documenti.data < ?", Time.zone.now.beginning_of_month.to_date ) }
+  scope :rimborsabile,  -> { da_rimborsare.joins(:documento).where("documenti.data < ?", Time.zone.now.beginning_of_month.to_date ) }
   
 
-  scope :mese_in_corso, joins(:documento).where("documenti.data >= ?", Time.zone.now.beginning_of_month.to_date)
+  scope :mese_in_corso, -> { joins(:documento).where("documenti.data >= ?", Time.zone.now.beginning_of_month.to_date) }
 
-  scope :mese_scorso, joins(:documento).where("documenti.data >= ? AND documenti.data <= ? ", 
+  scope :mese_scorso, -> { joins(:documento).where("documenti.data >= ? AND documenti.data <= ? ", 
                                               (Time.zone.now - 1.month).beginning_of_month,
                                               (Time.zone.now - 1.month).end_of_month
-                                             )
+                                             ) }
   
-  scope :mesi_passati, joins(:documento).where("documenti.data >= ? AND documenti.data <= ? ", 
+  scope :mesi_passati, -> { joins(:documento).where("documenti.data >= ? AND documenti.data <= ? ", 
                                                 Time.now.beginning_of_year,
                                                 (Time.zone.now - 2.month).end_of_month
-                                              )
+                                              ) }
 
   
   def eli?
