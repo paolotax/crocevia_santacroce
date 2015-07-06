@@ -164,7 +164,7 @@ class Documento < ActiveRecord::Base
     def notify_vendita
       if cassa?
         vendita = self.reload
-        Notifier.vendita_added(vendita).deliver
+        #Notifier.vendita_added(vendita).deliver
       end  
     end
     
